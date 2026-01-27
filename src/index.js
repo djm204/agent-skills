@@ -52,7 +52,7 @@ const SHARED_RULES = [
 
 // Supported IDEs/tools
 const SUPPORTED_IDES = ['cursor', 'claude', 'codex'];
-const DEFAULT_IDES = ['cursor', 'claude']; // Default when --ide not specified
+const DEFAULT_IDES = ['cursor', 'claude', 'codex']; // Default: install for all IDEs
 
 // Colors
 const colors = {
@@ -78,7 +78,7 @@ function printHelp() {
 ${colors.yellow('Options:')}
   --ide=<name>   Install for specific IDE (cursor, claude, codex)
                  Can be specified multiple times: --ide=cursor --ide=claude
-                 Default: cursor,claude (both)
+                 Default: all (cursor, claude, codex)
   --list, -l     List available templates
   --help, -h     Show this help message
   --dry-run      Show what would be installed

@@ -77,7 +77,7 @@ npx cursor-templates@latest web-frontend
 
 ### Install for Specific IDE
 
-By default, templates install for both Cursor and Claude. Use `--ide` to target specific tools:
+By default, templates install for all supported IDEs (Cursor, Claude, Copilot). Use `--ide` to target specific tools:
 
 ```bash
 # Install only for Cursor IDE
