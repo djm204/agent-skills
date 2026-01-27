@@ -1,4 +1,4 @@
-# cursor-templates
+# agentic-team-templates
 
 [![npm version](https://img.shields.io/npm/v/cursor-templates.svg)](https://www.npmjs.com/package/cursor-templates)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
