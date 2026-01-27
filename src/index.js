@@ -75,14 +75,17 @@ ${colors.yellow('Options:')}
   --list, -l     List available templates
   --help, -h     Show this help message
   --dry-run      Show what would be installed
+  --force, -f    Overwrite existing files (default: skip)
 
 ${colors.yellow('Examples:')}
   npx cursor-templates web-frontend
   npx cursor-templates web-frontend web-backend
   npx cursor-templates fullstack
   npx cursor-templates mobile utility-agent
+  npx cursor-templates web-backend --force
 
 ${colors.dim('Shared rules (code-quality, security, git-workflow, etc.) are always included.')}
+${colors.dim('Identical files are skipped. Modified files are preserved; ours saved as *-1.md.')}
 `);
 }
 
@@ -101,15 +104,68 @@ function printTemplates() {
   console.log();
 }
 
-function copyFile(src, dest) {
+/**
+ * Check if two files have identical content
+ */
+function filesMatch(file1, file2) {
+  try {
+    const content1 = fs.readFileSync(file1, 'utf8');
+    const content2 = fs.readFileSync(file2, 'utf8');
+    return content1 === content2;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Get alternate filename with -1 suffix (e.g., code-quality.md -> code-quality-1.md)
+ */
+function getAlternateFilename(filepath) {
+  const dir = path.dirname(filepath);
+  const ext = path.extname(filepath);
+  const base = path.basename(filepath, ext);
+  return path.join(dir, `${base}-1${ext}`);
+}
+
+/**
+ * Copy file, handling existing files intelligently
+ * @returns {{ status: string, destFile: string }}
+ *   status: 'copied' | 'skipped' | 'renamed' | 'updated'
+ *   destFile: actual destination path (may differ if renamed)
+ */
+function copyFile(src, dest, force = false) {
   const destDir = path.dirname(dest);
   if (!fs.existsSync(destDir)) {
     fs.mkdirSync(destDir, { recursive: true });
   }
-  fs.copyFileSync(src, dest);
+  
+  const exists = fs.existsSync(dest);
+  
+  if (!exists) {
+    // File doesn't exist - copy normally
+    fs.copyFileSync(src, dest);
+    return { status: 'copied', destFile: dest };
+  }
+  
+  if (force) {
+    // Force mode - overwrite
+    fs.copyFileSync(src, dest);
+    return { status: 'updated', destFile: dest };
+  }
+  
+  // File exists - check if it matches our template
+  if (filesMatch(src, dest)) {
+    // Same content - skip
+    return { status: 'skipped', destFile: dest };
+  }
+  
+  // Different content - save ours alongside with -1 suffix
+  const altDest = getAlternateFilename(dest);
+  fs.copyFileSync(src, altDest);
+  return { status: 'renamed', destFile: altDest };
 }
 
-function generateClaudeMd(targetDir, installedTemplates) {
+function generateClaudeMdContent(installedTemplates) {
   const templateList = installedTemplates
     .map(t => `- **${t}**: ${TEMPLATES[t].description}`)
     .join('\n');
@@ -127,7 +183,7 @@ function generateClaudeMd(targetDir, installedTemplates) {
 ${rules}`;
   }).join('\n');
 
-  const content = `# CLAUDE.md - Development Guide
+  return `# CLAUDE.md - Development Guide
 
 This project uses AI-assisted development with Cursor. The rules in \`.cursorrules/\` provide domain-specific guidance for the AI assistant.
 
@@ -227,27 +283,64 @@ npx cursor-templates ${installedTemplates.join(' ')}
 
 - [Cursor Documentation](https://cursor.sh/docs)
 `;
+}
 
+function generateClaudeMd(targetDir, installedTemplates) {
+  const content = generateClaudeMdContent(installedTemplates);
   fs.writeFileSync(path.join(targetDir, 'CLAUDE.md'), content);
 }
 
-function install(targetDir, templates, dryRun = false) {
+function generateClaudeMdToPath(targetDir, installedTemplates, destPath) {
+  const content = generateClaudeMdContent(installedTemplates);
+  fs.writeFileSync(destPath, content);
+}
+
+function install(targetDir, templates, dryRun = false, force = false) {
   const cursorrules = path.join(targetDir, '.cursorrules');
   
   if (!dryRun && !fs.existsSync(cursorrules)) {
     fs.mkdirSync(cursorrules, { recursive: true });
   }
 
-  console.log(`${colors.blue('Installing to:')} ${targetDir}\n`);
+  console.log(`${colors.blue('Installing to:')} ${targetDir}`);
+  if (!force) {
+    console.log(colors.dim('(identical files skipped, modified files preserved with ours saved as *-1.md)'));
+  }
+  console.log();
+
+  const stats = { copied: 0, skipped: 0, updated: 0, renamed: 0 };
+  const renamedFiles = [];
 
   // 1. Install shared rules
   console.log(colors.green('► Installing shared rules...'));
   for (const rule of SHARED_RULES) {
     const src = path.join(TEMPLATES_DIR, '_shared', rule);
     const dest = path.join(cursorrules, rule);
-    console.log(`  - ${rule}`);
-    if (!dryRun) {
-      copyFile(src, dest);
+    
+    if (dryRun) {
+      const exists = fs.existsSync(dest);
+      if (!exists) {
+        console.log(`  ${colors.dim('[copy]')} ${rule}`);
+      } else if (force) {
+        console.log(`  ${colors.dim('[update]')} ${rule}`);
+      } else if (filesMatch(src, dest)) {
+        console.log(`  ${colors.yellow('[skip]')} ${rule} (identical)`);
+      } else {
+        const altName = path.basename(getAlternateFilename(dest));
+        console.log(`  ${colors.blue('[rename]')} ${rule} → ${altName}`);
+      }
+    } else {
+      const result = copyFile(src, dest, force);
+      stats[result.status]++;
+      if (result.status === 'skipped') {
+        console.log(`  ${colors.yellow('[skip]')} ${rule} (identical)`);
+      } else if (result.status === 'renamed') {
+        const altName = path.basename(result.destFile);
+        renamedFiles.push({ original: rule, renamed: altName });
+        console.log(`  ${colors.blue('[rename]')} ${rule} → ${altName}`);
+      } else {
+        console.log(`  ${colors.dim(`[${result.status}]`)} ${rule}`);
+      }
     }
   }
   console.log();
@@ -259,37 +352,101 @@ function install(targetDir, templates, dryRun = false) {
     for (const rule of TEMPLATES[template].rules) {
       const src = path.join(TEMPLATES_DIR, template, '.cursorrules', rule);
       const dest = path.join(cursorrules, `${template}-${rule}`);
-      console.log(`  - ${template}-${rule}`);
-      if (!dryRun) {
-        copyFile(src, dest);
+      const destName = `${template}-${rule}`;
+      
+      if (dryRun) {
+        const exists = fs.existsSync(dest);
+        if (!exists) {
+          console.log(`  ${colors.dim('[copy]')} ${destName}`);
+        } else if (force) {
+          console.log(`  ${colors.dim('[update]')} ${destName}`);
+        } else if (filesMatch(src, dest)) {
+          console.log(`  ${colors.yellow('[skip]')} ${destName} (identical)`);
+        } else {
+          const altName = path.basename(getAlternateFilename(dest));
+          console.log(`  ${colors.blue('[rename]')} ${destName} → ${altName}`);
+        }
+      } else {
+        const result = copyFile(src, dest, force);
+        stats[result.status]++;
+        if (result.status === 'skipped') {
+          console.log(`  ${colors.yellow('[skip]')} ${destName} (identical)`);
+        } else if (result.status === 'renamed') {
+          const altName = path.basename(result.destFile);
+          renamedFiles.push({ original: destName, renamed: altName });
+          console.log(`  ${colors.blue('[rename]')} ${destName} → ${altName}`);
+        } else {
+          console.log(`  ${colors.dim(`[${result.status}]`)} ${destName}`);
+        }
       }
     }
     console.log();
   }
 
   // 3. Generate CLAUDE.md
+  const claudePath = path.join(targetDir, 'CLAUDE.md');
+  const claudeExists = fs.existsSync(claudePath);
+  
   console.log(colors.green('► Generating CLAUDE.md...'));
-  if (!dryRun) {
+  if (dryRun) {
+    if (!claudeExists) {
+      console.log(`  ${colors.dim('[copy]')} CLAUDE.md`);
+    } else if (force) {
+      console.log(`  ${colors.dim('[update]')} CLAUDE.md`);
+    } else {
+      console.log(`  ${colors.blue('[rename]')} CLAUDE.md → CLAUDE-1.md`);
+    }
+  } else if (!claudeExists) {
     generateClaudeMd(targetDir, templates);
+    console.log(`  ${colors.dim('[copied]')} CLAUDE.md`);
+    stats.copied++;
+  } else if (force) {
+    generateClaudeMd(targetDir, templates);
+    console.log(`  ${colors.dim('[updated]')} CLAUDE.md`);
+    stats.updated++;
+  } else {
+    // Save ours as CLAUDE-1.md
+    const altClaudePath = path.join(targetDir, 'CLAUDE-1.md');
+    generateClaudeMdToPath(targetDir, templates, altClaudePath);
+    renamedFiles.push({ original: 'CLAUDE.md', renamed: 'CLAUDE-1.md' });
+    console.log(`  ${colors.blue('[rename]')} CLAUDE.md → CLAUDE-1.md`);
+    stats.renamed++;
   }
   console.log();
 
   // Summary
-  const totalRules = SHARED_RULES.length + templates.reduce((acc, t) => acc + TEMPLATES[t].rules.length, 0);
-  
   console.log(colors.green('════════════════════════════════════════════════════════════'));
   console.log(colors.green('✓ Installation complete!\n'));
   
-  console.log(colors.yellow('Installed:'));
-  console.log('  - CLAUDE.md (main development guide)');
-  console.log(`  - .cursorrules/ (${totalRules} rule files)\n`);
+  console.log(colors.yellow('Summary:'));
+  console.log(`  - ${stats.copied} files created`);
+  if (stats.updated > 0) {
+    console.log(`  - ${stats.updated} files updated`);
+  }
+  if (stats.skipped > 0) {
+    console.log(`  - ${stats.skipped} files skipped (identical to template)`);
+  }
+  if (stats.renamed > 0) {
+    console.log(`  - ${colors.blue(`${stats.renamed} files saved as *-1.md`)} (yours preserved)`);
+  }
+  console.log();
   
-  console.log(colors.yellow('Templates:'));
+  console.log(colors.yellow('Templates installed:'));
   console.log('  - _shared (always included)');
   for (const template of templates) {
     console.log(`  - ${template}`);
   }
   console.log();
+  
+  if (renamedFiles.length > 0) {
+    console.log(colors.blue('Files saved alongside existing (your files preserved):'));
+    for (const { original, renamed } of renamedFiles) {
+      console.log(`  - ${original} → ${renamed}`);
+    }
+    console.log(colors.dim('\nReview the -1 files and merge changes as needed.'));
+    console.log(colors.dim('Use --force to overwrite existing files instead.'));
+    console.log();
+  }
   
   console.log(colors.blue('Next steps:'));
   console.log('  1. Review CLAUDE.md for any customization');
@@ -300,6 +457,7 @@ function install(targetDir, templates, dryRun = false) {
 export function run(args) {
   const templates = [];
   let dryRun = false;
+  let force = false;
 
   // Parse arguments
   for (const arg of args) {
@@ -318,6 +476,10 @@ export function run(args) {
         break;
       case '--dry-run':
         dryRun = true;
+        break;
+      case '--force':
+      case '-f':
+        force = true;
         break;
       default:
         if (arg.startsWith('-')) {
@@ -350,6 +512,10 @@ export function run(args) {
     console.log(colors.yellow('DRY RUN - No changes will be made\n'));
   }
 
+  if (force) {
+    console.log(colors.yellow('FORCE MODE - Existing files will be overwritten\n'));
+  }
+
   // Install to current directory
-  install(process.cwd(), templates, dryRun);
+  install(process.cwd(), templates, dryRun, force);
 }
