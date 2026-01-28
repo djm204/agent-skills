@@ -23,14 +23,14 @@ AI coding assistant templates for Cursor IDE, Claude Code, and GitHub Copilot. P
 No installation required. Run directly with `npx`:
 
 ```bash
-npx agentic-team-templates <template-name>
+npx agentic-team-templates [template-name]
 ```
 
 Or install globally:
 
 ```bash
 npm install -g agentic-team-templates
-agentic-team-templates <template-name>
+agentic-team-templates [template-name]
 ```
 
 ## How to Use
@@ -133,7 +133,7 @@ npx agentic-team-templates --reset --force
 
 | Option | Description |
 |--------|-------------|
-| `--ide=<name>` | Target IDE: `cursor`, `claude`, or `codex` (can be used multiple times) |
+| `--ide=[name]` | Target IDE: `cursor`, `claude`, or `codex` (can be used multiple times) |
 | `--list`, `-l` | List all available templates |
 | `--dry-run` | Preview changes without writing files |
 | `--force`, `-f` | Overwrite/remove even if files were modified |
@@ -278,7 +278,7 @@ If you're getting errors for options that should exist (like `--reset`), you may
 
 ```bash
 # Force latest version (recommended)
-npx agentic-team-templates@latest <command>
+npx agentic-team-templates@latest [command]
 
 # Clear npx cache
 npx clear-npx-cache
