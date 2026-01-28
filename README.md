@@ -292,6 +292,18 @@ npm cache clean --force
 Check which version you're running:
 
 ```bash
+npx agentic-team-templates --version
+```
+
+Output:
+```
+agentic-team-templates v0.7.0
+Changelog: https://github.com/djm204/agentic-team-templates/releases/tag/agentic-team-templates-v0.7.0
+```
+
+Or use `--help` which also checks for updates:
+
+```bash
 npx agentic-team-templates@latest --help
 ```
 

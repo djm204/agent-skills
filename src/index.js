@@ -15,6 +15,8 @@ const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 const PACKAGE_NAME = packageJson.name;
 const CURRENT_VERSION = packageJson.version;
+const REPO_URL = 'https://github.com/djm204/agentic-team-templates';
+const CHANGELOG_URL = `${REPO_URL}/releases/tag/${PACKAGE_NAME}-v${CURRENT_VERSION}`;
 
 // Available templates
 const TEMPLATES = {
@@ -1280,6 +1282,7 @@ export async function run(args) {
       process.exit(0);
     } else if (arg === '--version' || arg === '-v') {
       console.log(`${PACKAGE_NAME} v${CURRENT_VERSION}`);
+      console.log(`${colors.dim('Changelog:')} ${CHANGELOG_URL}`);
       process.exit(0);
     } else if (arg === '--dry-run') {
       dryRun = true;
@@ -1400,6 +1403,8 @@ export async function run(args) {
 export const _internals = {
   PACKAGE_NAME,
   CURRENT_VERSION,
+  REPO_URL,
+  CHANGELOG_URL,
   TEMPLATES,
   SHARED_RULES,
   SUPPORTED_IDES,
