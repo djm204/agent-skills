@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.8.0...agentic-team-templates-v0.8.1) (2026-01-28)
+
+
+### CI/CD
+
+* add auto-merge workflow for release PRs ([#19](https://github.com/djm204/agentic-team-templates/issues/19)) ([2ad69d8](https://github.com/djm204/agentic-team-templates/commit/2ad69d89fc29c3a8bf856c42bac85fca141c3840))
+
 ## [0.8.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.7.0...agentic-team-templates-v0.8.0) (2026-01-28)
 
 
