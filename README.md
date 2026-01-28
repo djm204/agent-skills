@@ -1,6 +1,6 @@
 # agentic-team-templates
 
-[![npm version](https://img.shields.io/npm/v/cursor-templates.svg)](https://www.npmjs.com/package/cursor-templates)
+[![npm version](https://img.shields.io/npm/v/agentic-team-templates.svg)](https://www.npmjs.com/package/agentic-team-templates)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Compatible with:**
@@ -23,14 +23,14 @@ AI coding assistant templates for Cursor IDE, Claude Code, and GitHub Copilot. P
 No installation required. Run directly with `npx`:
 
 ```bash
-npx cursor-templates <template-name>
+npx agentic-team-templates <template-name>
 ```
 
 Or install globally:
 
 ```bash
-npm install -g cursor-templates
-cursor-templates <template-name>
+npm install -g agentic-team-templates
+agentic-team-templates <template-name>
 ```
 
 ## How to Use
@@ -40,7 +40,7 @@ cursor-templates <template-name>
 Navigate to your project directory and run:
 
 ```bash
-npx cursor-templates web-frontend
+npx agentic-team-templates web-frontend
 ```
 
 This installs the template rules in your project directory.
@@ -50,13 +50,13 @@ This installs the template rules in your project directory.
 Combine templates for projects that span multiple domains:
 
 ```bash
-npx cursor-templates web-frontend web-backend
+npx agentic-team-templates web-frontend web-backend
 ```
 
 ### List All Available Templates
 
 ```bash
-npx cursor-templates --list
+npx agentic-team-templates --list
 ```
 
 ### Preview Before Installing (Dry Run)
@@ -64,7 +64,7 @@ npx cursor-templates --list
 See what files will be created without making changes:
 
 ```bash
-npx cursor-templates web-frontend --dry-run
+npx agentic-team-templates web-frontend --dry-run
 ```
 
 ### Update to Latest Rules
@@ -72,7 +72,7 @@ npx cursor-templates web-frontend --dry-run
 Re-run with `@latest` to get updated templates:
 
 ```bash
-npx cursor-templates@latest web-frontend
+npx agentic-team-templates@latest web-frontend
 ```
 
 ### Install for Specific IDE
@@ -81,16 +81,16 @@ By default, templates install for all supported IDEs (Cursor, Claude, Copilot). 
 
 ```bash
 # Install only for Cursor IDE
-npx cursor-templates web-frontend --ide=cursor
+npx agentic-team-templates web-frontend --ide=cursor
 
 # Install only for Claude Code
-npx cursor-templates web-frontend --ide=claude
+npx agentic-team-templates web-frontend --ide=claude
 
 # Install only for GitHub Copilot
-npx cursor-templates web-frontend --ide=codex
+npx agentic-team-templates web-frontend --ide=codex
 
 # Install for multiple IDEs
-npx cursor-templates web-frontend --ide=cursor --ide=codex
+npx agentic-team-templates web-frontend --ide=cursor --ide=codex
 ```
 
 ### Remove Specific Templates
@@ -99,16 +99,16 @@ Remove templates you no longer need while keeping shared rules and other templat
 
 ```bash
 # Remove a single template
-npx cursor-templates --remove web-frontend
+npx agentic-team-templates --remove web-frontend
 
 # Remove multiple templates
-npx cursor-templates --remove web-frontend web-backend
+npx agentic-team-templates --remove web-frontend web-backend
 
 # Remove from specific IDE only
-npx cursor-templates --remove web-frontend --ide=cursor
+npx agentic-team-templates --remove web-frontend --ide=cursor
 
 # Skip confirmation prompt
-npx cursor-templates --remove web-frontend --yes
+npx agentic-team-templates --remove web-frontend --yes
 ```
 
 ### Reset (Remove Everything)
@@ -117,16 +117,16 @@ Remove all installed content (shared rules, templates, generated files):
 
 ```bash
 # Reset all installed content
-npx cursor-templates --reset
+npx agentic-team-templates --reset
 
 # Reset for specific IDE only
-npx cursor-templates --reset --ide=cursor
+npx agentic-team-templates --reset --ide=cursor
 
 # Skip confirmation prompt
-npx cursor-templates --reset --yes
+npx agentic-team-templates --reset --yes
 
 # Force remove modified files
-npx cursor-templates --reset --force
+npx agentic-team-templates --reset --force
 ```
 
 ### CLI Options
@@ -186,7 +186,7 @@ Each template adds domain-specific rules. For example, `web-frontend` includes:
 
 ## File Structure
 
-After running `npx cursor-templates web-frontend`:
+After running `npx agentic-team-templates web-frontend`:
 
 ```
 your-project/
@@ -237,7 +237,7 @@ Templates merge with your existing `.cursorrules/` directory. Existing files are
 ```bash
 mkdir my-react-app && cd my-react-app
 npm create vite@latest . -- --template react-ts
-npx cursor-templates web-frontend
+npx agentic-team-templates web-frontend
 ```
 
 ### Full-Stack Next.js Project
@@ -245,21 +245,21 @@ npx cursor-templates web-frontend
 ```bash
 npx create-next-app@latest my-app
 cd my-app
-npx cursor-templates fullstack
+npx agentic-team-templates fullstack
 ```
 
 ### Microservices Backend
 
 ```bash
 cd my-api-service
-npx cursor-templates web-backend devops-sre
+npx agentic-team-templates web-backend devops-sre
 ```
 
 ### ML/AI Project
 
 ```bash
 cd my-ml-project
-npx cursor-templates ml-ai data-engineering
+npx agentic-team-templates ml-ai data-engineering
 ```
 
 ## Requirements
