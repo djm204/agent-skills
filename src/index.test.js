@@ -894,6 +894,14 @@ describe('CLI Argument Parsing', () => {
     await expect(run(['-v'])).rejects.toThrow('process.exit');
     
     expect(exitSpy).toHaveBeenCalledWith(0);
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('agentic-team-templates'));
+  });
+
+  it('should show changelog link with --version', async () => {
+    await expect(run(['--version'])).rejects.toThrow('process.exit');
+    
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('github.com'));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('releases/tag'));
   });
 
   it('should error on unknown option', async () => {
