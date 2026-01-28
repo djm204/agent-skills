@@ -24,6 +24,19 @@ jobs:
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
+      # Enable auto-merge on release PRs when they are created/updated
+      - name: Enable auto-merge for release PR
+        if: ${{ steps.release.outputs.prs_created == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Find the release PR with autorelease label and enable auto-merge
+          PR_NUMBER=$(gh pr list --label "autorelease: pending" --json number --jq '.[0].number')
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Enabling auto-merge for PR #$PR_NUMBER"
+            gh pr merge "$PR_NUMBER" --auto --squash
+          fi
+
   publish:
     needs: release-please
     if: ${{ needs.release-please.outputs.release_created }}
