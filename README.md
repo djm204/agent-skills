@@ -192,21 +192,20 @@ After running `npx cursor-templates web-frontend`:
 your-project/
 ├── CLAUDE.md                              # Development guide (Claude Code, Cursor)
 ├── .cursorrules/                          # Rule files (Cursor IDE)
-│   └── ...
+│   ├── core-principles.md                 # Shared
+│   ├── code-quality.md                    # Shared
+│   ├── security-fundamentals.md           # Shared
+│   ├── git-workflow.md                    # Shared
+│   ├── communication.md                   # Shared
+│   ├── web-frontend-overview.md           # Template-specific
+│   ├── web-frontend-accessibility.md      # Template-specific
+│   ├── web-frontend-component-patterns.md # Template-specific
+│   ├── web-frontend-performance.md        # Template-specific
+│   ├── web-frontend-state-management.md   # Template-specific
+│   ├── web-frontend-styling.md            # Template-specific
+│   └── web-frontend-testing.md            # Template-specific
 └── .github/
     └── copilot-instructions.md            # Instructions (GitHub Copilot)
-    ├── core-principles.md                 # Shared
-    ├── code-quality.md                    # Shared
-    ├── security-fundamentals.md           # Shared
-    ├── git-workflow.md                    # Shared
-    ├── communication.md                   # Shared
-    ├── web-frontend-overview.md           # Template-specific
-    ├── web-frontend-accessibility.md      # Template-specific
-    ├── web-frontend-component-patterns.md # Template-specific
-    ├── web-frontend-performance.md        # Template-specific
-    ├── web-frontend-state-management.md   # Template-specific
-    ├── web-frontend-styling.md            # Template-specific
-    └── web-frontend-testing.md            # Template-specific
 ```
 
 ## Customization
