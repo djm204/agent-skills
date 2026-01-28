@@ -157,6 +157,8 @@ npx agentic-team-templates --reset --force
 | `data-engineering` | Data pipelines, ETL, warehousing |
 | `platform-engineering` | Infrastructure as code, Kubernetes, CI/CD |
 | `devops-sre` | Incident management, SLOs, observability |
+| `product-manager` | Product strategy, discovery, OKRs, PRDs |
+| `qa-engineering` | Test strategy, automation, quality gates |
 | `utility-agent` | AI agent utilities, context management |
 | `documentation` | Technical writing, API docs, ADRs |
 
