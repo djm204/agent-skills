@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.12.1...agentic-team-templates-v0.13.0) (2026-01-30)
+
+
+### Features
+
+* **templates:** add python-expert template ([#41](https://github.com/djm204/agentic-team-templates/issues/41)) ([49fa65f](https://github.com/djm204/agentic-team-templates/commit/49fa65f59fde3a886ba3820ff31debf1bcde6a27))
+
 ## [0.12.1](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.12.0...agentic-team-templates-v0.12.1) (2026-01-30)
 
 
