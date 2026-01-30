@@ -59,6 +59,7 @@ const TEMPLATES = {
   'rust-expert': {
     description: 'Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async)',
     rules: ['concurrency.md', 'ecosystem-and-tooling.md', 'error-handling.md', 'overview.md', 'ownership-and-borrowing.md', 'performance-and-unsafe.md', 'testing.md', 'traits-and-generics.md']
+  },
   'platform-engineering': {
     description: 'Internal developer platforms, infrastructure automation, and reliability engineering',
     rules: ['ci-cd.md', 'developer-experience.md', 'infrastructure-as-code.md', 'kubernetes.md', 'observability.md', 'overview.md', 'security.md', 'testing.md']
