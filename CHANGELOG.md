@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.14.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.13.2...agentic-team-templates-v0.14.0) (2026-01-30)
+
+
+### Features
+
+* **templates:** add cpp-expert template ([#48](https://github.com/djm204/agentic-team-templates/issues/48)) ([e2e29a5](https://github.com/djm204/agentic-team-templates/commit/e2e29a571a428da27bd25f3d685438ccf50aa1f8))
+* **templates:** add csharp-expert template ([#46](https://github.com/djm204/agentic-team-templates/issues/46)) ([f930bad](https://github.com/djm204/agentic-team-templates/commit/f930badc2c2621f10b4250af02d4540d4e20f53f))
+* **templates:** add java-expert template ([#47](https://github.com/djm204/agentic-team-templates/issues/47)) ([b8b1de4](https://github.com/djm204/agentic-team-templates/commit/b8b1de4bc582d436c435ffd1b0ea3c4045568b9a))
+* **templates:** add kotlin-expert template ([#50](https://github.com/djm204/agentic-team-templates/issues/50)) ([15a14ca](https://github.com/djm204/agentic-team-templates/commit/15a14ca2fde429316121809a93543b39d96999ad))
+* **templates:** add swift-expert template ([#52](https://github.com/djm204/agentic-team-templates/issues/52)) ([69fa9b8](https://github.com/djm204/agentic-team-templates/commit/69fa9b83e91208e7ccad6c3f1b7908ba2a74a40d))
+* **templates:** extend javascript-expert with TypeScript deep dive ([#49](https://github.com/djm204/agentic-team-templates/issues/49)) ([0edcde8](https://github.com/djm204/agentic-team-templates/commit/0edcde863a44a2ae8bc0b07d60105044fc137b03))
+
 ## [0.13.2](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.13.1...agentic-team-templates-v0.13.2) (2026-01-30)
 
 
