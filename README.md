@@ -147,20 +147,24 @@ npx agentic-team-templates --reset --force
 
 | Template | Description |
 |----------|-------------|
-| `web-frontend` | SPAs, SSR, static sites, PWAs |
-| `web-backend` | REST, GraphQL, microservices |
-| `fullstack` | Full-stack apps (Next.js, Nuxt, etc.) |
-| `mobile` | React Native, Flutter, native iOS/Android |
-| `cli-tools` | Command-line applications and developer tools |
-| `blockchain` | Smart contracts, DeFi, Web3 applications |
-| `ml-ai` | Machine learning systems, model development |
-| `data-engineering` | Data pipelines, ETL, warehousing |
-| `platform-engineering` | Infrastructure as code, Kubernetes, CI/CD |
-| `devops-sre` | Incident management, SLOs, observability |
-| `product-manager` | Product strategy, discovery, OKRs, PRDs |
-| `qa-engineering` | Test strategy, automation, quality gates |
-| `utility-agent` | AI agent utilities, context management |
-| `documentation` | Technical writing, API docs, ADRs |
+| `blockchain` | Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem) |
+| `cli-tools` | Command-line applications and developer tools (Cobra, Commander, Click) |
+| `data-engineering` | Data platforms and pipelines (ETL, data modeling, data quality) |
+| `devops-sre` | DevOps and SRE practices (incident management, observability, SLOs, chaos engineering) |
+| `documentation` | Technical documentation standards (READMEs, API docs, ADRs, code comments) |
+| `fullstack` | Full-stack web applications (Next.js, Nuxt, SvelteKit, Remix) |
+| `golang-expert` | Principal-level Go engineering (concurrency, stdlib, production patterns, testing) |
+| `javascript-expert` | Principal-level JavaScript engineering across Node.js, React, vanilla JS, and testing |
+| `ml-ai` | Machine learning and AI systems (model development, deployment, monitoring) |
+| `mobile` | Mobile applications (React Native, Flutter, native iOS/Android) |
+| `platform-engineering` | Internal developer platforms, infrastructure automation, reliability engineering |
+| `product-manager` | Product management with customer-centric discovery, prioritization, and execution |
+| `qa-engineering` | Quality assurance programs for confident, rapid software delivery |
+| `rust-expert` | Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async) |
+| `testing` | Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing) |
+| `utility-agent` | AI agent utilities with context management and hallucination prevention |
+| `web-backend` | Backend APIs and services (REST, GraphQL, microservices) |
+| `web-frontend` | Frontend web applications (SPAs, SSR, static sites, PWAs) |
 
 ## What Gets Installed
 
