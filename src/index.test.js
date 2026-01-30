@@ -74,6 +74,7 @@ describe('Constants', () => {
     it('should have all expected templates', () => {
       const expectedTemplates = [
         'blockchain',
+        'cpp-expert',
         'csharp-expert',
         'cli-tools',
         'data-engineering',
