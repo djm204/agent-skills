@@ -61,8 +61,8 @@ const TEMPLATES = {
     rules: ['concurrency.md', 'error-handling.md', 'modern-java.md', 'overview.md', 'performance.md', 'persistence.md', 'spring-boot.md', 'testing.md', 'tooling.md']
   },
   'javascript-expert': {
-    description: 'Principal-level JavaScript engineering across Node.js, React, vanilla JS, and testing',
-    rules: ['language-deep-dive.md', 'node-patterns.md', 'overview.md', 'performance.md', 'react-patterns.md', 'testing.md', 'tooling.md']
+    description: 'Principal-level JavaScript & TypeScript engineering (Node.js, React, type system, testing)',
+    rules: ['language-deep-dive.md', 'node-patterns.md', 'overview.md', 'performance.md', 'react-patterns.md', 'testing.md', 'tooling.md', 'typescript-deep-dive.md']
   },
   'ml-ai': {
     description: 'Machine learning and AI systems (model development, deployment, monitoring)',
