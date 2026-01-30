@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.1](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.13.0...agentic-team-templates-v0.13.1) (2026-01-30)
+
+
+### Miscellaneous
+
+* update installer name ([0b68c59](https://github.com/djm204/agentic-team-templates/commit/0b68c5927fdcfab1a8ecf374258da2040d581c9b))
+
 ## [0.13.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.12.1...agentic-team-templates-v0.13.0) (2026-01-30)
 
 
