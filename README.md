@@ -148,6 +148,7 @@ npx agentic-team-templates --reset --force
 | Template | Description |
 |----------|-------------|
 | `blockchain` | Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem) |
+| `cpp-expert` | Principal-level C++ engineering (modern C++, RAII, concurrency, templates, performance) |
 | `cli-tools` | Command-line applications and developer tools (Cobra, Commander, Click) |
 | `data-engineering` | Data platforms and pipelines (ETL, data modeling, data quality) |
 | `devops-sre` | DevOps and SRE practices (incident management, observability, SLOs, chaos engineering) |
