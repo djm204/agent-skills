@@ -149,12 +149,14 @@ npx agentic-team-templates --reset --force
 |----------|-------------|
 | `blockchain` | Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem) |
 | `cpp-expert` | Principal-level C++ engineering (modern C++, RAII, concurrency, templates, performance) |
+| `csharp-expert` | Principal-level C# engineering (async, DI, EF Core, ASP.NET Core, testing) |
 | `cli-tools` | Command-line applications and developer tools (Cobra, Commander, Click) |
 | `data-engineering` | Data platforms and pipelines (ETL, data modeling, data quality) |
 | `devops-sre` | DevOps and SRE practices (incident management, observability, SLOs, chaos engineering) |
 | `documentation` | Technical documentation standards (READMEs, API docs, ADRs, code comments) |
 | `fullstack` | Full-stack web applications (Next.js, Nuxt, SvelteKit, Remix) |
 | `golang-expert` | Principal-level Go engineering (concurrency, stdlib, production patterns, testing) |
+| `java-expert` | Principal-level Java engineering (JVM, Spring Boot, concurrency, JPA, testing) |
 | `javascript-expert` | Principal-level JavaScript engineering across Node.js, React, vanilla JS, and testing |
 | `ml-ai` | Machine learning and AI systems (model development, deployment, monitoring) |
 | `mobile` | Mobile applications (React Native, Flutter, native iOS/Android) |
