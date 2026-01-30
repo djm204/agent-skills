@@ -60,10 +60,6 @@ const TEMPLATES = {
     description: 'Mobile applications (React Native, Flutter, native iOS/Android)',
     rules: ['navigation.md', 'offline-first.md', 'overview.md', 'performance.md', 'testing.md']
   },
-  'rust-expert': {
-    description: 'Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async)',
-    rules: ['concurrency.md', 'ecosystem-and-tooling.md', 'error-handling.md', 'overview.md', 'ownership-and-borrowing.md', 'performance-and-unsafe.md', 'testing.md', 'traits-and-generics.md']
-  },
   'platform-engineering': {
     description: 'Internal developer platforms, infrastructure automation, and reliability engineering',
     rules: ['ci-cd.md', 'developer-experience.md', 'infrastructure-as-code.md', 'kubernetes.md', 'observability.md', 'overview.md', 'security.md', 'testing.md']
@@ -72,9 +68,17 @@ const TEMPLATES = {
     description: 'Product management with customer-centric discovery, prioritization, and execution',
     rules: ['communication.md', 'discovery.md', 'metrics.md', 'overview.md', 'prioritization.md', 'requirements.md']
   },
+  'python-expert': {
+    description: 'Principal-level Python engineering (type system, async, testing, FastAPI, Django)',
+    rules: ['async-python.md', 'overview.md', 'patterns-and-idioms.md', 'performance.md', 'testing.md', 'tooling.md', 'type-system.md', 'web-and-apis.md']
+  },
   'qa-engineering': {
     description: 'Quality assurance programs for confident, rapid software delivery',
     rules: ['automation.md', 'metrics.md', 'overview.md', 'quality-gates.md', 'test-design.md', 'test-strategy.md']
+  },
+  'rust-expert': {
+    description: 'Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async)',
+    rules: ['concurrency.md', 'ecosystem-and-tooling.md', 'error-handling.md', 'overview.md', 'ownership-and-borrowing.md', 'performance-and-unsafe.md', 'testing.md', 'traits-and-generics.md']
   },
   'testing': {
     description: 'Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing)',
