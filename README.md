@@ -155,6 +155,7 @@ npx agentic-team-templates --reset --force
 | `fullstack` | Full-stack web applications (Next.js, Nuxt, SvelteKit, Remix) |
 | `golang-expert` | Principal-level Go engineering (concurrency, stdlib, production patterns, testing) |
 | `javascript-expert` | Principal-level JavaScript engineering across Node.js, React, vanilla JS, and testing |
+| `kotlin-expert` | Principal-level Kotlin engineering (coroutines, multiplatform, Ktor, Spring Boot, testing) |
 | `ml-ai` | Machine learning and AI systems (model development, deployment, monitoring) |
 | `mobile` | Mobile applications (React Native, Flutter, native iOS/Android) |
 | `platform-engineering` | Internal developer platforms, infrastructure automation, reliability engineering |
