@@ -159,6 +159,7 @@ npx agentic-team-templates --reset --force
 | `mobile` | Mobile applications (React Native, Flutter, native iOS/Android) |
 | `platform-engineering` | Internal developer platforms, infrastructure automation, reliability engineering |
 | `product-manager` | Product management with customer-centric discovery, prioritization, and execution |
+| `python-expert` | Principal-level Python engineering (type system, async, testing, FastAPI, Django) |
 | `qa-engineering` | Quality assurance programs for confident, rapid software delivery |
 | `rust-expert` | Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async) |
 | `testing` | Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing) |
