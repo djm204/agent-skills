@@ -342,11 +342,10 @@ We welcome contributions! Here's how to add new templates or improve existing on
 
 ### Adding a New Template
 
-1. **Create the template directory structure:**
+1. **Create the template in the appropriate category directory:**
 
 ```text
-templates/your-template/
-├── CLAUDE.md                 # Main development guide (required)
+templates/<category>/your-template/
 └── .cursor/
     └── rules/
         ├── overview.md           # Scope and core principles (required)
@@ -355,15 +354,17 @@ templates/your-template/
         └── ...
 ```
 
+Categories: `engineering`, `languages`, `creative`, `business`, `marketing`, `professional`, `finance`, `education`, `health`, `home`, `science`, `personal`, `civic`, `trades`, `agents`
+
 2. **Follow the existing patterns:**
-   - Look at `templates/web-frontend/` or `templates/platform-engineering/` for reference
+   - Look at `templates/engineering/web-frontend/` or `templates/languages/python-expert/` for reference
    - Each rule file should be focused on a single topic
    - Include code examples, not just guidelines
    - Add "Common Pitfalls" and "Definition of Done" sections
 
 3. **Required files:**
-   - `CLAUDE.md` - Comprehensive guide with overview, tech stack, patterns, and examples
    - `.cursor/rules/overview.md` - Scope, core principles, and project structure
+   - Add a `category` field to the template entry in `src/index.js`
 
 ### Template Guidelines
 
