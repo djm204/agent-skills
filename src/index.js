@@ -112,6 +112,10 @@ const TEMPLATES = {
     description: 'AI agent utilities with context management and hallucination prevention',
     rules: ['action-control.md', 'context-management.md', 'hallucination-prevention.md', 'overview.md', 'token-optimization.md']
   },
+  'ux-designer': {
+    description: 'Principal-level UX design with user research, interaction design, design systems, accessibility, and emotional design',
+    rules: ['accessibility.md', 'emotional-design.md', 'handoff.md', 'information-architecture.md', 'interaction-design.md', 'overview.md', 'research.md', 'visual-design.md']
+  },
   'web-backend': {
     description: 'Backend APIs and services (REST, GraphQL, microservices)',
     rules: ['api-design.md', 'authentication.md', 'database-patterns.md', 'error-handling.md', 'overview.md', 'security.md', 'testing.md']
@@ -143,6 +147,10 @@ const TEMPLATE_ALIASES = {
   'cs': 'csharp-expert',
   'teach': 'educator',
   'teacher': 'educator',
+  'ux': 'ux-designer',
+  'uxd': 'ux-designer',
+  'design': 'ux-designer',
+  'designer': 'ux-designer',
 };
 
 /**
@@ -262,6 +270,7 @@ ${colors.yellow('Shorthand Aliases:')}
   cpp                            → cpp-expert
   csharp, cs                     → csharp-expert
   teach, teacher                 → educator
+  ux, uxd, design, designer      → ux-designer
 
 ${colors.yellow('Examples:')}
   npx cursor-templates js

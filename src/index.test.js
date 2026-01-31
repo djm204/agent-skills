@@ -98,6 +98,7 @@ describe('Constants', () => {
         'swift-expert',
         'testing',
         'utility-agent',
+        'ux-designer',
         'web-backend',
         'web-frontend',
       ];
