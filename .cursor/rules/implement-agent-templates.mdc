@@ -1,0 +1,389 @@
+---
+description: Implementation plan for expanding agent templates beyond software engineering. Covers directory reorganization, new template categories, and implementation tracking. DELETE THIS FILE when all templates are implemented.
+globs:
+  - templates/**/*
+  - src/index.js
+  - src/index.test.js
+alwaysApply: false
+---
+
+# Agent Template Expansion - Implementation Plan
+
+## Directory Reorganization
+
+### Current (flat)
+
+```
+templates/
+├── _shared/
+├── web-frontend/.cursor/rules/
+├── golang-expert/.cursor/rules/
+├── ux-designer/.cursor/rules/
+└── ...
+```
+
+### Target (categorized)
+
+```
+templates/
+├── _shared/
+├── engineering/
+│   ├── web-frontend/.cursor/rules/
+│   ├── web-backend/.cursor/rules/
+│   ├── fullstack/.cursor/rules/
+│   ├── mobile/.cursor/rules/
+│   ├── cli-tools/.cursor/rules/
+│   ├── blockchain/.cursor/rules/
+│   ├── platform-engineering/.cursor/rules/
+│   ├── devops-sre/.cursor/rules/
+│   ├── data-engineering/.cursor/rules/
+│   ├── ml-ai/.cursor/rules/
+│   ├── testing/.cursor/rules/
+│   └── qa-engineering/.cursor/rules/
+├── languages/
+│   ├── javascript-expert/.cursor/rules/
+│   ├── python-expert/.cursor/rules/
+│   ├── golang-expert/.cursor/rules/
+│   ├── rust-expert/.cursor/rules/
+│   ├── java-expert/.cursor/rules/
+│   ├── kotlin-expert/.cursor/rules/
+│   ├── cpp-expert/.cursor/rules/
+│   ├── csharp-expert/.cursor/rules/
+│   └── swift-expert/.cursor/rules/
+├── creative/
+│   ├── ux-designer/.cursor/rules/
+│   ├── graphic-designer/.cursor/rules/
+│   ├── fiction-writer/.cursor/rules/
+│   ├── screenwriter/.cursor/rules/
+│   ├── music-producer/.cursor/rules/
+│   ├── photographer/.cursor/rules/
+│   ├── content-creator/.cursor/rules/
+│   └── copywriter/.cursor/rules/
+├── business/
+│   ├── product-manager/.cursor/rules/
+│   ├── project-manager/.cursor/rules/
+│   ├── operations-manager/.cursor/rules/
+│   ├── business-analyst/.cursor/rules/
+│   ├── startup-founder/.cursor/rules/
+│   ├── supply-chain/.cursor/rules/
+│   ├── compliance-officer/.cursor/rules/
+│   ├── small-business/.cursor/rules/
+│   └── freelancer/.cursor/rules/
+├── marketing/
+│   ├── marketing-strategist/.cursor/rules/
+│   ├── seo-specialist/.cursor/rules/
+│   ├── social-media/.cursor/rules/
+│   ├── public-relations/.cursor/rules/
+│   ├── email-marketer/.cursor/rules/
+│   └── brand-strategist/.cursor/rules/
+├── professional/
+│   ├── executive-assistant/.cursor/rules/
+│   ├── recruiter/.cursor/rules/
+│   ├── career-coach/.cursor/rules/
+│   ├── sales-engineer/.cursor/rules/
+│   ├── grant-writer/.cursor/rules/
+│   ├── technical-writer/.cursor/rules/
+│   ├── consultant/.cursor/rules/
+│   └── contract-reviewer/.cursor/rules/
+├── finance/
+│   ├── personal-finance/.cursor/rules/
+│   ├── accountant/.cursor/rules/
+│   ├── real-estate/.cursor/rules/
+│   └── insurance-advisor/.cursor/rules/
+├── education/
+│   ├── educator/.cursor/rules/
+│   ├── language-tutor/.cursor/rules/
+│   ├── study-coach/.cursor/rules/
+│   ├── math-tutor/.cursor/rules/
+│   ├── research-assistant/.cursor/rules/
+│   ├── homeschool-planner/.cursor/rules/
+│   └── skills-trainer/.cursor/rules/
+├── health/
+│   ├── nutrition-planner/.cursor/rules/
+│   ├── fitness-coach/.cursor/rules/
+│   ├── mental-health/.cursor/rules/
+│   ├── sleep-optimizer/.cursor/rules/
+│   ├── caregiver/.cursor/rules/
+│   └── chronic-condition/.cursor/rules/
+├── home/
+│   ├── home-organizer/.cursor/rules/
+│   ├── meal-prep/.cursor/rules/
+│   ├── home-maintenance/.cursor/rules/
+│   ├── event-planner/.cursor/rules/
+│   ├── travel-planner/.cursor/rules/
+│   ├── pet-care/.cursor/rules/
+│   └── parenting-coach/.cursor/rules/
+├── science/
+│   ├── data-analyst/.cursor/rules/
+│   ├── lab-manager/.cursor/rules/
+│   ├── academic-writer/.cursor/rules/
+│   └── citizen-scientist/.cursor/rules/
+├── personal/
+│   ├── productivity-coach/.cursor/rules/
+│   ├── negotiation-coach/.cursor/rules/
+│   ├── public-speaking/.cursor/rules/
+│   ├── networking-coach/.cursor/rules/
+│   ├── decision-maker/.cursor/rules/
+│   └── life-transition/.cursor/rules/
+├── civic/
+│   ├── nonprofit-manager/.cursor/rules/
+│   ├── community-organizer/.cursor/rules/
+│   └── policy-analyst/.cursor/rules/
+├── trades/
+│   ├── farmer-rancher/.cursor/rules/
+│   └── construction-pm/.cursor/rules/
+└── agents/
+    └── utility-agent/.cursor/rules/
+```
+
+`_shared/` stays at root. Categories are storage-only. The CLI user never sees or types a category name.
+
+---
+
+## src/index.js Changes Required
+
+### 1. Add `category` field to TEMPLATES
+
+```js
+const TEMPLATES = {
+  'web-frontend': {
+    category: 'engineering',
+    description: '...',
+    rules: [...]
+  },
+  'fiction-writer': {
+    category: 'creative',
+    description: '...',
+    rules: [...]
+  },
+};
+```
+
+### 2. Derive source path from category
+
+Everywhere the code builds a template source path, replace:
+
+```js
+// Before
+path.join(TEMPLATES_DIR, template, '.cursor', 'rules', rule)
+
+// After
+path.join(TEMPLATES_DIR, TEMPLATES[template].category, template, '.cursor', 'rules', rule)
+```
+
+Affected functions: `install()`, `remove()`, `reset()`, `generateCopilotInstructionsContent()`
+
+### 3. CLI interface unchanged
+
+- `npx agentic-team-templates web-frontend` still works
+- `--list` still shows a flat list (optionally grouped by category in display)
+- Aliases unchanged
+- `--ide`, `--remove`, `--reset` unchanged
+
+### 4. Update `--list` display (optional enhancement)
+
+Group templates by category in the list output:
+
+```
+Engineering:
+  web-frontend    Frontend web applications (SPAs, SSR, static sites, PWAs)
+  web-backend     Backend APIs and services (REST, GraphQL, microservices)
+
+Languages:
+  javascript-expert  Principal-level JavaScript & TypeScript engineering
+  python-expert      Principal-level Python engineering
+```
+
+### 5. Tests
+
+- Update all path assertions that reference `TEMPLATES_DIR/template` to include category
+- Add test: each template's `category` field maps to a real directory
+- Add test: source rule files exist at `templates/<category>/<name>/.cursor/rules/`
+
+---
+
+## Migration Steps (existing templates)
+
+```bash
+# 1. Create category dirs
+mkdir -p templates/{engineering,languages,creative,business,marketing,professional,finance,education,health,home,science,personal,civic,trades,agents}
+
+# 2. Move existing templates into categories
+git mv templates/web-frontend templates/engineering/
+git mv templates/web-backend templates/engineering/
+git mv templates/fullstack templates/engineering/
+git mv templates/mobile templates/engineering/
+git mv templates/cli-tools templates/engineering/
+git mv templates/blockchain templates/engineering/
+git mv templates/platform-engineering templates/engineering/
+git mv templates/devops-sre templates/engineering/
+git mv templates/data-engineering templates/engineering/
+git mv templates/ml-ai templates/engineering/
+git mv templates/testing templates/engineering/
+git mv templates/qa-engineering templates/engineering/
+
+git mv templates/javascript-expert templates/languages/
+git mv templates/python-expert templates/languages/
+git mv templates/golang-expert templates/languages/
+git mv templates/rust-expert templates/languages/
+git mv templates/java-expert templates/languages/
+git mv templates/kotlin-expert templates/languages/
+git mv templates/cpp-expert templates/languages/
+git mv templates/csharp-expert templates/languages/
+git mv templates/swift-expert templates/languages/
+
+git mv templates/ux-designer templates/creative/
+git mv templates/documentation templates/professional/
+git mv templates/product-manager templates/business/
+git mv templates/educator templates/education/
+git mv templates/utility-agent templates/agents/
+
+# 3. Update TEMPLATES in src/index.js with category field
+# 4. Update path resolution logic
+# 5. Run tests
+```
+
+---
+
+## New Templates to Implement
+
+Each template needs:
+- `overview.md` (required) - scope, core principles, when to use
+- 4-8 topic rule files - domain-specific guidance with examples and anti-patterns
+
+### Creative (7 new)
+
+- [ ] `graphic-designer` - visual hierarchy, typography, color theory, brand systems, file prep
+- [ ] `fiction-writer` - story structure, character dev, dialogue, worldbuilding, revision
+- [ ] `screenwriter` - three-act structure, scene construction, format, loglines, beat sheets
+- [ ] `music-producer` - arrangement, mixing, sound design, release strategy, licensing
+- [ ] `photographer` - composition, lighting, post-processing, portfolio, client mgmt
+- [ ] `content-creator` - platform strategy, content calendars, growth, monetization, analytics
+- [ ] `copywriter` - headlines, CTAs, brand voice, A/B testing, funnel messaging, email sequences
+
+### Business (8 new)
+
+- [ ] `project-manager` - scope, WBS, risk registers, status reporting, stakeholder comms
+- [ ] `operations-manager` - process mapping, bottlenecks, SOPs, vendor eval, capacity
+- [ ] `business-analyst` - requirements, process modeling, gap analysis, cost-benefit, user stories
+- [ ] `startup-founder` - lean canvas, pitch decks, unit economics, fundraising, GTM
+- [ ] `supply-chain` - inventory, demand forecasting, supplier eval, logistics, cost modeling
+- [ ] `compliance-officer` - regulatory checklists, audit prep, policy drafting, risk assessment
+- [ ] `small-business` - business plans, pricing, customer acquisition, cash flow, hiring
+- [ ] `freelancer` - client mgmt, proposals, rate setting, contracts, scope creep prevention
+
+### Marketing (6 new)
+
+- [ ] `marketing-strategist` - campaigns, segmentation, channel strategy, attribution, budgets
+- [ ] `seo-specialist` - keyword research, content optimization, technical SEO, link strategy
+- [ ] `social-media` - platform strategy, engagement, community mgmt, crisis response
+- [ ] `public-relations` - press releases, media pitches, crisis comms, spokesperson prep
+- [ ] `email-marketer` - list segmentation, drip sequences, deliverability, subject lines
+- [ ] `brand-strategist` - positioning, messaging hierarchy, voice/tone, differentiation, naming
+
+### Professional (7 new)
+
+- [ ] `executive-assistant` - calendar, meeting prep, email drafting, travel, priority triage
+- [ ] `recruiter` - job descriptions, screening criteria, interview questions, offer benchmarking
+- [ ] `career-coach` - resume review, interview prep, salary negotiation, career pathing
+- [ ] `sales-engineer` - discovery calls, demo scripting, objection handling, proposals
+- [ ] `grant-writer` - funding research, proposal structure, budget justification, compliance
+- [ ] `technical-writer` - user manuals, SOPs, knowledge bases, release notes
+- [ ] `consultant` - engagement scoping, stakeholder analysis, deliverables, recommendations
+
+### Finance (4 new)
+
+- [ ] `personal-finance` - budgeting, debt payoff, investment education, tax planning, retirement
+- [ ] `accountant` - bookkeeping, expense categorization, deductions, financial statements
+- [ ] `real-estate` - property evaluation, mortgage comparison, rental yield, due diligence
+- [ ] `insurance-advisor` - coverage gaps, policy comparison, claims docs, risk assessment
+- [ ] `contract-reviewer` - clause ID, risk flagging, plain-language summaries, negotiation points
+
+### Education (6 new)
+
+- [ ] `language-tutor` - immersion, spaced repetition, conversation practice, grammar drilling
+- [ ] `study-coach` - active recall, exam prep, note-taking systems, time-boxing
+- [ ] `math-tutor` - problem decomposition, proof strategies, visualization, prerequisite gaps
+- [ ] `research-assistant` - literature review, source eval, citations, methodology, synthesis
+- [ ] `homeschool-planner` - curriculum design, learning objectives, assessment, portfolios
+- [ ] `skills-trainer` - deliberate practice, feedback loops, skill decomposition, plateaus
+
+### Health (6 new)
+
+- [ ] `nutrition-planner` - meal planning, macro tracking, dietary restrictions, grocery lists
+- [ ] `fitness-coach` - program design, progressive overload, recovery, movement assessment
+- [ ] `mental-health` - CBT journaling, stress management, habit tracking, boundaries
+- [ ] `sleep-optimizer` - sleep hygiene, environment, schedule design, pattern analysis
+- [ ] `caregiver` - care coordination, medication tracking, appointments, respite planning
+- [ ] `chronic-condition` - symptom tracking, appointment prep, treatment comparison, lifestyle
+
+### Home (7 new)
+
+- [ ] `home-organizer` - decluttering, storage systems, maintenance schedules, space optimization
+- [ ] `meal-prep` - weekly planning, batch cooking, pantry management, waste reduction
+- [ ] `home-maintenance` - seasonal checklists, repair priority, contractor eval, preventive maint
+- [ ] `event-planner` - timelines, vendor coordination, budgets, guest mgmt, contingency
+- [ ] `travel-planner` - itinerary optimization, budget travel, packing, booking timing, safety
+- [ ] `pet-care` - training protocols, nutrition, vet prep, behavior, enrichment
+- [ ] `parenting-coach` - age-appropriate strategies, routines, school nav, developmental milestones
+
+### Science (4 new)
+
+- [ ] `data-analyst` - statistics, visualization, hypothesis testing, reporting, tool selection
+- [ ] `lab-manager` - protocols, inventory, safety compliance, experiment design, documentation
+- [ ] `academic-writer` - paper structure, peer review response, abstracts, thesis organization
+- [ ] `citizen-scientist` - data collection, observation methodology, community projects
+
+### Personal (6 new)
+
+- [ ] `productivity-coach` - GTD, time-blocking, deep work, energy management, goal frameworks
+- [ ] `negotiation-coach` - BATNA, anchoring, active listening, win-win framing, difficult convos
+- [ ] `public-speaking` - speech structure, slides, delivery, Q&A prep, anxiety management
+- [ ] `networking-coach` - outreach templates, relationship CRM, follow-ups, introductions
+- [ ] `decision-maker` - decision matrices, pre-mortem, reversibility, stakeholder mapping, bias
+- [ ] `life-transition` - change management, priority reassessment, resource mapping, timelines
+
+### Civic (3 new)
+
+- [ ] `nonprofit-manager` - donor comms, volunteer coordination, impact measurement, board reporting
+- [ ] `community-organizer` - stakeholder mapping, campaigns, coalitions, facilitation, advocacy
+- [ ] `policy-analyst` - issue framing, evidence synthesis, impact assessment, position papers
+
+### Trades (2 new)
+
+- [ ] `farmer-rancher` - crop planning, rotation, market timing, equipment maintenance, weather
+- [ ] `construction-pm` - job scheduling, materials estimation, code compliance, subcontractors
+
+---
+
+## Implementation Order
+
+1. **Phase 0**: Directory reorganization (move existing templates into categories, update `src/index.js`)
+2. **Phase 1**: Professional + Business (highest immediate value, closest to existing patterns)
+3. **Phase 2**: Creative + Marketing (strong demand, clear rule structures)
+4. **Phase 3**: Education + Science (well-defined domains)
+5. **Phase 4**: Finance + Health (require careful disclaimers and scope boundaries)
+6. **Phase 5**: Home + Personal + Civic + Trades (broadest audience)
+
+---
+
+## Template Authoring Checklist
+
+For each new template:
+
+- [ ] `overview.md` with scope, principles, and anti-patterns
+- [ ] 4-8 focused rule files (one topic per file, under 500 lines)
+- [ ] Concrete examples in every rule file (do/don't patterns)
+- [ ] Add to `TEMPLATES` object in `src/index.js` with `category` field
+- [ ] Add sensible aliases to `TEMPLATE_ALIASES`
+- [ ] Verify `node bin/cli.js <template> --dry-run` works
+- [ ] Add template to `--list` output verification test
+- [ ] Update README.md Available Templates table
+
+---
+
+## Completion Criteria
+
+When all 66 new templates are implemented, all tests pass, and README is updated:
+
+**DELETE THIS FILE.**

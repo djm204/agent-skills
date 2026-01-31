@@ -22,109 +22,146 @@ const CURRENT_VERSION = packageJson.version;
 const REPO_URL = 'https://github.com/djm204/agentic-team-templates';
 const CHANGELOG_URL = `${REPO_URL}/releases/tag/${PACKAGE_NAME}-v${CURRENT_VERSION}`;
 
+// Template categories (storage-only, not exposed to CLI users)
+const CATEGORIES = [
+  'engineering',
+  'languages',
+  'creative',
+  'business',
+  'professional',
+  'education',
+  'agents',
+];
+
 // Available templates
 const TEMPLATES = {
   'blockchain': {
+    category: 'engineering',
     description: 'Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem)',
     rules: ['defi-patterns.md', 'gas-optimization.md', 'overview.md', 'security.md', 'smart-contracts.md', 'testing.md', 'web3-integration.md']
   },
   'cpp-expert': {
+    category: 'languages',
     description: 'Principal-level C++ engineering (modern C++, RAII, concurrency, templates, performance)',
     rules: ['concurrency.md', 'error-handling.md', 'memory-and-ownership.md', 'modern-cpp.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
   },
   'csharp-expert': {
+    category: 'languages',
     description: 'Principal-level C# engineering (async, DI, EF Core, ASP.NET Core, testing)',
     rules: ['aspnet-core.md', 'async-patterns.md', 'dependency-injection.md', 'error-handling.md', 'language-features.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
   },
   'cli-tools': {
+    category: 'engineering',
     description: 'Command-line applications and developer tools (Cobra, Commander, Click)',
     rules: ['architecture.md', 'arguments.md', 'distribution.md', 'error-handling.md', 'overview.md', 'testing.md', 'user-experience.md']
   },
   'data-engineering': {
+    category: 'engineering',
     description: 'Data platforms and pipelines (ETL, data modeling, data quality)',
     rules: ['data-modeling.md', 'data-quality.md', 'overview.md', 'performance.md', 'pipeline-design.md', 'security.md', 'testing.md']
   },
   'devops-sre': {
+    category: 'engineering',
     description: 'DevOps and SRE practices (incident management, observability, SLOs, chaos engineering)',
     rules: ['capacity-planning.md', 'change-management.md', 'chaos-engineering.md', 'disaster-recovery.md', 'incident-management.md', 'observability.md', 'overview.md', 'postmortems.md', 'runbooks.md', 'slo-sli.md', 'toil-reduction.md']
   },
   'documentation': {
+    category: 'professional',
     description: 'Technical documentation standards (READMEs, API docs, ADRs, code comments)',
     rules: ['adr.md', 'api-documentation.md', 'code-comments.md', 'maintenance.md', 'overview.md', 'readme-standards.md']
   },
   'educator': {
+    category: 'education',
     description: 'World-class pedagogy with evidence-based teaching, learning retention, gamification, and assessment design',
     rules: ['accessibility.md', 'assessment.md', 'curriculum.md', 'engagement.md', 'instructional-design.md', 'overview.md', 'retention.md']
   },
   'fullstack': {
+    category: 'engineering',
     description: 'Full-stack web applications (Next.js, Nuxt, SvelteKit, Remix)',
     rules: ['api-contracts.md', 'architecture.md', 'overview.md', 'shared-types.md', 'testing.md']
   },
   'golang-expert': {
+    category: 'languages',
     description: 'Principal-level Go engineering (concurrency, stdlib, production patterns, testing)',
     rules: ['concurrency.md', 'error-handling.md', 'interfaces-and-types.md', 'overview.md', 'performance.md', 'production-patterns.md', 'stdlib-and-tooling.md', 'testing.md']
   },
   'java-expert': {
+    category: 'languages',
     description: 'Principal-level Java engineering (JVM, Spring Boot, concurrency, JPA, testing)',
     rules: ['concurrency.md', 'error-handling.md', 'modern-java.md', 'overview.md', 'performance.md', 'persistence.md', 'spring-boot.md', 'testing.md', 'tooling.md']
   },
   'javascript-expert': {
+    category: 'languages',
     description: 'Principal-level JavaScript & TypeScript engineering (Node.js, React, type system, testing)',
     rules: ['language-deep-dive.md', 'node-patterns.md', 'overview.md', 'performance.md', 'react-patterns.md', 'testing.md', 'tooling.md', 'typescript-deep-dive.md']
   },
   'kotlin-expert': {
+    category: 'languages',
     description: 'Principal-level Kotlin engineering (coroutines, multiplatform, Ktor, Spring Boot, testing)',
     rules: ['coroutines.md', 'error-handling.md', 'frameworks.md', 'language-features.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
   },
   'ml-ai': {
+    category: 'engineering',
     description: 'Machine learning and AI systems (model development, deployment, monitoring)',
     rules: ['data-engineering.md', 'deployment.md', 'model-development.md', 'monitoring.md', 'overview.md', 'security.md', 'testing.md']
   },
   'mobile': {
+    category: 'engineering',
     description: 'Mobile applications (React Native, Flutter, native iOS/Android)',
     rules: ['navigation.md', 'offline-first.md', 'overview.md', 'performance.md', 'testing.md']
   },
   'platform-engineering': {
+    category: 'engineering',
     description: 'Internal developer platforms, infrastructure automation, and reliability engineering',
     rules: ['ci-cd.md', 'developer-experience.md', 'infrastructure-as-code.md', 'kubernetes.md', 'observability.md', 'overview.md', 'security.md', 'testing.md']
   },
   'product-manager': {
+    category: 'business',
     description: 'Product management with customer-centric discovery, prioritization, and execution',
     rules: ['communication.md', 'discovery.md', 'metrics.md', 'overview.md', 'prioritization.md', 'requirements.md']
   },
   'python-expert': {
+    category: 'languages',
     description: 'Principal-level Python engineering (type system, async, testing, FastAPI, Django)',
     rules: ['async-python.md', 'overview.md', 'patterns-and-idioms.md', 'performance.md', 'testing.md', 'tooling.md', 'type-system.md', 'web-and-apis.md']
   },
   'qa-engineering': {
+    category: 'engineering',
     description: 'Quality assurance programs for confident, rapid software delivery',
     rules: ['automation.md', 'metrics.md', 'overview.md', 'quality-gates.md', 'test-design.md', 'test-strategy.md']
   },
   'rust-expert': {
+    category: 'languages',
     description: 'Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async)',
     rules: ['concurrency.md', 'ecosystem-and-tooling.md', 'error-handling.md', 'overview.md', 'ownership-and-borrowing.md', 'performance-and-unsafe.md', 'testing.md', 'traits-and-generics.md']
   },
   'swift-expert': {
+    category: 'languages',
     description: 'Principal-level Swift engineering (concurrency, SwiftUI, protocols, testing, Apple platforms)',
     rules: ['concurrency.md', 'error-handling.md', 'language-features.md', 'overview.md', 'performance.md', 'swiftui.md', 'testing.md', 'tooling.md']
   },
   'testing': {
+    category: 'engineering',
     description: 'Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing)',
     rules: ['advanced-techniques.md', 'ci-cd-integration.md', 'overview.md', 'performance-testing.md', 'quality-metrics.md', 'reliability.md', 'tdd-methodology.md', 'test-data.md', 'test-design.md', 'test-types.md']
   },
   'utility-agent': {
+    category: 'agents',
     description: 'AI agent utilities with context management and hallucination prevention',
     rules: ['action-control.md', 'context-management.md', 'hallucination-prevention.md', 'overview.md', 'token-optimization.md']
   },
   'ux-designer': {
+    category: 'creative',
     description: 'Principal-level UX design with user research, interaction design, design systems, accessibility, and emotional design',
     rules: ['accessibility.md', 'emotional-design.md', 'handoff.md', 'information-architecture.md', 'interaction-design.md', 'overview.md', 'research.md', 'visual-design.md']
   },
   'web-backend': {
+    category: 'engineering',
     description: 'Backend APIs and services (REST, GraphQL, microservices)',
     rules: ['api-design.md', 'authentication.md', 'database-patterns.md', 'error-handling.md', 'overview.md', 'security.md', 'testing.md']
   },
   'web-frontend': {
+    category: 'engineering',
     description: 'Frontend web applications (SPAs, SSR, static sites, PWAs)',
     rules: ['accessibility.md', 'component-patterns.md', 'overview.md', 'performance.md', 'state-management.md', 'styling.md', 'testing.md']
   }
@@ -164,6 +201,17 @@ const TEMPLATE_ALIASES = {
  */
 function resolveTemplateAlias(name) {
   return TEMPLATE_ALIASES[name] || name;
+}
+
+/**
+ * Get the source path for a template's rule files
+ * @param {string} template - Template name
+ * @param {string} rule - Rule filename
+ * @returns {string} Full path to the rule file in templates/<category>/<template>/.cursor/rules/
+ */
+function getTemplateRulePath(template, rule) {
+  const { category } = TEMPLATES[template];
+  return path.join(TEMPLATES_DIR, category, template, '.cursor', 'rules', rule);
 }
 
 const SHARED_RULES = [
@@ -310,11 +358,25 @@ function printTemplates() {
 
   console.log(colors.yellow('Available Templates:\n'));
 
+  // Group templates by category
+  const byCategory = {};
   for (const [name, info] of Object.entries(TEMPLATES)) {
-    const aliases = aliasesByTemplate[name];
-    const aliasSuffix = aliases ? ` ${colors.dim(`(aliases: ${aliases.join(', ')})`)}` : '';
-    console.log(`  ${colors.green(name)}${aliasSuffix}`);
-    console.log(`    ${info.description}\n`);
+    const cat = info.category;
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push({ name, info });
+  }
+
+  for (const category of CATEGORIES) {
+    const templates = byCategory[category];
+    if (!templates || templates.length === 0) continue;
+    const label = category.charAt(0).toUpperCase() + category.slice(1);
+    console.log(colors.blue(`  ${label}:`));
+    for (const { name, info } of templates) {
+      const aliases = aliasesByTemplate[name];
+      const aliasSuffix = aliases ? ` ${colors.dim(`(aliases: ${aliases.join(', ')})`)}` : '';
+      console.log(`    ${colors.green(name)}${aliasSuffix}`);
+      console.log(`      ${info.description}\n`);
+    }
   }
 
   console.log(colors.blue('Shared rules (always included):'));
@@ -709,7 +771,7 @@ function generateCopilotInstructionsContent(installedTemplates) {
   // Read and concatenate template-specific rules
   const templateRulesContent = installedTemplates.map(template => {
     return TEMPLATES[template].rules.map(rule => {
-      const rulePath = path.join(TEMPLATES_DIR, template, '.cursor', 'rules', rule);
+      const rulePath = getTemplateRulePath(template, rule);
       try {
         return fs.readFileSync(rulePath, 'utf8');
       } catch {
@@ -836,7 +898,7 @@ async function install(targetDir, templates, dryRun = false, force = false, ides
       console.log(colors.green(`► Installing ${template} template (${CURSOR_RULES_DIR}/)...`));
 
       for (const rule of TEMPLATES[template].rules) {
-        const src = path.join(TEMPLATES_DIR, template, '.cursor', 'rules', rule);
+        const src = getTemplateRulePath(template, rule);
         const dest = path.join(cursorRulesDir, `${template}-${rule}`);
         const destName = `${template}-${rule}`;
         
@@ -1132,7 +1194,7 @@ async function remove(targetDir, templates, dryRun = false, force = false, skipC
           for (const rule of TEMPLATES[template].rules) {
             const destName = `${template}-${rule}`;
             const destPath = path.join(dir, destName);
-            const srcPath = path.join(TEMPLATES_DIR, template, '.cursor', 'rules', rule);
+            const srcPath = getTemplateRulePath(template, rule);
 
             if (!fs.existsSync(destPath)) {
               continue;
@@ -1306,7 +1368,7 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
           for (const rule of templateInfo.rules) {
             const destName = `${templateName}-${rule}`;
             const destPath = path.join(dir, destName);
-            const srcPath = path.join(TEMPLATES_DIR, templateName, '.cursor', 'rules', rule);
+            const srcPath = getTemplateRulePath(templateName, rule);
 
             if (!fs.existsSync(destPath)) continue;
 
@@ -1630,6 +1692,7 @@ export const _internals = {
   CHANGELOG_URL,
   CURSOR_RULES_DIR,
   LEGACY_CURSORRULES_DIR,
+  CATEGORIES,
   TEMPLATES,
   TEMPLATE_ALIASES,
   SHARED_RULES,
@@ -1638,6 +1701,7 @@ export const _internals = {
   compareVersions,
   checkForUpdates,
   resolveTemplateAlias,
+  getTemplateRulePath,
   filesMatch,
   parseMarkdownSections,
   generateSectionSignature,

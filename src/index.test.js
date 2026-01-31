@@ -9,6 +9,7 @@ const {
   CURRENT_VERSION,
   CURSOR_RULES_DIR,
   LEGACY_CURSORRULES_DIR,
+  CATEGORIES,
   TEMPLATES,
   TEMPLATE_ALIASES,
   SHARED_RULES,
@@ -16,6 +17,7 @@ const {
   DEFAULT_IDES,
   compareVersions,
   resolveTemplateAlias,
+  getTemplateRulePath,
   filesMatch,
   parseMarkdownSections,
   generateSectionSignature,
@@ -108,12 +110,15 @@ describe('Constants', () => {
       expect(Object.keys(TEMPLATES).sort()).toEqual(expectedTemplates.sort());
     });
 
-    it('each template should have description and rules array', () => {
+    it('each template should have category, description, and rules array', () => {
       for (const [name, template] of Object.entries(TEMPLATES)) {
+        expect(template).toHaveProperty('category');
+        expect(CATEGORIES).toContain(template.category);
+
         expect(template).toHaveProperty('description');
         expect(typeof template.description).toBe('string');
         expect(template.description.length).toBeGreaterThan(0);
-        
+
         expect(template).toHaveProperty('rules');
         expect(Array.isArray(template.rules)).toBe(true);
         expect(template.rules.length).toBeGreaterThan(0);
@@ -123,6 +128,15 @@ describe('Constants', () => {
     it('each template should have overview.md in rules', () => {
       for (const [name, template] of Object.entries(TEMPLATES)) {
         expect(template.rules).toContain('overview.md');
+      }
+    });
+
+    it('each template rule file should exist on disk', () => {
+      for (const [name, template] of Object.entries(TEMPLATES)) {
+        for (const rule of template.rules) {
+          const rulePath = getTemplateRulePath(name, rule);
+          expect(fs.existsSync(rulePath), `Missing: ${rulePath}`).toBe(true);
+        }
       }
     });
   });
