@@ -35,6 +35,11 @@ const CATEGORIES = [
 
 // Available templates
 const TEMPLATES = {
+  'brand-guardian': {
+    category: 'creative',
+    description: 'Brand voice enforcement, visual identity compliance, content review workflows, and multi-channel consistency',
+    rules: ['brand-voice.md', 'content-review.md', 'ethical-guidelines.md', 'multi-channel.md', 'overview.md', 'visual-identity.md']
+  },
   'blockchain': {
     category: 'engineering',
     description: 'Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem)',
@@ -49,6 +54,11 @@ const TEMPLATES = {
     category: 'languages',
     description: 'Principal-level C# engineering (async, DI, EF Core, ASP.NET Core, testing)',
     rules: ['aspnet-core.md', 'async-patterns.md', 'dependency-injection.md', 'error-handling.md', 'language-features.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
+  },
+  'content-creation-expert': {
+    category: 'creative',
+    description: 'Content strategy, long-form writing, copywriting, SEO content, multimedia production, and editorial operations',
+    rules: ['content-strategy.md', 'copywriting.md', 'editorial-operations.md', 'multimedia-production.md', 'overview.md', 'seo-content.md']
   },
   'cli-tools': {
     category: 'engineering',
@@ -95,20 +105,50 @@ const TEMPLATES = {
     description: 'Principal-level JavaScript & TypeScript engineering (Node.js, React, type system, testing)',
     rules: ['language-deep-dive.md', 'node-patterns.md', 'overview.md', 'performance.md', 'react-patterns.md', 'testing.md', 'tooling.md', 'typescript-deep-dive.md']
   },
+  'knowledge-synthesis': {
+    category: 'professional',
+    description: 'Knowledge management with document ingestion, knowledge graphs, search/retrieval, summarization, and research workflows',
+    rules: ['document-management.md', 'knowledge-graphs.md', 'overview.md', 'research-workflow.md', 'search-retrieval.md', 'summarization.md']
+  },
   'kotlin-expert': {
     category: 'languages',
     description: 'Principal-level Kotlin engineering (coroutines, multiplatform, Ktor, Spring Boot, testing)',
     rules: ['coroutines.md', 'error-handling.md', 'frameworks.md', 'language-features.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
+  },
+  'life-logistics': {
+    category: 'professional',
+    description: 'Personal logistics optimization including scheduling, bill negotiation, insurance comparison, and vendor research',
+    rules: ['financial-optimization.md', 'negotiation.md', 'overview.md', 'research-methodology.md', 'scheduling.md', 'task-management.md']
+  },
+  'market-intelligence': {
+    category: 'business',
+    description: 'Market intelligence with data source aggregation, sentiment analysis, trend detection, and risk signal monitoring',
+    rules: ['data-sources.md', 'overview.md', 'reporting.md', 'risk-signals.md', 'sentiment-analysis.md', 'trend-detection.md']
+  },
+  'marketing-expert': {
+    category: 'business',
+    description: 'Principal marketing strategy covering brand positioning, campaign planning, market analysis, analytics, and growth frameworks',
+    rules: ['brand-strategy.md', 'campaign-planning.md', 'growth-frameworks.md', 'market-analysis.md', 'marketing-analytics.md', 'overview.md']
   },
   'ml-ai': {
     category: 'engineering',
     description: 'Machine learning and AI systems (model development, deployment, monitoring)',
     rules: ['data-engineering.md', 'deployment.md', 'model-development.md', 'monitoring.md', 'overview.md', 'security.md', 'testing.md']
   },
+  'narrative-architect': {
+    category: 'creative',
+    description: 'World-building, continuity tracking, timeline management, story bible creation, and collaborative storytelling',
+    rules: ['collaboration.md', 'continuity-tracking.md', 'overview.md', 'story-bible.md', 'timeline-management.md', 'world-building.md']
+  },
   'mobile': {
     category: 'engineering',
     description: 'Mobile applications (React Native, Flutter, native iOS/Android)',
     rules: ['navigation.md', 'offline-first.md', 'overview.md', 'performance.md', 'testing.md']
+  },
+  'predictive-maintenance': {
+    category: 'business',
+    description: 'Industrial sensor monitoring, failure prediction, maintenance scheduling, asset lifecycle management, and alerting',
+    rules: ['alerting.md', 'asset-lifecycle.md', 'failure-prediction.md', 'maintenance-scheduling.md', 'overview.md', 'sensor-analytics.md']
   },
   'platform-engineering': {
     category: 'engineering',
@@ -120,6 +160,16 @@ const TEMPLATES = {
     description: 'Product management with customer-centric discovery, prioritization, and execution',
     rules: ['communication.md', 'discovery.md', 'metrics.md', 'overview.md', 'prioritization.md', 'requirements.md']
   },
+  'regulatory-sentinel': {
+    category: 'business',
+    description: 'Regulatory compliance tracking, impact assessment, monitoring, risk classification, and compliance reporting',
+    rules: ['compliance-tracking.md', 'impact-assessment.md', 'monitoring.md', 'overview.md', 'reporting.md', 'risk-classification.md']
+  },
+  'resource-allocator': {
+    category: 'business',
+    description: 'Resource allocation with demand prediction, scheduling optimization, crisis management, and capacity modeling',
+    rules: ['capacity-modeling.md', 'coordination.md', 'crisis-management.md', 'demand-prediction.md', 'overview.md', 'scheduling.md']
+  },
   'python-expert': {
     category: 'languages',
     description: 'Principal-level Python engineering (type system, async, testing, FastAPI, Django)',
@@ -129,6 +179,21 @@ const TEMPLATES = {
     category: 'engineering',
     description: 'Quality assurance programs for confident, rapid software delivery',
     rules: ['automation.md', 'metrics.md', 'overview.md', 'quality-gates.md', 'test-design.md', 'test-strategy.md']
+  },
+  'social-media-expert': {
+    category: 'creative',
+    description: 'Social media strategy covering platform optimization, content planning, audience growth, community management, and analytics',
+    rules: ['audience-growth.md', 'community-management.md', 'content-strategy.md', 'overview.md', 'platform-strategy.md', 'social-analytics.md']
+  },
+  'strategic-negotiator': {
+    category: 'business',
+    description: 'Negotiation strategy with game theory, deal structuring, scenario modeling, preparation frameworks, and contract analysis',
+    rules: ['contract-analysis.md', 'deal-structuring.md', 'game-theory.md', 'overview.md', 'preparation.md', 'scenario-modeling.md']
+  },
+  'supply-chain-harmonizer': {
+    category: 'business',
+    description: 'Supply chain optimization with disruption response, rerouting, inventory rebalancing, and scenario simulation',
+    rules: ['disruption-response.md', 'inventory-rebalancing.md', 'overview.md', 'rerouting.md', 'scenario-simulation.md', 'stakeholder-notifications.md']
   },
   'rust-expert': {
     category: 'languages',
@@ -140,10 +205,20 @@ const TEMPLATES = {
     description: 'Principal-level Swift engineering (concurrency, SwiftUI, protocols, testing, Apple platforms)',
     rules: ['concurrency.md', 'error-handling.md', 'language-features.md', 'overview.md', 'performance.md', 'swiftui.md', 'testing.md', 'tooling.md']
   },
+  'trend-forecaster': {
+    category: 'creative',
+    description: 'Trend analysis with signal detection, cultural analysis, trend lifecycle modeling, forecasting methods, and reporting',
+    rules: ['cultural-analysis.md', 'forecasting-methods.md', 'overview.md', 'reporting.md', 'signal-analysis.md', 'trend-lifecycle.md']
+  },
   'testing': {
     category: 'engineering',
     description: 'Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing)',
     rules: ['advanced-techniques.md', 'ci-cd-integration.md', 'overview.md', 'performance-testing.md', 'quality-metrics.md', 'reliability.md', 'tdd-methodology.md', 'test-data.md', 'test-design.md', 'test-types.md']
+  },
+  'unity-dev-expert': {
+    category: 'engineering',
+    description: 'Unity game development with C# architecture, ECS/DOTS, physics/rendering, UI systems, multiplayer networking, and performance optimization',
+    rules: ['csharp-architecture.md', 'multiplayer-networking.md', 'overview.md', 'performance-optimization.md', 'physics-rendering.md', 'ui-systems.md']
   },
   'utility-agent': {
     category: 'agents',
@@ -154,6 +229,11 @@ const TEMPLATES = {
     category: 'creative',
     description: 'Principal-level UX design with user research, interaction design, design systems, accessibility, and emotional design',
     rules: ['accessibility.md', 'emotional-design.md', 'handoff.md', 'information-architecture.md', 'interaction-design.md', 'overview.md', 'research.md', 'visual-design.md']
+  },
+  'wellness-orchestrator': {
+    category: 'professional',
+    description: 'Unified wellness planning across fitness, nutrition, sleep, and mental wellness with wearable data integration',
+    rules: ['adaptive-planning.md', 'data-integration.md', 'fitness-programming.md', 'nutrition-planning.md', 'overview.md', 'sleep-optimization.md']
   },
   'web-backend': {
     category: 'engineering',
@@ -186,8 +266,12 @@ const TEMPLATE_ALIASES = {
   'cpp': 'cpp-expert',
   'csharp': 'csharp-expert',
   'cs': 'csharp-expert',
+  'unity': 'unity-dev-expert',
   'teach': 'educator',
   'teacher': 'educator',
+  'marketing': 'marketing-expert',
+  'social-media': 'social-media-expert',
+  'content-creation': 'content-creation-expert',
   'ux': 'ux-designer',
   'uxd': 'ux-designer',
   'design': 'ux-designer',

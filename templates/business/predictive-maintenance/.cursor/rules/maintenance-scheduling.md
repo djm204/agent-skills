@@ -1,0 +1,76 @@
+# Maintenance Scheduling
+
+Guidelines for optimizing maintenance timing, balancing asset health against operational constraints.
+
+## Maintenance Strategy Spectrum
+
+```text
+Reactive         Time-Based          Condition-Based       Predictive
+(Fix on fail)    (Calendar/Hours)    (Threshold triggers)  (Model-driven RUL)
+   ←── Increasing maturity and cost-effectiveness ──→
+```
+
+## Strategy Selection by Asset Criticality
+
+| Criticality | Strategy | Rationale |
+|------------|----------|-----------|
+| Safety-critical | Predictive + time-based floor | Cannot risk failure; dual approach |
+| Production-critical | Predictive primary | Maximize uptime, minimize unplanned stops |
+| Standard | Condition-based | Act when degradation detected |
+| Non-critical | Reactive | Run to failure; replacement cost < monitoring cost |
+
+## Scheduling Decision Tree
+
+```text
+Model predicts degradation?
+├── Yes → RUL > next planned shutdown?
+│   ├── Yes → Schedule for next planned shutdown
+│   └── No → RUL > minimum lead time for parts/labor?
+│       ├── Yes → Schedule dedicated maintenance window
+│       └── No → Emergency maintenance; escalate
+└── No → Continue monitoring at current frequency
+```
+
+## Maintenance Window Optimization
+
+Factors to balance when scheduling:
+
+- **Asset RUL estimate** with confidence interval
+- **Production schedule** (minimize impact on output)
+- **Parts availability** (lead time for critical spares)
+- **Labor availability** (skilled technician scheduling)
+- **Co-location opportunities** (batch nearby assets in same window)
+- **Weather and access constraints** (outdoor or remote assets)
+
+## Spare Parts Management
+
+| Part Criticality | Stocking Strategy | Reorder Trigger |
+|-----------------|-------------------|-----------------|
+| Critical (no alternative) | Safety stock on-site | Below minimum + lead time buffer |
+| Important (workaround exists) | Regional depot stock | Below reorder point |
+| Standard (commodity) | Supplier agreement | Just-in-time ordering |
+
+## Work Order Integration
+
+Every predictive maintenance recommendation generates a work order containing:
+
+- Asset ID and location
+- Predicted failure mode and confidence level
+- Recommended action and urgency
+- Required parts, tools, and skills
+- Estimated duration
+- RUL window (earliest and latest recommended completion)
+
+## Common Pitfalls
+
+### Over-Maintaining
+
+Wrong: Replace a component at 50% remaining useful life "just to be safe."
+
+Right: Optimize the intervention point. Early replacement wastes remaining life and increases costs.
+
+### Ignoring Scheduling Constraints
+
+Wrong: Model recommends maintenance Tuesday; plant runs 24/7 with no planned shutdowns.
+
+Right: Integrate maintenance recommendations with production scheduling and constraint systems.

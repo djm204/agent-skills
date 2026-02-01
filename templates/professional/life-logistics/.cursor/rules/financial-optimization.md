@@ -1,0 +1,73 @@
+# Personal Finance Optimization
+
+Guidelines for reducing recurring costs, optimizing insurance plans, maximizing rewards and benefits, and maintaining a systematic approach to household financial management.
+
+## Optimization Principles
+
+1. **Measure before optimizing** - Collect at least 6-12 months of spending data before recommending changes
+2. **Focus on the big categories first** - Housing, insurance, transportation, and utilities yield the largest savings
+3. **Optimization is recurring** - A one-time review is not enough. Financial optimization requires quarterly and annual review cadences
+4. **Tax-advantaged accounts first** - Maximize HSA, FSA, and retirement account contributions before optimizing discretionary spending
+5. **Rewards stacking** - Layer credit card rewards, loyalty programs, employer benefits, and promotional offers for maximum value
+
+## Insurance Optimization Methodology
+
+### Usage Pattern Analysis
+
+Before comparing any insurance plan:
+
+1. Pull 24 months of claims history and out-of-pocket spending
+2. List every provider, medication, and service used with frequency
+3. Identify any planned procedures or changes in the next 12 months
+4. Verify which providers are in-network for each plan under consideration
+5. Calculate total annual cost under best-case, expected-case, and worst-case usage scenarios
+
+### Plan Comparison
+
+For every insurance comparison, calculate total annual cost as:
+
+- (Monthly Premium x 12) + Expected Out-of-Pocket Based on Usage - Tax Savings from HSA/FSA - Employer Contributions
+
+Weight the scenarios: 50% best case, 35% expected case, 15% worst case. The plan with the lowest weighted total annual cost is typically the best choice, subject to network adequacy.
+
+### Annual Insurance Shopping Schedule
+
+- **45-60 days before renewal**: Request current policy declarations page and begin competitor quoting
+- **30-45 days before renewal**: Complete comparisons, negotiate with current carrier using competitor quotes
+- **14-30 days before renewal**: Make final decision and bind new policy if switching
+- **Day of renewal**: Verify new policy is active and old policy terminates without gap
+
+## Expense Category Strategies
+
+### High-Impact Categories
+
+- **Housing**: Review refinance opportunities when rates drop 0.5%+ below current rate. Appeal property tax assessments when comparable sales support a lower valuation. Request PMI removal at 80% LTV.
+- **Insurance**: Shop all policies annually. Bundle home and auto for 10-25% discount. Optimize deductibles based on emergency fund size.
+- **Telecom**: Negotiate annually with retention department. Right-size data and channel plans to actual usage.
+- **Subscriptions**: Audit quarterly. Cancel anything unused in the past 30 days. Negotiate annual rates for keepers.
+
+### Credit Card Rewards
+
+- Assign spending categories to the card with the highest reward rate for that category
+- Set recurring bills on the card that offers the best rate for subscription or utility payments
+- Review reward program changes quarterly as issuers frequently modify category bonuses
+- Redeem rewards at their highest-value option (often travel or statement credit, not merchandise)
+
+## Financial Review Cadence
+
+Follow the review schedule in CLAUDE.md:
+
+- **Weekly**: Transaction review for unauthorized charges, verify autopay processing
+- **Monthly**: Budget reconciliation, upcoming renewal check for the next 60 days
+- **Quarterly**: Subscription audit, insurance adequacy review, rewards optimization check
+- **Annually**: Full insurance shopping, tax withholding review, provider rate comparison, credit report check
+- **Event-triggered**: Any rate increase, life change, claim, or contract expiration
+
+## Verification Protocol
+
+After any financial change (new rate, plan switch, account modification):
+
+1. Document the change with confirmation number, effective date, and expected impact
+2. Set a 30-day reminder to verify the change on the next statement
+3. If the change is not reflected, escalate immediately with documentation
+4. Update the renewal tracker with the new terms and next review date

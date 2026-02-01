@@ -1,0 +1,137 @@
+# Marketing Analytics
+
+Guidelines for measurement, attribution, experimentation, and data-driven decision-making in marketing.
+
+## Measurement Architecture
+
+```text
+Marketing Measurement Stack
+├── Data Collection
+│   ├── Web analytics (GA4, Amplitude, Mixpanel)
+│   ├── Ad platform pixels and conversion APIs
+│   ├── CRM and marketing automation
+│   ├── Call tracking and form capture
+│   └── Product analytics (feature usage, events)
+├── Data Integration
+│   ├── CRM as system of record for pipeline
+│   ├── Marketing automation for engagement data
+│   ├── Data warehouse for cross-source analysis
+│   └── Identity resolution across touchpoints
+├── Analysis
+│   ├── Attribution modeling
+│   ├── Funnel analysis and conversion paths
+│   ├── Cohort analysis and retention curves
+│   ├── Channel ROI and efficiency
+│   └── Predictive scoring (MQL, PQL)
+└── Reporting
+    ├── Executive dashboards (monthly)
+    ├── Program dashboards (weekly)
+    ├── Campaign dashboards (daily)
+    └── Ad hoc analysis and deep dives
+```
+
+## Key Metrics by Function
+
+| Function | Primary Metrics | Secondary Metrics |
+|----------|----------------|-------------------|
+| Demand Generation | Pipeline generated, MQLs, SQLs | CPL, conversion rates, velocity |
+| Content Marketing | Organic traffic, engaged sessions | Rankings, backlinks, content-to-lead rate |
+| Paid Media | ROAS, CPA, pipeline from paid | CTR, quality score, impression share |
+| Email Marketing | Revenue per email, conversion rate | Open rate, click rate, unsubscribe rate |
+| Product Marketing | Win rate, feature adoption | Battle card usage, sales feedback scores |
+| Brand | Aided awareness, NPS, SOV | Branded search volume, sentiment score |
+| Growth | Activation rate, retention rate, LTV | K-factor, time to value, expansion revenue |
+
+## Attribution Model Selection
+
+| Scenario | Recommended Model | Rationale |
+|----------|------------------|-----------|
+| Short sales cycle (< 7 days) | Last touch or first touch | Few touchpoints, simplicity is fine |
+| Medium sales cycle (1-3 months) | U-shaped or linear | Enough touches to distribute credit |
+| Long sales cycle (3+ months, enterprise) | W-shaped or data-driven | Many touchpoints across buying committee |
+| Brand-heavy strategy | First touch weighted | Captures awareness investment value |
+| Performance-heavy strategy | Last touch weighted | Captures conversion efficiency |
+| Multi-channel, high volume | Data-driven / algorithmic | Enough data for statistical modeling |
+
+### Attribution Implementation Checklist
+
+| Item | Purpose | Priority |
+|------|---------|----------|
+| UTM parameter standards | Consistent campaign tagging across all channels | Critical |
+| CRM source/campaign fields | Map leads to originating campaigns | Critical |
+| Touchpoint tracking | Record every meaningful interaction | High |
+| Cookie/identity management | Connect anonymous to known across sessions | High |
+| Offline event tracking | Capture event, direct mail, phone touches | Medium |
+| Cross-device resolution | Connect mobile and desktop journeys | Medium |
+| Data warehouse joins | Unify ad platform, CRM, and product data | High |
+
+## Funnel Analysis
+
+### Standard Funnel Definitions
+
+| Stage | Definition | Owner |
+|-------|-----------|-------|
+| Visitor | Arrives at any owned property | Marketing |
+| Lead | Provides contact information | Marketing |
+| MQL (Marketing Qualified Lead) | Meets scoring threshold (behavior + fit) | Marketing |
+| SQL (Sales Qualified Lead) | Sales confirms qualified after outreach | Sales |
+| Opportunity | Active deal in pipeline with timeline | Sales |
+| Closed Won | Signed contract | Sales |
+
+### Conversion Benchmarks (B2B SaaS)
+
+| Conversion | Median | Top Quartile |
+|-----------|--------|-------------|
+| Visitor to Lead | 1-3% | 5-7% |
+| Lead to MQL | 15-25% | 30-40% |
+| MQL to SQL | 20-30% | 40-50% |
+| SQL to Opportunity | 40-60% | 60-75% |
+| Opportunity to Closed Won | 15-25% | 25-35% |
+| Visitor to Closed Won | 0.01-0.05% | 0.1-0.3% |
+
+## Experimentation Standards
+
+| Standard | Requirement |
+|----------|------------|
+| Sample size | Calculate minimum detectable effect before starting |
+| Duration | Run for at least 2 full business cycles (typically 2-4 weeks) |
+| Significance | p < 0.05 for declaring a winner |
+| One variable | Change only one element per test to isolate causality |
+| Documentation | Record hypothesis, setup, results, and learnings for every test |
+| No peeking | Do not check results daily and stop early; commit to the duration |
+
+## Reporting Cadence
+
+| Report | Audience | Frequency | Focus |
+|--------|----------|-----------|-------|
+| Executive summary | C-suite | Monthly | Revenue attribution, CAC, pipeline, brand health |
+| Demand gen review | Marketing leadership | Weekly | Pipeline by channel, conversion trends, spend pacing |
+| Campaign performance | Campaign managers | Daily/Weekly | Impressions, clicks, conversions, CPA |
+| Content performance | Content team | Bi-weekly | Traffic, engagement, rankings, content pipeline |
+| Experiment results | Growth team | Per experiment | Win/loss/inconclusive, learnings, next tests |
+
+## Common Pitfalls
+
+### Measuring What Is Easy, Not What Matters
+
+Wrong: Report on impressions, clicks, and page views because they are easy to track. Avoid the hard work of connecting marketing to revenue.
+
+Right: Invest in the infrastructure to track from first touch to closed deal. Revenue attribution is harder but infinitely more valuable than click counts.
+
+### Optimizing for Local Maxima
+
+Wrong: A/B test button colors endlessly while ignoring that the value proposition on the page is wrong.
+
+Right: Test big things first (messaging, offer, audience), then optimize small things (layout, copy, design). The hierarchy of impact matters.
+
+### Ignoring Statistical Significance
+
+Wrong: Declare a winner after 48 hours with 200 visitors. Call a 3% lift "significant" without checking confidence intervals.
+
+Right: Pre-calculate sample size requirements. Wait for statistical significance. Accept that some tests will be inconclusive and that is valuable information.
+
+### Dashboard Overload
+
+Wrong: Build 15 dashboards with 200 metrics. Nobody looks at any of them because there is too much noise.
+
+Right: One dashboard per audience. Five to eight metrics maximum per dashboard. If a metric does not drive a decision, remove it.

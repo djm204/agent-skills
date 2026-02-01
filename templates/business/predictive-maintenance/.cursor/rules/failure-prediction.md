@@ -1,0 +1,77 @@
+# Failure Prediction
+
+Guidelines for building and operating failure prediction models and anomaly detection systems.
+
+## Prediction Approaches
+
+| Approach | Data Required | Best For | Accuracy |
+|----------|-------------|----------|----------|
+| Physics-based | Engineering models | Well-understood failure modes | High for known modes |
+| Statistical (Weibull, Cox) | Historical failure data | Fleet-level life estimation | Medium |
+| Machine Learning | Sensor + failure history | Complex multi-sensor patterns | High with sufficient data |
+| Hybrid | All of the above | Critical assets, mixed failure modes | Highest |
+
+## Model Development Pipeline
+
+```text
+1. Define failure modes and target variable
+2. Collect and label historical data (run-to-failure + maintenance records)
+3. Engineer features (sensor stats, operating context, time-based)
+4. Train and validate models (time-series cross-validation)
+5. Set classification thresholds (balancing precision vs recall)
+6. Deploy with monitoring (drift detection, performance tracking)
+7. Retrain on new failure data (continuous improvement loop)
+```
+
+## Remaining Useful Life (RUL) Estimation
+
+```text
+RUL = Estimated time from current state to functional failure
+
+Approaches:
+├── Similarity-based: Compare current degradation curve to historical failures
+├── Regression-based: Predict time-to-failure from feature trajectory
+└── Threshold-based: Extrapolate trend to known failure threshold
+```
+
+## Anomaly Detection
+
+| Method | Use Case | Sensitivity |
+|--------|----------|-------------|
+| Statistical (Z-score, IQR) | Single-sensor deviations | Low-Medium |
+| Isolation Forest | Multi-sensor anomalies | Medium |
+| Autoencoders | Complex pattern deviations | Medium-High |
+| LSTM-based | Temporal sequence anomalies | High |
+
+## Model Performance Metrics
+
+| Metric | Target | Interpretation |
+|--------|--------|----------------|
+| Precision | > 85% | % of alerts that are true positives |
+| Recall | > 90% | % of actual failures caught |
+| Lead time | > 14 days | Average warning before failure |
+| False alarm rate | < 5% | Alerts with no confirmed issue |
+
+## Failure Mode Library
+
+Maintain a catalog per asset type:
+
+- **Failure mode**: What breaks (bearing wear, seal leak, winding insulation)
+- **Failure mechanism**: How it progresses (fatigue, corrosion, thermal degradation)
+- **Detection signature**: Which sensors and features indicate this mode
+- **Typical lead time**: How far in advance the degradation is detectable
+- **Consequence**: Safety, production, and cost impact of failure
+
+## Common Pitfalls
+
+### Training on Healthy Data Only
+
+Wrong: Build an anomaly detector with no failure examples, then wonder why it misses failures.
+
+Right: Include run-to-failure data. If no historical failures exist, use accelerated testing or physics-based simulation.
+
+### Ignoring Operating Context
+
+Wrong: Alert on high vibration without knowing the asset is running at 110% load during a production surge.
+
+Right: Normalize sensor readings against operating conditions before applying thresholds.
