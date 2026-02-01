@@ -1,0 +1,80 @@
+# Search and Retrieval
+
+Rules for finding, ranking, and presenting knowledge from the base in response to queries.
+
+## Search Methods
+
+Use the right method for the query type:
+
+| Query Type | Primary Method | Fallback |
+|------------|---------------|----------|
+| Known item ("Find Smith 2024 paper") | Lexical (title + author) | Metadata lookup |
+| Topical ("Everything on spaced repetition") | Hybrid (semantic + tag filter) | Lexical with synonyms |
+| Relational ("What contradicts note X?") | Graph traversal | Semantic + edge filter |
+| Temporal ("What I read last quarter") | Lexical + date range | Metadata filter |
+| Exploratory ("Surprise me") | Semantic + random walk | Graph neighborhood |
+| Synthesis ("Arguments for and against Y") | Graph + semantic retrieval | Multi-query expansion |
+
+## Search Stack
+
+1. **Lexical (BM25)** - Exact keywords, boolean operators, field-specific. Fast, precise, no semantic understanding.
+2. **Semantic (Vector)** - Embedding similarity. Handles synonyms and paraphrases. Requires vector index.
+3. **Graph Traversal** - Follow edges to find related nodes. Best for relationship-based queries.
+4. **Hybrid (Reciprocal Rank Fusion)** - Combine lexical and semantic scores, re-rank with cross-encoder.
+
+Always try hybrid first for general queries. Fall back to specific methods when the query type is unambiguous.
+
+## Embedding Strategy
+
+| Content Type | Granularity | Notes |
+|-------------|-------------|-------|
+| Academic papers | Per paragraph | Use domain-specific models when available |
+| Book chapters | Per section | Chunk at heading boundaries |
+| Personal notes | Per note (atomic) | One embedding per permanent note |
+| Highlights | Per highlight | Preserve surrounding context window |
+| Metadata records | Per record | Use lightweight model |
+
+Re-embed when a note is substantially updated (not for minor edits).
+
+## Retrieval Quality Targets
+
+| Metric | Target |
+|--------|--------|
+| Precision@10 | > 0.7 |
+| Recall@50 | > 0.8 |
+| Mean Reciprocal Rank | > 0.6 |
+| Time to useful result | < 30 seconds |
+
+## Result Presentation
+
+When returning search results:
+
+1. Show the most relevant snippet, not the entire note
+2. Highlight the matching terms or passage
+3. Include metadata: source, date, tags, link count
+4. Group related results when multiple notes cover the same concept
+5. Surface contradictions explicitly ("Note A claims X; Note B claims not-X")
+
+## Query Expansion
+
+When initial results are poor:
+
+1. Expand with synonyms and related terms from the knowledge graph
+2. Broaden date range if temporal filter is too narrow
+3. Relax tag filters to parent categories
+4. Try semantic search if lexical returned nothing
+5. Suggest related queries the user might mean
+
+## Indexing Rules
+
+- Full-text index updated synchronously on document ingestion
+- Vector index updated asynchronously (batch if needed, but within 5 minutes)
+- Graph index updated on every node or edge creation
+- Rebuild full indexes monthly to prevent drift
+- Never serve stale results: if an index is rebuilding, query the old index until complete
+
+## Caching
+
+- Cache frequent queries for 1 hour
+- Invalidate cache when any document in the result set is updated
+- Never cache exploratory or random-walk queries

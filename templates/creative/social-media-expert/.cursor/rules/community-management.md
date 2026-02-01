@@ -1,0 +1,147 @@
+# Community Management
+
+Guidelines for managing social media communities, moderating conversations, monitoring sentiment, and handling crisis communication with speed and professionalism.
+
+## Community Engagement Philosophy
+
+Community management is the practice of turning followers into advocates. It requires consistent presence, genuine interaction, and clear boundaries.
+
+```text
+Community Maturity Model
+├── Stage 1: Audience (Passive)
+│   ├── People see your content but do not interact
+│   ├── Focus: Create content worth stopping for
+│   └── Metric: Impressions and reach
+├── Stage 2: Followers (Interested)
+│   ├── People follow and occasionally engage
+│   ├── Focus: Respond to every interaction; invite conversation
+│   └── Metric: Follower growth rate and engagement rate
+├── Stage 3: Community (Active)
+│   ├── People engage regularly and with each other
+│   ├── Focus: Facilitate member-to-member conversation; recognize regulars
+│   └── Metric: Comments per post, DM volume, repeat engagers
+├── Stage 4: Advocates (Invested)
+│   ├── People create content about you and recommend you unprompted
+│   ├── Focus: Amplify advocates, reward loyalty, co-create
+│   └── Metric: UGC volume, brand mentions, referral traffic
+└── Stage 5: Ambassadors (Aligned)
+    ├── People identify with and defend the brand publicly
+    ├── Focus: Formalize relationships, exclusive access, feedback loops
+    └── Metric: Ambassador program KPIs, sentiment during crises
+```
+
+## Response Protocol
+
+| Interaction Type | Response Window | Response Approach | Escalation Trigger |
+|-----------------|----------------|-------------------|-------------------|
+| Positive comment | Within 1 hour | Genuine acknowledgment; ask follow-up; like the comment | None |
+| Question (simple) | Within 2 hours | Accurate, helpful answer; link to resources | None |
+| Question (complex) | Within 4 hours | Acknowledge, commit to answer, follow up via DM if needed | Product, legal, or technical questions |
+| Complaint (mild) | Within 1 hour | Empathize, acknowledge, offer solution or next step | Repeated complaints about same issue |
+| Complaint (serious) | Within 30 minutes | Empathize, take to DM, connect to support team | Safety issues, legal exposure, viral potential |
+| Brand mention (positive) | Within 4 hours | Like, comment, reshare if appropriate | None |
+| Brand mention (negative) | Within 1 hour | Assess severity; respond if factual correction needed | Viral spread, factual errors, influencer involvement |
+| Troll / bad faith | Do not engage publicly | Hide, delete, or block per moderation policy | Hate speech, threats, doxxing |
+| Influencer / creator mention | Within 30 minutes | Warm, personal response; explore relationship opportunity | None - always prioritize |
+| DM inquiry | Within 4 hours (business hours) | Helpful, professional, personalized | Sales or support handoff needed |
+
+## Moderation Policy
+
+| Content Type | Action | Documentation |
+|-------------|--------|--------------|
+| Spam and promotional links | Delete, block if repeat offender | Log in moderation tracker |
+| Profanity (mild, not directed at anyone) | Monitor; no action unless violates community guidelines | No action needed |
+| Profanity (directed at individuals) | Delete comment, warn user via DM | Log warning |
+| Hate speech, slurs, discrimination | Delete immediately, ban user permanently | Log and report to platform |
+| Misinformation about brand | Respond publicly with factual correction | Document for crisis monitoring |
+| Competitor promotion | Delete from owned channels; ignore on public platforms | Note pattern if recurring |
+| Off-topic but harmless | Redirect gently or leave visible | No action needed |
+| Threats or doxxing | Delete, ban, report to platform, escalate to legal | Full documentation required |
+| Copyright infringement | Remove content, notify original creator | Document for legal |
+
+## Sentiment Monitoring
+
+| Monitoring Layer | What to Track | Frequency | Tool Category |
+|-----------------|--------------|-----------|--------------|
+| Brand mentions | Direct @mentions and name mentions across all platforms | Real-time alerts | Social listening tool |
+| Product mentions | Product names, common misspellings, slang references | Real-time alerts | Social listening tool |
+| Campaign hashtags | All campaign-specific and branded hashtags | During campaign duration | Platform analytics + listening tool |
+| Competitor mentions | Competitor brand names in context of your category | Daily digest | Social listening tool |
+| Industry keywords | Trending topics and emerging conversations in your space | Daily review | Social listening tool |
+| Sentiment trends | Ratio of positive:neutral:negative mentions over time | Weekly analysis | Sentiment analysis tool |
+
+## Sentiment Escalation Thresholds
+
+| Signal | Threshold | Action |
+|--------|-----------|--------|
+| Negative sentiment spike | 25%+ increase in negative mentions within 24h | Alert community lead; investigate root cause |
+| Viral negative post | Single post exceeds 100 engagements or 10K views | Immediate assessment; draft response if needed |
+| Media amplification | Journalist or publication amplifies negative narrative | Escalate to PR and leadership within 1 hour |
+| Multi-platform spread | Same negative narrative appearing on 3+ platforms | Activate crisis response protocol |
+| Internal leak | Employee or insider sharing negative information publicly | Legal and HR escalation immediately |
+
+## Crisis Communication Protocol
+
+| Severity | Indicators | Response Time | Response Team | Actions |
+|----------|-----------|--------------|--------------|---------|
+| Level 1 (Minor) | Single complaint gaining traction; minor factual error | 2-4 hours | Community manager | Respond, correct, monitor |
+| Level 2 (Moderate) | Multiple complaints; negative press mention | 1 hour | Social lead + PR | Coordinate response, prepare statement |
+| Level 3 (Serious) | Viral negative content; trending hashtag against brand | 30 minutes | War room: social + PR + legal + leadership | Pause scheduled content, draft public statement |
+| Level 4 (Emergency) | Safety issue, legal exposure, mainstream media coverage | 15 minutes | Full crisis team including CEO | All content paused, legal-reviewed statement, continuous management |
+
+### Crisis Response Sequence
+
+```text
+Crisis Response Steps
+├── Step 1: Pause (0-15 minutes)
+│   ├── Pause all scheduled content across platforms
+│   ├── Pause all paid campaigns
+│   └── Assess scope and severity
+├── Step 2: Acknowledge (15-60 minutes)
+│   ├── Post brief acknowledgment: "We are aware and investigating"
+│   ├── Do NOT speculate, blame, or minimize
+│   └── Commit to a specific timeline for next update
+├── Step 3: Respond (1-4 hours)
+│   ├── Publish full statement with facts, empathy, and next steps
+│   ├── Legal and executive approval required for Level 3+
+│   └── Consistent message across all platforms simultaneously
+├── Step 4: Manage (Ongoing)
+│   ├── Respond to direct questions with approved messaging
+│   ├── Monitor sentiment and reach continuously
+│   └── Update statement as new information is confirmed
+└── Step 5: Recover (Post-crisis)
+    ├── Publish follow-up with actions taken and outcomes
+    ├── Conduct internal retrospective
+    └── Update crisis protocols based on learnings
+```
+
+## Community Health Metrics
+
+| Metric | Healthy Benchmark | Warning Sign | Measurement Frequency |
+|--------|------------------|-------------|---------------------|
+| Average response time | Under 2 hours (business hours) | Over 4 hours consistently | Weekly |
+| Comment-to-post ratio | 2-5% of reach | Below 1% or declining | Weekly |
+| Sentiment ratio | 70%+ positive, under 10% negative | Negative exceeding 20% | Weekly |
+| DM response rate | 95%+ responded within business hours | Below 80% | Weekly |
+| Repeat engager count | Growing month over month | Declining or stagnant | Monthly |
+| Moderation actions | Stable or declining over time | Increasing sharply | Monthly |
+
+## Common Pitfalls
+
+### Deleting All Negative Comments
+
+Wrong: Delete every negative comment to maintain a perfect-looking comment section, making the brand appear curated and inauthentic.
+
+Right: Leave constructive criticism visible and respond with empathy and solutions. Only delete comments that violate community guidelines (hate speech, spam, threats). A brand that handles criticism well earns more trust than one that hides it.
+
+### Template Responses for Everything
+
+Wrong: Copy-paste the same generic response to every comment. "Thanks for your feedback! We appreciate your support."
+
+Right: Personalize responses. Reference the specific content of their comment. Use their name when visible. Genuine responses take more time but build real community connections.
+
+### Ignoring DMs
+
+Wrong: Treat DMs as low-priority or ignore them entirely because they are not publicly visible.
+
+Right: DMs often contain your most engaged followers, potential customers, and partnership opportunities. Prioritize DM response as highly as public comment response. Set up organized workflows for DM management.

@@ -1,0 +1,149 @@
+# Growth Frameworks
+
+Guidelines for designing growth loops, running experimentation programs, optimizing retention, and scaling sustainable growth.
+
+## Growth Model Selection
+
+| Model | Description | Best For |
+|-------|-----------|----------|
+| Sales-Led Growth (SLG) | Dedicated sales team drives acquisition | Enterprise, high ACV, complex products |
+| Marketing-Led Growth (MLG) | Content, ads, and nurture drive pipeline | Mid-market, moderate ACV, education-heavy |
+| Product-Led Growth (PLG) | Product itself drives acquisition and conversion | Low ACV, self-serve, high volume |
+| Community-Led Growth (CLG) | Community creates content, referrals, and trust | Developer tools, platforms, niche markets |
+| Partner-Led Growth | Channel partners drive distribution | Geographic expansion, regulated industries |
+
+## Growth Loop Design
+
+```text
+Growth Loop Anatomy
+├── Input
+│   ├── What triggers the loop?
+│   ├── New user signup, content creation, purchase
+│   └── Must be a natural part of the product experience
+├── Action
+│   ├── What does the user do?
+│   ├── Share, invite, create, review, integrate
+│   └── Must deliver value to the user, not just the company
+├── Output
+│   ├── What result does the action create?
+│   ├── New content, new users, data improvement
+│   └── Must feed back into the input of the loop
+└── Amplifier
+    ├── What accelerates the loop?
+    ├── Incentives, network effects, algorithmic distribution
+    └── Must compound, not just add linearly
+```
+
+### Loop Health Metrics
+
+| Metric | Definition | Healthy Range |
+|--------|-----------|---------------|
+| Cycle time | Time for one complete loop iteration | Hours to days (shorter is better) |
+| Conversion rate | % of loop participants who complete the action | Varies by loop type; track trend |
+| K-factor (viral) | Average new users generated per existing user | > 1.0 for viral growth, > 0.3 for assist |
+| Loop efficiency | Output value / input cost | Increasing over time |
+| Decay rate | How quickly the loop weakens without investment | Slower decay = more durable loop |
+
+## AARRR Deep Dive
+
+### Acquisition Optimization
+
+| Lever | Tactic | Metric |
+|-------|--------|--------|
+| SEO | Publish problem-solution content at scale | Organic traffic, keyword rankings |
+| Paid | Test channels, optimize bids and targeting | CAC, ROAS, incremental pipeline |
+| Viral | Build sharing and invitation into product | K-factor, invite conversion rate |
+| Community | Foster user-generated content and discussion | Community growth rate, referral traffic |
+| Partnerships | Co-market with complementary products | Partner-sourced leads, co-branded traffic |
+
+### Activation Optimization
+
+| Lever | Tactic | Metric |
+|-------|--------|--------|
+| Onboarding | Reduce steps to first value moment | Time to value, onboarding completion |
+| Quick wins | Guide users to an "aha moment" fast | Feature adoption within first session |
+| Personalization | Tailor experience based on signup data | Activation rate by segment |
+| Education | In-app guides, tooltips, and walkthroughs | Help engagement, support ticket reduction |
+| Social proof | Show what similar users achieved | Activation rate uplift |
+
+### Retention Framework
+
+```text
+Retention Strategy Layers
+├── Short-Term (Day 1-7)
+│   ├── Onboarding completion
+│   ├── First value delivery
+│   ├── Welcome email sequence
+│   └── Quick win achievement
+├── Medium-Term (Week 2-8)
+│   ├── Habit formation loops
+│   ├── Feature discovery campaigns
+│   ├── Community onboarding
+│   └── Use case expansion
+├── Long-Term (Month 3+)
+│   ├── Workflow integration (switching cost)
+│   ├── Data accumulation (value increases over time)
+│   ├── Team expansion (more users = more value)
+│   └── Regular product launches (renewed interest)
+└── Recovery
+    ├── Churn prediction scoring
+    ├── Re-engagement campaigns
+    ├── Win-back offers
+    └── Exit interviews for learning
+```
+
+## Experimentation Program
+
+| Component | Description |
+|-----------|------------|
+| Idea backlog | Central repository for experiment ideas from all teams |
+| Prioritization | ICE scoring (Impact, Confidence, Ease) applied weekly |
+| Velocity target | Minimum number of experiments per sprint (e.g., 2-3/week) |
+| Documentation | Every experiment logged with hypothesis, results, learnings |
+| Review cadence | Weekly experiment review with cross-functional stakeholders |
+| Knowledge base | Searchable archive of past experiments and outcomes |
+
+### ICE Scoring Guide
+
+| Score | Impact | Confidence | Ease |
+|-------|--------|-----------|------|
+| 10 | Massive uplift (> 25%) | Proven in similar context | Ship today, no eng needed |
+| 7-9 | Large uplift (10-25%) | Strong evidence it will work | 1-2 days effort |
+| 4-6 | Moderate uplift (5-10%) | Reasonable hypothesis | 1-2 weeks effort |
+| 1-3 | Small uplift (< 5%) | Pure guess | Major effort, cross-team |
+
+## Scaling Checklist
+
+| Milestone | Criteria | Next Action |
+|-----------|----------|-------------|
+| Channel works | Positive ROI with small budget (< $5K/month) | Increase budget 2-3x |
+| Channel scales | ROI holds at 2-3x budget | Continue scaling, test creative variants |
+| Channel saturates | Diminishing returns at higher spend | Cap spend, find next channel |
+| Loop works | One complete loop cycle observed | Reduce friction, measure cycle time |
+| Loop compounds | Output exceeds input consistently | Invest in amplifiers, remove bottlenecks |
+
+## Common Pitfalls
+
+### Premature Optimization
+
+Wrong: Spend weeks optimizing a landing page conversion rate before validating that the traffic source sends qualified visitors.
+
+Right: Validate the full loop first. Ensure the right people arrive, experience value, and convert before optimizing any single step.
+
+### Growth Hacking Without Strategy
+
+Wrong: Chase viral tactics and hacks without a coherent growth model. Pursue short-term spikes that do not compound.
+
+Right: Design a sustainable growth loop first. Then use experimentation to optimize each step of the loop systematically.
+
+### Ignoring Retention
+
+Wrong: Celebrate new user acquisition while monthly active users remain flat because churn matches growth.
+
+Right: Measure net growth (new users minus churned users). Fix the retention floor before pouring more into the acquisition ceiling.
+
+### Copying Without Context
+
+Wrong: Adopt another company's growth playbook because they grew fast. Implement their referral program, pricing model, and onboarding without adapting.
+
+Right: Understand the principles behind successful growth strategies. Adapt the principles to your product, audience, and stage. Context determines what works.

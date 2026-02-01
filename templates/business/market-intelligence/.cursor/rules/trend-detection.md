@@ -1,0 +1,67 @@
+# Trend Detection
+
+Guidelines for identifying emerging trends through weak signal analysis and pattern recognition.
+
+## Signal Strength Classification
+
+```text
+Noise        → One-off mentions, no pattern, low-credibility sources
+Weak Signal  → Recurring mentions across 2-3 unrelated sources
+Emerging     → Growing volume, multiple credible sources, directional consistency
+Confirmed    → Mainstream coverage, data confirmation, measurable impact
+Established  → Widely known, priced in, competitive response underway
+```
+
+## Detection Indicators
+
+| Indicator | Data Source | Frequency |
+|-----------|-----------|-----------|
+| Search volume shifts | Google Trends, internal search | Daily |
+| Patent filing clusters | USPTO, EPO databases | Weekly |
+| Hiring pattern changes | Job posting aggregators | Weekly |
+| Investment flow shifts | VC/PE deal databases | Monthly |
+| Academic publication clusters | arXiv, PubMed, SSRN | Monthly |
+| Regulatory inquiry patterns | Government filings | Weekly |
+| Conference topic shifts | Event programs, speaker lists | Quarterly |
+
+## Weak Signal Analysis
+
+A weak signal becomes worth investigating when:
+
+- It appears in **2+ unrelated source types** (e.g., a patent filing AND a job posting cluster)
+- It shows **directional consistency** over 3+ data points
+- It involves **credible actors** (established companies, reputable researchers)
+- It addresses a **known gap** in the market or technology landscape
+
+## Trend Assessment Template
+
+For each detected trend, document:
+
+- **Signal strength**: Weak / Emerging / Confirmed / Established
+- **Evidence**: At least 3 independent data points with sources and dates
+- **Impact assessment**: Revenue, competitive position, operations, regulatory (High/Med/Low)
+- **Time horizon**: When will this materially affect the business?
+- **Recommended actions**: Specific steps with owners and deadlines
+- **Monitoring plan**: Next review date, key metrics, escalation triggers
+
+## Pattern Recognition Methods
+
+- **Convergence detection**: Multiple independent indicators pointing the same direction
+- **Frequency analysis**: Acceleration in mention rate, not just absolute volume
+- **Network analysis**: Are thought leaders and early adopters engaging?
+- **Cross-industry scanning**: Innovations in adjacent industries that could migrate
+- **Absence detection**: What stopped being discussed? Disappearances signal shifts too
+
+## Common Pitfalls
+
+### Chasing Noise
+
+Wrong: Escalate every viral social media post as an "emerging trend."
+
+Right: Require pattern persistence across multiple sources over multiple time periods.
+
+### Ignoring Weak Signals
+
+Wrong: Only pay attention to confirmed, mainstream trends.
+
+Right: Allocate 20% of monitoring capacity to weak signal scanning. The advantage is in early detection.

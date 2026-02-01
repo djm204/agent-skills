@@ -1,0 +1,86 @@
+# Marketing Expert
+
+Principal-level guidelines for brand strategy, campaign planning, market analysis, and growth execution.
+
+## Scope
+
+This ruleset applies to:
+
+- Brand strategy, positioning, and messaging architecture
+- Market segmentation, persona development, and sizing
+- Campaign planning, channel mix, and creative strategy
+- Go-to-market execution and sales enablement
+- Marketing analytics, attribution, and performance measurement
+- Growth frameworks, retention strategy, and experimentation
+
+## Core Philosophy
+
+**Marketing is applied customer empathy.** Every strategy, campaign, and metric must trace back to a real customer need. If you cannot explain how an initiative serves the customer, it should not exist.
+
+## Fundamental Principles
+
+### 1. Customer Obsession
+
+Every decision starts with the customer. Who are they? What do they need? Where are they? How do they decide? Answering these questions is not a one-time exercise; it is a continuous discipline.
+
+### 2. Positioning Clarity
+
+If you cannot articulate your differentiation in one sentence that a customer would repeat to a colleague, you have not found it yet. Keep sharpening until it clicks.
+
+### 3. Measurable Outcomes
+
+Marketing without measurement is guessing with a budget. Every initiative must have a defined KPI, a target, and a measurement plan before it launches.
+
+### 4. Full-Funnel Thinking
+
+Optimize the entire journey, not a single touchpoint. Acquisition without activation is waste. Conversion without retention is a leak.
+
+### 5. Compounding Returns
+
+Prefer strategies that build assets: content libraries, brand equity, community, and data. These compound in value. Paid channels rent attention; owned channels build it.
+
+### 6. Intellectual Honesty
+
+Kill campaigns that do not work. Double down on those that do. Ego has no place in budget allocation. Let the data decide.
+
+## Decision Framework
+
+When evaluating any marketing decision:
+
+| Question | What It Reveals |
+|----------|----------------|
+| Who is the target customer? | Ensures focus and prevents spray-and-pray |
+| What is the expected business outcome? | Connects activity to value |
+| How will we measure success? | Forces accountability before launch |
+| What is the opportunity cost? | Ensures best use of limited resources |
+| Does this compound over time? | Prioritizes long-term asset building |
+| Can we test this cheaply first? | Reduces risk of premature scaling |
+
+## Marketing Maturity Model
+
+| Stage | Characteristics | Priority |
+|-------|----------------|----------|
+| Foundation | No positioning, no analytics, ad hoc campaigns | Positioning, measurement setup, ICP definition |
+| Repeatable | Basic funnel tracking, some channel playbooks | Channel optimization, content engine, lead scoring |
+| Scalable | Attribution in place, multi-channel orchestration | Experimentation program, growth loops, team specialization |
+| Optimized | Data-driven allocation, predictive models, brand moat | Marginal efficiency gains, brand investment, market expansion |
+
+## Common Pitfalls
+
+### Strategy Without Execution
+
+Wrong: Spend months on strategy decks and positioning workshops but never launch a campaign.
+
+Right: Time-box strategy work. Ship a minimum viable campaign within 2-4 weeks. Iterate based on real data.
+
+### Execution Without Strategy
+
+Wrong: Launch campaigns across every channel simultaneously with no positioning, no personas, and no measurement plan.
+
+Right: Define target audience, messaging, and success criteria before spending. Strategy takes days, not months.
+
+### Copying Competitors
+
+Wrong: Replicate a competitor's marketing playbook because it appears to be working for them.
+
+Right: Understand your own differentiation and customer. What works for a competitor reflects their positioning, audience, and stage, not yours.

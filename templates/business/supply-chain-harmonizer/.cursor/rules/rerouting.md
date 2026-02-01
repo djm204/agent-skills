@@ -1,0 +1,88 @@
+# Rerouting
+
+Guidelines for automated shipment rerouting when primary routes are disrupted.
+
+## Decision Tree
+
+When a route is blocked or degraded:
+
+1. **Evaluate alternate routes** using the scoring algorithm
+2. **If cost delta < 25%**: Auto-approve and execute
+3. **If cost delta 25-50%**: Auto-approve with executive notification
+4. **If cost delta > 50%**: Hold for human approval (max 4-hour hold)
+5. **If no alternate route exists**: Evaluate alternate suppliers or escalate to war room
+
+For potential delays (not yet blocked):
+
+1. **If delay risk > 48 hours**: Begin preemptive reroute evaluation
+2. **If delay risk < 48 hours**: Monitor and reassess every 6 hours
+
+## Route Scoring
+
+Each alternative route is scored on five weighted factors:
+
+| Factor | Weight | Metric |
+|--------|--------|--------|
+| Transit time | 30% | Hours to destination vs. original ETA |
+| Cost | 25% | Incremental cost as percentage of shipment value |
+| Reliability | 20% | Historical on-time rate for this lane |
+| Capacity | 15% | Available capacity vs. shipment volume needed |
+| Risk exposure | 10% | Known risk factors currently active on route |
+
+Minimum acceptable composite score: 60 out of 100. Below this threshold, the route is rejected and the next alternative is evaluated.
+
+## Modal Switching
+
+When the original transport mode is unavailable, fall back in this order:
+
+| Original Mode | Fallback 1 | Fallback 2 | Fallback 3 |
+|--------------|-----------|-----------|-----------|
+| Ocean freight | Rail (continental) | Air freight (high-value) | Truck (regional) |
+| Air freight | Express ocean | Truck relay | Charter flight |
+| Rail | Truck | Intermodal ocean-truck | Air (critical only) |
+| Truck | Rail | Intermodal | Courier (small parcels) |
+
+Air freight is reserved for high-value or time-critical shipments where the cost premium is justified by the revenue at risk.
+
+## Constraints Checklist
+
+Before executing any reroute, verify:
+
+- **Regulatory compliance**: Goods can legally transit all countries on the new route
+- **Temperature requirements**: Cold chain integrity maintained across all segments
+- **Weight and volume limits**: New mode and route can handle the cargo dimensions
+- **Customs implications**: New transit countries do not add excessive clearance delays
+- **Contractual obligations**: Rerouting does not violate minimum volume commitments on original lane
+- **Insurance coverage**: Cargo insurance valid for the new route and mode
+
+## Rerouting Record
+
+Every rerouting decision must be logged with:
+
+- Original route and ETA
+- Disruption that triggered the reroute
+- Alternatives evaluated and their scores
+- Selected alternative and rationale
+- Cost delta and approval status
+- Revised ETA communicated to stakeholders
+- Actual delivery outcome (post-completion)
+
+## Common Pitfalls
+
+### Cheapest Route Bias
+
+Wrong: Always select the lowest-cost reroute regardless of reliability.
+
+Right: Use the weighted scoring algorithm. A $500 cheaper route that has a 60% on-time rate will likely cost more in the end.
+
+### Rerouting Into Congestion
+
+Wrong: Divert all shipments to the same alternate port, creating a secondary bottleneck.
+
+Right: Monitor capacity at alternate nodes. Distribute rerouted volume across multiple alternatives when possible.
+
+### Forgetting to Revert
+
+Wrong: Leave shipments on expensive alternate routes after the primary route recovers.
+
+Right: Set automated triggers to revert to primary routes once disruption is resolved and route is confirmed stable for 48+ hours.

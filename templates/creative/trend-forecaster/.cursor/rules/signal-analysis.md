@@ -1,0 +1,69 @@
+# Signal Analysis
+
+Guidelines for detecting, classifying, scoring, and validating trend signals across diverse source types.
+
+## Signal Classification
+
+Signals exist on a spectrum of strength:
+
+1. **Micro-signal**: Single-source, single-instance observation. Interesting but insufficient for action.
+2. **Weak signal**: Observed across multiple sources but at low frequency. Worth monitoring.
+3. **Emerging signal**: Multi-source with accelerating frequency. Warrants deeper investigation and narrative framing.
+4. **Confirmed signal**: Cross-domain validation with measurable consumer adoption. Ready for reporting.
+5. **Saturated signal**: Mainstream presence indicating peak or approaching decline. Report as peaking, not emerging.
+
+## Signal Strength Scoring
+
+Evaluate every signal against six weighted criteria:
+
+| Criterion | Weight | What to Assess |
+|-----------|--------|----------------|
+| Source diversity | 20% | How many independent source types confirm this signal? |
+| Geographic spread | 15% | Is this signal appearing across multiple markets? |
+| Cross-domain presence | 20% | Does this appear in more than one industry or aesthetic category? |
+| Acceleration rate | 15% | Is the frequency of observation increasing over time? |
+| Cultural driver clarity | 15% | Can you articulate the underlying cultural force behind this signal? |
+| Historical pattern alignment | 15% | Does this fit known cyclical patterns or have historical precedent? |
+
+## Cross-Referencing Requirements
+
+Before elevating a signal to emerging or confirmed status, require validation from at minimum:
+
+- Two different source tiers (primary observation AND digital data, for example)
+- Two different domains (fashion AND interiors, or interiors AND technology)
+- Two different geographies (European market AND Asian market, for example)
+
+Signals that cannot meet at least two of these three cross-referencing thresholds should remain at weak or micro-signal classification.
+
+## Source Tier Hierarchy
+
+- **Tier 1**: Primary observation (runway, trade fairs, studio visits, street documentation)
+- **Tier 2**: Expert networks (designer interviews, buyer conversations, supplier intelligence)
+- **Tier 3**: Social and digital signals (Pinterest, Instagram, TikTok, search trends)
+- **Tier 4**: Retail and commercial data (sell-through rates, e-commerce category growth)
+- **Tier 5**: Mass media coverage (magazine features, news articles, television)
+- **Tier 6**: Consumer surveys (attitude studies, focus groups, purchase intent)
+
+Higher tiers provide earlier warning but require more interpretive skill. Lower tiers provide more certainty but less lead time.
+
+## Digital Signal Monitoring
+
+Track visual platforms (Pinterest pin volume, Instagram hashtag velocity, TikTok aesthetic clusters), search and discovery data (Google Trends, e-commerce category growth), and professional sources (WGSN, Pantone, trade publications). Digital signals are fast but noisy. Always validate digital observations against primary and expert sources.
+
+## Counter-Signal Analysis
+
+For every signal collection, actively seek disconfirming evidence. Maintain a counter-signal log alongside the primary signal file. Ask: What forces would prevent this signal from becoming a trend? What alternative directions could the same cultural driver produce? This discipline reduces confirmation bias and improves forecast accuracy.
+
+## Common Pitfalls
+
+### Recency Bias
+
+Wrong: Weight the most recent signal observation more heavily than earlier ones simply because it is fresh.
+
+Right: Evaluate all signals within their temporal context. A signal observed six months ago may be more significant than one observed yesterday if it appeared earlier in the pipeline.
+
+### Volume Conflation
+
+Wrong: Treat high social media volume as automatic confirmation of trend strength.
+
+Right: Distinguish between genuine adoption signals and algorithmic amplification. Viral moments are not trends. Sustained, cross-platform, cross-demographic engagement is the better indicator.

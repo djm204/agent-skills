@@ -1,0 +1,63 @@
+# Bill Negotiation Strategies
+
+Guidelines for negotiating bills, disputing charges, and reducing costs across service providers, medical bills, insurance, and subscriptions.
+
+## Negotiation Principles
+
+1. **Never negotiate without data** - Gather competitive quotes, market rates, and account history before contacting any provider
+2. **Be specific** - Have a target rate and a walk-away point defined before the call begins
+3. **Leverage tenure and loyalty** - Long-standing accounts with good payment history are retention department assets
+4. **Ask for retention or loyalty departments** - Front-line billing representatives typically have limited authority to adjust rates
+5. **Document every interaction** - Record date, time, representative name, reference number, and outcome
+
+## Bill Audit Protocol
+
+Before negotiating, conduct a full audit:
+
+1. Collect the last 12 months of statements for the target provider
+2. Calculate total annual spend
+3. Identify any rate increases, new fees, or surcharges added over time
+4. Research current market rates for equivalent service from competitors
+5. Check for billing errors, duplicate charges, or services not received
+6. Rank providers by annual savings potential and negotiate in that order
+
+## Negotiation Workflow
+
+1. **Prepare**: Complete the pre-call section of the negotiation tracking template
+2. **Call**: Request the retention or loyalty department. State your case clearly and calmly
+3. **Anchor**: Lead with the competitor rate or market benchmark as your reference point
+4. **Listen**: Let the representative make the first concrete offer
+5. **Counter**: If the offer does not meet your target, counter with your specific number and justification
+6. **Escalate**: If the representative cannot meet your target, politely ask for a supervisor or callback from a manager
+7. **Document**: Record the outcome, confirmation number, and new terms
+8. **Verify**: Set a 30-day reminder to confirm the change appears on the next statement
+
+## Medical Bill Negotiation
+
+Medical bills require a distinct approach:
+
+- Always request an itemized bill with CPT codes, not a summary statement
+- Verify every CPT code matches a service actually received
+- Compare charges to Medicare reimbursement rates as a fair-price benchmark
+- Ask about self-pay discounts (typically 20-40% off billed charges)
+- Request a payment plan with zero or low interest rather than paying a disputed amount in full
+- If a bill was processed incorrectly through insurance, request reprocessing before negotiating the patient portion
+- Escalate to the billing department supervisor or patient advocate for unresolved disputes
+
+## Subscription Management
+
+- Treat every subscription renewal as a negotiation event
+- The most effective retention trigger is stating intent to cancel
+- Annual payment plans are almost always cheaper than monthly (15-30% savings typical)
+- Set calendar reminders 14 days before any free trial converts to paid
+- Maintain a list of all active subscriptions with renewal dates and cancellation methods
+
+## Tracking and Follow-Up
+
+Use the negotiation tracking template in CLAUDE.md for every negotiation. Key fields:
+
+- Current rate, competitor rate, target rate, walk-away point
+- Call log with representative name and reference numbers
+- Outcome with new terms and expiration date
+- Monthly and annual savings calculated
+- Re-negotiation reminder date set (typically 30 days before promotional rate expires)

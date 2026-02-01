@@ -1,0 +1,101 @@
+# Forecasting Methods
+
+Guidelines for structured trend forecasting approaches, including cyclical analysis, cross-domain correlation, and scenario planning.
+
+## Forecasting Approach Hierarchy
+
+Use multiple methods and triangulate results. No single method is sufficient alone.
+
+### 1. Cyclical Analysis
+
+Identify where the current moment sits within known long-duration aesthetic cycles:
+
+- Warm-cool chromatic pendulum (8-12 year period)
+- Maximalism-minimalism oscillation (10-15 year period)
+- Nostalgia reference decade (20-30 year lag from reference era)
+- Natural-synthetic material preference (7-10 year period)
+- Structured-relaxed silhouette (5-8 year period)
+- Ornament-austerity cycle (8-12 year period)
+
+Plot the current position within each cycle. Where multiple cycles align in the same direction, forecast confidence increases.
+
+### 2. Cross-Domain Correlation
+
+Map signal presence across independent domains. The more domains showing convergent signals, the higher the confidence:
+
+- Fashion (runway, street style, retail)
+- Interior design (residential, commercial, hospitality)
+- Automotive (exterior color, interior materials, concept cars)
+- Food and hospitality (plating, packaging, restaurant design)
+- Technology (device finishes, UI design, spatial computing)
+- Architecture (facade materials, public space, residential form)
+- Graphic design (typography, color, layout conventions)
+
+A direction visible in three or more unrelated domains is significantly more likely to reach mainstream adoption than one confined to a single domain.
+
+### 3. Cultural Driver Mapping
+
+Identify the underlying forces producing the aesthetic signals:
+
+- Economic conditions (recession austerity vs. expansion exuberance)
+- Social movements (inclusivity, sustainability, digital detox)
+- Technological shifts (AI aesthetics, bio-materials, spatial computing)
+- Demographic changes (generational influence, urbanization, migration)
+- Political climate (stability vs. disruption, globalism vs. localism)
+
+Trends that align with strong cultural drivers have longer lifespans and greater commercial impact than those driven by novelty alone.
+
+### 4. Historical Precedent Analysis
+
+Compare current signal patterns to documented historical parallels:
+
+- When did similar cultural conditions previously produce aesthetic shifts?
+- What emerged, how long did it last, and what caused the decline?
+- What are the critical differences between the historical context and the current one?
+
+Adjust predictions based on both similarities and differences. History rhymes but does not repeat identically.
+
+### 5. Scenario Planning
+
+For high-uncertainty forecasts, construct multiple plausible scenarios:
+
+- **Base case**: Most likely trajectory given current evidence
+- **Accelerated case**: What happens if a catalytic event speeds adoption
+- **Disrupted case**: What happens if a counter-force stalls or reverses the direction
+- **Wild card**: An unexpected development that changes the landscape entirely
+
+Assign probability estimates to each scenario and update as new evidence arrives.
+
+## Confidence Calibration
+
+| Confidence Level | Criteria | Recommended Action |
+|-----------------|----------|-------------------|
+| High (80%+) | Cross-domain validation, strong cultural driver, historical alignment, measurable adoption | Report with specific timeline and commercial guidance |
+| Medium (50-79%) | Multi-source signals, plausible cultural driver, partial cross-domain presence | Report with caveated timeline, recommend monitoring plan |
+| Low (25-49%) | Limited sources, unclear driver, single domain | Include in watch list, do not elevate to primary forecast |
+| Speculative (<25%) | Single observation, no validation, no clear driver | Archive for future reference, do not include in reporting |
+
+## Forecast Revision Protocol
+
+Forecasts are living documents. Update when:
+
+- A new signal significantly strengthens or weakens a forecast
+- A catalytic event accelerates or disrupts an expected trajectory
+- A seasonal cycle (runway season, trade show period) provides new data
+- Quarterly review identifies trajectory deviation from projection
+
+Flag all revisions clearly. State what changed, why it changed, and how it affects the timeline and confidence level.
+
+## Common Pitfalls
+
+### Single-Method Reliance
+
+Wrong: Base an entire forecast on cyclical analysis alone, or on social media data alone.
+
+Right: Triangulate across at least three methods. Agreement across methods increases confidence. Disagreement signals the need for deeper investigation.
+
+### False Precision
+
+Wrong: Forecast that a trend will peak in exactly 14 months.
+
+Right: Forecast in ranges. "Peak window: 12-18 months from current date" acknowledges the inherent uncertainty in cultural forecasting.
