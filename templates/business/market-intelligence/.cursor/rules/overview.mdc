@@ -1,0 +1,55 @@
+---
+description: Market Intelligence
+alwaysApply: false
+---
+
+# Market Intelligence
+
+Principal-level guidelines for market monitoring, trend detection, and intelligence reporting.
+
+## Scope
+
+This ruleset applies to:
+
+- Market monitoring and data aggregation
+- Competitive intelligence gathering
+- Sentiment analysis across news, social, and financial data
+- Trend identification and early warning systems
+- Risk signal detection and escalation
+- Intelligence reporting and dashboards
+
+## Core Philosophy
+
+**Intelligence is decision fuel.** Every monitoring effort, analysis, and report must connect to a decision that someone needs to make. If no decision depends on it, stop collecting it.
+
+## Fundamental Principles
+
+### 1. Speed With Accuracy
+
+Being first to know is useless if the information is wrong. Verify before escalating.
+
+### 2. Signal Over Noise
+
+Filter relentlessly. Volume is the enemy of insight. A single confirmed signal outweighs a thousand unverified mentions.
+
+### 3. Source Triangulation
+
+Never trust a single source. Corroborate across at least two independent channels before acting.
+
+### 4. Actionable Outputs
+
+Every intelligence product must include a recommended action, an owner, and a deadline. Data without direction is just noise.
+
+### 5. Continuous Calibration
+
+Models degrade. Sources shift. Retrain, reweight, and reassess monitoring parameters quarterly.
+
+## Decision Framework
+
+When evaluating any intelligence signal:
+
+1. **Credibility**: Is the source reliable? Can it be corroborated?
+2. **Relevance**: Does this affect our business directly or indirectly?
+3. **Magnitude**: What is the potential impact if this signal is correct?
+4. **Velocity**: How fast is this developing? Do we have time to investigate?
+5. **Actionability**: Can we do something about this? Who owns the response?

@@ -38,232 +38,237 @@ const TEMPLATES = {
   'brand-guardian': {
     category: 'creative',
     description: 'Brand voice enforcement, visual identity compliance, content review workflows, and multi-channel consistency',
-    rules: ['brand-voice.md', 'content-review.md', 'ethical-guidelines.md', 'multi-channel.md', 'overview.md', 'visual-identity.md']
+    rules: ['brand-voice.mdc', 'content-review.mdc', 'ethical-guidelines.mdc', 'multi-channel.mdc', 'overview.mdc', 'visual-identity.mdc']
   },
   'blockchain': {
     category: 'engineering',
     description: 'Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem)',
-    rules: ['defi-patterns.md', 'gas-optimization.md', 'overview.md', 'security.md', 'smart-contracts.md', 'testing.md', 'web3-integration.md']
+    rules: ['defi-patterns.mdc', 'gas-optimization.mdc', 'overview.mdc', 'security.mdc', 'smart-contracts.mdc', 'testing.mdc', 'web3-integration.mdc']
   },
   'cpp-expert': {
     category: 'languages',
     description: 'Principal-level C++ engineering (modern C++, RAII, concurrency, templates, performance)',
-    rules: ['concurrency.md', 'error-handling.md', 'memory-and-ownership.md', 'modern-cpp.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
+    rules: ['concurrency.mdc', 'error-handling.mdc', 'memory-and-ownership.mdc', 'modern-cpp.mdc', 'overview.mdc', 'performance.mdc', 'testing.mdc', 'tooling.mdc']
   },
   'csharp-expert': {
     category: 'languages',
     description: 'Principal-level C# engineering (async, DI, EF Core, ASP.NET Core, testing)',
-    rules: ['aspnet-core.md', 'async-patterns.md', 'dependency-injection.md', 'error-handling.md', 'language-features.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
+    rules: ['aspnet-core.mdc', 'async-patterns.mdc', 'dependency-injection.mdc', 'error-handling.mdc', 'language-features.mdc', 'overview.mdc', 'performance.mdc', 'testing.mdc', 'tooling.mdc']
   },
   'content-creation-expert': {
     category: 'creative',
     description: 'Content strategy, long-form writing, copywriting, SEO content, multimedia production, and editorial operations',
-    rules: ['content-strategy.md', 'copywriting.md', 'editorial-operations.md', 'multimedia-production.md', 'overview.md', 'seo-content.md']
+    rules: ['content-strategy.mdc', 'copywriting.mdc', 'editorial-operations.mdc', 'multimedia-production.mdc', 'overview.mdc', 'seo-content.mdc']
   },
   'cli-tools': {
     category: 'engineering',
     description: 'Command-line applications and developer tools (Cobra, Commander, Click)',
-    rules: ['architecture.md', 'arguments.md', 'distribution.md', 'error-handling.md', 'overview.md', 'testing.md', 'user-experience.md']
+    rules: ['architecture.mdc', 'arguments.mdc', 'distribution.mdc', 'error-handling.mdc', 'overview.mdc', 'testing.mdc', 'user-experience.mdc']
   },
   'data-engineering': {
     category: 'engineering',
     description: 'Data platforms and pipelines (ETL, data modeling, data quality)',
-    rules: ['data-modeling.md', 'data-quality.md', 'overview.md', 'performance.md', 'pipeline-design.md', 'security.md', 'testing.md']
+    rules: ['data-modeling.mdc', 'data-quality.mdc', 'overview.mdc', 'performance.mdc', 'pipeline-design.mdc', 'security.mdc', 'testing.mdc']
   },
   'devops-sre': {
     category: 'engineering',
     description: 'DevOps and SRE practices (incident management, observability, SLOs, chaos engineering)',
-    rules: ['capacity-planning.md', 'change-management.md', 'chaos-engineering.md', 'disaster-recovery.md', 'incident-management.md', 'observability.md', 'overview.md', 'postmortems.md', 'runbooks.md', 'slo-sli.md', 'toil-reduction.md']
+    rules: ['capacity-planning.mdc', 'change-management.mdc', 'chaos-engineering.mdc', 'disaster-recovery.mdc', 'incident-management.mdc', 'observability.mdc', 'overview.mdc', 'postmortems.mdc', 'runbooks.mdc', 'slo-sli.mdc', 'toil-reduction.mdc']
   },
   'documentation': {
     category: 'professional',
     description: 'Technical documentation standards (READMEs, API docs, ADRs, code comments)',
-    rules: ['adr.md', 'api-documentation.md', 'code-comments.md', 'maintenance.md', 'overview.md', 'readme-standards.md']
+    rules: ['adr.mdc', 'api-documentation.mdc', 'code-comments.mdc', 'maintenance.mdc', 'overview.mdc', 'readme-standards.mdc']
   },
   'educator': {
     category: 'education',
     description: 'World-class pedagogy with evidence-based teaching, learning retention, gamification, and assessment design',
-    rules: ['accessibility.md', 'assessment.md', 'curriculum.md', 'engagement.md', 'instructional-design.md', 'overview.md', 'retention.md']
+    rules: ['accessibility.mdc', 'assessment.mdc', 'curriculum.mdc', 'engagement.mdc', 'instructional-design.mdc', 'overview.mdc', 'retention.mdc']
   },
   'executive-assistant': {
     category: 'professional',
     description: 'Executive support with calendar optimization, communication management, meeting coordination, and priority triage',
-    rules: ['calendar.md', 'confidentiality.md', 'email.md', 'meetings.md', 'overview.md', 'prioritization.md', 'stakeholder-management.md', 'travel.md']
+    rules: ['calendar.mdc', 'confidentiality.mdc', 'email.mdc', 'meetings.mdc', 'overview.mdc', 'prioritization.mdc', 'stakeholder-management.mdc', 'travel.mdc']
   },
   'fullstack': {
     category: 'engineering',
     description: 'Full-stack web applications (Next.js, Nuxt, SvelteKit, Remix)',
-    rules: ['api-contracts.md', 'architecture.md', 'overview.md', 'shared-types.md', 'testing.md']
+    rules: ['api-contracts.mdc', 'architecture.mdc', 'overview.mdc', 'shared-types.mdc', 'testing.mdc']
   },
   'grant-writer': {
     category: 'professional',
     description: 'Grant writing with proposal development, budget justification, compliance management, and post-award stewardship',
-    rules: ['budgets.md', 'compliance.md', 'funding-research.md', 'narrative.md', 'overview.md', 'post-award.md', 'review-criteria.md', 'sustainability.md']
+    rules: ['budgets.mdc', 'compliance.mdc', 'funding-research.mdc', 'narrative.mdc', 'overview.mdc', 'post-award.mdc', 'review-criteria.mdc', 'sustainability.mdc']
   },
   'golang-expert': {
     category: 'languages',
     description: 'Principal-level Go engineering (concurrency, stdlib, production patterns, testing)',
-    rules: ['concurrency.md', 'error-handling.md', 'interfaces-and-types.md', 'overview.md', 'performance.md', 'production-patterns.md', 'stdlib-and-tooling.md', 'testing.md']
+    rules: ['concurrency.mdc', 'error-handling.mdc', 'interfaces-and-types.mdc', 'overview.mdc', 'performance.mdc', 'production-patterns.mdc', 'stdlib-and-tooling.mdc', 'testing.mdc']
   },
   'java-expert': {
     category: 'languages',
     description: 'Principal-level Java engineering (JVM, Spring Boot, concurrency, JPA, testing)',
-    rules: ['concurrency.md', 'error-handling.md', 'modern-java.md', 'overview.md', 'performance.md', 'persistence.md', 'spring-boot.md', 'testing.md', 'tooling.md']
+    rules: ['concurrency.mdc', 'error-handling.mdc', 'modern-java.mdc', 'overview.mdc', 'performance.mdc', 'persistence.mdc', 'spring-boot.mdc', 'testing.mdc', 'tooling.mdc']
   },
   'javascript-expert': {
     category: 'languages',
     description: 'Principal-level JavaScript & TypeScript engineering (Node.js, React, type system, testing)',
-    rules: ['language-deep-dive.md', 'node-patterns.md', 'overview.md', 'performance.md', 'react-patterns.md', 'testing.md', 'tooling.md', 'typescript-deep-dive.md']
+    rules: ['language-deep-dive.mdc', 'node-patterns.mdc', 'overview.mdc', 'performance.mdc', 'react-patterns.mdc', 'testing.mdc', 'tooling.mdc', 'typescript-deep-dive.mdc']
   },
   'knowledge-synthesis': {
     category: 'professional',
     description: 'Knowledge management with document ingestion, knowledge graphs, search/retrieval, summarization, and research workflows',
-    rules: ['document-management.md', 'knowledge-graphs.md', 'overview.md', 'research-workflow.md', 'search-retrieval.md', 'summarization.md']
+    rules: ['document-management.mdc', 'knowledge-graphs.mdc', 'overview.mdc', 'research-workflow.mdc', 'search-retrieval.mdc', 'summarization.mdc']
   },
   'kotlin-expert': {
     category: 'languages',
     description: 'Principal-level Kotlin engineering (coroutines, multiplatform, Ktor, Spring Boot, testing)',
-    rules: ['coroutines.md', 'error-handling.md', 'frameworks.md', 'language-features.md', 'overview.md', 'performance.md', 'testing.md', 'tooling.md']
+    rules: ['coroutines.mdc', 'error-handling.mdc', 'frameworks.mdc', 'language-features.mdc', 'overview.mdc', 'performance.mdc', 'testing.mdc', 'tooling.mdc']
   },
   'life-logistics': {
     category: 'professional',
     description: 'Personal logistics optimization including scheduling, bill negotiation, insurance comparison, and vendor research',
-    rules: ['financial-optimization.md', 'negotiation.md', 'overview.md', 'research-methodology.md', 'scheduling.md', 'task-management.md']
+    rules: ['financial-optimization.mdc', 'negotiation.mdc', 'overview.mdc', 'research-methodology.mdc', 'scheduling.mdc', 'task-management.mdc']
   },
   'market-intelligence': {
     category: 'business',
     description: 'Market intelligence with data source aggregation, sentiment analysis, trend detection, and risk signal monitoring',
-    rules: ['data-sources.md', 'overview.md', 'reporting.md', 'risk-signals.md', 'sentiment-analysis.md', 'trend-detection.md']
+    rules: ['data-sources.mdc', 'overview.mdc', 'reporting.mdc', 'risk-signals.mdc', 'sentiment-analysis.mdc', 'trend-detection.mdc']
   },
   'marketing-expert': {
     category: 'business',
     description: 'Principal marketing strategy covering brand positioning, campaign planning, market analysis, analytics, and growth frameworks',
-    rules: ['brand-strategy.md', 'campaign-planning.md', 'growth-frameworks.md', 'market-analysis.md', 'marketing-analytics.md', 'overview.md']
+    rules: ['brand-strategy.mdc', 'campaign-planning.mdc', 'growth-frameworks.mdc', 'market-analysis.mdc', 'marketing-analytics.mdc', 'overview.mdc']
   },
   'ml-ai': {
     category: 'engineering',
     description: 'Machine learning and AI systems (model development, deployment, monitoring)',
-    rules: ['data-engineering.md', 'deployment.md', 'model-development.md', 'monitoring.md', 'overview.md', 'security.md', 'testing.md']
+    rules: ['data-engineering.mdc', 'deployment.mdc', 'model-development.mdc', 'monitoring.mdc', 'overview.mdc', 'security.mdc', 'testing.mdc']
   },
   'narrative-architect': {
     category: 'creative',
     description: 'World-building, continuity tracking, timeline management, story bible creation, and collaborative storytelling',
-    rules: ['collaboration.md', 'continuity-tracking.md', 'overview.md', 'story-bible.md', 'timeline-management.md', 'world-building.md']
+    rules: ['collaboration.mdc', 'continuity-tracking.mdc', 'overview.mdc', 'story-bible.mdc', 'timeline-management.mdc', 'world-building.mdc']
   },
   'mobile': {
     category: 'engineering',
     description: 'Mobile applications (React Native, Flutter, native iOS/Android)',
-    rules: ['navigation.md', 'offline-first.md', 'overview.md', 'performance.md', 'testing.md']
+    rules: ['navigation.mdc', 'offline-first.mdc', 'overview.mdc', 'performance.mdc', 'testing.mdc']
   },
   'predictive-maintenance': {
     category: 'business',
     description: 'Industrial sensor monitoring, failure prediction, maintenance scheduling, asset lifecycle management, and alerting',
-    rules: ['alerting.md', 'asset-lifecycle.md', 'failure-prediction.md', 'maintenance-scheduling.md', 'overview.md', 'sensor-analytics.md']
+    rules: ['alerting.mdc', 'asset-lifecycle.mdc', 'failure-prediction.mdc', 'maintenance-scheduling.mdc', 'overview.mdc', 'sensor-analytics.mdc']
   },
   'platform-engineering': {
     category: 'engineering',
     description: 'Internal developer platforms, infrastructure automation, and reliability engineering',
-    rules: ['ci-cd.md', 'developer-experience.md', 'infrastructure-as-code.md', 'kubernetes.md', 'observability.md', 'overview.md', 'security.md', 'testing.md']
+    rules: ['ci-cd.mdc', 'developer-experience.mdc', 'infrastructure-as-code.mdc', 'kubernetes.mdc', 'observability.mdc', 'overview.mdc', 'security.mdc', 'testing.mdc']
   },
   'product-manager': {
     category: 'business',
     description: 'Product management with customer-centric discovery, prioritization, and execution',
-    rules: ['communication.md', 'discovery.md', 'metrics.md', 'overview.md', 'prioritization.md', 'requirements.md']
+    rules: ['communication.mdc', 'discovery.mdc', 'metrics.mdc', 'overview.mdc', 'prioritization.mdc', 'requirements.mdc']
   },
   'regulatory-sentinel': {
     category: 'business',
     description: 'Regulatory compliance tracking, impact assessment, monitoring, risk classification, and compliance reporting',
-    rules: ['compliance-tracking.md', 'impact-assessment.md', 'monitoring.md', 'overview.md', 'reporting.md', 'risk-classification.md']
+    rules: ['compliance-tracking.mdc', 'impact-assessment.mdc', 'monitoring.mdc', 'overview.mdc', 'reporting.mdc', 'risk-classification.mdc']
   },
   'resource-allocator': {
     category: 'business',
     description: 'Resource allocation with demand prediction, scheduling optimization, crisis management, and capacity modeling',
-    rules: ['capacity-modeling.md', 'coordination.md', 'crisis-management.md', 'demand-prediction.md', 'overview.md', 'scheduling.md']
+    rules: ['capacity-modeling.mdc', 'coordination.mdc', 'crisis-management.mdc', 'demand-prediction.mdc', 'overview.mdc', 'scheduling.mdc']
   },
   'project-manager': {
     category: 'business',
     description: 'Project management with WBS planning, risk management, status reporting, and change control',
-    rules: ['overview.md', 'reporting.md', 'risk-management.md', 'scheduling.md', 'scope-management.md', 'stakeholder-management.md']
+    rules: ['overview.mdc', 'reporting.mdc', 'risk-management.mdc', 'scheduling.mdc', 'scope-management.mdc', 'stakeholder-management.mdc']
   },
   'python-expert': {
     category: 'languages',
     description: 'Principal-level Python engineering (type system, async, testing, FastAPI, Django)',
-    rules: ['async-python.md', 'overview.md', 'patterns-and-idioms.md', 'performance.md', 'testing.md', 'tooling.md', 'type-system.md', 'web-and-apis.md']
+    rules: ['async-python.mdc', 'overview.mdc', 'patterns-and-idioms.mdc', 'performance.mdc', 'testing.mdc', 'tooling.mdc', 'type-system.mdc', 'web-and-apis.mdc']
   },
   'qa-engineering': {
     category: 'engineering',
     description: 'Quality assurance programs for confident, rapid software delivery',
-    rules: ['automation.md', 'metrics.md', 'overview.md', 'quality-gates.md', 'test-design.md', 'test-strategy.md']
+    rules: ['automation.mdc', 'metrics.mdc', 'overview.mdc', 'quality-gates.mdc', 'test-design.mdc', 'test-strategy.mdc']
   },
   'social-media-expert': {
     category: 'creative',
     description: 'Social media strategy covering platform optimization, content planning, audience growth, community management, and analytics',
-    rules: ['audience-growth.md', 'community-management.md', 'content-strategy.md', 'overview.md', 'platform-strategy.md', 'social-analytics.md']
+    rules: ['audience-growth.mdc', 'community-management.mdc', 'content-strategy.mdc', 'overview.mdc', 'platform-strategy.mdc', 'social-analytics.mdc']
   },
   'strategic-negotiator': {
     category: 'business',
     description: 'Negotiation strategy with game theory, deal structuring, scenario modeling, preparation frameworks, and contract analysis',
-    rules: ['contract-analysis.md', 'deal-structuring.md', 'game-theory.md', 'overview.md', 'preparation.md', 'scenario-modeling.md']
+    rules: ['contract-analysis.mdc', 'deal-structuring.mdc', 'game-theory.mdc', 'overview.mdc', 'preparation.mdc', 'scenario-modeling.mdc']
   },
   'supply-chain-harmonizer': {
     category: 'business',
     description: 'Supply chain optimization with disruption response, rerouting, inventory rebalancing, and scenario simulation',
-    rules: ['disruption-response.md', 'inventory-rebalancing.md', 'overview.md', 'rerouting.md', 'scenario-simulation.md', 'stakeholder-notifications.md']
+    rules: ['disruption-response.mdc', 'inventory-rebalancing.mdc', 'overview.mdc', 'rerouting.mdc', 'scenario-simulation.mdc', 'stakeholder-notifications.mdc']
+  },
+  'ruby-expert': {
+    category: 'languages',
+    description: 'Principal-level Ruby engineering (idioms, concurrency, Rails, performance, testing)',
+    rules: ['concurrency-and-threading.mdc', 'error-handling.mdc', 'idioms-and-style.mdc', 'overview.mdc', 'performance.mdc', 'rails-and-frameworks.mdc', 'testing.mdc', 'tooling.mdc']
   },
   'rust-expert': {
     category: 'languages',
     description: 'Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async)',
-    rules: ['concurrency.md', 'ecosystem-and-tooling.md', 'error-handling.md', 'overview.md', 'ownership-and-borrowing.md', 'performance-and-unsafe.md', 'testing.md', 'traits-and-generics.md']
+    rules: ['concurrency.mdc', 'ecosystem-and-tooling.mdc', 'error-handling.mdc', 'overview.mdc', 'ownership-and-borrowing.mdc', 'performance-and-unsafe.mdc', 'testing.mdc', 'traits-and-generics.mdc']
   },
   'supply-chain': {
     category: 'business',
     description: 'Supply chain management with inventory optimization, demand forecasting, supplier evaluation, and logistics',
-    rules: ['cost-modeling.md', 'demand-forecasting.md', 'inventory-management.md', 'logistics.md', 'overview.md', 'supplier-evaluation.md']
+    rules: ['cost-modeling.mdc', 'demand-forecasting.mdc', 'inventory-management.mdc', 'logistics.mdc', 'overview.mdc', 'supplier-evaluation.mdc']
   },
   'swift-expert': {
     category: 'languages',
     description: 'Principal-level Swift engineering (concurrency, SwiftUI, protocols, testing, Apple platforms)',
-    rules: ['concurrency.md', 'error-handling.md', 'language-features.md', 'overview.md', 'performance.md', 'swiftui.md', 'testing.md', 'tooling.md']
+    rules: ['concurrency.mdc', 'error-handling.mdc', 'language-features.mdc', 'overview.mdc', 'performance.mdc', 'swiftui.mdc', 'testing.mdc', 'tooling.mdc']
   },
   'trend-forecaster': {
     category: 'creative',
     description: 'Trend analysis with signal detection, cultural analysis, trend lifecycle modeling, forecasting methods, and reporting',
-    rules: ['cultural-analysis.md', 'forecasting-methods.md', 'overview.md', 'reporting.md', 'signal-analysis.md', 'trend-lifecycle.md']
+    rules: ['cultural-analysis.mdc', 'forecasting-methods.mdc', 'overview.mdc', 'reporting.mdc', 'signal-analysis.mdc', 'trend-lifecycle.mdc']
   },
   'testing': {
     category: 'engineering',
     description: 'Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing)',
-    rules: ['advanced-techniques.md', 'ci-cd-integration.md', 'overview.md', 'performance-testing.md', 'quality-metrics.md', 'reliability.md', 'tdd-methodology.md', 'test-data.md', 'test-design.md', 'test-types.md']
+    rules: ['advanced-techniques.mdc', 'ci-cd-integration.mdc', 'overview.mdc', 'performance-testing.mdc', 'quality-metrics.mdc', 'reliability.mdc', 'tdd-methodology.mdc', 'test-data.mdc', 'test-design.mdc', 'test-types.mdc']
   },
   'unity-dev-expert': {
     category: 'engineering',
     description: 'Unity game development with C# architecture, ECS/DOTS, physics/rendering, UI systems, multiplayer networking, and performance optimization',
-    rules: ['csharp-architecture.md', 'multiplayer-networking.md', 'overview.md', 'performance-optimization.md', 'physics-rendering.md', 'ui-systems.md']
+    rules: ['csharp-architecture.mdc', 'multiplayer-networking.mdc', 'overview.mdc', 'performance-optimization.mdc', 'physics-rendering.mdc', 'ui-systems.mdc']
   },
   'utility-agent': {
     category: 'agents',
     description: 'AI agent utilities with context management and hallucination prevention',
-    rules: ['action-control.md', 'context-management.md', 'hallucination-prevention.md', 'overview.md', 'token-optimization.md']
+    rules: ['action-control.mdc', 'context-management.mdc', 'hallucination-prevention.mdc', 'overview.mdc', 'token-optimization.mdc']
   },
   'ux-designer': {
     category: 'creative',
     description: 'Principal-level UX design with user research, interaction design, design systems, accessibility, and emotional design',
-    rules: ['accessibility.md', 'emotional-design.md', 'handoff.md', 'information-architecture.md', 'interaction-design.md', 'overview.md', 'research.md', 'visual-design.md']
+    rules: ['accessibility.mdc', 'emotional-design.mdc', 'handoff.mdc', 'information-architecture.mdc', 'interaction-design.mdc', 'overview.mdc', 'research.mdc', 'visual-design.mdc']
   },
   'wellness-orchestrator': {
     category: 'professional',
     description: 'Unified wellness planning across fitness, nutrition, sleep, and mental wellness with wearable data integration',
-    rules: ['adaptive-planning.md', 'data-integration.md', 'fitness-programming.md', 'nutrition-planning.md', 'overview.md', 'sleep-optimization.md']
+    rules: ['adaptive-planning.mdc', 'data-integration.mdc', 'fitness-programming.mdc', 'nutrition-planning.mdc', 'overview.mdc', 'sleep-optimization.mdc']
   },
   'web-backend': {
     category: 'engineering',
     description: 'Backend APIs and services (REST, GraphQL, microservices)',
-    rules: ['api-design.md', 'authentication.md', 'database-patterns.md', 'error-handling.md', 'overview.md', 'security.md', 'testing.md']
+    rules: ['api-design.mdc', 'authentication.mdc', 'database-patterns.mdc', 'error-handling.mdc', 'overview.mdc', 'security.mdc', 'testing.mdc']
   },
   'web-frontend': {
     category: 'engineering',
     description: 'Frontend web applications (SPAs, SSR, static sites, PWAs)',
-    rules: ['accessibility.md', 'component-patterns.md', 'overview.md', 'performance.md', 'state-management.md', 'styling.md', 'testing.md']
+    rules: ['accessibility.mdc', 'component-patterns.mdc', 'overview.mdc', 'performance.mdc', 'state-management.mdc', 'styling.mdc', 'testing.mdc']
   }
 };
 
@@ -279,6 +284,8 @@ const TEMPLATE_ALIASES = {
   'python': 'python-expert',
   'rs': 'rust-expert',
   'rust': 'rust-expert',
+  'ruby': 'ruby-expert',
+  'rb': 'ruby-expert',
   'swift': 'swift-expert',
   'kotlin': 'kotlin-expert',
   'kt': 'kotlin-expert',
@@ -319,11 +326,11 @@ function getTemplateRulePath(template, rule) {
 }
 
 const SHARED_RULES = [
-  'code-quality.md',
-  'communication.md', 
-  'core-principles.md',
-  'git-workflow.md',
-  'security-fundamentals.md'
+  'code-quality.mdc',
+  'communication.mdc',
+  'core-principles.mdc',
+  'git-workflow.mdc',
+  'security-fundamentals.mdc'
 ];
 
 // Supported IDEs/tools
@@ -420,6 +427,7 @@ ${colors.yellow('Shorthand Aliases:')}
   go, golang                     → golang-expert
   py, python                     → python-expert
   rs, rust                       → rust-expert
+  ruby, rb                       → ruby-expert
   swift                          → swift-expert
   kotlin, kt                     → kotlin-expert
   java                           → java-expert
@@ -445,7 +453,7 @@ ${colors.yellow('Removal Examples:')}
   npx cursor-templates --reset --yes
 
 ${colors.dim('Shared rules (code-quality, security, git-workflow, etc.) are always included.')}
-${colors.dim('Identical files are skipped. Modified files are preserved; ours saved as *-1.md.')}
+${colors.dim('Identical files are skipped. Modified files are preserved; ours saved as *-1.mdc.')}
 ${colors.dim('CLAUDE.md: missing sections are intelligently merged (not overwritten).')}
 `);
 }
@@ -485,7 +493,7 @@ function printTemplates() {
 
   console.log(colors.blue('Shared rules (always included):'));
   for (const rule of SHARED_RULES) {
-    console.log(`  - ${rule.replace('.md', '')}`);
+    console.log(`  - ${rule.replace('.mdc', '')}`);
   }
   console.log();
 }
@@ -677,7 +685,7 @@ function mergeClaudeContent(existingContent, templateContent) {
 }
 
 /**
- * Get alternate filename with -1 suffix (e.g., code-quality.md -> code-quality-1.md)
+ * Get alternate filename with -1 suffix (e.g., code-quality.mdc -> code-quality-1.mdc)
  */
 function getAlternateFilename(filepath) {
   const dir = path.dirname(filepath);
@@ -731,7 +739,7 @@ function generateClaudeMdContent(installedTemplates) {
 
   const templateRuleTables = installedTemplates.map(template => {
     const rules = TEMPLATES[template].rules
-      .map(rule => `| \`${template}-${rule}\` | ${rule.replace('.md', '').replace(/-/g, ' ')} guidelines |`)
+      .map(rule => `| \`${template}-${rule}\` | ${rule.replace('.mdc', '').replace(/-/g, ' ')} guidelines |`)
       .join('\n');
     
     return `
@@ -763,11 +771,11 @@ All rules are in \`.cursor/rules/\`. The AI assistant automatically reads these 
 
 | Rule | Purpose |
 |------|---------|
-| \`core-principles.md\` | Honesty, simplicity, testing requirements |
-| \`code-quality.md\` | SOLID, DRY, clean code patterns |
-| \`security-fundamentals.md\` | Zero trust, input validation, secrets |
-| \`git-workflow.md\` | Commits, branches, PRs, safety |
-| \`communication.md\` | Direct, objective, professional |
+| \`core-principles.mdc\` | Honesty, simplicity, testing requirements |
+| \`code-quality.mdc\` | SOLID, DRY, clean code patterns |
+| \`security-fundamentals.mdc\` | Zero trust, input validation, secrets |
+| \`git-workflow.mdc\` | Commits, branches, PRs, safety |
+| \`communication.mdc\` | Direct, objective, professional |
 ${templateRuleTables}
 
 ---
@@ -950,7 +958,7 @@ async function install(targetDir, templates, dryRun = false, force = false, ides
   console.log(`${colors.blue('Installing to:')} ${targetDir}`);
   console.log(`${colors.blue('Target IDEs:')} ${ides.join(', ')}`);
   if (!force) {
-    console.log(colors.dim('(identical files skipped, modified files preserved with ours saved as *-1.md)'));
+    console.log(colors.dim('(identical files skipped, modified files preserved with ours saved as *-1.mdc)'));
   }
   console.log();
 
@@ -1210,7 +1218,7 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
     console.log(`  - ${stats.skipped} files skipped (identical to template)`);
   }
   if (stats.renamed > 0) {
-    console.log(`  - ${colors.blue(`${stats.renamed} files saved as *-1.md`)} (yours preserved)`);
+    console.log(`  - ${colors.blue(`${stats.renamed} files saved as *-1.mdc`)} (yours preserved)`);
   }
   console.log();
   
@@ -1336,7 +1344,7 @@ async function remove(targetDir, templates, dryRun = false, force = false, skipC
 
           // Also check for -1 variant files
           for (const rule of TEMPLATES[template].rules) {
-            const altName = `${template}-${rule.replace('.md', '-1.md')}`;
+            const altName = `${template}-${rule.replace('.mdc', '-1.mdc')}`;
             const altPath = path.join(dir, altName);
 
             if (fs.existsSync(altPath)) {
@@ -1477,10 +1485,10 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
           }
 
           // Check for -1 variant
-          const altPath = path.join(dir, rule.replace('.md', '-1.md'));
+          const altPath = path.join(dir, rule.replace('.mdc', '-1.mdc'));
           if (fs.existsSync(altPath)) {
-            console.log(`  ${colors.red('[remove]')} ${rule.replace('.md', '-1.md')} (alternate file)`);
-            filesToRemove.push({ path: altPath, name: rule.replace('.md', '-1.md') });
+            console.log(`  ${colors.red('[remove]')} ${rule.replace('.mdc', '-1.mdc')} (alternate file)`);
+            filesToRemove.push({ path: altPath, name: rule.replace('.mdc', '-1.mdc') });
           }
         }
 
@@ -1505,7 +1513,7 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
             }
 
             // Check for -1 variant
-            const altName = destName.replace('.md', '-1.md');
+            const altName = destName.replace('.mdc', '-1.mdc');
             const altPath = path.join(dir, altName);
             if (fs.existsSync(altPath)) {
               console.log(`  ${colors.red('[remove]')} ${altName} (alternate file)`);

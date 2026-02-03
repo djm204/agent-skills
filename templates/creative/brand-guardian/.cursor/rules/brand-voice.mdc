@@ -1,0 +1,88 @@
+---
+description: Brand Voice
+alwaysApply: false
+---
+
+# Brand Voice
+
+Guidelines for defining, documenting, and enforcing a consistent brand voice across all content.
+
+## Voice Architecture
+
+A brand voice has three layers:
+
+1. **Core Identity**: The unchanging personality traits, values, and mission that define who the brand is
+2. **Voice Attributes**: Specific, measurable characteristics (e.g., confident, warm, direct) with examples and counter-examples
+3. **Tone Ranges**: The acceptable spectrum of formality, emotion, and authority that shifts by channel and context
+
+## Defining Voice Attributes
+
+Every voice attribute must include:
+
+- A clear one-sentence definition
+- Three or more "sounds like" examples
+- Three or more "does not sound like" counter-examples
+- Channel intensity ratings showing how strongly the attribute appears in each medium
+
+Attributes are typically grouped as primary (always present), secondary (context-dependent), and anti-attributes (never present).
+
+## Voice Consistency Scoring
+
+| Criterion | Weight |
+|-----------|--------|
+| Vocabulary alignment | 20% |
+| Sentence structure match | 15% |
+| Tone appropriateness | 20% |
+| Personality expression | 15% |
+| Audience awareness | 15% |
+| Channel adaptation | 15% |
+
+Score interpretation:
+
+- 4.5-5.0: Exemplary, use as reference content
+- 3.5-4.4: On-brand, approved for publication
+- 2.5-3.4: Needs revision, specific adjustments required
+- 1.5-2.4: Off-brand, significant rewrite needed
+- Below 1.5: Reject, does not represent the brand
+
+## Tone Spectrum
+
+Tone is the variable expression of a fixed voice. Map each content type along these spectrums:
+
+- Formal to Casual
+- Serious to Playful
+- Authoritative to Approachable
+- Technical to Accessible
+
+Each content type (social post, press release, support email) should have a defined position on each spectrum.
+
+## Word List Governance
+
+Maintain four lists:
+
+- **Preferred terms**: Always use when describing brand concepts
+- **Acceptable alternatives**: Permitted but not preferred
+- **Prohibited terms**: Never use in brand communications
+- **Inclusive language**: Preferred over exclusionary alternatives
+
+Review and update word lists quarterly. Track new terminology emerging from product, marketing, and customer usage.
+
+## Common Pitfalls
+
+### Voice as Script
+
+Wrong: Give creators exact sentences to copy and paste for every scenario.
+
+Right: Define the personality, provide examples, and trust trained creators to express it authentically.
+
+### Confusing Voice and Tone
+
+Wrong: Treat voice and tone as the same thing. Apply identical tone to a celebration post and a crisis statement.
+
+Right: Voice is constant personality. Tone is the mood that shifts with context. The brand always sounds like itself but adjusts its emotional register.
+
+### Ignoring Internal Voice
+
+Wrong: Enforce brand voice in marketing but allow internal communications, recruiting, and partner materials to speak however they please.
+
+Right: Brand voice applies everywhere the brand name appears. Internal culture documents, job postings, and partner materials all carry brand equity.

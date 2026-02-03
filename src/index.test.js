@@ -111,6 +111,7 @@ describe('Constants', () => {
         'qa-engineering',
         'regulatory-sentinel',
         'resource-allocator',
+        'ruby-expert',
         'rust-expert',
         'social-media-expert',
         'strategic-negotiator',
@@ -145,9 +146,9 @@ describe('Constants', () => {
       }
     });
 
-    it('each template should have overview.md in rules', () => {
+    it('each template should have overview.mdc in rules', () => {
       for (const [name, template] of Object.entries(TEMPLATES)) {
-        expect(template.rules).toContain('overview.md');
+        expect(template.rules).toContain('overview.mdc');
       }
     });
 
@@ -163,16 +164,16 @@ describe('Constants', () => {
 
   describe('SHARED_RULES', () => {
     it('should have expected shared rules', () => {
-      expect(SHARED_RULES).toContain('code-quality.md');
-      expect(SHARED_RULES).toContain('communication.md');
-      expect(SHARED_RULES).toContain('core-principles.md');
-      expect(SHARED_RULES).toContain('git-workflow.md');
-      expect(SHARED_RULES).toContain('security-fundamentals.md');
+      expect(SHARED_RULES).toContain('code-quality.mdc');
+      expect(SHARED_RULES).toContain('communication.mdc');
+      expect(SHARED_RULES).toContain('core-principles.mdc');
+      expect(SHARED_RULES).toContain('git-workflow.mdc');
+      expect(SHARED_RULES).toContain('security-fundamentals.mdc');
     });
 
-    it('all rules should end with .md', () => {
+    it('all rules should end with .mdc', () => {
       for (const rule of SHARED_RULES) {
-        expect(rule).toMatch(/\.md$/);
+        expect(rule).toMatch(/\.mdc$/);
       }
     });
   });
@@ -206,6 +207,8 @@ describe('Constants', () => {
       expect(TEMPLATE_ALIASES['go']).toBe('golang-expert');
       expect(TEMPLATE_ALIASES['py']).toBe('python-expert');
       expect(TEMPLATE_ALIASES['rs']).toBe('rust-expert');
+      expect(TEMPLATE_ALIASES['ruby']).toBe('ruby-expert');
+      expect(TEMPLATE_ALIASES['rb']).toBe('ruby-expert');
       expect(TEMPLATE_ALIASES['kt']).toBe('kotlin-expert');
     });
   });
@@ -218,6 +221,8 @@ describe('Constants', () => {
       expect(resolveTemplateAlias('golang')).toBe('golang-expert');
       expect(resolveTemplateAlias('py')).toBe('python-expert');
       expect(resolveTemplateAlias('rs')).toBe('rust-expert');
+      expect(resolveTemplateAlias('ruby')).toBe('ruby-expert');
+      expect(resolveTemplateAlias('rb')).toBe('ruby-expert');
       expect(resolveTemplateAlias('kotlin')).toBe('kotlin-expert');
       expect(resolveTemplateAlias('kt')).toBe('kotlin-expert');
     });
@@ -243,12 +248,12 @@ describe('Constants', () => {
 describe('Utility Functions', () => {
   describe('getAlternateFilename', () => {
     it('should add -1 suffix before extension', () => {
-      expect(getAlternateFilename('/path/to/file.md')).toBe('/path/to/file-1.md');
-      expect(getAlternateFilename('/path/to/code-quality.md')).toBe('/path/to/code-quality-1.md');
+      expect(getAlternateFilename('/path/to/file.mdc')).toBe('/path/to/file-1.mdc');
+      expect(getAlternateFilename('/path/to/code-quality.mdc')).toBe('/path/to/code-quality-1.mdc');
     });
 
     it('should handle files without directory', () => {
-      expect(getAlternateFilename('file.md')).toBe('file-1.md');
+      expect(getAlternateFilename('file.mdc')).toBe('file-1.mdc');
     });
 
     it('should handle different extensions', () => {
@@ -594,9 +599,9 @@ describe('Content Generation', () => {
     it('should include shared rules table', () => {
       const content = generateClaudeMdContent(['web-frontend']);
       
-      expect(content).toContain('core-principles.md');
-      expect(content).toContain('code-quality.md');
-      expect(content).toContain('security-fundamentals.md');
+      expect(content).toContain('core-principles.mdc');
+      expect(content).toContain('code-quality.mdc');
+      expect(content).toContain('security-fundamentals.mdc');
     });
 
     it('should include development principles', () => {
@@ -806,9 +811,9 @@ describe('Install/Remove/Reset Operations', () => {
       await install(tempDir, ['web-frontend', 'web-backend'], false, false, ['cursor']);
 
       // Check web-frontend rules
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc'))).toBe(true);
       // Check web-backend rules
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-backend-overview.md'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-backend-overview.mdc'))).toBe(true);
     });
 
     it('should copy legacy .cursorrules/ files to .cursor/rules/ then remove legacy dir when cleanup confirmed', async () => {
@@ -821,7 +826,7 @@ describe('Install/Remove/Reset Operations', () => {
       await install(tempDir, ['web-frontend'], false, false, ['cursor'], true);
 
       expect(fs.existsSync(legacyDir)).toBe(false);
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc'))).toBe(true);
       expect(fs.existsSync(path.join(cursorRulesDir, 'old-rule.md'))).toBe(true);
       expect(fs.readFileSync(path.join(cursorRulesDir, 'old-rule.md'), 'utf8')).toBe('# Old rule');
       expect(fs.existsSync(path.join(cursorRulesDir, 'custom-guide.md'))).toBe(true);
@@ -886,12 +891,12 @@ describe('Install/Remove/Reset Operations', () => {
       await remove(tempDir, ['web-frontend'], true, false, true, ['cursor']);
 
       // Files should still exist
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc'))).toBe(true);
     });
 
     it('should skip modified files without force', async () => {
       // Modify a file
-      const filePath = path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md');
+      const filePath = path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc');
       fs.writeFileSync(filePath, '# Modified content');
 
       await remove(tempDir, ['web-frontend'], false, false, true, ['cursor']);
@@ -903,7 +908,7 @@ describe('Install/Remove/Reset Operations', () => {
 
     it('should remove modified files with force', async () => {
       // Modify a file
-      const filePath = path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md');
+      const filePath = path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc');
       fs.writeFileSync(filePath, '# Modified content');
 
       await remove(tempDir, ['web-frontend'], false, true, true, ['cursor']);
@@ -941,8 +946,8 @@ describe('Install/Remove/Reset Operations', () => {
       await reset(tempDir, false, false, true, ['cursor']);
 
       // Template files should be removed
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md'))).toBe(false);
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-backend-overview.md'))).toBe(false);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc'))).toBe(false);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-backend-overview.mdc'))).toBe(false);
     });
 
     it('should remove shared rules', async () => {
@@ -997,13 +1002,13 @@ describe('Install/Remove/Reset Operations', () => {
       for (const rule of SHARED_RULES) {
         fs.writeFileSync(path.join(legacyDir, rule), '# legacy shared');
       }
-      fs.writeFileSync(path.join(legacyDir, 'web-frontend-overview.md'), '# legacy template');
+      fs.writeFileSync(path.join(legacyDir, 'web-frontend-overview.mdc'), '# legacy template');
 
       await reset(tempDir, false, true, true, ['cursor']);
 
       // Both directories should be cleaned up
-      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.md'))).toBe(false);
-      expect(fs.existsSync(path.join(legacyDir, 'web-frontend-overview.md'))).toBe(false);
+      expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules', 'web-frontend-overview.mdc'))).toBe(false);
+      expect(fs.existsSync(path.join(legacyDir, 'web-frontend-overview.mdc'))).toBe(false);
     });
   });
 });

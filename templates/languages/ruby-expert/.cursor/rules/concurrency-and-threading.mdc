@@ -1,0 +1,65 @@
+---
+description: Ruby Expert — Concurrency and Threading
+alwaysApply: false
+---
+
+# Ruby Expert — Concurrency and Threading
+
+Principal-level Ruby: understand the GIL, design for I/O and background work, and avoid the threading pitfalls that cause production incidents.
+
+## The GIL (Global VM Lock)
+
+- **MRI has a GIL.** Only one thread runs Ruby code at a time. Threads don't give you CPU parallelism for Ruby execution; they give you concurrency for I/O (HTTP, DB, file).
+- **CPU-bound work:** use processes (`fork`, `Process.spawn`) or offload to a job queue and run multiple worker processes. Don't expect threads to speed up CPU-heavy Ruby.
+- **I/O-bound work:** threads can help (e.g. multiple HTTP requests in parallel) as long as you don't hold the GIL while blocking. Use non-blocking I/O or a pool of threads that block on I/O.
+
+## Thread Safety
+
+- **Shared mutable state is the enemy.** Avoid class variables (`@@`) and mutable globals. Prefer thread-local only when necessary and documented (e.g. request context).
+- **Rails and connection pools:** ActiveRecord uses a connection pool per process. Threads can share the process but must not hold a connection across blocking calls; release back to the pool.
+- **Libraries:** many gems are not thread-safe. Check docs and code. When in doubt, assume single-threaded or use a mutex around shared usage.
+
+```ruby
+# Good: Stateless or explicit synchronization
+result = fetch_from_api(id)  # No shared mutable state
+
+# Risky: Shared mutable state without synchronization
+class Cache
+  @data = {}  # Class instance variable — shared across threads
+  def self.[]=(k, v); @data[k] = v; end
+  def self.[](k); @data[k]; end
+end
+# Use Concurrent::Map or a proper cache store (e.g. Rails.cache) instead.
+```
+
+## Ractors (Ruby 3+)
+
+- **Ractors** provide parallelism without the GIL by isolating objects between ractors. Use for CPU-bound work when you've measured a bottleneck and understand the copy/move rules.
+- **Adoption is still evolving.** Prefer processes and job queues unless you have a clear use case and tests.
+
+## Fibers and Async (Ruby 3+)
+
+- **Fibers** are lightweight concurrency primitives. Used internally by async gems and for cooperative scheduling.
+- **Async I/O:** can improve throughput for I/O-bound services. Use when you've validated the need and the team understands the model. Don't introduce for "cleverness."
+
+## Background Jobs
+
+- **Sidekiq / Solid Queue / Good Job:** standard way to do work asynchronously in Rails. Jobs run in separate processes; no GIL sharing, no in-process threading bugs for the job body.
+- **Idempotency:** design jobs to be idempotent. Retries and duplicate enqueues happen; the job should be safe to run more than once.
+- **Small, focused jobs.** One job type per logical task. Pass ids, not huge objects. Avoid N+1s inside the job.
+- **Timeouts and retries:** configure max retries, dead queue, and timeouts. Know what happens when a job fails permanently.
+
+## Request and Rack
+
+- **Rack servers (Puma, etc.):** multiple workers (processes) and optionally threads per process. Threads share memory; one bad thread can affect others. Isolate request state.
+- **Don't store request-scoped data in class variables or globals.** Use request env, thread-local only if documented, or passed parameters.
+
+## Definition of Done (Concurrency)
+
+- [ ] No reliance on threads for CPU-bound parallelism; use processes or job queues.
+- [ ] Shared mutable state is avoided or explicitly synchronized and documented.
+- [ ] Background jobs are idempotent and have bounded retries/timeouts.
+- [ ] No request-scoped data in global or class-level mutable state.
+- [ ] Dependencies are checked for thread-safety when used in multi-threaded context.
+
+Consider these rules if they affect your changes.

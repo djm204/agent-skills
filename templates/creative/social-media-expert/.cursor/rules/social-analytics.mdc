@@ -1,0 +1,163 @@
+---
+description: Social Analytics
+alwaysApply: false
+---
+
+# Social Analytics
+
+Guidelines for measuring social media performance, building reports, conducting A/B tests, and translating data into strategic decisions.
+
+## Metrics Hierarchy
+
+Not all metrics are created equal. Organize them by business relevance:
+
+| Tier | Metric Category | Key Metrics | Why It Matters |
+|------|---------------|------------|---------------|
+| Tier 1: Business Impact | Revenue and conversions | Social-attributed revenue, cost per acquisition, lead volume | Directly proves ROI of social investment |
+| Tier 2: Behavioral | Traffic and actions | Link clicks, landing page visits, email signups, app installs | Shows audience moving from social to business outcomes |
+| Tier 3: Engagement | Interaction quality | Engagement rate, save rate, share rate, comment depth | Indicates content resonance and community health |
+| Tier 4: Awareness | Reach and exposure | Impressions, reach, video views, follower growth | Shows brand visibility and audience expansion |
+
+## Platform-Specific Key Metrics
+
+| Metric | Instagram | TikTok | LinkedIn | X | YouTube |
+|--------|-----------|--------|----------|---|---------|
+| Primary engagement | Saves + Shares | Completion rate + Shares | Dwell time + Comments | Replies + Reposts | Watch time + Subscribers |
+| Content quality signal | Save rate | Full video views | Comment length | Quote tweets with context | Average view duration |
+| Discovery signal | Reel reach to non-followers | For You page views | Impressions from network | Impression sources | Click-through rate |
+| Community signal | DM volume + Story replies | Follower-to-like ratio | Connection requests | Follower engagement rate | Community post engagement |
+| Conversion signal | Link clicks (bio + Stories) | TikTok Shop clicks | Website clicks | Link clicks | Description link clicks |
+
+## Reporting Cadence and Structure
+
+| Report | Frequency | Audience | Focus Areas |
+|--------|-----------|----------|-------------|
+| Daily pulse | Daily (automated) | Social team | Engagement anomalies, trending content, urgent flags |
+| Weekly review | Weekly | Marketing team | Top/bottom performing content, growth trends, content mix analysis |
+| Monthly report | Monthly | Leadership | KPI progress vs. targets, channel comparison, audience insights |
+| Quarterly strategy | Quarterly | Executive team | ROI analysis, strategy recommendations, competitive benchmarks |
+| Campaign report | Per campaign | Campaign stakeholders | Results vs. goals, cost efficiency, creative learnings |
+
+### Monthly Report Template
+
+```markdown
+## Social Media Monthly Report: [Month Year]
+
+### Executive Summary
+[2-3 sentences: What happened, what it means, what to do next]
+
+### Key Metrics vs. Targets
+| Metric | Target | Actual | Delta | Trend (MoM) |
+|--------|--------|--------|-------|-------------|
+| Total impressions | | | | |
+| Engagement rate | | | | |
+| Net follower growth | | | | |
+| Link clicks | | | | |
+| Conversions attributed | | | | |
+| Revenue attributed | | | | |
+
+### Platform Performance
+| Platform | Followers | Growth Rate | Engagement Rate | Top Post | Key Insight |
+|----------|-----------|-------------|-----------------|----------|-------------|
+| Instagram | | | | | |
+| TikTok | | | | | |
+| LinkedIn | | | | | |
+| X | | | | | |
+| YouTube | | | | | |
+
+### Top 5 Posts by Engagement
+| Rank | Platform | Post Summary | Engagement Rate | Key Takeaway |
+|------|----------|-------------|-----------------|-------------|
+| 1 | | | | |
+| 2 | | | | |
+| 3 | | | | |
+| 4 | | | | |
+| 5 | | | | |
+
+### Content Pillar Performance
+| Pillar | Posts Published | Avg Engagement Rate | Avg Reach | Assessment |
+|--------|---------------|--------------------|-----------|-----------|
+| Educational | | | | |
+| Industry | | | | |
+| Community | | | | |
+| Social Proof | | | | |
+| Entertainment | | | | |
+
+### Recommendations for Next Month
+- [Action 1 based on data]
+- [Action 2 based on data]
+- [Action 3 based on data]
+```
+
+## A/B Testing Protocol
+
+| Test Element | Variables | Sample Size | Duration | Success Metric |
+|-------------|-----------|-------------|----------|---------------|
+| Post timing | 2-3 different publish times | 10+ posts per time slot | 3-4 weeks | Average engagement rate by time |
+| Hook style | 2 hook approaches on same topic | 5+ posts per approach | 2-3 weeks | First-3-second retention or engagement rate |
+| Format | Carousel vs. single vs. video on same topic | 5+ posts per format | 3-4 weeks | Reach and engagement rate |
+| Caption length | Short (< 50 words) vs. long (200+ words) | 10+ posts per length | 4 weeks | Engagement rate and saves |
+| CTA phrasing | Different CTAs on similar content | 10+ posts per CTA | 4 weeks | Action completion rate |
+| Hashtag sets | 3 different hashtag groups | 10+ posts per set | 4 weeks | Reach from hashtags |
+| Thumbnail / first slide | 2-3 visual variations | 3+ per variation | 2 weeks | Click-through rate |
+
+### Testing Discipline
+
+```text
+A/B Testing Rules
+├── Test one variable at a time
+│   └── Changing multiple variables makes results uninterpretable
+├── Define success metric before launching
+│   └── Choosing the metric after seeing results introduces bias
+├── Set minimum sample size before starting
+│   └── Do not call a winner after 3 posts
+├── Run tests for sufficient duration
+│   └── At least 2 full weeks to account for day-of-week variance
+├── Document every test and result
+│   └── Build institutional knowledge; avoid re-running the same tests
+└── Act on results
+    └── A test that does not change strategy is a wasted test
+```
+
+## Competitive Benchmarking
+
+| Benchmark Element | What to Track | Source | Frequency |
+|-------------------|-------------|--------|-----------|
+| Follower count and growth | Competitor audience size and growth trajectory | Public profiles + tracking tools | Monthly |
+| Engagement rate | Average engagement relative to follower count | Public metrics + estimation tools | Monthly |
+| Content mix | What formats and topics competitors prioritize | Manual content audit | Quarterly |
+| Posting frequency | How often competitors post per platform | Manual tracking or tools | Monthly |
+| Top-performing content | What types of posts get highest engagement | Public profile analysis | Monthly |
+| Share of voice | Relative brand mention volume in your category | Social listening tools | Monthly |
+| Paid activity | Ad Library review for active campaigns and creative | Meta Ad Library, TikTok Creative Center | Monthly |
+| New platform adoption | Where competitors are experimenting | Platform monitoring | Ongoing |
+
+## Attribution Models
+
+| Model | How It Works | Strengths | Limitations |
+|-------|-------------|-----------|------------|
+| Last-touch | Credits the final social interaction before conversion | Simple, easy to implement | Ignores awareness and consideration touchpoints |
+| First-touch | Credits the first social interaction | Values discovery and top-of-funnel | Ignores nurturing and decision-stage content |
+| Linear | Equal credit to all social touchpoints | Acknowledges full journey | Over-credits low-impact touches |
+| Time-decay | More credit to interactions closer to conversion | Balances journey and recency | Complex to set up |
+| Incrementality | Measures lift from social vs. holdout group | Most accurate for proving true impact | Requires scale and testing infrastructure |
+
+## Common Pitfalls
+
+### Reporting Without Insight
+
+Wrong: Send a weekly report that lists numbers (impressions: 50K, engagement rate: 3.2%, followers: +127) with no context, comparison, or recommendation.
+
+Right: Every metric should answer "so what?" Compare to targets, previous periods, and benchmarks. End every report section with a recommended action based on the data.
+
+### Optimizing for the Wrong Metric
+
+Wrong: Optimize all content for maximum reach (impressions) when the business goal is lead generation. Celebrate going viral on a post that drove zero clicks.
+
+Right: Align content optimization with the metric that maps to your business objective. If the goal is leads, optimize for click-through rate and conversion rate, not impressions.
+
+### Ignoring Qualitative Data
+
+Wrong: Make all decisions based on quantitative metrics while ignoring what people are actually saying in comments, DMs, and mentions.
+
+Right: Quantitative data tells you what is happening. Qualitative data (comment themes, DM questions, sentiment) tells you why. Read comments. Read DMs. Let audience language inform content strategy.

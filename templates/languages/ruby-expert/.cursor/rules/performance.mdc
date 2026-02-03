@@ -1,0 +1,68 @@
+---
+description: Ruby Expert — Performance
+alwaysApply: false
+---
+
+# Ruby Expert — Performance
+
+Principal-level Ruby: measure first, know where Ruby and Rails bite (memory, N+1, allocation churn), and optimize only what matters.
+
+## Profile First
+
+- **Don't guess.** Use profiling (e.g. `stackprof`, `memory_profiler`, `ruby-prof`) and APM (Scout, New Relic, Datadog) to find real bottlenecks.
+- **Reproduce under load.** Optimize the path that shows up in production traces and metrics, not the one that "feels" slow.
+- **Set goals.** "Make it faster" is vague. "P99 under 200ms" or "reduce N+1s on users#show" is actionable.
+
+## N+1 Queries
+
+- **Classic Rails bug.** One query in a loop (or lazy enumeration) causes N extra queries. Principal Rubyists catch this before merge.
+- **Use `includes`, `eager_load`, `preload`** for associations you know you'll use. Prefer `includes` for most cases; understand the difference for complex cases.
+- **Bullet gem** in development: warns on N+1s and unused eager loading. Enable it and fix what it reports.
+- **Scopes and batch loading:** when processing large sets, use `find_each` / `in_batches` instead of loading everything into memory.
+
+```ruby
+# Bad: N+1
+User.all.each { |u| puts u.profile.bio }
+
+# Good: Eager load
+User.includes(:profile).each { |u| puts u.profile.bio }
+
+# Good: Batch iteration for large sets
+User.find_each(batch_size: 1000) { |u| process(u) }
+```
+
+## Memory
+
+- **Object allocation matters in hot paths.** Avoid creating large objects or long strings in loops. Reuse buffers or build incrementally where it helps.
+- **Frozen string literals** reduce allocations. Use `# frozen_string_literal: true` in new files.
+- **Large collections:** stream or batch. Don't load 100k records into memory if you can iterate in batches.
+- **Memory leaks:** long-lived references (e.g. global caches holding onto request objects) can leak. Profile memory over time under load.
+
+## Database
+
+- **Indexes:** ensure queries used in production use indexes. Explain plans and slow-query logs are your friends.
+- **Select only what you need:** `select(:id, :name)` instead of `SELECT *` when you don't need all columns.
+- **Avoid heavy work in loops:** one bulk update or bulk insert is better than N single-row operations when the DB supports it.
+- **Connection pool:** size appropriately for threads/processes. Too few connections = queueing; too many = DB overload.
+
+## Caching
+
+- **Cache at the right layer.** Fragment caching, Russian doll, low-level caching — use where it removes real work and stays invalidatable.
+- **Cache keys:** include everything that affects the result. Stale cache is a bug.
+- **Don't cache by default.** Add caching when metrics show a hotspot and you've defined invalidation and TTL.
+
+## Ruby-Level Optimizations
+
+- **Avoid unnecessary allocation in hot paths:** e.g. prefer `each` + side effect over `map` when you don't need a new array.
+- **Regex and string:** compile regexes outside loops (`CONSTANT = /\A...\z/`). Avoid repeated `split`/`gsub` on huge strings if you can scan once.
+- **C extensions and native gems:** use when profiling shows a Ruby-bound bottleneck and the team can maintain or trust the dependency. Don't optimize with C on a hunch.
+
+## Definition of Done (Performance)
+
+- [ ] New queries and loops checked for N+1s (Bullet or review).
+- [ ] Large iterations use `find_each`/`in_batches` or equivalent.
+- [ ] No optimization without measurement; hot paths aligned with production metrics.
+- [ ] Caching added only with clear invalidation and TTL.
+- [ ] No premature optimization; clarity first, then optimize where data says so.
+
+Consider these rules if they affect your changes.

@@ -1,0 +1,62 @@
+---
+description: Data Sources
+alwaysApply: false
+---
+
+# Data Sources
+
+Guidelines for source selection, credibility assessment, and data collection strategy.
+
+## Source Taxonomy
+
+```text
+Market Intelligence Sources
+├── Financial Data (stock prices, filings, earnings transcripts)
+├── News & Media (wire services, industry press, podcasts)
+├── Social & Sentiment (Twitter/X, Reddit, review platforms)
+├── Government & Regulatory (policy, patents, trade data)
+└── Alternative Data (satellite imagery, job postings, web traffic)
+```
+
+## Credibility Tiers
+
+| Tier | Source Type | Reliability | Use Case |
+|------|-----------|-------------|----------|
+| 1 | Official filings, central banks | Very High | Primary evidence |
+| 2 | Major wire services, Bloomberg | High | Breaking news, verification |
+| 3 | Industry analysts, trade publications | Medium-High | Context, expert opinion |
+| 4 | Social media, forums | Variable | Sentiment, early signals |
+| 5 | Anonymous tips, rumor channels | Low | Background only |
+
+## Source Evaluation Criteria
+
+Score each source on these dimensions (1-5):
+
+- **Track record accuracy**: How often has this source been correct?
+- **Editorial independence**: Is the source free from conflicts of interest?
+- **Timeliness**: How quickly does this source report developments?
+- **Domain expertise**: Does the source have deep knowledge in the relevant area?
+- **Transparency**: Does the source explain methodology and cite evidence?
+
+## Collection Best Practices
+
+- Define intelligence requirements before selecting sources
+- Diversify across source types, geographies, and perspectives
+- Set collection frequency based on signal velocity (real-time for markets, weekly for patents)
+- Automate collection where possible; reserve human analysis for interpretation
+- Deduplicate aggressively across feeds
+- Set expiration dates on collected data; stale intelligence misleads
+
+## Common Pitfalls
+
+### Source Monoculture
+
+Wrong: Rely exclusively on one data provider or news feed.
+
+Right: Maintain at least 3 independent source types per intelligence requirement.
+
+### Volume Over Quality
+
+Wrong: Collect everything available and filter later.
+
+Right: Define collection scope tightly. More data is not better data.
