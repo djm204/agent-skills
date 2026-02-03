@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.22.1](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.22.0...agentic-team-templates-v0.22.1) (2026-02-03)
+
+
+### Miscellaneous
+
+* **docs:** document .mdc format, front matter, and short focused rules ([#77](https://github.com/djm204/agentic-team-templates/issues/77)) ([1d5748e](https://github.com/djm204/agentic-team-templates/commit/1d5748ecdbba7e0fa4a5023332a702904d5fb4fa))
+* **rules:** add rules-creation-best-practices.mdc ([#79](https://github.com/djm204/agentic-team-templates/issues/79)) ([86f009a](https://github.com/djm204/agentic-team-templates/commit/86f009aa453260d613f1b805750f8b598787ebdb))
+
+
+### Documentation
+
+* **readme:** update rule file references from .md to .mdc ([3841c67](https://github.com/djm204/agentic-team-templates/commit/3841c6717d3bad607c6d89763e7595d739cbbd7d))
+
 ## [0.22.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.21.1...agentic-team-templates-v0.22.0) (2026-02-03)
 
 
