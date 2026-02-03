@@ -1,3 +1,15 @@
+---
+description: Deployment configuration - Cloudflare Pages, environment variables, CI/CD pipelines. Apply when modifying deployment or infrastructure files.
+globs:
+  - "wrangler.toml"
+  - ".github/workflows/**/*"
+  - "**/*.yml"
+  - "**/*.yaml"
+  - "Dockerfile*"
+  - "docker-compose*.yml"
+alwaysApply: false
+---
+
 # Deployment
 
 ## Cloudflare Pages Configuration

@@ -1,10 +1,16 @@
+---
+description: Git workflow practices - branching, commits, PRs, safety rules. Apply when performing git operations or reviewing version control decisions.
+globs:
+  - ".git/**/*"
+  - ".github/**/*"
+  - ".gitignore"
+  - ".gitattributes"
+alwaysApply: false
+---
+
 # Git Workflow
 
 Universal git practices for maintaining clean, traceable project history.
-
-**Note**: For comprehensive commit and PR standards including semantic versioning, see the main `.cursorrules` directory:
-- [Commit Standards](../../.cursorrules/commit-standards.md)
-- [PR Standards](../../.cursorrules/pr-standards.md)
 
 ## Commit Practices
 

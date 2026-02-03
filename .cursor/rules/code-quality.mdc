@@ -1,3 +1,8 @@
+---
+description: Code quality standards - SOLID principles, DRY, clean code practices, naming conventions, error handling, immutability. Apply to all code changes.
+alwaysApply: true
+---
+
 # Code Quality Standards
 
 Universal code quality principles applicable across all languages and frameworks.
@@ -7,7 +12,7 @@ Universal code quality principles applicable across all languages and frameworks
 ### Single Responsibility (S)
 One function, one job. One class, one purpose.
 
-```
+```typescript
 // Good
 function validateEmail(email: string): boolean { ... }
 function sendEmail(email: string, body: string): void { ... }
@@ -19,7 +24,7 @@ function validateAndSendEmail(email: string, body: string): boolean { ... }
 ### Open/Closed (O)
 Extend via composition, not modification.
 
-```
+```typescript
 // Good: Extend behavior through composition
 const enhancedLogger = compose(addTimestamp, addContext)(baseLogger);
 
@@ -38,7 +43,7 @@ Small, focused interfaces over large, general ones.
 ### Dependency Inversion (D)
 Depend on abstractions, not concrete implementations.
 
-```
+```typescript
 // Good: Inject dependencies
 function processOrder(orderRepo: OrderRepository) { ... }
 
@@ -62,7 +67,7 @@ function processOrder() { const repo = new MySQLOrderRepo(); ... }
 - Be consistent with naming conventions
 - Names should be searchable
 
-```
+```typescript
 // Good
 const maxConnectionRetries = 3;
 const userEmailAddress = getEmail(user);
@@ -79,7 +84,7 @@ const e = getE(u);
 - Avoid side effects when possible
 - Return early to reduce nesting
 
-```
+```typescript
 // Good: Return early
 function getDiscount(user) {
   if (!user) return 0;
@@ -104,7 +109,7 @@ function getDiscount(user) {
 - Delete commented-out code (that's what git is for)
 - Keep comments up-to-date or delete them
 
-```
+```typescript
 // Good: Explains why
 // Using retry logic because the external API is flaky during peak hours
 await retryWithBackoff(apiCall, 3);
@@ -121,7 +126,7 @@ counter++;
 - Fail fast with clear diagnostics
 - Handle errors at the appropriate level
 
-```
+```typescript
 // Good
 function parseConfig(path: string): Result<Config, ConfigError> {
   const content = readFile(path);
@@ -145,7 +150,7 @@ function parseConfig(path: string): Config | null {
 
 Prefer immutable data structures and pure functions.
 
-```
+```typescript
 // Good: Immutable update
 const updatedUser = { ...user, name: newName };
 

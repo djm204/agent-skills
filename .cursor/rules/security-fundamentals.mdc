@@ -1,3 +1,8 @@
+---
+description: Security fundamentals - zero trust, input validation, secrets management, OWASP top 10 prevention. Apply to all code handling user input, authentication, or sensitive data.
+alwaysApply: true
+---
+
 # Security Fundamentals
 
 Universal security practices applicable to all software development.
@@ -27,7 +32,7 @@ All external input must be validated:
 - Environment variables at startup
 - Configuration files
 
-```
+```typescript
 // Good: Validate at system boundaries
 function createUser(input: unknown): Result<User, ValidationError> {
   const parsed = UserSchema.safeParse(input);
@@ -55,13 +60,13 @@ Always sanitize data before rendering or returning:
 ### Injection (SQL, Command, etc.)
 
 ❌ **Vulnerable:**
-```
+```typescript
 const query = `SELECT * FROM users WHERE id = ${userId}`;
 exec(`convert ${filename} output.pdf`);
 ```
 
 ✅ **Secure:**
-```
+```typescript
 const query = 'SELECT * FROM users WHERE id = ?';
 db.query(query, [userId]);
 
@@ -72,12 +77,12 @@ execFile('convert', [sanitizedFilename, 'output.pdf']);
 ### Cross-Site Scripting (XSS)
 
 ❌ **Vulnerable:**
-```
+```typescript
 element.innerHTML = userInput;
 ```
 
 ✅ **Secure:**
-```
+```typescript
 element.textContent = userInput;
 // Or use a sanitization library for HTML
 element.innerHTML = DOMPurify.sanitize(userInput);
@@ -109,7 +114,7 @@ element.innerHTML = DOMPurify.sanitize(userInput);
 
 ### Environment Variables
 
-```
+```bash
 # .env.local (never committed)
 DATABASE_URL=postgres://...
 API_KEY=sk_live_...
@@ -130,7 +135,7 @@ API_KEY=your_api_key_here
 ### Don't Leak Information
 
 ❌ **Leaky:**
-```
+```typescript
 catch (e) {
   res.status(500).json({ error: e.stack });  // Reveals internals
 }
@@ -140,7 +145,7 @@ res.json({ error: 'Password incorrect for user admin' });  // Confirms username 
 ```
 
 ✅ **Secure:**
-```
+```typescript
 catch (e) {
   logger.error('Internal error', { error: e, requestId });
   res.status(500).json({ error: 'Internal server error', requestId });
