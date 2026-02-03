@@ -1,3 +1,8 @@
+---
+description: Common coding pitfalls to avoid - client-side trust, state mutation, error swallowing, skipping tests, using any type. Quick reference for code review.
+alwaysApply: true
+---
+
 # Common Pitfalls to Avoid
 
 ## 1. Trusting Client-Side Validation

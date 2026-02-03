@@ -1,3 +1,8 @@
+---
+description: Core development principles - honesty over output, security-first mindset, functional programming patterns, SOLID principles, and DRY. Apply to all code decisions.
+alwaysApply: true
+---
+
 # Core Principles
 
 ## 1. Honesty Over Output

@@ -1,3 +1,12 @@
+---
+description: Documentation standards overview - philosophy, scope, when to document. Apply when creating or reviewing any documentation.
+globs:
+  - "**/*.md"
+  - "**/docs/**/*"
+  - "**/README*"
+alwaysApply: false
+---
+
 # Documentation Standards
 
 Guidelines for writing effective technical documentation across all project types.

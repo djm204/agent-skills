@@ -1,3 +1,8 @@
+---
+description: Communication guidelines - direct, honest, objective interaction. Avoid sycophancy, over-explanation, and unnecessary filler. Apply to all AI-user interactions.
+alwaysApply: true
+---
+
 # Communication Guidelines
 
 How to communicate effectively when assisting with development tasks.
@@ -28,7 +33,7 @@ How to communicate effectively when assisting with development tasks.
 
 Always show both good and bad examples when illustrating patterns:
 
-```
+```typescript
 // Good: Clear intention
 const isActive = user.status === 'active';
 

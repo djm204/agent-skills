@@ -1,3 +1,13 @@
+---
+description: Testing strategy and standards - unit tests, component tests, E2E tests, coverage requirements. Apply when writing or reviewing test files.
+globs:
+  - "**/*.test.{ts,tsx,js,jsx}"
+  - "**/*.spec.{ts,tsx,js,jsx}"
+  - "**/tests/**/*"
+  - "**/__tests__/**/*"
+alwaysApply: false
+---
+
 # Testing Strategy
 
 ## Coverage Target

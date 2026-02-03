@@ -1,3 +1,8 @@
+---
+description: Monitoring and observability - error tracking, performance monitoring, logging structure. Apply when implementing observability features.
+alwaysApply: false
+---
+
 # Monitoring & Observability
 
 ## Error Tracking
