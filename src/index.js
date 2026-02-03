@@ -210,6 +210,11 @@ const TEMPLATES = {
     description: 'Supply chain optimization with disruption response, rerouting, inventory rebalancing, and scenario simulation',
     rules: ['disruption-response.mdc', 'inventory-rebalancing.mdc', 'overview.mdc', 'rerouting.mdc', 'scenario-simulation.mdc', 'stakeholder-notifications.mdc']
   },
+  'ruby-expert': {
+    category: 'languages',
+    description: 'Principal-level Ruby engineering (idioms, concurrency, Rails, performance, testing)',
+    rules: ['concurrency-and-threading.mdc', 'error-handling.mdc', 'idioms-and-style.mdc', 'overview.mdc', 'performance.mdc', 'rails-and-frameworks.mdc', 'testing.mdc', 'tooling.mdc']
+  },
   'rust-expert': {
     category: 'languages',
     description: 'Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async)',
@@ -279,6 +284,8 @@ const TEMPLATE_ALIASES = {
   'python': 'python-expert',
   'rs': 'rust-expert',
   'rust': 'rust-expert',
+  'ruby': 'ruby-expert',
+  'rb': 'ruby-expert',
   'swift': 'swift-expert',
   'kotlin': 'kotlin-expert',
   'kt': 'kotlin-expert',
@@ -420,6 +427,7 @@ ${colors.yellow('Shorthand Aliases:')}
   go, golang                     → golang-expert
   py, python                     → python-expert
   rs, rust                       → rust-expert
+  ruby, rb                       → ruby-expert
   swift                          → swift-expert
   kotlin, kt                     → kotlin-expert
   java                           → java-expert

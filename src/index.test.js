@@ -111,6 +111,7 @@ describe('Constants', () => {
         'qa-engineering',
         'regulatory-sentinel',
         'resource-allocator',
+        'ruby-expert',
         'rust-expert',
         'social-media-expert',
         'strategic-negotiator',
@@ -206,6 +207,8 @@ describe('Constants', () => {
       expect(TEMPLATE_ALIASES['go']).toBe('golang-expert');
       expect(TEMPLATE_ALIASES['py']).toBe('python-expert');
       expect(TEMPLATE_ALIASES['rs']).toBe('rust-expert');
+      expect(TEMPLATE_ALIASES['ruby']).toBe('ruby-expert');
+      expect(TEMPLATE_ALIASES['rb']).toBe('ruby-expert');
       expect(TEMPLATE_ALIASES['kt']).toBe('kotlin-expert');
     });
   });
@@ -218,6 +221,8 @@ describe('Constants', () => {
       expect(resolveTemplateAlias('golang')).toBe('golang-expert');
       expect(resolveTemplateAlias('py')).toBe('python-expert');
       expect(resolveTemplateAlias('rs')).toBe('rust-expert');
+      expect(resolveTemplateAlias('ruby')).toBe('ruby-expert');
+      expect(resolveTemplateAlias('rb')).toBe('ruby-expert');
       expect(resolveTemplateAlias('kotlin')).toBe('kotlin-expert');
       expect(resolveTemplateAlias('kt')).toBe('kotlin-expert');
     });

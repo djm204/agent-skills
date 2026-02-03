@@ -1,0 +1,60 @@
+---
+description: Ruby Expert — Rails and Frameworks
+alwaysApply: false
+---
+
+# Ruby Expert — Rails and Frameworks
+
+Principal-level Ruby: use Rails where it earns its keep, keep it out of your domain core, and know the production scars so you don't repeat them.
+
+## When to Use Rails
+
+- **Web apps, APIs, and admin UIs** that fit the Rails model: request/response, ActiveRecord, background jobs, asset pipeline. Convention over configuration pays off here.
+- **Prototypes and product discovery:** Rails is fast to ship. When the domain stabilizes, extract services and boundaries.
+- **Don't use Rails inside a plain Ruby gem** unless the gem is explicitly a Rails extension (engine, railtie). Keep dependencies minimal and framework-agnostic where possible.
+
+## Architecture Boundaries
+
+- **Controllers:** params, auth, render. No business logic. Call a service or command object; handle redirects and status codes.
+- **Models:** persistence, scopes, validations, and simple domain rules (e.g. "full name"). No HTTP, no external APIs, no "god" models that know everything.
+- **Services / use cases:** orchestration, multi-model operations, external calls. One entry point per use case; call from controllers or jobs.
+- **Jobs:** single responsibility, idempotent, pass ids or small payloads. No N+1s inside the job.
+
+## Conventions to Follow
+
+- **Routing and REST:** use resourceful routes and standard actions. Custom actions are fine when they're clearly named and documented.
+- **Migrations:** reversible when possible. No data migrations without a plan for backfill and rollback. Lock tables only when necessary and for as short a time as possible.
+- **Config:** use `Rails.application.config` and env. No hardcoded secrets or environment-specific logic in code paths that run in every env.
+- **Credentials and secrets:** use Rails credentials or env vars. Never commit secrets. Use different credentials per environment.
+
+## Conventions to Question
+
+- **"Fat model":** move complex logic to services, policies, or value objects. Models stay focused on persistence and simple invariants.
+- **Callbacks for side effects:** `after_save` that sends email or enqueues jobs can make control flow hard to follow and test. Prefer explicit calls in services or jobs.
+- **Global state:** `Current` or request-scoped attributes are OK when documented and thread-safe. Avoid `Thread.current[:foo]` for anything that isn't request-scoped and short-lived.
+- **Monkey-patching Rails:** avoid. If you must, do it in an initializer with a clear comment and ticket. Prefer composition (decorators, wrappers) or upstream patches.
+
+## Production Hardening
+
+- **Eager loading:** ensure `config.eager_load = true` in production. Lazy loading in production can cause thread-safety and load-order issues.
+- **Connection pools:** size DB and Redis pools for the number of threads/processes. Monitor connection usage.
+- **Logging:** use structured logging (e.g. lograge). Don't log huge payloads or secrets. Request id and key context in every log line.
+- **Error tracking:** configure Sentry (or similar) with sanitization. Report unhandled exceptions; avoid reporting expected validation or not-found cases as errors.
+- **Health checks:** `/up` or `/health` that checks DB (and critical external deps) without running full app stack. Use for load balancers and orchestrators.
+- **Graceful shutdown:** allow in-flight requests and jobs to finish; then exit. Configure Puma (or your server) and job backends for SIGTERM.
+
+## Upgrades and Deprecations
+
+- **Stay on supported Ruby and Rails versions.** Plan upgrades; test in staging; have a rollback plan.
+- **Address deprecation warnings** before they become errors. Run test suite and critical paths with deprecation logging enabled.
+- **Gems:** pin major versions; review release notes and changelogs. Prefer well-maintained gems with clear compatibility.
+
+## Definition of Done (Rails)
+
+- [ ] Controllers and models are thin; business logic lives in services or domain objects.
+- [ ] No business logic in callbacks that could live in a service or job.
+- [ ] Config and secrets use Rails credentials or env; no hardcoded secrets.
+- [ ] Production settings: eager load, connection pools, logging, and health checks are in place.
+- [ ] Deprecations are addressed; upgrade path is planned for EOL versions.
+
+Consider these rules if they affect your changes.

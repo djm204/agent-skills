@@ -1,0 +1,52 @@
+---
+description: Ruby Expert — Tooling
+alwaysApply: false
+---
+
+# Ruby Expert — Tooling
+
+Principal-level Ruby: consistent linting, reliable dependency and test runs, and tooling that catches real issues before production.
+
+## Linting and Formatting
+
+- **RuboCop** (or Standard Ruby, which is RuboCop with a default config): run in CI. No "we'll fix later" — fix or explicitly disable with a comment and reference (e.g. ticket).
+- **Format on save / pre-commit:** run formatter (e.g. `rubocop -a` or `standardrb --fix`) so style is consistent. Disable cops only when justified and documented.
+- **Custom cops:** add project-specific rules (naming, banned patterns) when they prevent known bugs or enforce team agreements.
+
+## Dependencies
+
+- **Bundler:** lockfile committed. Use `bundle install` in CI; `bundle check` or equivalent to ensure lockfile is in sync.
+- **Gem versions:** pin major (and minor when stability matters). Update dependencies in a dedicated pass; run full test suite and manual smoke after upgrades.
+- **Security:** run `bundle audit` (or `bundler-audit`) in CI. Fix or explicitly accept known vulnerabilities with a ticket and timeline.
+- **Minimal dependencies:** don't add a gem for one small use case if stdlib or a few lines of code will do. Dependencies are a liability (security, upgrades, behavior changes).
+
+## Testing in CI
+
+- **Run tests in CI on every push/PR.** RSpec: `bundle exec rspec`. Minitest: `bundle exec rails test` or `ruby -Itest test/**/*_test.rb`.
+- **Coverage:** track coverage; don't chase 100%. Focus on critical paths and new code. Use coverage to find gaps, not as a single metric.
+- **Parallel tests:** split test suite across workers when it's slow. Ensure DB and other shared resources are isolated (e.g. parallel test DBs, unique keys).
+- **No flaky tests in main.** Quarantine or fix. Re-run only when infrastructure is known to cause transient failures, and track rerun rate.
+
+## Debugging and Profiling
+
+- **`debug` (Ruby 3.2+)** or `binding.pry` / `byebug`: use for local debugging. Never leave a `binding.pry` in committed code; add a pre-commit or CI check.
+- **Stack traces:** read them. Ruby stack traces point to the call site; follow the chain. Know how to trace through blocks, metaprogramming, and Rails.
+- **Profiling:** `stackprof`, `memory_profiler`, `ruby-prof` for local or staging. Use APM in production for request/job traces and N+1 detection.
+- **Logging:** structured logs (JSON or key-value) with request id, user id (if safe), and relevant context. No secrets; redact or omit.
+
+## Local Development
+
+- **Ruby version:** use `.ruby-version` (and optionally rbenv/asdf). CI and production use the same major/minor.
+- **Env:** `.env` or similar for local secrets; never commit. Document required vars in `.env.example` or README.
+- **DB:** migrations run in order; seed data optional and documented. Use same DB engine as production in CI when practical (e.g. PostgreSQL everywhere).
+- **Pre-commit:** run linter and tests (or a fast subset). Keep hooks fast so they're not skipped.
+
+## Definition of Done (Tooling)
+
+- [ ] RuboCop (or chosen linter) passes in CI; no unexplained disables.
+- [ ] `bundle audit` (or equivalent) run in CI; vulnerabilities fixed or accepted with ticket.
+- [ ] Test suite runs in CI; no flaky tests on main.
+- [ ] No `binding.pry` or `debug` left in committed code.
+- [ ] Ruby version and critical env vars documented; CI matches production where it matters.
+
+Consider these rules if they affect your changes.

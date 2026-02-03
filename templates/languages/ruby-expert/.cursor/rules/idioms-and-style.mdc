@@ -1,0 +1,76 @@
+---
+description: Ruby Expert — Idioms and Style
+alwaysApply: false
+---
+
+# Ruby Expert — Idioms and Style
+
+Principal-level Ruby: idiomatic, readable, and maintainable. The "Ruby way" exists for a reason — use it unless you have a clear, documented reason not to.
+
+## Style and Consistency
+
+- **RuboCop (or equivalent) is the baseline.** Run it in CI. Fix or explicitly disable with a comment and ticket. "We'll fix it later" is how style debt becomes unmaintainable code.
+- **Frozen string literals** in new code: `# frozen_string_literal: true` at the top of files. Prevents accidental mutation and can reduce allocations.
+- **Naming:** `snake_case` for methods and variables, `CamelCase` for classes and modules. Constants `SCREAMING_SNAKE`. Predicates and booleans: `user.active?`, `valid?`.
+
+## Blocks and Iteration
+
+```ruby
+# Good: Block for single expression, do/end for multi-line
+users.each { |u| process(u) }
+users.each do |u|
+  validate(u)
+  process(u)
+end
+
+# Good: Enumerable over raw loops when it clarifies intent
+valid_users = users.select(&:active?).map(&:email)
+ids = records.map { |r| r.id }.uniq  # or records.pluck(:id).uniq in Rails
+
+# Bad: Loop that hides intent
+i = 0
+while i < arr.length
+  do_something(arr[i])
+  i += 1
+end
+```
+
+- Prefer `each`, `map`, `select`, `reduce` over `for` or manual index loops.
+- Use `&:method` only for simple, single-argument calls. For anything else, use a block.
+
+## Method Design
+
+- **Small, single-purpose methods.** If a method does three things, split it. Easier to test, name, and debug at 2 AM.
+- **Keyword arguments** for optional or many parameters: `def create_user(name:, email:, role: :member)`.
+- **Return early** to reduce nesting: guard clauses at the top, then the happy path.
+- **Predicate methods:** end with `?` and return truthy/falsy. Don't use `?` for methods that return non-boolean values.
+
+## Classes and Modules
+
+- **Composition over inheritance.** Prefer small modules and injected dependencies over deep hierarchies. "Favor composition over inheritance" is as true in Ruby as elsewhere.
+- **Modules for shared behavior:** use for mixins and namespacing. Don't use modules as god-objects.
+- **Struct and OpenStruct:** `Struct` for fixed, known attributes (and value objects). Avoid `OpenStruct` in hot paths and with untrusted input (memory and security).
+
+## Metaprogramming
+
+- **Use sparingly.** Prefer explicit methods and data structures when they're enough.
+- **When you do use it:** document intent, add tests that lock behavior, and ensure stack traces and debugging stay sane.
+- **Never** use `eval` or `send` with user-controlled input. Use safe reflection (e.g. `respond_to?`, whitelisted method names).
+- **`define_method` and `class_eval`:** fine for code generation (e.g. attribute accessors) when the pattern is clear and tested.
+
+## Rails Conventions (When in Rails)
+
+- **Fat model, skinny controller** is outdated. Prefer: skinny controller, skinny model, fat service/policy objects.
+- **Scopes over class methods** for query composition: `scope :active, -> { where(active: true) }`.
+- **Callbacks:** use for persistence lifecycle only (e.g. `after_commit`). Keep them short and free of side effects that belong in a job or service.
+- **Validations** on the model; business rules that involve multiple models or external calls go in services.
+
+## Anti-Patterns to Avoid
+
+- **Monkey-patching** core or stdlib without a gem namespace and clear documentation. Prefer composition or delegation.
+- **Mutable default arguments:** `def foo(bar = [])` — use `def foo(bar = nil); bar ||= []; end` or a default that's clearly immutable.
+- **Rescue without re-raise or log:** swallowing exceptions hides failures.
+- **Overuse of `try`/`&.`:** if nil is unexpected, let it blow up. Use safe navigation only where nil is a valid case.
+- **Global state:** avoid `$globals` and thread-unsafe class variables. Use configuration objects, dependency injection, or thread-local only when justified.
+
+Consider these rules if they affect your changes.

@@ -153,6 +153,7 @@ Use shorter names for common templates:
 | `go`, `golang` | `golang-expert` |
 | `py`, `python` | `python-expert` |
 | `rs`, `rust` | `rust-expert` |
+| `ruby`, `rb` | `ruby-expert` |
 | `swift` | `swift-expert` |
 | `kotlin`, `kt` | `kotlin-expert` |
 | `java` | `java-expert` |
@@ -185,7 +186,7 @@ Use shorter names for common templates:
 | `web-backend` | Backend APIs and services (REST, GraphQL, microservices) |
 | `web-frontend` | Frontend web applications (SPAs, SSR, static sites, PWAs) |
 
-### Languages (9)
+### Languages (10)
 
 | Template | Description |
 |----------|-------------|
@@ -196,6 +197,7 @@ Use shorter names for common templates:
 | `javascript-expert` | Principal-level JavaScript & TypeScript engineering (Node.js, React, type system, testing) |
 | `kotlin-expert` | Principal-level Kotlin engineering (coroutines, multiplatform, Ktor, Spring Boot, testing) |
 | `python-expert` | Principal-level Python engineering (type system, async, testing, FastAPI, Django) |
+| `ruby-expert` | Principal-level Ruby engineering (idioms, concurrency, Rails, performance, testing) |
 | `rust-expert` | Principal-level Rust engineering (ownership, concurrency, unsafe, traits, async) |
 | `swift-expert` | Principal-level Swift engineering (concurrency, SwiftUI, protocols, testing, Apple platforms) |
 

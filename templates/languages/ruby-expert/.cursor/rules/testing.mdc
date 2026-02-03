@@ -1,0 +1,56 @@
+---
+description: Ruby Expert — Testing
+alwaysApply: false
+---
+
+# Ruby Expert — Testing
+
+Principal-level Ruby: tests that catch real bugs, document behavior, and stay maintainable. No silent rescues, no testing implementation for the sake of it.
+
+## Choice of Framework
+
+- **RSpec or Minitest:** pick one per project and stick to it. Both are capable. Consistency matters more than which one.
+- **Factory Bot (or similar)** for building records. Keep factories simple; avoid deep associations and traits unless necessary. Prefer `build` over `create` when persistence isn't needed.
+- **Fixtures** are fine for small, stable reference data. Don't use them for complex or frequently changing setups if factories are clearer.
+
+## What to Test
+
+- **Behavior, not implementation.** Test inputs and outputs, side effects, and error cases. Avoid testing private methods or internal state unless they're the only way to assert important behavior.
+- **Critical paths:** integration or request specs for main user flows. Unit tests for services, validators, and pure logic.
+- **Edge cases:** nil, empty, invalid input, permission denied, external failure. One test per meaningful case; use parameterized tests or shared examples to avoid duplication.
+- **Don't test the framework.** Skip testing that Rails finds a record or that a gem does what its docs say. Test your code that uses them.
+
+## Structure and Naming
+
+- **Arrange–Act–Assert** (or Given–When–Then). One logical assertion per test when possible; multiple assertions for one behavior are fine.
+- **Descriptive names:** `it "returns 404 when user does not exist"` not `it "works"`. Names should survive as documentation.
+- **Shared examples and contexts** for common setups (e.g. "when user is unauthenticated"). Don't over-nest; two levels of context is usually enough.
+
+## Mocks and Stubs
+
+- **Use sparingly.** Prefer real objects or small test doubles. Over-mocking ties tests to implementation and makes refactors painful.
+- **Stub at boundaries:** external APIs, time, file system. Use `allow`/`expect` (RSpec) or Minitest stubs with clear scope.
+- **Never stub the subject under test** in a way that makes the test tautological (e.g. stubbing the method you're testing).
+- **Prefer dependency injection** so tests can pass in fakes or doubles without metaprogramming.
+
+## Database and Jobs
+
+- **Transactional tests** (Rails): default for speed. For job tests, use `perform_enqueued_jobs` or run jobs inline in tests so side effects are visible.
+- **Clean state:** truncate or use transactions so tests don't depend on order. No "test B only passes if test A ran first."
+- **Idempotent jobs:** test that running the job twice has the same effect as running it once (or the documented behavior).
+
+## Failure and Debugging
+
+- **No rescuing exceptions in tests** without re-raising or asserting. Hiding failures makes green tests meaningless.
+- **One failing test per bug.** When fixing a regression, add a test that fails before the fix and passes after. Keep it.
+- **Flaky tests:** fix or quarantine. Flaky tests get disabled and then forgotten; eliminate the cause or remove the test.
+
+## Definition of Done (Testing)
+
+- [ ] New behavior has tests; bug fixes have regression tests.
+- [ ] Tests are deterministic (no sleep, no order dependence, no unisolated global state).
+- [ ] No silent rescue in tests; failures are visible.
+- [ ] Mocks/stubs only at boundaries; subject under test is real.
+- [ ] Names and structure make failures easy to diagnose.
+
+Consider these rules if they affect your changes.
