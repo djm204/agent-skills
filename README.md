@@ -254,22 +254,22 @@ Every template installation includes these foundational rules:
 
 | File | Description |
 |------|-------------|
-| `core-principles.md` | Honesty, simplicity, testing requirements |
-| `code-quality.md` | SOLID, DRY, clean code patterns |
-| `security-fundamentals.md` | Zero trust, input validation, secrets management |
-| `git-workflow.md` | Commits, branches, PRs, safety protocols |
-| `communication.md` | Direct, objective, professional communication |
+| `core-principles.mdc` | Honesty, simplicity, testing requirements |
+| `code-quality.mdc` | SOLID, DRY, clean code patterns |
+| `security-fundamentals.mdc` | Zero trust, input validation, secrets management |
+| `git-workflow.mdc` | Commits, branches, PRs, safety protocols |
+| `communication.mdc` | Direct, objective, professional communication |
 
 ### Template-Specific Rules
 
 Each template adds domain-specific rules. For example, `web-frontend` includes:
 
-- `accessibility.md` - WCAG compliance, ARIA patterns
-- `component-patterns.md` - React/Vue/Svelte best practices
-- `performance.md` - Core Web Vitals, optimization
-- `state-management.md` - State patterns, data flow
-- `styling.md` - CSS architecture, design systems
-- `testing.md` - Unit, integration, E2E testing
+- `accessibility.mdc` - WCAG compliance, ARIA patterns
+- `component-patterns.mdc` - React/Vue/Svelte best practices
+- `performance.mdc` - Core Web Vitals, optimization
+- `state-management.mdc` - State patterns, data flow
+- `styling.mdc` - CSS architecture, design systems
+- `testing.mdc` - Unit, integration, E2E testing
 
 ## File Structure
 
@@ -280,18 +280,18 @@ your-project/
 ├── CLAUDE.md                              # Development guide (Claude Code, Cursor)
 ├── .cursor/
 │   └── rules/                             # Rule files (Cursor IDE)
-│       ├── core-principles.md                 # Shared
-│       ├── code-quality.md                    # Shared
-│       ├── security-fundamentals.md           # Shared
-│       ├── git-workflow.md                    # Shared
-│       ├── communication.md                   # Shared
-│       ├── web-frontend-overview.md           # Template-specific
-│       ├── web-frontend-accessibility.md      # Template-specific
-│       ├── web-frontend-component-patterns.md # Template-specific
-│       ├── web-frontend-performance.md        # Template-specific
-│       ├── web-frontend-state-management.md   # Template-specific
-│       ├── web-frontend-styling.md            # Template-specific
-│       └── web-frontend-testing.md            # Template-specific
+│       ├── core-principles.mdc                 # Shared
+│       ├── code-quality.mdc                    # Shared
+│       ├── security-fundamentals.mdc           # Shared
+│       ├── git-workflow.mdc                    # Shared
+│       ├── communication.mdc                   # Shared
+│       ├── web-frontend-overview.mdc           # Template-specific
+│       ├── web-frontend-accessibility.mdc      # Template-specific
+│       ├── web-frontend-component-patterns.mdc # Template-specific
+│       ├── web-frontend-performance.mdc        # Template-specific
+│       ├── web-frontend-state-management.mdc   # Template-specific
+│       ├── web-frontend-styling.mdc            # Template-specific
+│       └── web-frontend-testing.mdc            # Template-specific
 └── .github/
     └── copilot-instructions.md            # Instructions (GitHub Copilot)
 ```
@@ -300,10 +300,10 @@ your-project/
 
 ### Add Project-Specific Rules
 
-Create new `.md` files in `.cursor/rules/`:
+Create new `.mdc` files in `.cursor/rules/`:
 
 ```markdown
-# my-project-conventions.md
+# my-project-conventions.mdc
 
 ## API Endpoints
 
@@ -316,7 +316,7 @@ Edit any file in `.cursor/rules/` or `CLAUDE.md` directly. Changes take effect i
 
 ### Combine with Existing Rules
 
-Templates merge with your existing `.cursor/rules/` directory. Existing files are preserved unless they have the same name.
+Templates merge with your existing `.cursor/rules/` directory. Rule files are installed as `.mdc` (Cursor MDC format with frontmatter). Existing files are preserved unless they have the same name.
 
 ### Migrating from `.cursorrules/`
 
@@ -436,9 +436,9 @@ We welcome contributions! Here's how to add new templates or improve existing on
 templates/<category>/your-template/
 └── .cursor/
     └── rules/
-        ├── overview.md           # Scope and core principles (required)
-        ├── topic-one.md          # Domain-specific rules
-        ├── topic-two.md
+        ├── overview.mdc          # Scope and core principles (required)
+        ├── topic-one.mdc         # Domain-specific rules
+        ├── topic-two.mdc
         └── ...
 ```
 
@@ -451,7 +451,7 @@ Categories: `engineering`, `languages`, `creative`, `business`, `professional`, 
    - Add "Common Pitfalls" and "Definition of Done" sections
 
 3. **Required files:**
-   - `.cursor/rules/overview.md` - Scope, core principles, and project structure
+   - `.cursor/rules/overview.mdc` - Scope, core principles, and project structure
    - Add a `category` field to the template entry in `src/index.js`
 
 ### Template Guidelines
@@ -492,11 +492,11 @@ Categories: `engineering`, `languages`, `creative`, `business`, `professional`, 
 
 The `templates/_shared/` directory contains rules included with every template:
 
-- `core-principles.md` - Universal development principles
-- `code-quality.md` - Clean code patterns
-- `security-fundamentals.md` - Security basics
-- `git-workflow.md` - Git conventions
-- `communication.md` - AI communication style
+- `core-principles.mdc` - Universal development principles
+- `code-quality.mdc` - Clean code patterns
+- `security-fundamentals.mdc` - Security basics
+- `git-workflow.mdc` - Git conventions
+- `communication.mdc` - AI communication style
 
 Changes to shared rules affect all templates, so be thoughtful with modifications.
 
