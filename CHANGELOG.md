@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.23.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.22.2...agentic-team-templates-v0.23.0) (2026-02-04)
+
+
+### Features
+
+* **cli:** add logical shorthand aliases for templates ([#84](https://github.com/djm204/agentic-team-templates/issues/84)) ([9e6cbbf](https://github.com/djm204/agentic-team-templates/commit/9e6cbbf214e8d8f4d8c46230d76af46534a344e4))
+* **languages:** add Ruby expert template ([#83](https://github.com/djm204/agentic-team-templates/issues/83)) ([31672ee](https://github.com/djm204/agentic-team-templates/commit/31672eec1f341c378fe95953a34cd1a78dedb6b7))
+* **templates:** add research-assistant template ([#82](https://github.com/djm204/agentic-team-templates/issues/82)) ([c8e5440](https://github.com/djm204/agentic-team-templates/commit/c8e544075444e7d121cfa247f2a581da7a65121f))
+
 ## [0.22.2](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.22.1...agentic-team-templates-v0.22.2) (2026-02-03)
 
 
