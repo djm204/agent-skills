@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.1](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.23.0...agentic-team-templates-v0.23.1) (2026-02-08)
+
+
+### Refactoring
+
+* condense rules to 100 lines and optimize output generation ([#86](https://github.com/djm204/agentic-team-templates/issues/86)) ([c6d9678](https://github.com/djm204/agentic-team-templates/commit/c6d96781d6d20bfb07e23c3ed95215ac4894584a))
+
 ## [0.23.0](https://github.com/djm204/agentic-team-templates/compare/agentic-team-templates-v0.22.2...agentic-team-templates-v0.23.0) (2026-02-04)
 
 
