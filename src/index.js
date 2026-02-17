@@ -19,7 +19,7 @@ const packageJsonPath = path.join(__dirname, '..', 'package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 const PACKAGE_NAME = packageJson.name;
 const CURRENT_VERSION = packageJson.version;
-const REPO_URL = 'https://github.com/djm204/agentic-team-templates';
+const REPO_URL = 'https://github.com/djm204/agent-skills';
 const CHANGELOG_URL = `${REPO_URL}/releases/tag/${PACKAGE_NAME}-v${CURRENT_VERSION}`;
 
 // Template categories (storage-only, not exposed to CLI users)
@@ -466,16 +466,16 @@ async function checkForUpdates() {
 function printBanner() {
   console.log(colors.blue(`
 ╔═══════════════════════════════════════════════════════════╗
-║           Agentic Team Templates Installer                ║
+║              Agent Skills Installer                       ║
 ╚═══════════════════════════════════════════════════════════╝
 `));
 }
 
 function printHelp() {
   console.log(`${colors.yellow('Usage:')}
-  npx cursor-templates <templates...> [options]
-  npx cursor-templates --remove <templates...> [options]
-  npx cursor-templates --reset [options]
+  npx @djm204/agent-skills <templates...> [options]
+  npx @djm204/agent-skills --remove <templates...> [options]
+  npx @djm204/agent-skills --reset [options]
 
 ${colors.yellow('Options:')}
   --ide=<name>   Install for specific IDE (cursor, claude, codex)
@@ -508,20 +508,20 @@ ${colors.yellow('Shorthand Aliases:')}
   Run --list to see full alias → template mapping.
 
 ${colors.yellow('Examples:')}
-  npx cursor-templates js
-  npx cursor-templates web-frontend
-  npx cursor-templates web-frontend --ide=cursor
-  npx cursor-templates web-frontend --ide=claude --ide=codex
-  npx cursor-templates fullstack --ide=codex
-  npx cursor-templates web-backend --force
+  npx @djm204/agent-skills js
+  npx @djm204/agent-skills web-frontend
+  npx @djm204/agent-skills web-frontend --ide=cursor
+  npx @djm204/agent-skills web-frontend --ide=claude --ide=codex
+  npx @djm204/agent-skills fullstack --ide=codex
+  npx @djm204/agent-skills web-backend --force
 
 ${colors.yellow('Removal Examples:')}
-  npx cursor-templates --remove web-frontend
-  npx cursor-templates --remove web-frontend web-backend
-  npx cursor-templates --remove web-frontend --ide=cursor
-  npx cursor-templates --reset
-  npx cursor-templates --reset --ide=cursor
-  npx cursor-templates --reset --yes
+  npx @djm204/agent-skills --remove web-frontend
+  npx @djm204/agent-skills --remove web-frontend web-backend
+  npx @djm204/agent-skills --remove web-frontend --ide=cursor
+  npx @djm204/agent-skills --reset
+  npx @djm204/agent-skills --reset --ide=cursor
+  npx @djm204/agent-skills --reset --yes
 
 ${colors.dim('Shared rules (code-quality, security, git-workflow, etc.) are always included.')}
 ${colors.dim('Identical files are skipped. Modified files are preserved; ours saved as *-1.mdc.')}
@@ -849,7 +849,7 @@ ${templateRuleTables}
 
 - Create new \`.mdc\` files in \`.cursor/rules/\` for project-specific rules
 - Edit existing files directly; changes take effect immediately
-- Re-run to update: \`npx cursor-templates ${installedTemplates.join(' ')}\`
+- Re-run to update: \`npx @djm204/agent-skills ${installedTemplates.join(' ')}\`
 `;
 }
 
@@ -1732,7 +1732,7 @@ export async function run(args) {
   if (removeMode) {
     if (resolvedTemplates.length === 0) {
       console.error(colors.red('Error: No templates specified for removal\n'));
-      console.error(colors.dim('Usage: npx cursor-templates --remove <templates...>\n'));
+      console.error(colors.dim('Usage: npx @djm204/agent-skills --remove <templates...>\n'));
       printTemplates();
       process.exit(1);
     }
