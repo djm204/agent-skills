@@ -43,7 +43,7 @@ Convert installed template rule files from `.md` to `.mdc` with proper Cursor fr
 ## Impact
 
 - **New installs**: Users get `.mdc` rules in `.cursor/rules/` with frontmatter.
-- **Existing installs**: Users who already have template rules will keep their current `.md` files until they re-run the installer (e.g. `npx agentic-team-templates <template>`) or remove and re-add templates; then they’ll receive `.mdc` copies.
+- **Existing installs**: Users who already have template rules will keep their current `.md` files until they re-run the installer (e.g. `npx @djm204/agent-skills <template>`) or remove and re-add templates; then they’ll receive `.mdc` copies.
 - **No breaking API change**: CLI usage and template names are unchanged.
 
 ## Checklist

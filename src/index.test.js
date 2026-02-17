@@ -39,7 +39,7 @@ const {
 
 describe('Package Info', () => {
   it('should have a valid package name', () => {
-    expect(PACKAGE_NAME).toBe('agentic-team-templates');
+    expect(PACKAGE_NAME).toBe('@djm204/agent-skills');
   });
 
   it('should have a valid semver version', () => {
@@ -281,7 +281,7 @@ describe('Utility Functions', () => {
     let tempDir;
     
     beforeEach(() => {
-      tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cursor-templates-test-'));
+      tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-skills-test-'));
     });
     
     afterEach(() => {
@@ -323,7 +323,7 @@ describe('Utility Functions', () => {
     let tempDir;
     
     beforeEach(() => {
-      tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cursor-templates-test-'));
+      tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-skills-test-'));
     });
     
     afterEach(() => {
@@ -624,7 +624,7 @@ describe('Content Generation', () => {
       
       expect(content).toContain('Customization');
       expect(content).toContain('.mdc');
-      expect(content).toContain('npx cursor-templates');
+      expect(content).toContain('npx @djm204/agent-skills');
     });
 
     it('should not include duplicated principles or definition of done', () => {
@@ -679,7 +679,7 @@ describe('File Operations', () => {
   let tempDir;
   
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cursor-templates-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-skills-test-'));
   });
   
   afterEach(() => {
@@ -768,7 +768,7 @@ describe('Install/Remove/Reset Operations', () => {
   let consoleLogSpy;
   
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cursor-templates-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-skills-test-'));
     originalCwd = process.cwd();
     // Suppress console output during tests
     consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
@@ -1051,7 +1051,7 @@ describe('CLI Argument Parsing', () => {
   let consoleErrorSpy;
   
   beforeEach(() => {
-    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'cursor-templates-test-'));
+    tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'agent-skills-test-'));
     originalCwd = process.cwd();
     process.chdir(tempDir);
     
@@ -1099,14 +1099,14 @@ describe('CLI Argument Parsing', () => {
     await expect(run(['--version'])).rejects.toThrow('process.exit');
     
     expect(exitSpy).toHaveBeenCalledWith(0);
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('agentic-team-templates'));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('@djm204/agent-skills'));
   });
 
   it('should show version with -v', async () => {
     await expect(run(['-v'])).rejects.toThrow('process.exit');
     
     expect(exitSpy).toHaveBeenCalledWith(0);
-    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('agentic-team-templates'));
+    expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('@djm204/agent-skills'));
   });
 
   it('should show changelog link with --version', async () => {

@@ -1,6 +1,6 @@
 # Testing Strategy
 
-Reference for testing in agentic-team-templates. Read when writing or modifying tests.
+Reference for testing in @djm204/agent-skills. Read when writing or modifying tests.
 
 ## Framework
 

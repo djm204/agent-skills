@@ -1,6 +1,6 @@
 # Tech Stack
 
-Reference for agentic-team-templates development. Read when needing version or tool specifics.
+Reference for @djm204/agent-skills development. Read when needing version or tool specifics.
 
 ## Core
 
