@@ -1,6 +1,6 @@
 # Security Requirements
 
-Reference for security in agentic-team-templates. Read when handling user input or external data.
+Reference for security in @djm204/agent-skills. Read when handling user input or external data.
 
 ## Principles
 

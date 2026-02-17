@@ -37,7 +37,7 @@
 
 ## Project Overview
 
-**agentic-team-templates** — CLI that installs AI assistant rules (Cursor, Claude, Copilot) into projects. Node.js, Vitest, release-please.
+**@djm204/agent-skills** — CLI that installs AI assistant rules (Cursor, Claude, Copilot) into projects. Node.js, Vitest, release-please.
 
 ### Key Paths
 

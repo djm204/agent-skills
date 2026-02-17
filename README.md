@@ -1,6 +1,6 @@
-# agentic-team-templates
+# @djm204/agent-skills
 
-[![npm version](https://img.shields.io/npm/v/agentic-team-templates.svg)](https://www.npmjs.com/package/agentic-team-templates)
+[![npm version](https://img.shields.io/npm/v/@djm204/agent-skills.svg)](https://www.npmjs.com/package/@djm204/agent-skills)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 **Compatible with:**
@@ -24,14 +24,14 @@ AI coding assistant templates for Cursor IDE, Claude Code, and GitHub Copilot. P
 No installation required. Run directly with `npx`:
 
 ```bash
-npx agentic-team-templates [template-name]
+npx @djm204/agent-skills [template-name]
 ```
 
 Or install globally:
 
 ```bash
-npm install -g agentic-team-templates
-agentic-team-templates [template-name]
+npm install -g @djm204/agent-skills
+agent-skills [template-name]
 ```
 
 ## How to Use
@@ -41,7 +41,7 @@ agentic-team-templates [template-name]
 Navigate to your project directory and run:
 
 ```bash
-npx agentic-team-templates web-frontend
+npx @djm204/agent-skills web-frontend
 ```
 
 This installs the template rules in your project directory.
@@ -51,13 +51,13 @@ This installs the template rules in your project directory.
 Combine templates for projects that span multiple domains:
 
 ```bash
-npx agentic-team-templates web-frontend web-backend
+npx @djm204/agent-skills web-frontend web-backend
 ```
 
 ### List All Available Templates
 
 ```bash
-npx agentic-team-templates --list
+npx @djm204/agent-skills --list
 ```
 
 ### Preview Before Installing (Dry Run)
@@ -65,7 +65,7 @@ npx agentic-team-templates --list
 See what files will be created without making changes:
 
 ```bash
-npx agentic-team-templates web-frontend --dry-run
+npx @djm204/agent-skills web-frontend --dry-run
 ```
 
 ### Update to Latest Rules
@@ -73,7 +73,7 @@ npx agentic-team-templates web-frontend --dry-run
 Re-run with `@latest` to get updated templates:
 
 ```bash
-npx agentic-team-templates@latest web-frontend
+npx @djm204/agent-skills@latest web-frontend
 ```
 
 ### Install for Specific IDE
@@ -82,16 +82,16 @@ By default, templates install for all supported IDEs (Cursor, Claude, Copilot). 
 
 ```bash
 # Install only for Cursor IDE
-npx agentic-team-templates web-frontend --ide=cursor
+npx @djm204/agent-skills web-frontend --ide=cursor
 
 # Install only for Claude Code
-npx agentic-team-templates web-frontend --ide=claude
+npx @djm204/agent-skills web-frontend --ide=claude
 
 # Install only for GitHub Copilot
-npx agentic-team-templates web-frontend --ide=codex
+npx @djm204/agent-skills web-frontend --ide=codex
 
 # Install for multiple IDEs
-npx agentic-team-templates web-frontend --ide=cursor --ide=codex
+npx @djm204/agent-skills web-frontend --ide=cursor --ide=codex
 ```
 
 ### Remove Specific Templates
@@ -100,16 +100,16 @@ Remove templates you no longer need while keeping shared rules and other templat
 
 ```bash
 # Remove a single template
-npx agentic-team-templates --remove web-frontend
+npx @djm204/agent-skills --remove web-frontend
 
 # Remove multiple templates
-npx agentic-team-templates --remove web-frontend web-backend
+npx @djm204/agent-skills --remove web-frontend web-backend
 
 # Remove from specific IDE only
-npx agentic-team-templates --remove web-frontend --ide=cursor
+npx @djm204/agent-skills --remove web-frontend --ide=cursor
 
 # Skip confirmation prompt
-npx agentic-team-templates --remove web-frontend --yes
+npx @djm204/agent-skills --remove web-frontend --yes
 ```
 
 ### Reset (Remove Everything)
@@ -118,16 +118,16 @@ Remove all installed content (shared rules, templates, generated files):
 
 ```bash
 # Reset all installed content
-npx agentic-team-templates --reset
+npx @djm204/agent-skills --reset
 
 # Reset for specific IDE only
-npx agentic-team-templates --reset --ide=cursor
+npx @djm204/agent-skills --reset --ide=cursor
 
 # Skip confirmation prompt
-npx agentic-team-templates --reset --yes
+npx @djm204/agent-skills --reset --yes
 
 # Force remove modified files
-npx agentic-team-templates --reset --force
+npx @djm204/agent-skills --reset --force
 ```
 
 ### CLI Options
@@ -145,7 +145,7 @@ npx agentic-team-templates --reset --force
 
 ### Shorthand Aliases
 
-You can use short names instead of full template names for both install and remove (`--remove <alias>`). Run `npx agentic-team-templates --list` to see aliases next to each template.
+You can use short names instead of full template names for both install and remove (`--remove <alias>`). Run `npx @djm204/agent-skills --list` to see aliases next to each template.
 
 **Languages**
 
@@ -339,7 +339,7 @@ All rule files use the **`.mdc`** extension (Cursor MDC format). Templates were 
 
 ## File Structure
 
-After running `npx agentic-team-templates web-frontend`:
+After running `npx @djm204/agent-skills web-frontend`:
 
 ```text
 your-project/
@@ -400,9 +400,9 @@ If your project uses the older `.cursorrules/` directory, the installer will det
 ```bash
 mkdir my-react-app && cd my-react-app
 npm create vite@latest . -- --template react-ts
-npx agentic-team-templates web-frontend
+npx @djm204/agent-skills web-frontend
 # or use shorthand:
-npx agentic-team-templates frontend
+npx @djm204/agent-skills frontend
 ```
 
 ### Full-Stack Next.js Project
@@ -410,45 +410,45 @@ npx agentic-team-templates frontend
 ```bash
 npx create-next-app@latest my-app
 cd my-app
-npx agentic-team-templates fullstack
+npx @djm204/agent-skills fullstack
 ```
 
 ### Microservices Backend
 
 ```bash
 cd my-api-service
-npx agentic-team-templates web-backend devops-sre
+npx @djm204/agent-skills web-backend devops-sre
 # or use shorthands:
-npx agentic-team-templates backend devops
+npx @djm204/agent-skills backend devops
 ```
 
 ### ML/AI Project
 
 ```bash
 cd my-ml-project
-npx agentic-team-templates ml-ai data-engineering
+npx @djm204/agent-skills ml-ai data-engineering
 # or use shorthands:
-npx agentic-team-templates ml data
+npx @djm204/agent-skills ml data
 ```
 
 ### Unity Game Project
 
 ```bash
 cd my-unity-game
-npx agentic-team-templates unity
+npx @djm204/agent-skills unity
 ```
 
 ### Marketing Team
 
 ```bash
 cd marketing-workspace
-npx agentic-team-templates marketing social-media content-creation
+npx @djm204/agent-skills marketing social-media content-creation
 ```
 
 ### Docs and research
 
 ```bash
-npx agentic-team-templates docs research
+npx @djm204/agent-skills docs research
 ```
 
 ## Requirements
@@ -467,7 +467,7 @@ If you're getting errors for options that should exist (like `--reset`), you may
 
 ```bash
 # Force latest version (recommended)
-npx agentic-team-templates@latest [command]
+npx @djm204/agent-skills@latest [command]
 
 # Clear npx cache
 npx clear-npx-cache
@@ -481,20 +481,20 @@ npm cache clean --force
 Check which version you're running:
 
 ```bash
-npx agentic-team-templates --version
+npx @djm204/agent-skills --version
 ```
 
 Output:
 
 ```text
-agentic-team-templates v0.7.0
-Changelog: https://github.com/djm204/agentic-team-templates/releases/tag/agentic-team-templates-v0.7.0
+@djm204/agent-skills v1.0.0
+Changelog: https://github.com/djm204/agent-skills/releases/tag/@djm204/agent-skills-v1.0.0
 ```
 
 Or use `--help` which also checks for updates:
 
 ```bash
-npx agentic-team-templates@latest --help
+npx @djm204/agent-skills@latest --help
 ```
 
 The CLI will notify you if a newer version is available.
@@ -504,7 +504,7 @@ The CLI will notify you if a newer version is available.
 If installed globally:
 
 ```bash
-npm update -g agentic-team-templates
+npm update -g @djm204/agent-skills
 ```
 
 ## How to Contribute
