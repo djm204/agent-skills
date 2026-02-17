@@ -10,7 +10,7 @@ alwaysApply: false
 # Project Structure
 
 ```
-agentic-team-templates/
+agent-skills/
 ├── bin/
 │   └── cli.js                          # CLI entry point
 ├── src/

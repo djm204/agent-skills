@@ -175,7 +175,7 @@ Affected functions: `install()`, `remove()`, `reset()`, `generateCopilotInstruct
 
 ### 3. CLI interface unchanged
 
-- `npx agentic-team-templates web-frontend` still works
+- `npx @djm204/agent-skills web-frontend` still works
 - `--list` still shows a flat list (optionally grouped by category in display)
 - Aliases unchanged
 - `--ide`, `--remove`, `--reset` unchanged

@@ -1,11 +1,11 @@
 ---
-description: Project overview and critical requirements - agentic-team-templates CLI, template structure. Reference for understanding project context.
+description: Project overview and critical requirements - @djm204/agent-skills CLI, template structure. Reference for understanding project context.
 alwaysApply: false
 ---
 
 # Project Overview
 
-**agentic-team-templates** — CLI that installs AI assistant rules (Cursor, Claude, Copilot) into projects.
+**@djm204/agent-skills** — CLI that installs AI assistant rules (Cursor, Claude, Copilot) into projects.
 
 ## Key Facts
 
