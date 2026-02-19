@@ -255,4 +255,54 @@ describe('loadSkill', () => {
     expect(skill.tools).toHaveLength(1);
     expect(skill.tools[0].name).toBe('web_search');
   });
+
+  // --------------------------------------------------------------------------
+  // Fragment resolution
+  // --------------------------------------------------------------------------
+
+  it('resolves {{fragment:name}} references in prompts when fragmentsDir is provided', async () => {
+    const skillDir = path.join(tmpDir, 'fragment-skill');
+    const fragDir = path.join(tmpDir, 'fragments');
+    fs.mkdirSync(fragDir, { recursive: true });
+    fs.writeFileSync(path.join(fragDir, 'ethics.md'), 'Always be ethical.');
+
+    createSkillFixture(skillDir, VALID_MANIFEST, {
+      'standard.md': 'Standard prompt.\n{{fragment:ethics}}',
+    });
+
+    const skill = await loadSkill(skillDir, { fragmentsDir: fragDir });
+
+    expect(skill.prompts.standard).toContain('Always be ethical.');
+    expect(skill.prompts.standard).not.toContain('{{fragment:ethics}}');
+  });
+
+  it('leaves prompts unchanged when fragmentsDir is not provided', async () => {
+    const skillDir = path.join(tmpDir, 'no-frag-skill');
+    createSkillFixture(skillDir, VALID_MANIFEST, {
+      'standard.md': 'Standard prompt.\n{{fragment:ethics}}',
+    });
+
+    const skill = await loadSkill(skillDir);
+
+    expect(skill.prompts.standard).toContain('{{fragment:ethics}}');
+  });
+
+  it('resolves fragments in all tiers when fragmentsDir is provided', async () => {
+    const skillDir = path.join(tmpDir, 'multi-tier-frag-skill');
+    const fragDir = path.join(tmpDir, 'fragments');
+    fs.mkdirSync(fragDir, { recursive: true });
+    fs.writeFileSync(path.join(fragDir, 'footer.md'), 'Footer content.');
+
+    createSkillFixture(skillDir, VALID_MANIFEST, {
+      'minimal.md': 'Minimal.\n{{fragment:footer}}',
+      'standard.md': 'Standard.\n{{fragment:footer}}',
+      'comprehensive.md': 'Comprehensive.\n{{fragment:footer}}',
+    });
+
+    const skill = await loadSkill(skillDir, { fragmentsDir: fragDir });
+
+    expect(skill.prompts.minimal).toContain('Footer content.');
+    expect(skill.prompts.standard).toContain('Footer content.');
+    expect(skill.prompts.comprehensive).toContain('Footer content.');
+  });
 });
