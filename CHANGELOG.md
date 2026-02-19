@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.2.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.1.0...agent-skills-v1.2.0) (2026-02-19)
+
+
+### Features
+
+* add 5 more skill packs (blockchain, web-backend, research-assistant, executive-assistant, product-manager) ([#101](https://github.com/djm204/agent-skills/issues/101)) ([8ee7ad3](https://github.com/djm204/agent-skills/commit/8ee7ad3e3c788fc1311561a0bfd879e1af4cd332))
+* composition engine for multi-skill token-budget-aware merging ([#99](https://github.com/djm204/agent-skills/issues/99)) ([66a5ff6](https://github.com/djm204/agent-skills/commit/66a5ff666f188d475ab77e07cf76c662bde26193))
+* openai-agents, langchain, crewai framework adapters ([#100](https://github.com/djm204/agent-skills/issues/100)) ([9f6d4ce](https://github.com/djm204/agent-skills/commit/9f6d4ce2967683fa81b60300efe62e3d552ae8f2)), closes [#91](https://github.com/djm204/agent-skills/issues/91)
+
 ## [1.1.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.0.0...agent-skills-v1.1.0) (2026-02-19)
 
 
