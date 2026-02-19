@@ -255,4 +255,85 @@ describe('loadSkill', () => {
     expect(skill.tools).toHaveLength(1);
     expect(skill.tools[0].name).toBe('web_search');
   });
+
+  // --------------------------------------------------------------------------
+  // Output schema loading
+  // --------------------------------------------------------------------------
+
+  it('includes output_schemas array (empty when no output_schemas/ dir)', async () => {
+    const skillDir = path.join(tmpDir, 'test-skill');
+    createSkillFixture(skillDir);
+
+    const skill = await loadSkill(skillDir);
+
+    expect(Array.isArray(skill.output_schemas)).toBe(true);
+    expect(skill.output_schemas).toHaveLength(0);
+  });
+
+  it('loads output schemas from output_schemas/ directory', async () => {
+    const skillDir = path.join(tmpDir, 'schema-skill');
+    createSkillFixture(skillDir);
+    fs.mkdirSync(path.join(skillDir, 'output_schemas'), { recursive: true });
+    fs.writeFileSync(
+      path.join(skillDir, 'output_schemas', 'report.yaml'),
+      'name: report\ndescription: A structured report\nformat: json\nschema:\n  type: object\n'
+    );
+
+    const skill = await loadSkill(skillDir);
+
+    expect(skill.output_schemas).toHaveLength(1);
+    expect(skill.output_schemas[0].name).toBe('report');
+    expect(skill.output_schemas[0].format).toBe('json');
+  });
+
+  it('loads multiple output schemas sorted by name', async () => {
+    const skillDir = path.join(tmpDir, 'multi-schema-skill');
+    createSkillFixture(skillDir);
+    fs.mkdirSync(path.join(skillDir, 'output_schemas'), { recursive: true });
+    fs.writeFileSync(
+      path.join(skillDir, 'output_schemas', 'summary.yaml'),
+      'name: summary\ndescription: Summary\nformat: json\n'
+    );
+    fs.writeFileSync(
+      path.join(skillDir, 'output_schemas', 'analysis.yaml'),
+      'name: analysis\ndescription: Analysis\nformat: json\n'
+    );
+
+    const skill = await loadSkill(skillDir);
+
+    expect(skill.output_schemas).toHaveLength(2);
+    expect(skill.output_schemas[0].name).toBe('analysis');
+    expect(skill.output_schemas[1].name).toBe('summary');
+  });
+
+  it('ignores non-yaml files in output_schemas/', async () => {
+    const skillDir = path.join(tmpDir, 'schema-ignore-skill');
+    createSkillFixture(skillDir);
+    fs.mkdirSync(path.join(skillDir, 'output_schemas'), { recursive: true });
+    fs.writeFileSync(
+      path.join(skillDir, 'output_schemas', 'report.yaml'),
+      'name: report\ndescription: A report\nformat: json\n'
+    );
+    fs.writeFileSync(path.join(skillDir, 'output_schemas', 'README.md'), '# Schemas');
+
+    const skill = await loadSkill(skillDir);
+
+    expect(skill.output_schemas).toHaveLength(1);
+  });
+
+  it('real skill market-intelligence has output schemas', async () => {
+    const skillDir = new URL('../../skills/market-intelligence', import.meta.url).pathname;
+    const skill = await loadSkill(skillDir);
+    expect(skill.output_schemas.length).toBeGreaterThan(0);
+    const schemaNames = skill.output_schemas.map((s) => s.name);
+    expect(schemaNames).toContain('market_report');
+  });
+
+  it('real skill strategic-negotiator has output schemas', async () => {
+    const skillDir = new URL('../../skills/strategic-negotiator', import.meta.url).pathname;
+    const skill = await loadSkill(skillDir);
+    expect(skill.output_schemas.length).toBeGreaterThan(0);
+    const schemaNames = skill.output_schemas.map((s) => s.name);
+    expect(schemaNames).toContain('negotiation_analysis');
+  });
 });
