@@ -5,6 +5,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import { getAdapter, ADAPTERS } from './adapters/index.js';
 import { loadSkill } from './core/skill-loader.js';
+import { composeSkills } from './core/composer.js';
 
 const execAsync = promisify(exec);
 
@@ -1700,6 +1701,83 @@ async function skillInstall(skillName, adapterName, { tier = 'standard', skillsD
   return { files, summary };
 }
 
+/**
+ * Compose multiple skills and install via the adapter pipeline.
+ * Loads all skills, merges them with composeSkills(), then writes
+ * a single composed output file using the named adapter.
+ *
+ * @param {string[]} skillNames
+ * @param {string} adapterName
+ * @param {{ budget?: number, primary?: string, tier?: string, skillsDir?: string, outDir?: string }} options
+ */
+async function skillCompose(skillNames, adapterName, { budget = 8000, primary, skillsDir, outDir } = {}) {
+  const resolvedSkillsDir = path.resolve(skillsDir || 'skills');
+
+  // Validate primary skill name
+  if (primary && !skillNames.includes(primary)) {
+    throw new Error(`Primary skill "${primary}" is not in the skill list: ${skillNames.join(', ')}`);
+  }
+
+  // Load all skills
+  const skillPacks = await Promise.all(
+    skillNames.map(async (skillName) => {
+      const skillDir = path.join(resolvedSkillsDir, skillName);
+      if (!fs.existsSync(skillDir) || !fs.existsSync(path.join(skillDir, 'skill.yaml'))) {
+        throw new Error(`Skill not found: "${skillName}" (looked in ${skillDir})`);
+      }
+      return loadSkill(skillDir);
+    })
+  );
+
+  // Compose skills
+  const composed = await composeSkills(skillPacks, { budget, primary });
+
+  // Build a virtual composed skill pack for the adapter
+  const composedName = skillNames.join('+');
+  const composedPack = {
+    name: composedName,
+    version: '1.0.0',
+    category: 'composed',
+    tags: [],
+    description: {
+      short: `Composed: ${skillNames.join(' + ')}`,
+      long: `Budget-aware composition of: ${skillNames.join(', ')} (${composed.estimatedTokens} estimated tokens)`,
+    },
+    context_budget: { minimal: budget, standard: budget, comprehensive: budget },
+    composable_with: {},
+    conflicts_with: [],
+    requires_tools: skillPacks.some((s) => s.requires_tools),
+    requires_memory: skillPacks.some((s) => s.requires_memory),
+    prompts: { standard: composed.systemPrompt },
+    systemPrompt: composed.systemPrompt,
+    tierUsed: 'standard',
+    tools: composed.tools,
+    output_schemas: skillPacks.flatMap((s) => s.output_schemas || []),
+  };
+
+  const adapter = getAdapter(adapterName);
+  const { files, summary } = adapter(composedPack, { tier: 'standard' });
+
+  const resolvedOut = path.resolve(outDir || process.cwd());
+  if (!fs.existsSync(resolvedOut)) {
+    fs.mkdirSync(resolvedOut, { recursive: true });
+  }
+
+  for (const file of files) {
+    const dest = path.join(resolvedOut, file.path);
+    const destDir = path.dirname(dest);
+    if (!fs.existsSync(destDir)) {
+      fs.mkdirSync(destDir, { recursive: true });
+    }
+    fs.writeFileSync(dest, file.content, 'utf8');
+    console.log(`  ${colors.dim('[written]')} ${file.path}`);
+  }
+
+  console.log(colors.green(`✓ ${summary}`));
+  console.log(colors.dim(`  Composition: ${composed.composition.map((e) => `${e.name}@${e.tier}`).join(', ')}`));
+  return { files, summary, composition: composed.composition };
+}
+
 export async function run(args) {
   const templates = [];
   const ides = [];
@@ -1712,6 +1790,8 @@ export async function run(args) {
   let adapterTier = 'standard';
   let adapterSkillsDir = null;
   let adapterOutDir = null;
+  let adapterBudget = null;
+  let adapterPrimary = null;
 
   // Parse arguments
   for (const arg of args) {
@@ -1751,6 +1831,14 @@ export async function run(args) {
       adapterSkillsDir = arg.slice(12);
     } else if (arg.startsWith('--out=')) {
       adapterOutDir = arg.slice(6);
+    } else if (arg.startsWith('--budget=')) {
+      const budgetVal = Number(arg.slice(9));
+      if (!Number.isFinite(budgetVal) || budgetVal <= 0) {
+        throw new Error(`Invalid budget: "${arg.slice(9)}". Budget must be a positive number.`);
+      }
+      adapterBudget = budgetVal;
+    } else if (arg.startsWith('--primary=')) {
+      adapterPrimary = arg.slice(10);
     } else if (arg.startsWith('--ide=')) {
       const ide = arg.slice(6).toLowerCase();
       if (!SUPPORTED_IDES.includes(ide)) {
@@ -1791,6 +1879,19 @@ export async function run(args) {
       console.error(colors.dim('Usage: npx @djm204/agent-skills <skill-name> --adapter=<adapter>\n'));
       process.exit(1);
     }
+
+    // Multi-skill composition mode (when --budget is specified or multiple skills)
+    if (adapterBudget !== null || resolvedTemplates.length > 1) {
+      await skillCompose(resolvedTemplates, adapterName, {
+        budget: adapterBudget || 8000,
+        primary: adapterPrimary,
+        skillsDir: adapterSkillsDir,
+        outDir: adapterOutDir,
+      });
+      return;
+    }
+
+    // Single-skill install mode
     for (const skillName of resolvedTemplates) {
       await skillInstall(skillName, adapterName, {
         tier: adapterTier,
@@ -1884,6 +1985,7 @@ export const _internals = {
   VALID_TIERS,
   ADAPTERS,
   skillInstall,
+  skillCompose,
   PACKAGE_NAME,
   CURRENT_VERSION,
   REPO_URL,
