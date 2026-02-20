@@ -1,0 +1,9 @@
+name: utility-agent
+category: agents
+description: "AI agent utilities with context management and hallucination prevention"
+rules:
+  - action-control.mdc
+  - context-management.mdc
+  - hallucination-prevention.mdc
+  - overview.mdc
+  - token-optimization.mdc

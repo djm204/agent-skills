@@ -1,0 +1,10 @@
+name: marketing-expert
+category: business
+description: "Principal marketing strategy covering brand positioning, campaign planning, market analysis, analytics, and growth frameworks"
+rules:
+  - brand-strategy.mdc
+  - campaign-planning.mdc
+  - growth-frameworks.mdc
+  - market-analysis.mdc
+  - marketing-analytics.mdc
+  - overview.mdc

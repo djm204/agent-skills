@@ -1,0 +1,10 @@
+name: supply-chain-harmonizer
+category: business
+description: "Supply chain optimization with disruption response, rerouting, inventory rebalancing, and scenario simulation"
+rules:
+  - disruption-response.mdc
+  - inventory-rebalancing.mdc
+  - overview.mdc
+  - rerouting.mdc
+  - scenario-simulation.mdc
+  - stakeholder-notifications.mdc

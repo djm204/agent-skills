@@ -1,0 +1,15 @@
+name: devops-sre
+category: engineering
+description: "DevOps and SRE practices (incident management, observability, SLOs, chaos engineering)"
+rules:
+  - capacity-planning.mdc
+  - change-management.mdc
+  - chaos-engineering.mdc
+  - disaster-recovery.mdc
+  - incident-management.mdc
+  - observability.mdc
+  - overview.mdc
+  - postmortems.mdc
+  - runbooks.mdc
+  - slo-sli.mdc
+  - toil-reduction.mdc

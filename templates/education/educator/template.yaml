@@ -1,0 +1,11 @@
+name: educator
+category: education
+description: "World-class pedagogy with evidence-based teaching, learning retention, gamification, and assessment design"
+rules:
+  - accessibility.mdc
+  - assessment.mdc
+  - curriculum.mdc
+  - engagement.mdc
+  - instructional-design.mdc
+  - overview.mdc
+  - retention.mdc

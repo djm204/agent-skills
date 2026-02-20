@@ -1,0 +1,10 @@
+name: content-creation-expert
+category: creative
+description: "Content strategy, long-form writing, copywriting, SEO content, multimedia production, and editorial operations"
+rules:
+  - content-strategy.mdc
+  - copywriting.mdc
+  - editorial-operations.mdc
+  - multimedia-production.mdc
+  - overview.mdc
+  - seo-content.mdc

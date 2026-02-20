@@ -1,0 +1,10 @@
+name: knowledge-synthesis
+category: professional
+description: "Knowledge management — research workflows, synthesis, knowledge graphs, and document retrieval"
+rules:
+  - document-management.mdc
+  - knowledge-graphs.mdc
+  - overview.mdc
+  - research-workflow.mdc
+  - search-retrieval.mdc
+  - summarization.mdc

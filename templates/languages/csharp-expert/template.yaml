@@ -1,0 +1,13 @@
+name: csharp-expert
+category: languages
+description: "C# and .NET — ASP.NET Core, async patterns, dependency injection, and testing"
+rules:
+  - aspnet-core.mdc
+  - async-patterns.mdc
+  - dependency-injection.mdc
+  - error-handling.mdc
+  - language-features.mdc
+  - overview.mdc
+  - performance.mdc
+  - testing.mdc
+  - tooling.mdc

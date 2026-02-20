@@ -1,0 +1,13 @@
+name: java-expert
+category: languages
+description: "Java — modern Java features, Spring Boot, concurrency, persistence, and testing"
+rules:
+  - concurrency.mdc
+  - error-handling.mdc
+  - modern-java.mdc
+  - overview.mdc
+  - performance.mdc
+  - persistence.mdc
+  - spring-boot.mdc
+  - testing.mdc
+  - tooling.mdc

@@ -1,0 +1,12 @@
+name: platform-engineering
+category: engineering
+description: "Internal developer platforms, infrastructure automation, and reliability engineering"
+rules:
+  - ci-cd.mdc
+  - developer-experience.mdc
+  - infrastructure-as-code.mdc
+  - kubernetes.mdc
+  - observability.mdc
+  - overview.mdc
+  - security.mdc
+  - testing.mdc

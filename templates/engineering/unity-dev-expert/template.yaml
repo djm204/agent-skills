@@ -1,0 +1,10 @@
+name: unity-dev-expert
+category: engineering
+description: "Unity game development with C# architecture, ECS/DOTS, physics/rendering, UI systems, multiplayer networking, and performance optimization"
+rules:
+  - csharp-architecture.mdc
+  - multiplayer-networking.mdc
+  - overview.mdc
+  - performance-optimization.mdc
+  - physics-rendering.mdc
+  - ui-systems.mdc

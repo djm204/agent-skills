@@ -1,0 +1,9 @@
+name: mobile
+category: engineering
+description: "Mobile applications (React Native, Flutter, native iOS/Android)"
+rules:
+  - navigation.mdc
+  - offline-first.mdc
+  - overview.mdc
+  - performance.mdc
+  - testing.mdc

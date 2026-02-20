@@ -1,0 +1,12 @@
+name: kotlin-expert
+category: languages
+description: "Kotlin — coroutines, language features, Android/JVM frameworks, and testing"
+rules:
+  - coroutines.mdc
+  - error-handling.mdc
+  - frameworks.mdc
+  - language-features.mdc
+  - overview.mdc
+  - performance.mdc
+  - testing.mdc
+  - tooling.mdc

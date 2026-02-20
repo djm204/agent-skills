@@ -1,0 +1,10 @@
+name: documentation
+category: professional
+description: "Technical documentation — READMEs, API docs, ADRs, code comments, and maintenance"
+rules:
+  - adr.mdc
+  - api-documentation.mdc
+  - code-comments.mdc
+  - maintenance.mdc
+  - overview.mdc
+  - readme-standards.mdc

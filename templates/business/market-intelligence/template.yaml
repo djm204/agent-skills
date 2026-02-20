@@ -1,0 +1,10 @@
+name: market-intelligence
+category: business
+description: "Market intelligence with data source aggregation, sentiment analysis, trend detection, and risk signal monitoring"
+rules:
+  - data-sources.mdc
+  - overview.mdc
+  - reporting.mdc
+  - risk-signals.mdc
+  - sentiment-analysis.mdc
+  - trend-detection.mdc

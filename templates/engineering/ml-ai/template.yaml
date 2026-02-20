@@ -1,0 +1,11 @@
+name: ml-ai
+category: engineering
+description: "Machine learning and AI systems (model development, deployment, monitoring)"
+rules:
+  - data-engineering.mdc
+  - deployment.mdc
+  - model-development.mdc
+  - monitoring.mdc
+  - overview.mdc
+  - security.mdc
+  - testing.mdc

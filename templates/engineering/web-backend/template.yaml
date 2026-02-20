@@ -1,0 +1,11 @@
+name: web-backend
+category: engineering
+description: "Backend APIs and services (REST, GraphQL, microservices)"
+rules:
+  - api-design.mdc
+  - authentication.mdc
+  - database-patterns.mdc
+  - error-handling.mdc
+  - overview.mdc
+  - security.mdc
+  - testing.mdc

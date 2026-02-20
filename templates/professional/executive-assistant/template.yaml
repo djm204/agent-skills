@@ -1,0 +1,12 @@
+name: executive-assistant
+category: professional
+description: "Executive assistance — calendar management, email, meetings, travel, and stakeholder communication"
+rules:
+  - calendar.mdc
+  - confidentiality.mdc
+  - email.mdc
+  - meetings.mdc
+  - overview.mdc
+  - prioritization.mdc
+  - stakeholder-management.mdc
+  - travel.mdc

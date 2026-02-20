@@ -1,0 +1,10 @@
+name: narrative-architect
+category: creative
+description: "World-building, continuity tracking, timeline management, story bible creation, and collaborative storytelling"
+rules:
+  - collaboration.mdc
+  - continuity-tracking.mdc
+  - overview.mdc
+  - story-bible.mdc
+  - timeline-management.mdc
+  - world-building.mdc

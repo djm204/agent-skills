@@ -1,0 +1,11 @@
+name: blockchain
+category: engineering
+description: "Smart contracts, DeFi protocols, and Web3 applications (Solidity, Foundry, Viem)"
+rules:
+  - defi-patterns.mdc
+  - gas-optimization.mdc
+  - overview.mdc
+  - security.mdc
+  - smart-contracts.mdc
+  - testing.mdc
+  - web3-integration.mdc

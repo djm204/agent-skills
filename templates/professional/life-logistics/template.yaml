@@ -1,0 +1,10 @@
+name: life-logistics
+category: professional
+description: "Personal life management — scheduling, task management, financial optimization, and negotiation"
+rules:
+  - financial-optimization.mdc
+  - negotiation.mdc
+  - overview.mdc
+  - research-methodology.mdc
+  - scheduling.mdc
+  - task-management.mdc

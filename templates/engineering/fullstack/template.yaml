@@ -1,0 +1,9 @@
+name: fullstack
+category: engineering
+description: "Full-stack web applications (Next.js, Nuxt, SvelteKit, Remix)"
+rules:
+  - api-contracts.mdc
+  - architecture.mdc
+  - overview.mdc
+  - shared-types.mdc
+  - testing.mdc

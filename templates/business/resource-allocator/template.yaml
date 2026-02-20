@@ -1,0 +1,10 @@
+name: resource-allocator
+category: business
+description: "Resource allocation with demand prediction, scheduling optimization, crisis management, and capacity modeling"
+rules:
+  - capacity-modeling.mdc
+  - coordination.mdc
+  - crisis-management.mdc
+  - demand-prediction.mdc
+  - overview.mdc
+  - scheduling.mdc

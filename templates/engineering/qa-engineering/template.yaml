@@ -1,0 +1,10 @@
+name: qa-engineering
+category: engineering
+description: "Quality assurance programs for confident, rapid software delivery"
+rules:
+  - automation.mdc
+  - metrics.mdc
+  - overview.mdc
+  - quality-gates.mdc
+  - test-design.mdc
+  - test-strategy.mdc

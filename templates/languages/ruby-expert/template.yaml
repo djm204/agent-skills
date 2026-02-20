@@ -1,0 +1,12 @@
+name: ruby-expert
+category: languages
+description: "Ruby — idioms, Rails and frameworks, concurrency, performance, and testing"
+rules:
+  - concurrency-and-threading.mdc
+  - error-handling.mdc
+  - idioms-and-style.mdc
+  - overview.mdc
+  - performance.mdc
+  - rails-and-frameworks.mdc
+  - testing.mdc
+  - tooling.mdc

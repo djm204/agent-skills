@@ -1,0 +1,12 @@
+name: rust-expert
+category: languages
+description: "Rust — ownership and borrowing, traits, concurrency, error handling, and performance"
+rules:
+  - concurrency.mdc
+  - ecosystem-and-tooling.mdc
+  - error-handling.mdc
+  - overview.mdc
+  - ownership-and-borrowing.mdc
+  - performance-and-unsafe.mdc
+  - testing.mdc
+  - traits-and-generics.mdc
