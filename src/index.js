@@ -167,9 +167,6 @@ const TEMPLATE_ALIASES = {
   'exec': 'executive-assistant',
   'ea': 'executive-assistant',
   'knowledge': 'knowledge-synthesis',
-  'wellness': 'wellness-orchestrator',
-  'life': 'life-logistics',
-  'logistics': 'life-logistics',
   // Business
   'product': 'product-manager',
   'project': 'project-manager',
@@ -184,9 +181,6 @@ const TEMPLATE_ALIASES = {
   'predictive': 'predictive-maintenance',
   // Creative
   'brand': 'brand-guardian',
-  'narrative': 'narrative-architect',
-  'story': 'narrative-architect',
-  'trends': 'trend-forecaster',
   // Agents
   'agent': 'utility-agent',
   'utility': 'utility-agent',

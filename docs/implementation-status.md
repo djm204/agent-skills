@@ -10,10 +10,10 @@ Last updated: 2026-02-20. Full plan at: `/home/pfk/.claude/plans/typed-sauteeing
 |-------|------|--------|
 | 1.1 | Fix `devops-sre requires_tools: false` bug | ✅ Done (already `true`) |
 | 1.2 | Create `skills/utility-agent/` skill pack | ✅ Done |
-| 3 (partial) | Add `template.yaml` manifests to 31/48 templates | ✅ 31 done, 17 missing |
-| README | PR #112 merged — README reflects 48 skills + skill-pack system | ✅ Done |
+| 3 (partial) | Add `template.yaml` manifests to 31/44 templates | ✅ 31 done, 17 missing |
+| README | PR #112 merged — README reflects 44 skills + skill-pack system | ✅ Done |
 
-**Total: 48 skill packs in `skills/`, 4 with real tool definitions (devops-sre, strategic-negotiator + 2 more)**
+**Total: 44 skill packs in `skills/`, 4 with real tool definitions (devops-sre, strategic-negotiator + 2 more)**
 
 ---
 
@@ -21,7 +21,7 @@ Last updated: 2026-02-20. Full plan at: `/home/pfk/.claude/plans/typed-sauteeing
 
 ### Phase 3 — Finish Auto-Register Templates
 
-17 templates missing `template.yaml` manifest:
+15 templates missing `template.yaml` manifest:
 
 ```
 templates/languages/cpp-expert
@@ -38,9 +38,7 @@ templates/professional/documentation
 templates/professional/executive-assistant
 templates/professional/grant-writer
 templates/professional/knowledge-synthesis
-templates/professional/life-logistics
 templates/professional/research-assistant
-templates/professional/wellness-orchestrator
 ```
 
 **Format** (see `templates/engineering/web-frontend/template.yaml` for reference):
@@ -53,7 +51,7 @@ rules:
   - file2.mdc
 ```
 
-**After all 48 manifests exist**, refactor `src/index.js`:
+**After all 44 manifests exist**, refactor `src/index.js`:
 - Remove hardcoded `TEMPLATES` object (lines 41–282, ~240 lines)
 - Add `loadTemplateRegistry()` function that scans `templates/` dirs for `template.yaml`
 - Update tests in `src/index.test.js` to use runtime values not hardcoded expectations
