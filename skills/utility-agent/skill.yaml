@@ -1,0 +1,36 @@
+name: utility-agent
+version: 1.0.0
+category: agents
+tags:
+  - agent
+  - utility
+  - context-management
+  - hallucination-prevention
+  - action-control
+  - token-optimization
+
+description:
+  short: "Cross-cutting agent utilities: context management, hallucination prevention, action safety, and token efficiency"
+  long: "Behavioral guardrails for any AI agent: proactive context window management with threshold-based summarization, verification-first hallucination prevention, permission-gated action control for destructive operations, and token budget discipline."
+
+context_budget:
+  minimal: 500
+  standard: 2000
+  comprehensive: 5500
+
+composable_with:
+  recommended:
+    - web-backend
+    - web-frontend
+    - devops-sre
+    - research-assistant
+    - executive-assistant
+  enhances:
+    - market-intelligence
+    - knowledge-synthesis
+    - data-engineering
+
+conflicts_with: []
+
+requires_tools: false
+requires_memory: true

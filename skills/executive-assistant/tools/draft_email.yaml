@@ -1,0 +1,43 @@
+name: draft_email
+description: "Create a draft email with specified recipients, subject, and body content"
+when_to_use: "When the executive needs an email drafted for review before sending"
+parameters:
+  to:
+    type: array
+    description: "Primary recipient email addresses"
+    required: true
+  subject:
+    type: string
+    description: "Email subject line"
+    required: true
+  body:
+    type: string
+    description: "Full email body content"
+    required: true
+  cc:
+    type: array
+    description: "Email addresses to copy on the message"
+    required: false
+  priority:
+    type: string
+    description: "Message priority level"
+    enum: [normal, high, urgent]
+    required: false
+  attachments:
+    type: array
+    description: "File paths or document references to attach to the draft"
+    required: false
+returns:
+  type: object
+  description: "Saved draft details including a preview URL for review"
+  properties:
+    draft_id:
+      type: string
+    to:
+      type: array
+    subject:
+      type: string
+    created_at:
+      type: string
+    preview_url:
+      type: string

@@ -1,0 +1,35 @@
+name: generate_report
+description: "Generate a formatted project status report or stakeholder update in the specified format"
+when_to_use: "When a status report, executive summary, or stakeholder communication needs to be produced from live project data"
+parameters:
+  project_id:
+    type: string
+    description: "Unique identifier of the project to report on"
+    required: true
+  report_type:
+    type: string
+    description: "Type of report to generate"
+    enum: [weekly_status, executive_summary, risk_register, budget_variance]
+    required: true
+  format:
+    type: string
+    description: "Output format for the report content"
+    default: "markdown"
+  audience:
+    type: string
+    description: "Intended audience to calibrate tone and detail level, e.g. \"engineering\", \"board\", \"client\""
+    required: false
+returns:
+  type: object
+  description: "Generated report with content, format metadata, and word count"
+  properties:
+    report_id:
+      type: string
+    content:
+      type: string
+    format:
+      type: string
+    generated_at:
+      type: string
+    word_count:
+      type: integer

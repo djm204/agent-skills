@@ -1,0 +1,32 @@
+name: get_compliance_status
+description: "Check the compliance status of a regulation or requirement for a specified entity or jurisdiction"
+when_to_use: "When assessing whether a specific regulation applies, what its current status is, and what action is required"
+parameters:
+  regulation_id:
+    type: string
+    description: "Unique identifier or citation for the regulation to check (e.g. '17 CFR 240.10b-5', 'GDPR Art. 32')"
+    required: true
+  entity_type:
+    type: string
+    description: "Type of entity being assessed for compliance, e.g. 'bank', 'insurer', 'tech_company'"
+    required: false
+  jurisdiction:
+    type: string
+    description: "Jurisdiction context for the compliance check, e.g. 'EU', 'US-federal', 'California'"
+    required: false
+returns:
+  type: object
+  description: "Compliance status record including current regulatory status, deadline, requirements, and risk level"
+  properties:
+    regulation_id:
+      type: string
+    status:
+      type: string
+      description: "Current lifecycle status: proposed | final | effective | superseded"
+    compliance_deadline:
+      type: string
+    requirements:
+      type: array
+    risk_level:
+      type: string
+      description: "Assessed risk level: low | medium | high | critical"

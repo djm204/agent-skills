@@ -1,0 +1,35 @@
+name: query_sensor_data
+description: "Retrieve time-series sensor readings for a specific asset or sensor group within a time window"
+when_to_use: "When analyzing equipment health, detecting anomalies, or building predictive models from raw sensor streams"
+parameters:
+  asset_id:
+    type: string
+    description: "Unique identifier of the asset or equipment whose sensor data should be retrieved"
+    required: true
+  sensors:
+    type: array
+    description: "List of sensor types to retrieve data for, e.g. ['temperature', 'vibration', 'pressure']; returns all sensors if omitted"
+    required: false
+  from:
+    type: string
+    description: "Start of the query time window as an ISO datetime string"
+    required: true
+  to:
+    type: string
+    description: "End of the query time window as an ISO datetime string"
+    required: true
+  resolution:
+    type: string
+    description: "Aggregation interval for the returned readings, e.g. '1m', '5m', '1h'; returns raw data if omitted"
+    required: false
+returns:
+  type: object
+  description: "Time-series sensor data for the asset with anomaly detection results"
+  properties:
+    asset_id:
+      type: string
+    series:
+      type: array
+      description: "List of sensor streams, each with sensor name, unit, and readings array of {timestamp, value} objects"
+    anomalies_detected:
+      type: boolean

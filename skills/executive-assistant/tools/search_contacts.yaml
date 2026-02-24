@@ -1,0 +1,42 @@
+name: search_contacts
+description: "Search the contact directory for people by name, company, role, or relationship"
+when_to_use: "When finding contact information, identifying the right person to reach out to, or mapping stakeholder relationships"
+parameters:
+  query:
+    type: string
+    description: "Name, keyword, or phrase to search across contact records"
+    required: true
+  company:
+    type: string
+    description: "Filter results to contacts at a specific company or organization"
+    required: false
+  role:
+    type: string
+    description: "Filter by job title or role, e.g. \"CTO\", \"procurement manager\""
+    required: false
+  relationship_type:
+    type: string
+    description: "Filter by relationship category, e.g. \"client\", \"vendor\", \"investor\""
+    required: false
+returns:
+  type: array
+  description: "Matching contacts with full profile details and last interaction date"
+  items:
+    type: object
+    properties:
+      contact_id:
+        type: string
+      name:
+        type: string
+      title:
+        type: string
+      company:
+        type: string
+      email:
+        type: string
+      phone:
+        type: string
+      relationship_type:
+        type: string
+      last_contact_date:
+        type: string

@@ -1,0 +1,45 @@
+name: get_analytics
+description: "Query product usage metrics, funnel conversion rates, and engagement KPIs for a feature or user segment"
+when_to_use: "When understanding product performance, validating feature adoption, or preparing data for prioritization decisions"
+parameters:
+  metric:
+    type: string
+    description: "Name of the metric to query, e.g. \"DAU\", \"retention_d30\", \"funnel_step\""
+    required: true
+  segment:
+    type: string
+    description: "User segment to filter by, e.g. \"paid_users\", \"mobile\""
+    required: false
+  date_range:
+    type: string
+    description: "Time window for the query, e.g. \"last_30d\" or \"2025-01-01/2025-01-31\""
+    required: false
+  breakdown_by:
+    type: string
+    description: "Dimension to group results by, e.g. \"platform\", \"country\""
+    required: false
+returns:
+  type: object
+  description: "Metric value with trend and optional dimensional breakdown"
+  properties:
+    metric:
+      type: string
+    segment:
+      type: string
+    date_range:
+      type: string
+    value:
+      type: number
+    trend_pct:
+      type: number
+    breakdown:
+      type: array
+      items:
+        type: object
+        properties:
+          dimension:
+            type: string
+          value:
+            type: number
+          share_pct:
+            type: number

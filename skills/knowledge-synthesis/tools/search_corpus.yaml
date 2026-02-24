@@ -1,0 +1,36 @@
+name: search_corpus
+description: "Perform semantic search across an indexed document corpus or knowledge base"
+when_to_use: "When the user needs to find relevant documents, passages, or facts within a specific collection; when exploring what is already known before generating new content"
+parameters:
+  query:
+    type: string
+    description: "The natural-language search query to match against the corpus"
+    required: true
+  corpus_id:
+    type: string
+    description: "Identifier of the specific corpus or knowledge base to search; if omitted, searches the default corpus"
+    required: false
+  top_k:
+    type: integer
+    description: "Number of top results to return"
+    default: 10
+  min_relevance:
+    type: number
+    description: "Minimum relevance score threshold (0.0–1.0); results below this score are excluded"
+    default: 0.7
+returns:
+  type: array
+  description: "Ranked list of matching passages with relevance scores"
+  items:
+    type: object
+    properties:
+      document_id:
+        type: string
+      title:
+        type: string
+      passage:
+        type: string
+      relevance_score:
+        type: number
+      source_url:
+        type: string

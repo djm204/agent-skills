@@ -1,0 +1,26 @@
+name: fetch_document
+description: "Retrieve and extract the full text content of a URL or document"
+when_to_use: "When a specific document, article, paper, or page needs to be read in full for analysis; when the snippet from a search result is insufficient and the complete source text is required"
+parameters:
+  url:
+    type: string
+    description: "The URL of the document, article, or page to retrieve"
+    required: true
+  extract_sections:
+    type: array
+    description: "Specific sections to extract from the document (e.g. ['abstract', 'conclusions', 'methodology']); if omitted, full content is returned"
+    required: false
+returns:
+  type: object
+  description: "Full text content of the document with metadata"
+  properties:
+    url:
+      type: string
+    title:
+      type: string
+    content:
+      type: string
+    word_count:
+      type: integer
+    extracted_at:
+      type: string

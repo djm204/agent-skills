@@ -1,0 +1,29 @@
+name: get_inventory
+description: "Query current inventory levels, locations, and availability across warehouses and distribution centers"
+when_to_use: "When assessing stock levels, identifying shortfalls, or planning rebalancing across supply chain nodes"
+parameters:
+  sku:
+    type: string
+    description: "Stock-keeping unit identifier to filter results to a specific product"
+    required: false
+  location_id:
+    type: string
+    description: "Warehouse or distribution center identifier to scope the query to a specific node"
+    required: false
+  low_stock_threshold:
+    type: number
+    description: "Number of days of supply below which an item is flagged as low stock"
+    required: false
+  include_in_transit:
+    type: boolean
+    description: "Whether to include inventory currently in transit between nodes"
+    default: true
+returns:
+  type: object
+  description: "Inventory snapshot with item-level detail and timestamp"
+  properties:
+    items:
+      type: array
+      description: "List of inventory records, each with sku, description, on_hand, in_transit, location_id, and days_of_supply"
+    snapshot_time:
+      type: string

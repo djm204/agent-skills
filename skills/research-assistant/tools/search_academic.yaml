@@ -1,0 +1,40 @@
+name: search_academic
+description: "Search academic databases for peer-reviewed papers and scholarly sources"
+when_to_use: "When the research requires primary academic sources, peer-reviewed evidence, or scholarly citations; when verifying claims against the published scientific literature"
+parameters:
+  query:
+    type: string
+    description: "The academic search query, including keywords, author names, or topic phrases"
+    required: true
+  fields:
+    type: array
+    description: "Academic fields or disciplines to filter results (e.g. ['computer science', 'medicine', 'economics'])"
+    required: false
+  year_from:
+    type: integer
+    description: "Earliest publication year to include in results"
+    required: false
+  max_results:
+    type: integer
+    description: "Maximum number of papers to return"
+    default: 10
+returns:
+  type: array
+  description: "List of academic papers matching the query"
+  items:
+    type: object
+    properties:
+      title:
+        type: string
+      authors:
+        type: array
+      abstract:
+        type: string
+      doi:
+        type: string
+      year:
+        type: integer
+      journal:
+        type: string
+      citation_count:
+        type: integer

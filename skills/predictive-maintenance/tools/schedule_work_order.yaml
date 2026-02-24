@@ -1,0 +1,44 @@
+name: schedule_work_order
+description: "Create and schedule a maintenance work order for an asset, assigning technician and parts"
+when_to_use: "When predictive signals indicate maintenance is required and a work order must be created in the CMMS before failure occurs"
+parameters:
+  asset_id:
+    type: string
+    description: "Unique identifier of the asset requiring maintenance"
+    required: true
+  priority:
+    type: string
+    description: "Work order priority level: routine | urgent | critical"
+    required: true
+  work_description:
+    type: string
+    description: "Detailed description of the maintenance work to be performed"
+    required: true
+  scheduled_date:
+    type: string
+    description: "Target date for performing the maintenance as an ISO date string"
+    required: true
+  technician_id:
+    type: string
+    description: "Identifier of the technician to assign to the work order; system auto-assigns if omitted"
+    required: false
+  parts_required:
+    type: array
+    description: "List of parts needed for the work order, each with part_id and quantity"
+    required: false
+returns:
+  type: object
+  description: "Work order confirmation with scheduling details and CMMS reference"
+  properties:
+    work_order_id:
+      type: string
+    status:
+      type: string
+    scheduled_date:
+      type: string
+    assigned_technician:
+      type: string
+    estimated_duration_hours:
+      type: number
+    confirmation_number:
+      type: string

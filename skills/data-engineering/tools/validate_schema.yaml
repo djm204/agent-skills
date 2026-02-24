@@ -1,0 +1,43 @@
+name: validate_schema
+description: "Validate a dataset or pipeline output against an expected schema, returning violations and statistics"
+when_to_use: "When enforcing data contracts at pipeline ingestion or output, or when checking data quality before downstream consumption"
+parameters:
+  dataset_id:
+    type: string
+    description: "Identifier of the dataset or pipeline output to validate"
+    required: true
+  schema_version:
+    type: string
+    description: "Specific schema version to validate against; defaults to the registered latest"
+    required: false
+  checks:
+    type: array
+    description: "Quality checks to run, e.g. [\"null_rate\", \"type_mismatch\", \"pk_uniqueness\", \"referential_integrity\"]"
+    required: false
+returns:
+  type: object
+  description: "Validation outcome with pass/fail status, detailed violations, and an overall quality score"
+  properties:
+    dataset_id:
+      type: string
+    schema_version:
+      type: string
+    passed:
+      type: boolean
+    violations:
+      type: array
+      items:
+        type: object
+        properties:
+          field:
+            type: string
+          check:
+            type: string
+          expected:
+            type: string
+          actual:
+            type: string
+          row_count:
+            type: integer
+    quality_score:
+      type: number

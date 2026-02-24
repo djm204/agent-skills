@@ -1,0 +1,40 @@
+name: log_experiment
+description: "Log experiment parameters, metrics, and artifacts to the experiment tracking system"
+when_to_use: "When a training run completes and its results need to be recorded for comparison and reproducibility"
+parameters:
+  experiment_name:
+    type: string
+    description: "Human-readable name for the experiment group"
+    required: true
+  run_id:
+    type: string
+    description: "Unique identifier for this specific training run"
+    required: true
+  params:
+    type: object
+    description: "Hyperparameters and configuration values used in this run"
+    required: true
+  metrics:
+    type: object
+    description: "Final metric values to record, e.g. {loss: 0.12, accuracy: 0.94}"
+    required: true
+  artifact_paths:
+    type: array
+    description: "Paths to model checkpoints, plots, or other output artifacts to attach"
+    required: false
+  tags:
+    type: array
+    description: "Labels for categorizing and filtering runs, e.g. [\"baseline\", \"prod-candidate\"]"
+    required: false
+returns:
+  type: object
+  description: "Confirmation of the logged run with a direct URL for inspection"
+  properties:
+    experiment_id:
+      type: string
+    run_id:
+      type: string
+    run_url:
+      type: string
+    logged_at:
+      type: string

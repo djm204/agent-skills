@@ -1,0 +1,30 @@
+name: web_search
+description: "Search the web for current information on a topic"
+when_to_use: "When market data, competitor announcements, industry news, or pricing changes need to be retrieved; when monitoring for breaking developments that post-date training data"
+parameters:
+  query:
+    type: string
+    description: "The search query, formulated using relevant market terms, company names, or industry keywords"
+    required: true
+  max_results:
+    type: integer
+    description: "Maximum number of results to return"
+    default: 5
+  date_range:
+    type: string
+    description: "Restrict results to a recency window (e.g. 'past_month', 'past_week', 'past_year')"
+    required: false
+returns:
+  type: array
+  description: "List of web search results with title, url, snippet, and publication date"
+  items:
+    type: object
+    properties:
+      title:
+        type: string
+      url:
+        type: string
+      snippet:
+        type: string
+      published_date:
+        type: string

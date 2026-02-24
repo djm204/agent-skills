@@ -1,0 +1,37 @@
+name: update_task
+description: "Update the status, assignee, due date, or notes on a specific project task"
+when_to_use: "When tracking task completion, reassigning work, updating estimates, or recording blockers"
+parameters:
+  task_id:
+    type: string
+    description: "Unique identifier of the task to update"
+    required: true
+  status:
+    type: string
+    description: "New task status"
+    enum: [not_started, in_progress, blocked, done]
+    required: false
+  assignee_id:
+    type: string
+    description: "User ID of the person to assign the task to"
+    required: false
+  due_date:
+    type: string
+    description: "Revised due date in ISO 8601 format"
+    required: false
+  notes:
+    type: string
+    description: "Additional context, blocker description, or progress notes"
+    required: false
+returns:
+  type: object
+  description: "Confirmation of the update with changed fields and prior values for audit"
+  properties:
+    task_id:
+      type: string
+    updated_fields:
+      type: object
+    previous_values:
+      type: object
+    updated_at:
+      type: string

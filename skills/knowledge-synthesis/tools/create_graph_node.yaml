@@ -1,0 +1,35 @@
+name: create_graph_node
+description: "Create or update a node and its relationships in the knowledge graph"
+when_to_use: "When new information needs to be persisted to the knowledge graph for future retrieval; when connecting a newly extracted entity or concept to existing nodes"
+parameters:
+  node_type:
+    type: string
+    description: "The category or type of the node (e.g. 'concept', 'person', 'document', 'event')"
+    required: true
+  properties:
+    type: object
+    description: "Key-value pairs of properties to store on the node (e.g. {name: 'Zettelkasten', origin: 'Luhmann'})"
+    required: true
+  relations:
+    type: array
+    description: "Edges to create from this node to other nodes, each specifying target_id, relation_type, and optional weight"
+    required: false
+    items:
+      type: object
+      properties:
+        target_id:
+          type: string
+        relation_type:
+          type: string
+        weight:
+          type: number
+returns:
+  type: object
+  description: "Result of the node creation or update operation"
+  properties:
+    node_id:
+      type: string
+    created:
+      type: boolean
+    updated_relations:
+      type: array

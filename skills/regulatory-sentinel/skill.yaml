@@ -29,5 +29,5 @@ composable_with:
 
 conflicts_with: []
 
-requires_tools: false
+requires_tools: true
 requires_memory: false

@@ -1,0 +1,41 @@
+name: run_evaluation
+description: "Run a model evaluation on a dataset split and return performance metrics"
+when_to_use: "When a model needs to be assessed on a held-out test set, comparing performance against baselines or prior checkpoints"
+parameters:
+  model_id:
+    type: string
+    description: "Identifier of the model to evaluate"
+    required: true
+  dataset_id:
+    type: string
+    description: "Identifier of the dataset to evaluate against"
+    required: true
+  split:
+    type: string
+    description: "Dataset split to use for evaluation"
+    default: "test"
+  metrics:
+    type: array
+    description: "List of metrics to compute, e.g. [\"accuracy\", \"f1\", \"auc\", \"rmse\"]"
+    required: false
+  batch_size:
+    type: integer
+    description: "Number of samples per evaluation batch"
+    required: false
+returns:
+  type: object
+  description: "Evaluation results including per-metric scores, timing, and sample count"
+  properties:
+    model_id:
+      type: string
+    dataset_id:
+      type: string
+    split:
+      type: string
+    metrics:
+      type: object
+      description: "Map of metric name to computed value, e.g. {accuracy: 0.91, f1: 0.88}"
+    evaluation_time_s:
+      type: number
+    samples_evaluated:
+      type: integer

@@ -1,0 +1,44 @@
+name: extract_entities
+description: "Extract named entities, relationships, and concepts from a text passage"
+when_to_use: "When building a knowledge graph or identifying key concepts, people, organizations, and relationships in text; when structuring unstructured content for ingestion into a knowledge base"
+parameters:
+  text:
+    type: string
+    description: "The text passage to extract entities and relationships from"
+    required: true
+  entity_types:
+    type: array
+    description: "Entity categories to extract (e.g. ['person', 'org', 'concept', 'date', 'location']); if omitted, all types are extracted"
+    required: false
+  include_relations:
+    type: boolean
+    description: "Whether to extract relationships between identified entities in addition to the entities themselves"
+    default: true
+returns:
+  type: object
+  description: "Extracted entities and their relationships"
+  properties:
+    entities:
+      type: array
+      items:
+        type: object
+        properties:
+          text:
+            type: string
+          type:
+            type: string
+          confidence:
+            type: number
+    relations:
+      type: array
+      items:
+        type: object
+        properties:
+          subject:
+            type: string
+          predicate:
+            type: string
+          object:
+            type: string
+          confidence:
+            type: number

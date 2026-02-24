@@ -1,0 +1,33 @@
+name: find_alternate_route
+description: "Identify alternative shipping routes, carriers, or logistics paths when a primary route is disrupted"
+when_to_use: "When a disruption (weather, geopolitical, capacity constraint) requires rerouting shipments to maintain delivery commitments"
+parameters:
+  origin:
+    type: string
+    description: "Origin location identifier or address for the shipment"
+    required: true
+  destination:
+    type: string
+    description: "Destination location identifier or address for the shipment"
+    required: true
+  cargo_type:
+    type: string
+    description: "Type of cargo being shipped, used to filter compatible carriers and routes (e.g. 'hazmat', 'refrigerated', 'oversized')"
+    required: false
+  urgency:
+    type: string
+    description: "Delivery urgency level to weight route scoring: 'standard', 'expedited', or 'critical'"
+    required: false
+  excluded_routes:
+    type: array
+    description: "List of route identifiers to exclude from consideration (e.g. previously failed or unavailable routes)"
+    required: false
+returns:
+  type: object
+  description: "Ranked alternative routes with cost, time, risk, and environmental impact deltas relative to the primary route"
+  properties:
+    alternatives:
+      type: array
+      description: "List of route options, each with route_id, carrier, transit_days, cost_delta_pct, risk_score, and co2_delta"
+    recommended_route_id:
+      type: string

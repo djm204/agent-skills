@@ -1,0 +1,33 @@
+name: get_maintenance_history
+description: "Retrieve the maintenance history, failure records, and work orders for a specific asset"
+when_to_use: "When assessing failure patterns, calculating MTBF, or understanding the maintenance lifecycle of an asset"
+parameters:
+  asset_id:
+    type: string
+    description: "Unique identifier of the asset whose maintenance history should be retrieved"
+    required: true
+  event_types:
+    type: array
+    description: "Filter to specific maintenance event categories, e.g. ['failure', 'preventive', 'corrective']; returns all types if omitted"
+    required: false
+  from:
+    type: string
+    description: "Start of the date range filter as an ISO date string"
+    required: false
+  to:
+    type: string
+    description: "End of the date range filter as an ISO date string"
+    required: false
+returns:
+  type: object
+  description: "Maintenance event history with reliability metrics for the asset"
+  properties:
+    asset_id:
+      type: string
+    events:
+      type: array
+      description: "List of maintenance events, each with event_id, type, date, description, downtime_hours, technician, and parts_replaced"
+    mtbf_days:
+      type: number
+    total_downtime_hours:
+      type: number

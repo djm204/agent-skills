@@ -1,0 +1,42 @@
+name: query_dataset
+description: "Query a dataset catalog for available datasets, their schemas, and statistics"
+when_to_use: "When selecting training data, understanding feature distributions, or checking data quality before model training"
+parameters:
+  search:
+    type: string
+    description: "Free-text search term to filter datasets by name or description"
+    required: false
+  data_type:
+    type: string
+    description: "Filter by dataset modality, e.g. \"tabular\", \"text\", \"image\""
+    required: false
+  min_rows:
+    type: integer
+    description: "Minimum number of rows required in the dataset"
+    required: false
+  tags:
+    type: array
+    description: "Filter datasets by associated tags"
+    required: false
+returns:
+  type: array
+  description: "List of matching datasets with metadata and quality indicators"
+  items:
+    type: object
+    properties:
+      dataset_id:
+        type: string
+      name:
+        type: string
+      description:
+        type: string
+      row_count:
+        type: integer
+      feature_count:
+        type: integer
+      schema_url:
+        type: string
+      quality_score:
+        type: number
+      last_updated:
+        type: string

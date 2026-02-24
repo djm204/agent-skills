@@ -1,0 +1,51 @@
+name: query_user_feedback
+description: "Search and aggregate user feedback, support tickets, and NPS responses related to a topic or feature"
+when_to_use: "When gathering qualitative evidence for prioritization, understanding pain points, or validating a problem hypothesis"
+parameters:
+  query:
+    type: string
+    description: "Search term or topic to match against feedback content"
+    required: true
+  sources:
+    type: array
+    description: "Feedback sources to include, e.g. [\"intercom\", \"zendesk\", \"app_reviews\", \"nps\"]"
+    required: false
+  from:
+    type: string
+    description: "Start date for the feedback window in ISO 8601 format"
+    required: false
+  sentiment:
+    type: string
+    description: "Filter by sentiment classification"
+    enum: [positive, negative, neutral]
+    required: false
+returns:
+  type: object
+  description: "Aggregated feedback with theme clusters, sample quotes, and sentiment breakdown"
+  properties:
+    query:
+      type: string
+    total_matches:
+      type: integer
+    themes:
+      type: array
+      items:
+        type: object
+        properties:
+          theme:
+            type: string
+          count:
+            type: integer
+          sample_quotes:
+            type: array
+            items:
+              type: string
+    sentiment_breakdown:
+      type: object
+      properties:
+        positive:
+          type: integer
+        neutral:
+          type: integer
+        negative:
+          type: integer

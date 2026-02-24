@@ -1,0 +1,36 @@
+name: notify_stakeholders
+description: "Send structured supply chain disruption or rebalancing notifications to relevant stakeholders"
+when_to_use: "When a disruption, reroute, or inventory rebalancing decision needs to be communicated to suppliers, logistics partners, or internal teams"
+parameters:
+  event_type:
+    type: string
+    description: "Category of supply chain event triggering the notification, e.g. 'disruption', 'reroute', 'rebalance'"
+    required: true
+  affected_parties:
+    type: array
+    description: "List of stakeholder identifiers (user IDs, team names, or email addresses) who must receive the notification"
+    required: true
+  message:
+    type: string
+    description: "Notification body describing the event, impact, and any required actions"
+    required: true
+  severity:
+    type: string
+    description: "Severity level of the event: info | warning | critical"
+    required: false
+  estimated_resolution:
+    type: string
+    description: "Estimated resolution time or date as an ISO datetime string"
+    required: false
+returns:
+  type: object
+  description: "Notification delivery confirmation with recipient list, timestamp, and event tracking ID"
+  properties:
+    notifications_sent:
+      type: number
+    recipients:
+      type: array
+    timestamp:
+      type: string
+    event_id:
+      type: string

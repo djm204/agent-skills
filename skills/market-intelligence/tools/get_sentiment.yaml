@@ -1,0 +1,44 @@
+name: get_sentiment
+description: "Analyze sentiment and opinion signals from news, social media, and analyst reports for a company or topic"
+when_to_use: "When the user needs to understand market sentiment, brand perception, or public opinion trends for a given company, product, or industry topic"
+parameters:
+  subject:
+    type: string
+    description: "The company name, ticker, product, or topic to analyze sentiment for"
+    required: true
+  sources:
+    type: array
+    description: "Source types to include in the analysis (e.g. ['news', 'social', 'analyst']); if omitted, all available sources are used"
+    required: false
+  timeframe:
+    type: string
+    description: "Time window for signal collection (e.g. '7d', '30d', 'Q4 2025')"
+    required: false
+returns:
+  type: object
+  description: "Aggregated sentiment assessment with per-source signals"
+  properties:
+    subject:
+      type: string
+    overall_sentiment:
+      type: string
+      enum:
+        - positive
+        - neutral
+        - negative
+        - mixed
+    confidence:
+      type: number
+    signals:
+      type: array
+      items:
+        type: object
+        properties:
+          source:
+            type: string
+          sentiment:
+            type: string
+          summary:
+            type: string
+          date:
+            type: string

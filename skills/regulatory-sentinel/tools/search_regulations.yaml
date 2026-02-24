@@ -1,0 +1,29 @@
+name: search_regulations
+description: "Search regulatory databases and official sources for laws, regulations, rules, and guidance documents"
+when_to_use: "When tracking new regulatory developments, finding the text of specific rules, or researching compliance requirements for a jurisdiction or sector"
+parameters:
+  query:
+    type: string
+    description: "Search query describing the regulation, topic, or compliance requirement to find"
+    required: true
+  jurisdiction:
+    type: string
+    description: "Jurisdiction to scope the search, e.g. 'EU', 'US-federal', 'California'"
+    required: false
+  sector:
+    type: string
+    description: "Industry sector to scope the search, e.g. 'financial', 'healthcare'"
+    required: false
+  effective_date:
+    type: string
+    description: "Filter results to regulations effective on or after this date (ISO date format)"
+    required: false
+returns:
+  type: object
+  description: "Search results with matching regulations and total count"
+  properties:
+    results:
+      type: array
+      description: "List of matching regulations, each with title, regulator, jurisdiction, effective_date, summary, url, and citation"
+    total_found:
+      type: number

@@ -1,0 +1,48 @@
+name: run_experiment
+description: "Query A/B test or feature experiment results including statistical significance and effect size"
+when_to_use: "When reviewing experiment results to make a ship/kill decision or understand treatment effect"
+parameters:
+  experiment_id:
+    type: string
+    description: "Unique identifier of the A/B test or feature experiment"
+    required: true
+  metric:
+    type: string
+    description: "Primary metric to focus the result summary on; defaults to the experiment's pre-registered metric"
+    required: false
+  confidence_level:
+    type: number
+    description: "Statistical confidence threshold for significance testing"
+    default: 0.95
+returns:
+  type: object
+  description: "Experiment outcomes with statistical analysis and a ship/kill recommendation"
+  properties:
+    experiment_id:
+      type: string
+    status:
+      type: string
+    treatment:
+      type: string
+    control:
+      type: string
+    primary_metric:
+      type: object
+      properties:
+        name:
+          type: string
+        treatment_value:
+          type: number
+        control_value:
+          type: number
+        lift_pct:
+          type: number
+        p_value:
+          type: number
+        significant:
+          type: boolean
+        confidence:
+          type: number
+    recommendation:
+      type: string
+      enum: [ship, kill, extend]

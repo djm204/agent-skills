@@ -1,0 +1,42 @@
+name: run_query
+description: "Execute a SQL or dataframe query against a data warehouse or compute engine and return results"
+when_to_use: "When data exploration, profiling, validation, or pipeline debugging requires executing a query against a live data source"
+parameters:
+  query:
+    type: string
+    description: "SQL statement or dataframe expression to execute"
+    required: true
+  engine:
+    type: string
+    description: "Target compute engine, e.g. \"bigquery\", \"snowflake\", \"spark\""
+    required: false
+  timeout_s:
+    type: integer
+    description: "Maximum seconds to wait before cancelling the query"
+    default: 60
+  max_rows:
+    type: integer
+    description: "Maximum number of rows to return in the result set"
+    default: 1000
+returns:
+  type: object
+  description: "Query results with schema, rows, and execution diagnostics"
+  properties:
+    columns:
+      type: array
+      description: "Ordered list of column descriptors with name and type"
+      items:
+        type: object
+        properties:
+          name:
+            type: string
+          type:
+            type: string
+    rows:
+      type: array
+    row_count:
+      type: integer
+    execution_time_ms:
+      type: integer
+    bytes_processed:
+      type: integer

@@ -1,0 +1,19 @@
+name: monitor_feed
+description: "Subscribe to or poll a regulatory feed for new announcements, rule changes, and compliance deadlines"
+when_to_use: "When the user wants ongoing monitoring of regulatory changes for a sector or jurisdiction"
+parameters:
+  feed_type:
+    type: string
+    description: "Regulatory feed source to poll, e.g. 'federal_register', 'sec_edgar', 'eur_lex'"
+    required: true
+  filters:
+    type: object
+    description: "Optional filters to narrow results, with fields: sector (string), keywords (array), effective_after (ISO date string)"
+    required: false
+  since:
+    type: string
+    description: "Return only items published after this ISO date; defaults to last poll time if omitted"
+    required: false
+returns:
+  type: array
+  description: "List of regulatory feed items, each with publication_date, title, regulator, change_type (new_rule | amendment | guidance | enforcement), summary, deadline, and url"
