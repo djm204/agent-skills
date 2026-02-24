@@ -1,0 +1,10 @@
+name: strategic-negotiator
+category: business
+description: "Negotiation strategy with game theory, deal structuring, scenario modeling, preparation frameworks, and contract analysis"
+rules:
+  - contract-analysis.mdc
+  - deal-structuring.mdc
+  - game-theory.mdc
+  - overview.mdc
+  - preparation.mdc
+  - scenario-modeling.mdc

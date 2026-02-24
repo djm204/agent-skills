@@ -1,0 +1,12 @@
+name: ux-designer
+category: creative
+description: "Principal-level UX design with user research, interaction design, design systems, accessibility, and emotional design"
+rules:
+  - accessibility.mdc
+  - emotional-design.mdc
+  - handoff.mdc
+  - information-architecture.mdc
+  - interaction-design.mdc
+  - overview.mdc
+  - research.mdc
+  - visual-design.mdc

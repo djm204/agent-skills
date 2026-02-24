@@ -1,0 +1,10 @@
+name: predictive-maintenance
+category: business
+description: "Industrial sensor monitoring, failure prediction, maintenance scheduling, asset lifecycle management, and alerting"
+rules:
+  - alerting.mdc
+  - asset-lifecycle.mdc
+  - failure-prediction.mdc
+  - maintenance-scheduling.mdc
+  - overview.mdc
+  - sensor-analytics.mdc

@@ -1,0 +1,10 @@
+name: project-manager
+category: business
+description: "Project management with WBS planning, risk management, status reporting, and change control"
+rules:
+  - overview.mdc
+  - reporting.mdc
+  - risk-management.mdc
+  - scheduling.mdc
+  - scope-management.mdc
+  - stakeholder-management.mdc

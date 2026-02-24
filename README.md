@@ -12,7 +12,7 @@
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat)
 ![OpenAI Agents](https://img.shields.io/badge/OpenAI_Agents-412991?style=flat)
 
-A library of **48 expert skill packs** for AI coding assistants and agent frameworks. Each skill pack encodes principal-level behavioral guidance in tiered prompts — install them into Cursor, Claude Code, or GitHub Copilot, or compose them into LangChain, CrewAI, and OpenAI Agents SDK pipelines.
+A library of **44 expert skill packs** for AI coding assistants and agent frameworks. Each skill pack encodes principal-level behavioral guidance in tiered prompts — install them into Cursor, Claude Code, or GitHub Copilot, or compose them into LangChain, CrewAI, and OpenAI Agents SDK pipelines.
 
 > **Disclaimer:** This project is provided for **educational and experimental purposes only**. The author takes no responsibility for any actions, outputs, or consequences resulting from an LLM or AI assistant following these rules. Use at your own risk. Always review AI-generated code before deploying to production.
 
@@ -244,8 +244,6 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 | `grants` | `grant-writer` |
 | `exec`, `ea` | `executive-assistant` |
 | `knowledge` | `knowledge-synthesis` |
-| `wellness` | `wellness-orchestrator` |
-| `life`, `logistics` | `life-logistics` |
 | `research`, `researcher` | `research-assistant` |
 
 **Business**
@@ -271,8 +269,6 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 | `brand` | `brand-guardian` |
 | `social-media` | `social-media-expert` |
 | `content-creation` | `content-creation-expert` |
-| `narrative`, `story` | `narrative-architect` |
-| `trends` | `trend-forecaster` |
 
 **Education & Agents**
 
@@ -283,7 +279,7 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 
 ---
 
-## Available Skills (48)
+## Available Skills (44)
 
 ### Engineering (13)
 
@@ -333,18 +329,16 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 | `supply-chain` | Supply chain operations, procurement, logistics, and vendor management |
 | `supply-chain-harmonizer` | Disruption response, autonomous rerouting, inventory rebalancing, and scenario simulation |
 
-### Creative (6)
+### Creative (4)
 
 | Skill | Description |
 |-------|-------------|
 | `brand-guardian` | Brand voice enforcement, visual identity compliance, and content review workflows |
 | `content-creation-expert` | Content strategy, copywriting, SEO content, multimedia production, and editorial ops |
-| `narrative-architect` | World-building, continuity tracking, timeline management, and story bible governance |
 | `social-media-expert` | Platform strategy, content planning, audience growth, community management, and analytics |
-| `trend-forecaster` | Signal detection, cultural analysis, trend lifecycle modeling, and color/material forecasting |
 | `ux-designer` | User research, interaction design, design systems, accessibility, and emotional design |
 
-### Professional (7)
+### Professional (5)
 
 | Skill | Description |
 |-------|-------------|
@@ -352,9 +346,7 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 | `executive-assistant` | Scheduling, correspondence, meeting management, and executive workflow optimization |
 | `grant-writer` | Proposal strategy, narrative development, budget justification, and funder research |
 | `knowledge-synthesis` | Document ingestion, knowledge graphs, search/retrieval, summarization, and research workflows |
-| `life-logistics` | Scheduling optimization, bill negotiation, insurance comparison, and vendor research |
 | `research-assistant` | Literature review, source evaluation, citation management, and synthesis reporting |
-| `wellness-orchestrator` | Unified wellness planning across fitness, nutrition, sleep, and mental wellness |
 
 ### Education (1)
 

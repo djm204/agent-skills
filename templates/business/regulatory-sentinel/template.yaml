@@ -1,0 +1,10 @@
+name: regulatory-sentinel
+category: business
+description: "Regulatory compliance tracking, impact assessment, monitoring, risk classification, and compliance reporting"
+rules:
+  - compliance-tracking.mdc
+  - impact-assessment.mdc
+  - monitoring.mdc
+  - overview.mdc
+  - reporting.mdc
+  - risk-classification.mdc

@@ -1,0 +1,11 @@
+name: cli-tools
+category: engineering
+description: "Command-line applications and developer tools (Cobra, Commander, Click)"
+rules:
+  - architecture.mdc
+  - arguments.mdc
+  - distribution.mdc
+  - error-handling.mdc
+  - overview.mdc
+  - testing.mdc
+  - user-experience.mdc

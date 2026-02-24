@@ -1,0 +1,12 @@
+name: python-expert
+category: languages
+description: "Python — async, type system, patterns, web/APIs, performance, and testing"
+rules:
+  - async-python.mdc
+  - overview.mdc
+  - patterns-and-idioms.mdc
+  - performance.mdc
+  - testing.mdc
+  - tooling.mdc
+  - type-system.mdc
+  - web-and-apis.mdc

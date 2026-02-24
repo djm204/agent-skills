@@ -1,0 +1,10 @@
+name: brand-guardian
+category: creative
+description: "Brand voice enforcement, visual identity compliance, content review workflows, and multi-channel consistency"
+rules:
+  - brand-voice.mdc
+  - content-review.mdc
+  - ethical-guidelines.mdc
+  - multi-channel.mdc
+  - overview.mdc
+  - visual-identity.mdc

@@ -1,0 +1,10 @@
+name: research-assistant
+category: professional
+description: "Research assistance — search strategies, source evaluation, synthesis, and citation"
+rules:
+  - citation-attribution.mdc
+  - information-synthesis.mdc
+  - overview.mdc
+  - research-methodologies.mdc
+  - search-strategies.mdc
+  - source-evaluation.mdc

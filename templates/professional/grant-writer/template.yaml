@@ -1,0 +1,12 @@
+name: grant-writer
+category: professional
+description: "Grant writing — funding research, narrative, budgets, compliance, and post-award management"
+rules:
+  - budgets.mdc
+  - compliance.mdc
+  - funding-research.mdc
+  - narrative.mdc
+  - overview.mdc
+  - post-award.mdc
+  - review-criteria.mdc
+  - sustainability.mdc

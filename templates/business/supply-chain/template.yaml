@@ -1,0 +1,10 @@
+name: supply-chain
+category: business
+description: "Supply chain management with inventory optimization, demand forecasting, supplier evaluation, and logistics"
+rules:
+  - cost-modeling.mdc
+  - demand-forecasting.mdc
+  - inventory-management.mdc
+  - logistics.mdc
+  - overview.mdc
+  - supplier-evaluation.mdc

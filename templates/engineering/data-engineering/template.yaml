@@ -1,0 +1,11 @@
+name: data-engineering
+category: engineering
+description: "Data platforms and pipelines (ETL, data modeling, data quality)"
+rules:
+  - data-modeling.mdc
+  - data-quality.mdc
+  - overview.mdc
+  - performance.mdc
+  - pipeline-design.mdc
+  - security.mdc
+  - testing.mdc

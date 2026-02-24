@@ -1,0 +1,14 @@
+name: testing
+category: engineering
+description: "Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing)"
+rules:
+  - advanced-techniques.mdc
+  - ci-cd-integration.mdc
+  - overview.mdc
+  - performance-testing.mdc
+  - quality-metrics.mdc
+  - reliability.mdc
+  - tdd-methodology.mdc
+  - test-data.mdc
+  - test-design.mdc
+  - test-types.mdc

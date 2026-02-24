@@ -97,12 +97,10 @@ describe('Constants', () => {
         'javascript-expert',
         'knowledge-synthesis',
         'kotlin-expert',
-        'life-logistics',
         'market-intelligence',
         'marketing-expert',
         'ml-ai',
         'mobile',
-        'narrative-architect',
         'platform-engineering',
         'predictive-maintenance',
         'product-manager',
@@ -120,13 +118,11 @@ describe('Constants', () => {
         'supply-chain',
         'swift-expert',
         'testing',
-        'trend-forecaster',
         'unity-dev-expert',
         'utility-agent',
         'ux-designer',
         'web-backend',
         'web-frontend',
-        'wellness-orchestrator',
       ];
       
       expect(Object.keys(TEMPLATES).sort()).toEqual(expectedTemplates.sort());

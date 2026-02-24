@@ -1,0 +1,10 @@
+name: product-manager
+category: business
+description: "Product management with customer-centric discovery, prioritization, and execution"
+rules:
+  - communication.mdc
+  - discovery.mdc
+  - metrics.mdc
+  - overview.mdc
+  - prioritization.mdc
+  - requirements.mdc

@@ -1,0 +1,12 @@
+name: golang-expert
+category: languages
+description: "Go — idiomatic concurrency, error handling, interfaces, stdlib patterns, and testing"
+rules:
+  - concurrency.mdc
+  - error-handling.mdc
+  - interfaces-and-types.mdc
+  - overview.mdc
+  - performance.mdc
+  - production-patterns.mdc
+  - stdlib-and-tooling.mdc
+  - testing.mdc

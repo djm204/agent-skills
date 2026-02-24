@@ -1,0 +1,12 @@
+name: javascript-expert
+category: languages
+description: "JavaScript and TypeScript — Node.js, React, type system, performance, and testing"
+rules:
+  - language-deep-dive.mdc
+  - node-patterns.mdc
+  - overview.mdc
+  - performance.mdc
+  - react-patterns.mdc
+  - testing.mdc
+  - tooling.mdc
+  - typescript-deep-dive.mdc

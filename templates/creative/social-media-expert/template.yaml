@@ -1,0 +1,10 @@
+name: social-media-expert
+category: creative
+description: "Social media strategy covering platform optimization, content planning, audience growth, community management, and analytics"
+rules:
+  - audience-growth.mdc
+  - community-management.mdc
+  - content-strategy.mdc
+  - overview.mdc
+  - platform-strategy.mdc
+  - social-analytics.mdc

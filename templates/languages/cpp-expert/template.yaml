@@ -1,0 +1,12 @@
+name: cpp-expert
+category: languages
+description: "Modern C++ (C++17/20) — memory safety, concurrency, performance, and tooling"
+rules:
+  - concurrency.mdc
+  - error-handling.mdc
+  - memory-and-ownership.mdc
+  - modern-cpp.mdc
+  - overview.mdc
+  - performance.mdc
+  - testing.mdc
+  - tooling.mdc
