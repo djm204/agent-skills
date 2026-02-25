@@ -19,8 +19,13 @@ import {
   evaluateResponse,
   validateTestCase,
 } from '../testing/test-runner.js';
+import {
+  runBenchmark,
+  scoreBenchmarkCase,
+} from '../benchmarks/runner.js';
 
 export { evaluateResponse, validateTestCase };
+export { runBenchmark, scoreBenchmarkCase };
 
 // Re-export adapter utilities
 export { getAdapter, ADAPTERS };

@@ -12,7 +12,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import { loadSkill, listSkills, getAdapter, ADAPTERS } from './index.js';
+import { loadSkill, listSkills, getAdapter, ADAPTERS, runBenchmark, scoreBenchmarkCase } from './index.js';
 
 // ============================================================================
 // Fixtures
@@ -175,5 +175,19 @@ describe('ADAPTERS re-export', () => {
 
   it('includes the four built-in adapters', () => {
     expect(ADAPTERS).toEqual(expect.arrayContaining(['raw', 'cursor', 'claude-code', 'copilot']));
+  });
+});
+
+// ============================================================================
+// Benchmark re-exports
+// ============================================================================
+
+describe('Benchmark API re-exports', () => {
+  it('exports runBenchmark as a function', () => {
+    expect(typeof runBenchmark).toBe('function');
+  });
+
+  it('exports scoreBenchmarkCase as a function', () => {
+    expect(typeof scoreBenchmarkCase).toBe('function');
   });
 });
