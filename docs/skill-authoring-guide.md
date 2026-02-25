@@ -144,6 +144,12 @@ Fragment files live in `fragments/<name>.md`. The loader replaces references at 
 
 ## Tool Definitions (`tools/*.yaml`)
 
+> **Note:** Tool definitions are **interface contracts**, not implementations. They describe
+> the parameters and return types a tool *would* have if connected to a real service.
+> Adapters serialize these schemas into framework-specific formats (OpenAI function schemas,
+> LangChain StructuredTool stubs, CrewAI BaseTool subclasses), but the actual tool execution
+> is the responsibility of the consuming application.
+
 Define tools the agent can call. Tools are framework-agnostic — adapters map them to the target framework's function-calling format.
 
 ```yaml

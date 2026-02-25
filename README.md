@@ -154,6 +154,8 @@ npx @djm204/agent-skills <skill-name> --adapter=<adapter> [--tier=<tier>] [--out
 | `langchain` | Python `SystemMessagePromptTemplate` | LangChain |
 | `crewai` | Python `Agent(backstory=..., goal=...)` | CrewAI |
 
+> **Note:** Adapters produce formatted prompt strings and code scaffolds — not runtime framework plugins. Tool definitions in skill packs (`tools/*.yaml`) are interface contracts that describe what a tool would accept and return. Your application provides the implementation.
+
 ### Prompt Tiers
 
 Each skill has three standalone prompt tiers. Choose the tier that fits your context budget:
