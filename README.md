@@ -12,9 +12,21 @@
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat)
 ![OpenAI Agents](https://img.shields.io/badge/OpenAI_Agents-412991?style=flat)
 
-A library of **44 expert skill packs** for AI coding assistants and agent frameworks. Each skill pack encodes principal-level behavioral guidance in tiered prompts — install them into Cursor, Claude Code, or GitHub Copilot, or compose them into LangChain, CrewAI, and OpenAI Agents SDK pipelines.
+**44 curated prompt packs** that encode principal-level domain expertise for AI coding assistants. Install into Cursor, Claude Code, or GitHub Copilot — or compose into LangChain, CrewAI, and OpenAI Agents SDK pipelines via adapter templates.
 
 > **Disclaimer:** This project is provided for **educational and experimental purposes only**. The author takes no responsibility for any actions, outputs, or consequences resulting from an LLM or AI assistant following these rules. Use at your own risk. Always review AI-generated code before deploying to production.
+
+## What This Is
+
+- **Tiered behavioral prompts** — each skill has 3 standalone tiers (minimal ~700 tokens, standard ~2,800, comprehensive ~7,500) encoding *how to think* about a domain, not just what to do
+- **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, and GitHub Copilot, with smart merging and conflict detection
+- **Adapter templates** — reformats prompts into framework-specific boilerplate for LangChain, CrewAI, and OpenAI Agents SDK
+
+### What This Isn't (Yet)
+
+- **Not runtime agents** — skills are static prompts injected into context windows, not executable code
+- **Not MCP servers** — the `tools/*.yaml` files define interface contracts for future tool implementations, not working tools (see [Roadmap](#roadmap))
+- **Not deep framework integrations** — adapters produce formatted strings and code scaffolds, not framework plugins
 
 ## Installation
 
@@ -141,6 +153,8 @@ npx @djm204/agent-skills <skill-name> --adapter=<adapter> [--tier=<tier>] [--out
 | `openai-agents` | Python `Agent(instructions=...)` snippet | OpenAI Agents SDK |
 | `langchain` | Python `SystemMessagePromptTemplate` | LangChain |
 | `crewai` | Python `Agent(backstory=..., goal=...)` | CrewAI |
+
+> **Note:** Adapters produce formatted prompt strings and code scaffolds — not runtime framework plugins. Tool definitions in skill packs (`tools/*.yaml`) are interface contracts that describe what a tool would accept and return. Your application provides the implementation.
 
 ### Prompt Tiers
 
@@ -544,6 +558,20 @@ npx @djm204/agent-skills product-manager --adapter=crewai --out=./crew
 npx @djm204/agent-skills web-frontend --adapter=crewai --out=./crew
 npx @djm204/agent-skills qa-engineering --adapter=crewai --out=./crew
 ```
+
+---
+
+## Roadmap
+
+| Phase | What | Status |
+|-------|------|--------|
+| Honest positioning | Clarify what skills are (prompts) vs. what they aren't (agents) | Done |
+| Remove off-brand skills | Cut lifestyle skills, focus on dev/business (48 → 44) | Done |
+| MCP servers | Turn tool schemas into real MCP tools that agents can call | Planned |
+| Effectiveness benchmarks | A/B test prompts vs. no-prompts, publish results | Planned |
+| Model-specific tuning | Test and document per-model tier recommendations | Planned |
+| Real framework integrations | LangChain Runnables, CrewAI Agent subclasses | Future |
+| Runtime composition | Dynamic skill loading based on task detection | Future |
 
 ---
 
