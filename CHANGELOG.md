@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.4.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.3.0...agent-skills-v1.4.0) (2026-02-25)
+
+
+### Features
+
+* A/B benchmark runner for skill effectiveness ([#116](https://github.com/djm204/agent-skills/issues/116)) ([345ca47](https://github.com/djm204/agent-skills/commit/345ca472bbbe2d0cf79683d2d3afde5ad394bfb7))
+* add 38 tool definitions across 13 skills and utility-agent skill pack ([d4152cf](https://github.com/djm204/agent-skills/commit/d4152cfe64cfd8bb197b0d1eef0b7a429c9f85c4))
+* remove 4 off-brand skills (48 → 44) ([#113](https://github.com/djm204/agent-skills/issues/113)) ([b45d23d](https://github.com/djm204/agent-skills/commit/b45d23d8115f1deddb0bf3b6dad06b1c9d3074cb))
+
+
+### Documentation
+
+* honest positioning — reframe messaging, add roadmap ([#115](https://github.com/djm204/agent-skills/issues/115)) ([96be080](https://github.com/djm204/agent-skills/commit/96be08071b04bd666c4f882c72a219a7574153e9))
+
 ## [1.3.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.2.0...agent-skills-v1.3.0) (2026-02-20)
 
 
