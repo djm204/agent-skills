@@ -165,6 +165,7 @@ describe('Constants', () => {
       expect(SHARED_RULES).toContain('communication.mdc');
       expect(SHARED_RULES).toContain('core-principles.mdc');
       expect(SHARED_RULES).toContain('git-workflow.mdc');
+      expect(SHARED_RULES).toContain('review-protocol.mdc');
       expect(SHARED_RULES).toContain('security-fundamentals.mdc');
     });
 
