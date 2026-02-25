@@ -170,6 +170,41 @@ export interface EvaluationResult {
 }
 
 // ============================================================================
+// Benchmark types
+// ============================================================================
+
+export interface BenchmarkCaseScore {
+  score: number;
+  passed: boolean;
+  failures: string[];
+  error?: string;
+}
+
+export interface BenchmarkCaseResult {
+  id: string;
+  prompt: string;
+  baseline: BenchmarkCaseScore;
+  withSkill: BenchmarkCaseScore;
+  /** withSkill.score - baseline.score */
+  delta: number;
+}
+
+export interface BenchmarkSummary {
+  baselinePassRate: number;
+  withSkillPassRate: number;
+  avgDelta: number;
+  totalCases: number;
+  runs: number;
+}
+
+export interface BenchmarkResult {
+  skill: string;
+  systemPrompt: string;
+  cases: BenchmarkCaseResult[];
+  summary: BenchmarkSummary;
+}
+
+// ============================================================================
 // Adapter types
 // ============================================================================
 
@@ -282,3 +317,31 @@ export function getAdapter(name: AdapterName): AdapterFn;
 
 /** List of all registered adapter names. */
 export const ADAPTERS: AdapterName[];
+
+/**
+ * Score a single response against expected assertions.
+ * Returns a fractional score (0-1) based on how many assertions pass.
+ *
+ * @param response - The LLM response text.
+ * @param expected - Assertions to check.
+ */
+export function scoreBenchmarkCase(
+  response: string,
+  expected?: TestExpected
+): BenchmarkCaseScore;
+
+/**
+ * Run a benchmark comparing skill-prompted vs. bare model responses.
+ *
+ * @param suite - Test suite (from loadTestSuite or manual).
+ * @param systemPrompt - The skill's system prompt to benchmark.
+ * @param provider - Async function: (prompt, systemPrompt?) => response string.
+ * @param options.runs - Number of runs per case for averaging. Default 1.
+ * @param options.tags - Filter cases by tag.
+ */
+export function runBenchmark(
+  suite: TestSuite,
+  systemPrompt: string,
+  provider: (prompt: string, systemPrompt?: string) => Promise<string>,
+  options?: { runs?: number; tags?: string[] }
+): Promise<BenchmarkResult>;
