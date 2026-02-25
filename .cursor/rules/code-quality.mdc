@@ -15,7 +15,7 @@ alwaysApply: true
 
 ## DRY
 
-- Abstract repeated patterns into utilities
+- Flag repetition aggressively — abstract repeated patterns into utilities
 - One source of truth for validation logic, constants, configs
 - Don't over-abstract — three similar lines often beats a premature abstraction
 
@@ -28,6 +28,7 @@ alwaysApply: true
 ### Functions
 - Small (<20 lines), single-purpose, 0-3 args, return early to reduce nesting
 - Avoid side effects when possible
+- Explicit over clever — bias toward readable, intentional code
 
 ### Comments
 - Code should be self-documenting; comments explain *why*, not *what*
@@ -45,8 +46,9 @@ alwaysApply: true
 - Prefer immutable updates: `{ ...user, name: newName }` over `user.name = newName`
 - Prefer pure functions
 
-## Avoid Over-Engineering
+## "Engineered Enough"
 
+- No hacky or fragile code, but no over-engineered premature abstractions either
 - Only make changes directly requested or clearly necessary
 - Don't add features or abstractions beyond scope
 - Don't design for hypothetical future requirements

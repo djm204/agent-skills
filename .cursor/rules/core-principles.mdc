@@ -22,10 +22,11 @@ Universal principles that guide all development work, regardless of technology s
 - Prefer explicit over implicit
 - The best code is code you don't have to write
 - If it needs a comment to explain *what* it does, simplify it
+- Thoughtfulness > speed — err on the side of handling more edge cases, not fewer
 
-## 3. Tests Are Required
+## 3. Tests Are Non-Negotiable
 
-- No feature is complete without tests
+- No feature is complete without tests — too many tests beats too few
 - Tests document expected behavior
 - Green CI or it didn't happen
 - Test behavior, not implementation details
