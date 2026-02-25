@@ -561,6 +561,20 @@ npx @djm204/agent-skills qa-engineering --adapter=crewai --out=./crew
 
 ---
 
+## Roadmap
+
+| Phase | What | Status |
+|-------|------|--------|
+| Honest positioning | Clarify what skills are (prompts) vs. what they aren't (agents) | Done |
+| Remove off-brand skills | Cut lifestyle skills, focus on dev/business (48 → 44) | Done |
+| MCP servers | Turn tool schemas into real MCP tools that agents can call | Planned |
+| Effectiveness benchmarks | A/B test prompts vs. no-prompts, publish results | Planned |
+| Model-specific tuning | Test and document per-model tier recommendations | Planned |
+| Real framework integrations | LangChain Runnables, CrewAI Agent subclasses | Future |
+| Runtime composition | Dynamic skill loading based on task detection | Future |
+
+---
+
 ## Requirements
 
 - **Node.js**: 18.0.0 or higher
