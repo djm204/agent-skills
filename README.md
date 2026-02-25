@@ -12,9 +12,21 @@
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat)
 ![OpenAI Agents](https://img.shields.io/badge/OpenAI_Agents-412991?style=flat)
 
-A library of **44 expert skill packs** for AI coding assistants and agent frameworks. Each skill pack encodes principal-level behavioral guidance in tiered prompts — install them into Cursor, Claude Code, or GitHub Copilot, or compose them into LangChain, CrewAI, and OpenAI Agents SDK pipelines.
+**44 curated prompt packs** that encode principal-level domain expertise for AI coding assistants. Install into Cursor, Claude Code, or GitHub Copilot — or compose into LangChain, CrewAI, and OpenAI Agents SDK pipelines via adapter templates.
 
 > **Disclaimer:** This project is provided for **educational and experimental purposes only**. The author takes no responsibility for any actions, outputs, or consequences resulting from an LLM or AI assistant following these rules. Use at your own risk. Always review AI-generated code before deploying to production.
+
+## What This Is
+
+- **Tiered behavioral prompts** — each skill has 3 standalone tiers (minimal ~700 tokens, standard ~2,800, comprehensive ~7,500) encoding *how to think* about a domain, not just what to do
+- **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, and GitHub Copilot, with smart merging and conflict detection
+- **Adapter templates** — reformats prompts into framework-specific boilerplate for LangChain, CrewAI, and OpenAI Agents SDK
+
+### What This Isn't (Yet)
+
+- **Not runtime agents** — skills are static prompts injected into context windows, not executable code
+- **Not MCP servers** — the `tools/*.yaml` files define interface contracts for future tool implementations, not working tools (see [Roadmap](#roadmap))
+- **Not deep framework integrations** — adapters produce formatted strings and code scaffolds, not framework plugins
 
 ## Installation
 
