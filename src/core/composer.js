@@ -192,11 +192,13 @@ export async function composeSkills(skills, options = {}) {
   const rawPrompt = sections.join('\n\n---\n\n');
   const systemPrompt = deduplicateFragments(rawPrompt);
   const estimatedTokens = Math.ceil(systemPrompt.length / 4);
+  const mcp_servers = [...new Set(skills.map((s) => s.mcp_server).filter(Boolean))].sort();
 
   return {
     systemPrompt,
     tools: allTools,
     composition,
     estimatedTokens,
+    mcp_servers,
   };
 }

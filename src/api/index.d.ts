@@ -103,6 +103,8 @@ export interface ComposedSkillPack {
   composition: CompositionEntry[];
   /** Rough token count: Math.ceil(systemPrompt.length / 4). */
   estimatedTokens: number;
+  /** Unique MCP server package names aggregated from all composed skills. */
+  mcp_servers: string[];
 }
 
 // ============================================================================

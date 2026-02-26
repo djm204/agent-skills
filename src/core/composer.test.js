@@ -42,6 +42,7 @@ function makeSkill(overrides = {}) {
     conflicts_with: overrides.conflicts_with || [],
     requires_tools: false,
     requires_memory: false,
+    mcp_server: overrides.mcp_server || null,
   };
 }
 
@@ -220,6 +221,25 @@ describe('composeSkills', () => {
     });
     const primaryEntry = result.composition.find((e) => e.name === 'skill-a');
     expect(['standard', 'comprehensive']).toContain(primaryEntry.tier);
+  });
+
+  it('collects unique mcp_servers from composed skills', async () => {
+    const skillA = makeSkill({ name: 'skill-a', mcp_server: '@djm204/mcp-web' });
+    const skillB = makeSkill({ name: 'skill-b', mcp_server: '@djm204/mcp-data' });
+    const result = await composeSkills([skillA, skillB], { budget: 8000 });
+    expect(result.mcp_servers).toEqual(['@djm204/mcp-data', '@djm204/mcp-web']);
+  });
+
+  it('deduplicates identical mcp_server values', async () => {
+    const skillA = makeSkill({ name: 'skill-a', mcp_server: '@djm204/mcp-web' });
+    const skillB = makeSkill({ name: 'skill-b', mcp_server: '@djm204/mcp-web' });
+    const result = await composeSkills([skillA, skillB], { budget: 8000 });
+    expect(result.mcp_servers).toEqual(['@djm204/mcp-web']);
+  });
+
+  it('returns empty mcp_servers array when no skills have mcp_server', async () => {
+    const result = await composeSkills([SKILL_A, SKILL_B], { budget: 8000 });
+    expect(result.mcp_servers).toEqual([]);
   });
 
   it('deduplicates shared fragment blocks across composed skills', async () => {
