@@ -24,8 +24,23 @@ export function cursorAdapter(skillPack, options = {}) {
   const content = frontMatter + prompt;
   const filePath = `.cursor/rules/${skillPack.name}.mdc`;
 
+  const files = [{ path: filePath, content }];
+
+  if (skillPack.mcp_server) {
+    const serverName = skillPack.mcp_server.replace(/^@[^/]+\//, '');
+    const mcpConfig = {
+      mcpServers: {
+        [serverName]: {
+          command: 'npx',
+          args: ['-y', skillPack.mcp_server],
+        },
+      },
+    };
+    files.push({ path: '.cursor/mcp.json', content: JSON.stringify(mcpConfig, null, 2) });
+  }
+
   return {
-    files: [{ path: filePath, content }],
+    files,
     summary: `Cursor rule: ${filePath} (tier: ${tier})`,
   };
 }
