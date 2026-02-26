@@ -211,6 +211,7 @@ const SHARED_RULES = [
   'communication.mdc',
   'core-principles.mdc',
   'git-workflow.mdc',
+  'review-protocol.mdc',
   'security-fundamentals.mdc'
 ];
 
