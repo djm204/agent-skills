@@ -195,6 +195,70 @@ describe('copilotAdapter', () => {
 });
 
 // ============================================================================
+// MCP config emission tests
+// ============================================================================
+
+const SKILL_PACK_WITH_MCP = {
+  ...SKILL_PACK,
+  mcp_server: '@djm204/mcp-web',
+};
+
+const SKILL_PACK_NO_MCP = {
+  ...SKILL_PACK,
+  mcp_server: null,
+};
+
+describe('claudeCodeAdapter — MCP config', () => {
+  it('emits .claude/settings.json with mcpServers when mcp_server is set', () => {
+    const result = claudeCodeAdapter(SKILL_PACK_WITH_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.claude/settings.json');
+    expect(settingsFile).toBeDefined();
+    const settings = JSON.parse(settingsFile.content);
+    expect(settings.mcpServers).toBeDefined();
+    expect(settings.mcpServers['mcp-web']).toBeDefined();
+  });
+
+  it('uses npx -y <package> pattern for MCP server command', () => {
+    const result = claudeCodeAdapter(SKILL_PACK_WITH_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.claude/settings.json');
+    const settings = JSON.parse(settingsFile.content);
+    expect(settings.mcpServers['mcp-web'].command).toBe('npx');
+    expect(settings.mcpServers['mcp-web'].args).toEqual(['-y', '@djm204/mcp-web']);
+  });
+
+  it('skips MCP config when mcp_server is null', () => {
+    const result = claudeCodeAdapter(SKILL_PACK_NO_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.claude/settings.json');
+    expect(settingsFile).toBeUndefined();
+  });
+});
+
+describe('cursorAdapter — MCP config', () => {
+  it('emits .cursor/mcp.json with mcpServers when mcp_server is set', () => {
+    const result = cursorAdapter(SKILL_PACK_WITH_MCP);
+    const mcpFile = result.files.find((f) => f.path === '.cursor/mcp.json');
+    expect(mcpFile).toBeDefined();
+    const config = JSON.parse(mcpFile.content);
+    expect(config.mcpServers).toBeDefined();
+    expect(config.mcpServers['mcp-web']).toBeDefined();
+  });
+
+  it('uses npx -y <package> pattern for MCP server command', () => {
+    const result = cursorAdapter(SKILL_PACK_WITH_MCP);
+    const mcpFile = result.files.find((f) => f.path === '.cursor/mcp.json');
+    const config = JSON.parse(mcpFile.content);
+    expect(config.mcpServers['mcp-web'].command).toBe('npx');
+    expect(config.mcpServers['mcp-web'].args).toEqual(['-y', '@djm204/mcp-web']);
+  });
+
+  it('skips MCP config when mcp_server is null', () => {
+    const result = cursorAdapter(SKILL_PACK_NO_MCP);
+    const mcpFile = result.files.find((f) => f.path === '.cursor/mcp.json');
+    expect(mcpFile).toBeUndefined();
+  });
+});
+
+// ============================================================================
 // Adapter registry tests
 // ============================================================================
 

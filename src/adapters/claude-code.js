@@ -28,8 +28,23 @@ export function claudeCodeAdapter(skillPack, options = {}) {
 
   const content = header + prompt;
 
+  const files = [{ path: 'CLAUDE.md', content }];
+
+  if (skillPack.mcp_server) {
+    const serverName = skillPack.mcp_server.replace(/^@[^/]+\//, '');
+    const settings = {
+      mcpServers: {
+        [serverName]: {
+          command: 'npx',
+          args: ['-y', skillPack.mcp_server],
+        },
+      },
+    };
+    files.push({ path: '.claude/settings.json', content: JSON.stringify(settings, null, 2) });
+  }
+
   return {
-    files: [{ path: 'CLAUDE.md', content }],
+    files,
     summary: `Claude Code: CLAUDE.md with ${skillPack.name} (tier: ${tier})`,
   };
 }
