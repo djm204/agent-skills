@@ -83,6 +83,8 @@ export interface SkillPack {
   tierUsed: Tier;
   tools: ToolDefinition[];
   output_schemas: OutputSchema[];
+  /** MCP server package name, or null if the skill has no MCP server. */
+  mcp_server: string | null;
 }
 
 // ============================================================================

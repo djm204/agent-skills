@@ -446,6 +446,31 @@ describe('loadSkill', () => {
     expect(skill.tools[0].name).toBe('scenario_model');
   });
 
+  // --------------------------------------------------------------------------
+  // mcp_server field
+  // --------------------------------------------------------------------------
+
+  it('passes through mcp_server when present in manifest', async () => {
+    const skillDir = path.join(tmpDir, 'mcp-skill');
+    createSkillFixture(skillDir, {
+      ...VALID_MANIFEST,
+      mcp_server: '@djm204/mcp-web',
+    });
+
+    const skill = await loadSkill(skillDir);
+
+    expect(skill.mcp_server).toBe('@djm204/mcp-web');
+  });
+
+  it('defaults mcp_server to null when absent from manifest', async () => {
+    const skillDir = path.join(tmpDir, 'no-mcp-skill');
+    createSkillFixture(skillDir);
+
+    const skill = await loadSkill(skillDir);
+
+    expect(skill.mcp_server).toBeNull();
+  });
+
   it('ignores non-yaml files in tools/ directory', async () => {
     const skillDir = path.join(tmpDir, 'skill-tools-nonjson');
     createSkillFixture(skillDir);
@@ -495,6 +520,11 @@ describe('real skills with tool definitions', () => {
     const tool = skill.tools.find(t => t.name === 'query_metrics');
     expect(tool).toBeDefined();
     expect(tool.parameters).toBeDefined();
+  });
+
+  it('research-assistant has mcp_server set to @djm204/mcp-web', async () => {
+    const skill = await loadSkill(path.join(SKILLS_DIR, 'research-assistant'));
+    expect(skill.mcp_server).toBe('@djm204/mcp-web');
   });
 
   it('all tool files have required name and description fields', async () => {

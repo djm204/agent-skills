@@ -328,6 +328,7 @@ export async function loadSkill(skillDir, options = {}) {
     conflicts_with: manifest.conflicts_with || [],
     requires_tools: manifest.requires_tools || false,
     requires_memory: manifest.requires_memory || false,
+    mcp_server: manifest.mcp_server || null,
     prompts,
     systemPrompt: systemPrompt || '',
     tierUsed,
