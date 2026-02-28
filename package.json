@@ -49,9 +49,6 @@
     "skills",
     "README.md"
   ],
-  "workspaces": [
-    "packages/*"
-  ],
   "type": "module",
   "engines": {
     "node": ">=18.0.0"
@@ -63,6 +60,9 @@
     "validate:rules": "node scripts/validate-rule-sizes.js",
     "dogfood": "node scripts/dogfood.js",
     "prepare": "husky"
+  },
+  "dependencies": {
+    "@djm204/mcp-web": "github:djm204/mcp-web"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
