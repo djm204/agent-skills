@@ -1,5 +1,22 @@
 # Changelog
 
+## [1.5.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.4.0...agent-skills-v1.5.0) (2026-03-02)
+
+
+### Features
+
+* add @djm204/mcp-web MCP server package ([#122](https://github.com/djm204/agent-skills/issues/122)) ([bbed918](https://github.com/djm204/agent-skills/commit/bbed9186c5a503ccfd5b18e5a33643b1e4eeaf6a))
+* aggregate mcp_servers in ComposedSkillPack ([#121](https://github.com/djm204/agent-skills/issues/121)) ([d547976](https://github.com/djm204/agent-skills/commit/d54797658575e1c71f720bba15e824218be88569))
+* emit MCP config from claude-code and cursor adapters ([#120](https://github.com/djm204/agent-skills/issues/120)) ([364b5bb](https://github.com/djm204/agent-skills/commit/364b5bb95aaf3455c71f7c3dbb4ec3d9b9e208f8))
+* model-specific tuning — benchmark matrix runner (Plan 04) ([#124](https://github.com/djm204/agent-skills/issues/124)) ([9b73fc4](https://github.com/djm204/agent-skills/commit/9b73fc4bbb76e86356553758c352de61b0ef1072))
+* **shared:** add review protocol and strengthen coding standards ([#117](https://github.com/djm204/agent-skills/issues/117)) ([3cd5a7f](https://github.com/djm204/agent-skills/commit/3cd5a7feae62535c72a1c9a30754244182f1c784))
+* **skill-loader:** add mcp_server field to SkillPack ([#119](https://github.com/djm204/agent-skills/issues/119)) ([1627c36](https://github.com/djm204/agent-skills/commit/1627c3661184dae38a4c022dcaf05c459a99ee19))
+
+
+### Refactoring
+
+* extract mcp-web to its own repo ([#123](https://github.com/djm204/agent-skills/issues/123)) ([bbd9c19](https://github.com/djm204/agent-skills/commit/bbd9c1936bd9a89d124cabd06670827b6eab4185))
+
 ## [1.4.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.3.0...agent-skills-v1.4.0) (2026-02-25)
 
 
