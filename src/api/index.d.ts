@@ -209,6 +209,37 @@ export interface BenchmarkResult {
 }
 
 // ============================================================================
+// Model matrix types
+// ============================================================================
+
+export interface MatrixEntry {
+  model: string;
+  skill: string;
+  tier: Tier;
+  result: BenchmarkResult | null;
+  skipped?: boolean;
+  skipReason?: string;
+}
+
+export interface ModelSummary {
+  bestTier: Tier;
+  avgDelta: number;
+}
+
+export interface ModelMatrixMetadata {
+  skillNames: string[];
+  modelIds: string[];
+  tiers: Tier[];
+  runs: number;
+}
+
+export interface ModelMatrixResult {
+  matrix: MatrixEntry[];
+  summary: Record<string, ModelSummary>;
+  metadata: ModelMatrixMetadata;
+}
+
+// ============================================================================
 // Adapter types
 // ============================================================================
 
@@ -343,6 +374,27 @@ export function scoreBenchmarkCase(
  * @param options.runs - Number of runs per case for averaging. Default 1.
  * @param options.tags - Filter cases by tag.
  */
+/**
+ * Run benchmarks across a matrix of models × skills × tiers.
+ *
+ * @param skillNames - Skill names to benchmark.
+ * @param providers - Map of model IDs to provider functions.
+ * @param options.tiers - Tiers to test. Default: all three.
+ * @param options.runs - Runs per case for variance averaging. Default 1.
+ * @param options.skillsDir - Skills root directory.
+ * @param options.onProgress - Progress callback: (completed, total) => void.
+ */
+export function runModelMatrix(
+  skillNames: string[],
+  providers: Record<string, (prompt: string, systemPrompt?: string) => Promise<string>>,
+  options?: {
+    tiers?: Tier[];
+    runs?: number;
+    skillsDir?: string;
+    onProgress?: (completed: number, total: number) => void;
+  }
+): Promise<ModelMatrixResult>;
+
 export function runBenchmark(
   suite: TestSuite,
   systemPrompt: string,

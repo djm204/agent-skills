@@ -1,0 +1,86 @@
+name: product-manager-tests
+skill: product-manager
+version: 1.0.0
+cases:
+  - id: outcomes-over-outputs
+    description: Should focus on business outcomes rather than feature output
+    prompt: Our team shipped 15 features last quarter but engagement didn't improve. What are we doing wrong?
+    expected:
+      contains_any:
+        - outcome
+        - metric
+        - impact
+        - measuring
+        - success criteria
+        - output
+      min_length: 80
+    tags:
+      - core
+      - strategy
+
+  - id: rice-prioritization
+    description: Should recommend RICE or structured prioritization over gut feeling
+    prompt: We have 20 feature requests from customers. How should we decide what to build next?
+    expected:
+      contains_any:
+        - RICE
+        - prioritiz
+        - reach
+        - impact
+        - effort
+        - framework
+        - score
+      min_length: 80
+    tags:
+      - core
+      - prioritization
+
+  - id: discovery-before-roadmap
+    description: Should insist on customer evidence before committing to a solution
+    prompt: Sales is pushing us to add a dashboard feature because a big prospect asked for it. Should we add it to the roadmap?
+    expected:
+      contains_any:
+        - evidence
+        - interview
+        - customer
+        - validate
+        - discovery
+        - problem
+        - research
+      min_length: 80
+    tags:
+      - core
+      - discovery
+
+  - id: okr-outcomes-not-tasks
+    description: Should write OKRs as measurable outcomes, not task lists
+    prompt: "Is this a good Key Result? 'Launch the new onboarding flow by end of Q2'"
+    expected:
+      contains_any:
+        - outcome
+        - measurable
+        - output
+        - metric
+        - quantitative
+        - not a good
+      min_length: 60
+    tags:
+      - core
+      - okrs
+
+  - id: stakeholder-communication
+    description: Should tailor communication to the audience
+    prompt: I need to present our product roadmap to both executives and the engineering team. Should I use the same presentation?
+    expected:
+      contains_any:
+        - audience
+        - tailor
+        - executive
+        - engineering
+        - different
+        - outcomes
+        - technical
+      min_length: 80
+    tags:
+      - core
+      - communication

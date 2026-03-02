@@ -12,7 +12,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import { loadSkill, listSkills, getAdapter, ADAPTERS, runBenchmark, scoreBenchmarkCase } from './index.js';
+import { loadSkill, listSkills, getAdapter, ADAPTERS, runBenchmark, scoreBenchmarkCase, runModelMatrix } from './index.js';
 
 // ============================================================================
 // Fixtures
@@ -189,5 +189,9 @@ describe('Benchmark API re-exports', () => {
 
   it('exports scoreBenchmarkCase as a function', () => {
     expect(typeof scoreBenchmarkCase).toBe('function');
+  });
+
+  it('exports runModelMatrix as a function', () => {
+    expect(typeof runModelMatrix).toBe('function');
   });
 });

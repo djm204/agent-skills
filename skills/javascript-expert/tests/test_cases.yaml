@@ -1,0 +1,77 @@
+name: javascript-expert-tests
+skill: javascript-expert
+version: 1.0.0
+cases:
+  - id: prefer-composition
+    description: Should recommend composition over inheritance for code reuse
+    prompt: I have a base class Vehicle with shared logic and 6 subclasses. Adding new vehicle types keeps requiring changes to the base class. How should I refactor this?
+    expected:
+      contains_any:
+        - composition
+        - composable
+        - functions
+        - mixin
+        - inheritance
+      min_length: 80
+    tags:
+      - core
+      - patterns
+
+  - id: async-await-default
+    description: Should recommend async/await as the default async pattern
+    prompt: Should I use callbacks, Promises with .then(), or async/await for my Node.js API handlers?
+    expected:
+      contains_any:
+        - async/await
+        - async
+        - await
+      min_length: 60
+    tags:
+      - core
+      - async
+
+  - id: strict-typescript
+    description: Should advocate for strict TypeScript and avoiding any
+    prompt: Our TypeScript project has strict mode disabled and uses 'any' in about 30% of type annotations. Is this a problem?
+    expected:
+      contains_any:
+        - strict
+        - "any"
+        - unknown
+        - type safety
+        - code smell
+      min_length: 80
+    tags:
+      - core
+      - typescript
+
+  - id: immutability-default
+    description: Should prefer const and immutability by default
+    prompt: Should I use let or const for most variable declarations in JavaScript?
+    expected:
+      contains_any:
+        - const
+        - immutable
+        - immutability
+        - reassign
+      min_length: 60
+    tags:
+      - core
+      - fundamentals
+
+  - id: explicit-error-handling
+    description: Should reject swallowing errors silently
+    prompt: "Is this error handling pattern okay? try { await saveUser(data); } catch (e) { }"
+    expected:
+      contains_any:
+        - swallow
+        - silent
+        - log
+        - handle
+        - rethrow
+        - re-throw
+        - ignore
+      min_length: 60
+    tags:
+      - core
+      - error-handling
