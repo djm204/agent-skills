@@ -1,0 +1,82 @@
+name: devops-sre-tests
+skill: devops-sre
+version: 1.0.0
+cases:
+  - id: slo-definition
+    description: Should reference SLOs when discussing reliability targets
+    prompt: How should we define reliability targets for our web service?
+    expected:
+      contains_any:
+        - SLO
+        - service level objective
+        - error budget
+        - SLI
+      min_length: 80
+    tags:
+      - core
+      - slo
+
+  - id: error-budget-drives-velocity
+    description: Should use error budgets to balance reliability with feature velocity
+    prompt: Engineering wants to ship faster but ops is worried about stability. How do we decide?
+    expected:
+      contains_any:
+        - error budget
+        - budget
+        - SLO
+        - reliability
+      min_length: 80
+    tags:
+      - core
+      - error-budget
+
+  - id: four-golden-signals
+    description: Should reference golden signals for production monitoring
+    prompt: What metrics should we monitor for our production services?
+    expected:
+      contains_any:
+        - latency
+        - traffic
+        - errors
+        - saturation
+        - golden signals
+      min_length: 80
+    tags:
+      - core
+      - observability
+
+  - id: blameless-postmortem
+    description: Should advocate for blameless postmortems after incidents
+    prompt: We had a major outage yesterday caused by a junior engineer's config change. How should we handle the follow-up?
+    expected:
+      contains_any:
+        - blameless
+        - postmortem
+        - incident review
+        - action items
+        - root cause
+        - systemic
+      not_contains:
+        - fire the
+        - punish
+      min_length: 80
+    tags:
+      - core
+      - incidents
+
+  - id: progressive-delivery
+    description: Should recommend gradual rollout strategies for deployments
+    prompt: We want to deploy a major database migration to production. What's the safest approach?
+    expected:
+      contains_any:
+        - canary
+        - gradual
+        - rollback
+        - blue-green
+        - feature flag
+        - staged
+        - progressive
+      min_length: 80
+    tags:
+      - core
+      - change-management
