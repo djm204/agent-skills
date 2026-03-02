@@ -23,9 +23,10 @@ import {
   runBenchmark,
   scoreBenchmarkCase,
 } from '../benchmarks/runner.js';
+import { runModelMatrix } from '../benchmarks/model-matrix.js';
 
 export { evaluateResponse, validateTestCase };
-export { runBenchmark, scoreBenchmarkCase };
+export { runBenchmark, scoreBenchmarkCase, runModelMatrix };
 
 // Re-export adapter utilities
 export { getAdapter, ADAPTERS };
