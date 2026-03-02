@@ -1523,6 +1523,16 @@ async function skillInstall(skillName, adapterName, { tier = 'standard', skillsD
   }
 
   console.log(colors.green(`✓ ${summary}`));
+
+  // Surface tier recommendation based on adapter's implied model family
+  const TIER_HINTS = {
+    'claude-code': { tier: 'standard', model: 'Claude' },
+  };
+  const hint = TIER_HINTS[adapterName];
+  if (hint && tier !== hint.tier) {
+    console.log(colors.dim(`  Tip: For ${hint.model} models, the ${hint.tier} tier is recommended. See docs/model-tuning-guide.md`));
+  }
+
   return { files, summary };
 }
 
