@@ -24,6 +24,7 @@ import {
   scoreBenchmarkCase,
 } from '../benchmarks/runner.js';
 import { runModelMatrix } from '../benchmarks/model-matrix.js';
+import { exportSkills as _exportSkills } from '../core/skill-exporter.js';
 
 export { evaluateResponse, validateTestCase };
 export { runBenchmark, scoreBenchmarkCase, runModelMatrix };
@@ -130,4 +131,15 @@ export function loadTestSuite(skillPath) {
  */
 export async function runTestSuite(suite, provider, options = {}) {
   return _runTestSuite(suite, provider, options);
+}
+
+/**
+ * Export all skills as JSON manifest + prompt files.
+ *
+ * @param {string} skillsDir - Directory containing skill subdirectories
+ * @param {{ outDir?: string }} [options]
+ * @returns {Promise<{ skills: object[], skillCount: number, outputDir: string }>}
+ */
+export async function exportSkills(skillsDir, options = {}) {
+  return _exportSkills(path.resolve(skillsDir), options);
 }

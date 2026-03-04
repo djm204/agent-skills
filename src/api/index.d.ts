@@ -401,3 +401,42 @@ export function runBenchmark(
   provider: (prompt: string, systemPrompt?: string) => Promise<string>,
   options?: { runs?: number; tags?: string[] }
 ): Promise<BenchmarkResult>;
+
+// ============================================================================
+// Skill export types
+// ============================================================================
+
+export interface ExportedSkill {
+  name: string;
+  version: string;
+  category: string;
+  tags: string[];
+  description: SkillDescription;
+  context_budget: ContextBudget;
+  composable_with: ComposableWith;
+  conflicts_with: string[];
+  requires_tools: boolean;
+  requires_memory: boolean;
+  mcp_server: string | null;
+  tools: ToolDefinition[];
+  /** Tier names that have prompt files available. */
+  prompts: Tier[];
+}
+
+export interface ExportResult {
+  skills: ExportedSkill[];
+  skillCount: number;
+  outputDir: string;
+}
+
+/**
+ * Export all skills as a JSON manifest + prompt files.
+ * Writes skills.json and skills/<name>/<tier>.md to the output directory.
+ *
+ * @param skillsDir - Directory containing skill subdirectories.
+ * @param options.outDir - Output directory. Default: './export'.
+ */
+export function exportSkills(
+  skillsDir: string,
+  options?: { outDir?: string }
+): Promise<ExportResult>;
