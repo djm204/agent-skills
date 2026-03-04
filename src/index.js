@@ -7,6 +7,7 @@ import { loadTestSuite } from './testing/test-runner.js';
 import { getAdapter, ADAPTERS } from './adapters/index.js';
 import { loadSkill } from './core/skill-loader.js';
 import { composeSkills } from './core/composer.js';
+import { exportSkills } from './core/skill-exporter.js';
 
 const execAsync = promisify(exec);
 
@@ -1622,6 +1623,7 @@ export async function run(args) {
   let removeMode = false;
   let resetMode = false;
   let testMode = false;
+  let exportFormat = null;
   let testSkillsDir = null;
   let adapterName = null;
   let adapterTier = 'standard';
@@ -1656,6 +1658,11 @@ export async function run(args) {
       resetMode = true;
     } else if (arg === '--test') {
       testMode = true;
+    } else if (arg.startsWith('--export=')) {
+      exportFormat = arg.slice(9).toLowerCase();
+      if (exportFormat !== 'json') {
+        throw new Error(`Unsupported export format: "${exportFormat}". Supported: json`);
+      }
     } else if (arg.startsWith('--skill-dir=')) {
       testSkillsDir = arg.slice(12);
       adapterSkillsDir = arg.slice(12);
@@ -1708,6 +1715,20 @@ export async function run(args) {
 
   // Use default IDEs if none specified
   const targetIdes = ides.length > 0 ? ides : DEFAULT_IDES;
+
+  // Handle --export mode
+  if (exportFormat) {
+    const resolvedSkillsDir = path.resolve(adapterSkillsDir || 'skills');
+    const outDir = adapterOutDir || './export';
+
+    console.log(`\n${colors.cyan('Exporting skills as JSON...')}`);
+    const result = await exportSkills(resolvedSkillsDir, { outDir });
+
+    console.log(`${colors.green('✓')} Exported ${result.skillCount} skills to ${colors.cyan(result.outputDir)}`);
+    console.log(`  ${colors.dim('skills.json')} — metadata for all skills`);
+    console.log(`  ${colors.dim('skills/<name>/<tier>.md')} — prompt files\n`);
+    return result;
+  }
 
   // Handle --test mode
   if (testMode) {
