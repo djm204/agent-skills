@@ -8,6 +8,8 @@ import { getAdapter, ADAPTERS } from './adapters/index.js';
 import { loadSkill } from './core/skill-loader.js';
 import { composeSkills } from './core/composer.js';
 import { exportSkills } from './core/skill-exporter.js';
+import { detectContext } from './core/context-detector.js';
+import { selectSkills } from './core/skill-selector.js';
 
 const execAsync = promisify(exec);
 
@@ -1624,6 +1626,8 @@ export async function run(args) {
   let resetMode = false;
   let testMode = false;
   let exportFormat = null;
+  let autoMode = false;
+  let autoPrompt = null;
   let testSkillsDir = null;
   let adapterName = null;
   let adapterTier = 'standard';
@@ -1663,6 +1667,10 @@ export async function run(args) {
       if (exportFormat !== 'json') {
         throw new Error(`Unsupported export format: "${exportFormat}". Supported: json`);
       }
+    } else if (arg === '--auto') {
+      autoMode = true;
+    } else if (arg.startsWith('--prompt=')) {
+      autoPrompt = arg.slice(9);
     } else if (arg.startsWith('--skill-dir=')) {
       testSkillsDir = arg.slice(12);
       adapterSkillsDir = arg.slice(12);
@@ -1728,6 +1736,91 @@ export async function run(args) {
     console.log(`  ${colors.dim('skills.json')} — metadata for all skills`);
     console.log(`  ${colors.dim('skills/<name>/<tier>.md')} — prompt files\n`);
     return result;
+  }
+
+  // Handle --auto mode
+  if (autoMode) {
+    const resolvedSkillsDir = path.resolve(adapterSkillsDir || 'skills');
+
+    // Detect context from cwd
+    const context = detectContext(process.cwd());
+    console.log(`\n${colors.cyan('Auto-detecting skills for this project...')}`);
+
+    if (context.language) {
+      console.log(`  Language: ${colors.yellow(context.language)}`);
+    }
+    if (context.frameworks.length > 0) {
+      console.log(`  Frameworks: ${colors.yellow(context.frameworks.join(', '))}`);
+    }
+
+    // Build skill catalog from available skills
+    const catalog = [];
+    if (fs.existsSync(resolvedSkillsDir)) {
+      const entries = fs.readdirSync(resolvedSkillsDir, { withFileTypes: true });
+      for (const entry of entries) {
+        if (!entry.isDirectory()) continue;
+        const skillDir = path.join(resolvedSkillsDir, entry.name);
+        if (!fs.existsSync(path.join(skillDir, 'skill.yaml'))) continue;
+        try {
+          const pack = await loadSkill(skillDir);
+          catalog.push({
+            name: pack.name,
+            category: pack.category,
+            tags: pack.tags,
+            description: pack.description,
+            context_budget: pack.context_budget,
+            composable_with: pack.composable_with,
+            conflicts_with: pack.conflicts_with,
+            path: skillDir,
+          });
+        } catch {
+          // Skip invalid skills
+        }
+      }
+    }
+
+    // Select skills
+    const selected = selectSkills(autoPrompt || '', context, {
+      catalog,
+      maxSkills: 5,
+      budget: adapterBudget || undefined,
+    });
+
+    if (selected.length === 0) {
+      console.log(`\n${colors.yellow('No matching skills found for this project.')}`);
+      return { selected: [], context };
+    }
+
+    console.log(`\n${colors.cyan('Selected skills:')}`);
+    for (const s of selected) {
+      console.log(`  ${colors.green('●')} ${s.name} ${colors.dim(`(score: ${s.score})`)}`);
+    }
+
+    if (dryRun) {
+      console.log(`\n${colors.dim('Dry run — no changes made.')}`);
+      return { selected, context };
+    }
+
+    // Install selected skills using the specified adapter or default IDEs
+    if (adapterName) {
+      const skillNames = selected.map((s) => s.name);
+      if (adapterBudget !== null || skillNames.length > 1) {
+        await skillCompose(skillNames, adapterName, {
+          budget: adapterBudget || 8000,
+          primary: adapterPrimary,
+          skillsDir: adapterSkillsDir,
+          outDir: adapterOutDir,
+        });
+      } else {
+        await skillInstall(skillNames[0], adapterName, {
+          tier: adapterTier,
+          skillsDir: adapterSkillsDir,
+          outDir: adapterOutDir,
+        });
+      }
+    }
+
+    return { selected, context };
   }
 
   // Handle --test mode

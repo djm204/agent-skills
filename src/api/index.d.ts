@@ -440,3 +440,57 @@ export function exportSkills(
   skillsDir: string,
   options?: { outDir?: string }
 ): Promise<ExportResult>;
+
+// ============================================================================
+// Runtime composition types
+// ============================================================================
+
+export interface ContextSignals {
+  language: string | null;
+  frameworks: string[];
+  packageManager: string | null;
+  ci: string | null;
+  testFramework: string | null;
+}
+
+export interface SelectedSkill {
+  name: string;
+  score: number;
+  meta: SkillMeta & {
+    context_budget: ContextBudget;
+    composable_with: ComposableWith;
+    conflicts_with: string[];
+  };
+}
+
+/**
+ * Detect language, framework, and tooling from a working directory.
+ * Scans top level + one level deep. No recursive tree walk.
+ *
+ * @param cwd - Directory to scan.
+ */
+export function detectContext(cwd: string): ContextSignals;
+
+/**
+ * Select and rank skills by relevance using keyword + tag scoring.
+ * Pure heuristic — no LLM calls required.
+ *
+ * @param prompt - User's input text.
+ * @param context - Codebase signals from detectContext().
+ * @param options.catalog - Skill metadata array to select from.
+ * @param options.maxSkills - Maximum skills to return. Default 5.
+ * @param options.budget - Token budget constraint (uses minimal tier costs).
+ */
+export function selectSkills(
+  prompt: string,
+  context?: Partial<ContextSignals>,
+  options?: {
+    catalog?: Array<SkillMeta & {
+      context_budget: ContextBudget;
+      composable_with?: ComposableWith;
+      conflicts_with?: string[];
+    }>;
+    maxSkills?: number;
+    budget?: number;
+  }
+): SelectedSkill[];

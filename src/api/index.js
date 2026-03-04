@@ -25,6 +25,8 @@ import {
 } from '../benchmarks/runner.js';
 import { runModelMatrix } from '../benchmarks/model-matrix.js';
 import { exportSkills as _exportSkills } from '../core/skill-exporter.js';
+import { selectSkills } from '../core/skill-selector.js';
+import { detectContext } from '../core/context-detector.js';
 
 export { evaluateResponse, validateTestCase };
 export { runBenchmark, scoreBenchmarkCase, runModelMatrix };
@@ -143,3 +145,6 @@ export async function runTestSuite(suite, provider, options = {}) {
 export async function exportSkills(skillsDir, options = {}) {
   return _exportSkills(path.resolve(skillsDir), options);
 }
+
+// Re-export runtime composition utilities
+export { selectSkills, detectContext };
