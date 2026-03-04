@@ -10,6 +10,7 @@ import { composeSkills } from './core/composer.js';
 import { exportSkills } from './core/skill-exporter.js';
 import { detectContext } from './core/context-detector.js';
 import { selectSkills } from './core/skill-selector.js';
+import { trackUsage, getUsageReport, clearUsageData } from './analytics/tracker.js';
 
 const execAsync = promisify(exec);
 
@@ -1628,6 +1629,10 @@ export async function run(args) {
   let exportFormat = null;
   let autoMode = false;
   let autoPrompt = null;
+  let statsMode = false;
+  let statsJson = false;
+  let clearStats = false;
+  let noTracking = false;
   let testSkillsDir = null;
   let adapterName = null;
   let adapterTier = 'standard';
@@ -1671,6 +1676,14 @@ export async function run(args) {
       autoMode = true;
     } else if (arg.startsWith('--prompt=')) {
       autoPrompt = arg.slice(9);
+    } else if (arg === '--stats') {
+      statsMode = true;
+    } else if (arg === '--json') {
+      statsJson = true;
+    } else if (arg === '--clear-stats') {
+      clearStats = true;
+    } else if (arg === '--no-tracking') {
+      noTracking = true;
     } else if (arg.startsWith('--skill-dir=')) {
       testSkillsDir = arg.slice(12);
       adapterSkillsDir = arg.slice(12);
@@ -1723,6 +1736,60 @@ export async function run(args) {
 
   // Use default IDEs if none specified
   const targetIdes = ides.length > 0 ? ides : DEFAULT_IDES;
+
+  // Handle --no-tracking (set env var for this process)
+  if (noTracking) {
+    process.env.AGENT_SKILLS_NO_TRACKING = '1';
+  }
+
+  // Handle --clear-stats
+  if (clearStats) {
+    clearUsageData();
+    console.log(`${colors.green('✓')} Usage data cleared.`);
+    if (!statsMode) return;
+  }
+
+  // Handle --stats
+  if (statsMode) {
+    const report = getUsageReport();
+
+    if (statsJson) {
+      console.log(JSON.stringify(report, null, 2));
+      return report;
+    }
+
+    console.log(`\n${colors.cyan('Agent Skills Usage Report')}\n`);
+
+    if (report.totalEvents === 0) {
+      console.log(`${colors.dim('No usage data recorded yet.')}\n`);
+      return report;
+    }
+
+    console.log(`Total events: ${report.totalEvents}`);
+    console.log(`Compositions: ${report.composeCount}\n`);
+
+    // Most installed skills
+    const sorted = Object.entries(report.skillCounts).sort(([, a], [, b]) => b - a);
+    if (sorted.length > 0) {
+      console.log(`${colors.cyan('Most installed skills:')}`);
+      for (const [skill, count] of sorted.slice(0, 10)) {
+        console.log(`  ${count}× ${skill}`);
+      }
+      console.log('');
+    }
+
+    // Adapter usage
+    const adapters = Object.entries(report.adapterCounts);
+    if (adapters.length > 0) {
+      console.log(`${colors.cyan('Adapter usage:')}`);
+      for (const [adapter, count] of adapters.sort(([, a], [, b]) => b - a)) {
+        console.log(`  ${count}× ${adapter}`);
+      }
+      console.log('');
+    }
+
+    return report;
+  }
 
   // Handle --export mode
   if (exportFormat) {
