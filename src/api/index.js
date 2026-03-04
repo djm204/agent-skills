@@ -27,6 +27,7 @@ import { runModelMatrix } from '../benchmarks/model-matrix.js';
 import { exportSkills as _exportSkills } from '../core/skill-exporter.js';
 import { selectSkills } from '../core/skill-selector.js';
 import { detectContext } from '../core/context-detector.js';
+import { trackUsage, getUsageReport, clearUsageData, isTrackingEnabled } from '../analytics/tracker.js';
 
 export { evaluateResponse, validateTestCase };
 export { runBenchmark, scoreBenchmarkCase, runModelMatrix };
@@ -148,3 +149,6 @@ export async function exportSkills(skillsDir, options = {}) {
 
 // Re-export runtime composition utilities
 export { selectSkills, detectContext };
+
+// Re-export analytics utilities
+export { trackUsage, getUsageReport, clearUsageData, isTrackingEnabled };

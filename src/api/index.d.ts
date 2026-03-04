@@ -494,3 +494,63 @@ export function selectSkills(
     budget?: number;
   }
 ): SelectedSkill[];
+
+// ============================================================================
+// Analytics types
+// ============================================================================
+
+export interface UsageEvent {
+  type: 'install' | 'compose' | 'remove';
+  skills: string[];
+  timestamp?: string;
+  tier?: Tier;
+  ide?: string;
+  adapter?: string;
+  budget?: number;
+  autoSelected?: boolean;
+  projectLanguage?: string;
+  [key: string]: unknown;
+}
+
+export interface UsageReport {
+  totalEvents: number;
+  skillCounts: Record<string, number>;
+  composeCount: number;
+  adapterCounts: Record<string, number>;
+}
+
+/**
+ * Append a usage event to the local tracking file.
+ * No-op if tracking is disabled (CI, env var).
+ *
+ * @param event - Event data to track.
+ * @param options.usageFile - Override default usage file path.
+ */
+export function trackUsage(
+  event: UsageEvent,
+  options?: { usageFile?: string }
+): void;
+
+/**
+ * Generate a usage report from the local tracking file.
+ *
+ * @param options.usageFile - Override default usage file path.
+ */
+export function getUsageReport(
+  options?: { usageFile?: string }
+): UsageReport;
+
+/**
+ * Remove all local usage tracking data.
+ *
+ * @param options.usageFile - Override default usage file path.
+ */
+export function clearUsageData(
+  options?: { usageFile?: string }
+): void;
+
+/**
+ * Check if usage tracking is enabled.
+ * Returns false in CI or when AGENT_SKILLS_NO_TRACKING=1.
+ */
+export function isTrackingEnabled(): boolean;
