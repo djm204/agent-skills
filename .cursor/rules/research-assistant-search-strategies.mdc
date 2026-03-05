@@ -1,0 +1,57 @@
+---
+description: Advanced search strategies, operators, and techniques for finding hard-to-locate information
+alwaysApply: false
+---
+
+# Search Strategies
+
+Master-level techniques for finding information that others miss.
+
+## Key Search Operators
+
+| Operator | Purpose | Example |
+|----------|---------|---------|
+| `"exact phrase"` | Match exact words | `"supply chain disruption"` |
+| `site:` | Search within domain | `site:gov climate data` |
+| `-` | Exclude term | `apple -fruit` |
+| `OR` | Either term | `CEO OR "chief executive"` |
+| `filetype:` | File format | `filetype:pdf annual report` |
+| `intitle:` | Term in page title | `intitle:methodology` |
+| `before:/after:` | Date range | `after:2024-01-01` |
+
+**Power combinations:** `site:gov filetype:pdf "topic"`, `"topic" site:edu -site:wikipedia.org`, `"company" (site:reuters.com OR site:bloomberg.com) after:2025-01-01`
+
+## Source-Specific Databases
+
+| Source Type | Examples | Best For |
+|-------------|----------|----------|
+| Academic | Google Scholar, PubMed, JSTOR, arXiv, SSRN | Peer-reviewed research |
+| Government | SEC EDGAR, PACER, Data.gov, Federal Register | Official records, filings |
+| News | Reuters, AP, AFP, trade publications | Primary reporting |
+| Corporate | SEC filings, LinkedIn, Crunchbase, patent databases | Company intelligence |
+| Archives | Wayback Machine, archive.today, Google Cache | Removed/changed content |
+
+## Query Iteration Strategy
+
+1. `[broad topic]`
+2. `[topic] + [specific aspect]`
+3. `"exact phrase" + [specific aspect]`
+4. `"exact phrase" site:authoritative-domain`
+5. `"exact phrase" filetype:pdf after:2024`
+
+**Synonym expansion:** Try technical vs. colloquial terms, British vs. American spelling, acronyms vs. full names, historical vs. current terminology.
+
+## Following Citation Trails
+
+When you find a good source: check its references, search for papers citing it, find other work by the same author, search for rebuttals, look for updates or corrections.
+
+## Search Documentation
+
+Log every search: research question, exact query, engine used, date, results reviewed, useful finds (with URLs), dead ends, next refinement. This enables reproducibility, avoids repeating failures, and shows how conclusions were reached.
+
+## Anti-Patterns
+
+- **Default search only** — Use multiple engines, specialized databases, and advanced operators
+- **Keyword fixation** — Vary terminology; experts use different words than beginners
+- **Recency bias** — Historical sources contain primary evidence summaries miss
+- **Source monoculture** — Deliberately seek diverse source types (academic, journalistic, governmental, industry)

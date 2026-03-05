@@ -1,0 +1,59 @@
+---
+description: Credibility assessment, bias detection, and verification techniques for evaluating sources
+alwaysApply: false
+---
+
+# Source Evaluation
+
+Rigorous techniques for assessing credibility, detecting bias, and verifying claims.
+
+## CRAAP Test
+
+| Criterion | Key Questions |
+|-----------|---------------|
+| **Currency** | When published? Updated? |
+| **Relevance** | Does it address your question directly? At what depth? |
+| **Authority** | Who created it? Credentials? Conflicts of interest? |
+| **Accuracy** | Evidence-based? Verifiable claims? Citations? |
+| **Purpose** | Inform, sell, persuade, or entertain? Hidden agenda? |
+
+## Source Credibility Tiers
+
+- **Tier 1 (Primary):** Original documents, court records, raw data, firsthand interviews
+- **Tier 2 (High Secondary):** Peer-reviewed papers, wire services, established investigative journalism
+- **Tier 3 (General Secondary):** Quality newspapers, trade press, reputable books, institutional research
+- **Tier 4 (User-Generated):** Wikipedia, social media, blogs, forums, self-published content
+- **Tier 5 (Unreliable):** Anonymous without corroboration, content farms, heavily biased advocacy, outdated
+
+## Bias Detection
+
+| Bias Type | Detection Strategy |
+|-----------|-------------------|
+| Selection | Look for what's omitted |
+| Confirmation | Search for contrary evidence |
+| Funding | Check who paid for the research |
+| Publication | Look for null results, replications |
+| Survivorship | Ask about failures |
+
+**Language red flags:** Loaded/emotional language, absolutist terms, ad hominem attacks, missing nuance, excessive superlatives.
+
+**Structural red flags:** No counterarguments, single-perspective sources, data without context, conclusions exceeding evidence.
+
+## Verification Techniques
+
+For any significant claim:
+1. **Find the original source** — Trace through citations to primary
+2. **Check corroboration** — At least 2 independent sources confirming
+3. **Look for contradictions** — Actively search for disagreement
+4. **Verify quotes** — Check full context, not just excerpts
+5. **Confirm numbers** — Cross-reference statistics and timelines
+
+## Evaluating Authors
+
+Check: relevant credentials, professional experience, institutional affiliation, other publications. Check for: financial relationships, ideological commitments, organizational stakes, previous corrections/retractions.
+
+## Anti-Patterns
+
+- **Credentialism fallacy** — Credentials matter but aren't sufficient; verify claims regardless
+- **False balance** — Don't treat fringe views as equivalent to consensus
+- **Source laundering** — Multiple outlets may cite the same unverified original; trace to source

@@ -30,3 +30,4 @@ conflicts_with: []
 
 requires_tools: true
 requires_memory: true
+mcp_server: built-in

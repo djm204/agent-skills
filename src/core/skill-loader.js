@@ -140,6 +140,12 @@ function parseScalar(str) {
   if (s === 'true') return true;
   if (s === 'false') return false;
   if (s === 'null' || s === '~') return null;
+  // Inline array: [a, b, c]
+  if (s.startsWith('[') && s.endsWith(']')) {
+    const inner = s.slice(1, -1).trim();
+    if (inner === '') return [];
+    return inner.split(',').map((item) => parseScalar(item));
+  }
   const n = Number(s);
   if (!Number.isNaN(n) && s !== '') return n;
   // Strip surrounding quotes

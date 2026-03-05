@@ -26,14 +26,16 @@
     "url": "https://github.com/djm204/agent-skills/issues"
   },
   "bin": {
-    "agent-skills": "bin/cli.js"
+    "agent-skills": "bin/cli.js",
+    "agent-skills-serve": "bin/mcp-serve.js"
   },
   "exports": {
     ".": "./src/index.js",
     "./api": {
       "types": "./src/api/index.d.ts",
       "default": "./src/api/index.js"
-    }
+    },
+    "./mcp": "./src/mcp/server.js"
   },
   "typesVersions": {
     "*": {
@@ -47,6 +49,7 @@
     "src",
     "templates",
     "skills",
+    "fragments",
     "README.md"
   ],
   "type": "module",
@@ -62,7 +65,9 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@djm204/mcp-web": "github:djm204/mcp-web"
+    "@djm204/mcp-web": "github:djm204/mcp-web",
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",

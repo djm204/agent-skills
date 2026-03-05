@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import { loadSkill, validateManifest, REQUIRED_MANIFEST_FIELDS } from './skill-loader.js';
+import { loadSkill, validateManifest, parseYaml, REQUIRED_MANIFEST_FIELDS } from './skill-loader.js';
 
 // ============================================================================
 // Fixtures
@@ -73,6 +73,37 @@ function createSkillFixture(dir, manifest = VALID_MANIFEST, prompts = {}) {
 // ============================================================================
 // Tests
 // ============================================================================
+
+describe('parseYaml — inline arrays', () => {
+  it('parses inline arrays [a, b, c] as arrays', () => {
+    const yaml = 'colors: [red, green, blue]';
+    const result = parseYaml(yaml);
+    expect(result.colors).toEqual(['red', 'green', 'blue']);
+  });
+
+  it('parses inline arrays with quoted strings', () => {
+    const yaml = 'items: ["hello world", "foo bar"]';
+    const result = parseYaml(yaml);
+    expect(result.items).toEqual(['hello world', 'foo bar']);
+  });
+
+  it('parses inline arrays with numbers', () => {
+    const yaml = 'values: [1, 2, 3]';
+    const result = parseYaml(yaml);
+    expect(result.values).toEqual([1, 2, 3]);
+  });
+
+  it('parses enum field with inline array in nested YAML', () => {
+    const yaml = [
+      'priority:',
+      '  type: string',
+      '  enum: [normal, high, urgent]',
+      '  required: false',
+    ].join('\n');
+    const result = parseYaml(yaml);
+    expect(result.priority.enum).toEqual(['normal', 'high', 'urgent']);
+  });
+});
 
 describe('REQUIRED_MANIFEST_FIELDS', () => {
   it('includes all required top-level fields', () => {
@@ -522,9 +553,9 @@ describe('real skills with tool definitions', () => {
     expect(tool.parameters).toBeDefined();
   });
 
-  it('research-assistant has mcp_server set to @djm204/mcp-web', async () => {
+  it('research-assistant has mcp_server set to built-in', async () => {
     const skill = await loadSkill(path.join(SKILLS_DIR, 'research-assistant'));
-    expect(skill.mcp_server).toBe('@djm204/mcp-web');
+    expect(skill.mcp_server).toBe('built-in');
   });
 
   it('all tool files have required name and description fields', async () => {

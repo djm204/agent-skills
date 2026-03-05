@@ -39,6 +39,13 @@ graph TB
         Frags["Fragments<br/>fragments/"]
     end
 
+    subgraph MCP["MCP Server Layer — src/mcp/"]
+        McpServer["MCP Server Factory<br/>server.js"]
+        SchemaConv["Schema Converter<br/>schema-converter.js"]
+        HandlerReg["Handler Registry<br/>handler-registry.js"]
+        StubHandler["Stub Handlers<br/>handlers/stub.js"]
+    end
+
     subgraph Support["Support Systems"]
         Analytics["Usage Tracker<br/>src/analytics/"]
         Testing["Test Runner<br/>src/testing/"]
@@ -76,6 +83,14 @@ graph TB
     CLI --> Analytics
     API --> Testing
     API --> Benchmarks
+
+    CLI -->|serve| McpServer
+    API --> McpServer
+    McpServer --> SchemaConv
+    McpServer --> HandlerReg
+    HandlerReg --> StubHandler
+    SchemaConv -->|Zod schemas| McpServer
+    Loader --> McpServer
 ```
 
 ---
@@ -307,7 +322,8 @@ erDiagram
 ```
 @djm204/agent-skills/
 ├── bin/
-│   └── cli.js                     # CLI entry point → calls src/index.js run()
+│   ├── cli.js                     # CLI entry point → calls src/index.js run()
+│   └── mcp-serve.js               # Standalone MCP entry → npx @djm204/agent-skills-serve
 ├── src/
 │   ├── index.js                   # CLI orchestrator (~1800 lines)
 │   │                              #   - arg parsing, alias resolution
@@ -332,6 +348,12 @@ erDiagram
 │   │   ├── openai-agents.js       # OpenAI Agents SDK (Python)
 │   │   ├── langchain.js           # LangChain agent (Python)
 │   │   └── crewai.js              # CrewAI agent (Python)
+│   ├── mcp/
+│   │   ├── server.js              # MCP server factory (createMcpServer + startServer)
+│   │   ├── schema-converter.js    # YAML tool params → Zod schemas
+│   │   ├── handler-registry.js    # Priority: built-in > user > stub
+│   │   └── handlers/
+│   │       └── stub.js            # Auto-generated "not implemented" responses
 │   ├── analytics/
 │   │   └── tracker.js             # Local usage tracking (JSON Lines)
 │   ├── benchmarks/
@@ -397,6 +419,9 @@ graph TB
     subgraph Integration["Integration Layer"]
         AdapterReg["Adapter Registry"]
         AdapterImpl["7 Adapter Implementations"]
+        McpSrv["MCP Server Factory"]
+        McpSchema["Schema Converter"]
+        McpHandlers["Handler Registry"]
         Tracker["Usage Tracker"]
         TestRunner["Test Runner"]
         BenchRunner["Benchmark Runner"]
@@ -424,9 +449,14 @@ graph TB
     SkillExporter --> Loader
 
     AdapterReg --> AdapterImpl
+    McpSrv --> McpSchema
+    McpSrv --> McpHandlers
+    McpSrv --> Loader
     TestRunner --> Loader
     BenchRunner --> Loader
 
+    CLI_Main -->|serve| McpSrv
+    API_Surface --> McpSrv
     API_Surface --> TestRunner
     API_Surface --> BenchRunner
     API_Surface --> Tracker
@@ -581,6 +611,77 @@ graph LR
 
 ---
 
+## MCP Server
+
+The generic MCP server (`src/mcp/server.js`) turns any skill's tool schemas into live MCP tools. See [ADR-003](adrs/003-generic-mcp-server.md) for the architectural decision.
+
+```mermaid
+sequenceDiagram
+    participant Client as MCP Client
+    participant Server as McpServer
+    participant Registry as HandlerRegistry
+    participant Schema as SchemaConverter
+    participant Stub as StubHandler
+
+    Note over Server: createMcpServer(skillPack)
+    Server->>Schema: convertParametersToZod(tool.parameters)
+    Schema-->>Server: Zod schema
+    Server->>Registry: resolve(toolName, toolDef)
+    alt Built-in handler exists
+        Registry-->>Server: builtinHandler
+    else User handler exists
+        Registry-->>Server: userHandler
+    else No handler
+        Registry->>Stub: createStubHandler(toolDef)
+        Stub-->>Registry: stubFn
+        Registry-->>Server: stubFn
+    end
+    Server->>Server: server.tool(name, desc, schema, handler)
+
+    Note over Client,Server: Runtime
+    Client->>Server: callTool({ name, params })
+    Server->>Server: Validate params via Zod
+    Server->>Registry: handler(params)
+    Registry-->>Server: MCP result
+    Server-->>Client: { content: [{ type, text }] }
+```
+
+### Handler Priority
+
+| Priority | Source | How to register |
+|----------|--------|----------------|
+| 1 (highest) | Built-in | `builtinHandlers` option in `createMcpServer()` |
+| 2 | User-provided | `.js` files in `--handler-dir` directory |
+| 3 (fallback) | Stub | Auto-generated "not implemented" JSON response |
+
+### CLI Usage
+
+```bash
+# Via main CLI
+npx @djm204/agent-skills serve research-assistant
+npx @djm204/agent-skills serve research-assistant --handler-dir=./my-handlers
+
+# Via standalone entry (for MCP client config)
+npx @djm204/agent-skills-serve research-assistant
+```
+
+### Programmatic Usage
+
+```javascript
+import { createMcpServer, loadSkill } from '@djm204/agent-skills/api';
+
+const skill = await loadSkill('skills/research-assistant');
+const { server } = await createMcpServer(skill, {
+  builtinHandlers: {
+    web_search: async (params) => ({
+      content: [{ type: 'text', text: JSON.stringify(results) }],
+    }),
+  },
+});
+```
+
+---
+
 ## Analytics (Privacy-First)
 
 - **Storage**: `~/.agent-skills/usage.jsonl` (local, append-only JSON Lines)
@@ -617,6 +718,11 @@ Options:
   --export                  Export skills as JSON
   --auto                    Auto-select skills based on project context
   --stats                   Show usage statistics
+
+MCP Server:
+  agent-skills serve <skill>                    Start MCP server for a skill
+  agent-skills serve <skill> --handler-dir=DIR  Use custom tool handlers
+  agent-skills serve <skill> --tier=TIER        Load specific prompt tier
 ```
 
 ---
@@ -626,6 +732,8 @@ Options:
 | Dependency | Purpose | Type |
 |-----------|---------|------|
 | Node.js built-ins (fs, path, os, child_process) | File I/O, process management | Runtime |
+| @modelcontextprotocol/sdk | MCP server implementation | Runtime |
+| zod | Schema validation for MCP tools | Runtime |
 | vitest | Test framework | Dev |
 | husky | Git hooks | Dev |
 | @commitlint/cli + config-conventional | Commit message validation | Dev |

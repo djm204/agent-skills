@@ -1,0 +1,75 @@
+---
+description: Code Comments
+alwaysApply: false
+---
+
+# Code Comments
+
+Guidelines for inline comments, docstrings, and API documentation.
+
+## Comment Hierarchy
+
+### Self-Documenting Code (Preferred)
+
+```typescript
+// Bad: const d = 86400; // seconds in a day
+// Good:
+const SECONDS_PER_DAY = 86400;
+```
+
+### Inline Comments — Why, Not What
+
+```typescript
+// Good: Explains why
+// Retry with backoff because payment API is flaky during peak hours
+await retryWithBackoff(processPayment, 3);
+
+// Bad: Explains what (obvious from code)
+// Increment counter by 1
+counter++;
+```
+
+### Warning Comments
+
+```typescript
+// WARNING: Not thread-safe. Always call from main thread.
+function updateGlobalState() { ... }
+
+// HACK: Workaround for Chrome bug #12345. Remove after Chrome 120.
+element.style.transform = 'translateZ(0)';
+```
+
+## API Documentation (Docstrings)
+
+```typescript
+/**
+ * Calculates total price including tax and discounts.
+ *
+ * @param items - Array of cart items to price
+ * @param taxRate - Tax rate as decimal (e.g., 0.08 for 8%)
+ * @param couponCode - Optional discount coupon
+ * @returns The final price in cents
+ * @throws {InvalidCouponError} If coupon is expired or invalid
+ */
+function calculateTotal(
+  items: CartItem[], taxRate: number, couponCode?: string
+): number { ... }
+```
+
+## What to Document
+
+**Always:** Public functions (what, params, returns, errors, examples for complex APIs), non-obvious constraints (thread safety, perf, valid ranges), side effects (API calls, DB writes, FS changes)
+
+**Skip:** Obvious getters/setters, private implementation details, self-explanatory one-liners
+
+## Anti-Patterns
+
+- **Commented-out code** — Use version control instead
+- **Noise comments** — `// Constructor` or `// Loop through users` adds nothing
+- **Outdated comments** — Update or delete; a lying comment is worse than none
+
+## Formatting Conventions
+
+- Single-line: sentence case with period
+- Multi-line: `/** */` for API docs, proper grammar
+- Action items: `TODO(user)`, `FIXME`, `HACK`, `NOTE` — be consistent

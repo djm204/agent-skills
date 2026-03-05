@@ -1,0 +1,65 @@
+---
+description: Analysis frameworks, pattern recognition, and synthesis techniques for combining research findings
+alwaysApply: false
+---
+
+# Information Synthesis
+
+Techniques for combining disparate findings into coherent, actionable understanding.
+
+## Synthesis Process
+
+1. **Organize** — Catalog sources, tag by topic/credibility, note gaps and contradictions
+2. **Identify Patterns** — What do sources agree on? Where do they diverge? What themes emerge?
+3. **Reconcile Contradictions** — Examine methodology differences, consider context/timing, assess source quality
+4. **Build Understanding** — Construct narrative from evidence, test against all data, assign confidence levels
+5. **Validate** — Seek disconfirming evidence, consider alternative explanations, check logical consistency
+6. **Communicate** — Lead with insights, provide evidence chains, acknowledge limitations
+
+## Analysis Frameworks
+
+**Argument Mapping:** Main Claim → Supporting Evidence (with sub-evidence) + Counter-evidence (with rebuttals or unaddressed).
+
+**Comparative Matrix:** Factors (weighted 1-5) scored per option, weighted totals compared.
+
+**SWOT:** Strengths, Weaknesses, Opportunities, Threats — with specific questions for each.
+
+**Five Whys:** State problem → Ask "Why?" iteratively (typically 5 times) to reach root cause.
+
+**Timeline Analysis:** Events with dates, key actors, significance, causal links, and subsequent developments.
+
+## Pattern Recognition
+
+| Pattern | Description | Key Question |
+|---------|-------------|--------------|
+| Convergence | Multiple sources agree | Same original source? |
+| Divergence | Sources disagree | What explains the difference? |
+| Silence | Expected info missing | Why isn't this discussed? |
+| Anomaly | Unexpected finding | Signal or noise? |
+| Trend | Change over time | What's driving it? |
+| Correlation | Things co-occur | Causation? Confounding? |
+
+## Handling Contradictions
+
+1. Verify you understand each position (different definitions?)
+2. Examine methodology (different methods, periods, populations?)
+3. Consider context (changed over time? different perspectives?)
+4. Assess source quality (one more authoritative? conflicts of interest?)
+5. Seek resolution (both partially correct? unresolvable? flag it)
+
+## Confidence Levels
+
+| Level | Definition | Criteria |
+|-------|------------|----------|
+| High | Very likely true | 3+ independent quality sources agree |
+| Medium | Probably true | 2+ sources agree, minor gaps |
+| Low | Possibly true | Single source, conflicting evidence |
+| Speculative | Unknown | No direct evidence, inference only |
+
+Use precise language: "evidence strongly suggests" (high), "appears likely" (medium), "some sources indicate" (low), "cannot determine from available evidence" (speculative).
+
+## Anti-Patterns
+
+- **Premature closure** — Keep synthesizing as new info arrives; seek disconfirming evidence
+- **Equal weighting** — Weight evidence by source quality, directness, and corroboration
+- **Narrative over evidence** — Let evidence drive narrative; address uncomfortable facts

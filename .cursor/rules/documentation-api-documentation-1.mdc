@@ -1,0 +1,64 @@
+---
+description: API Documentation
+alwaysApply: false
+---
+
+# API Documentation
+
+Guidelines for documenting REST, GraphQL, and library APIs.
+
+## Design-First Approach
+
+Write the API specification before implementation. This catches design issues early, enables parallel development, creates documentation as a byproduct, and prevents implementation details leaking into contracts.
+
+## Endpoint Documentation Requirements
+
+Every endpoint must have:
+- **Summary** — One-line description
+- **Description** — Detailed behavior explanation
+- **Parameters** — All path, query, header parameters
+- **Request body** — Schema with examples
+- **Responses** — All possible response codes (success *and* errors)
+- **Authentication** — Required auth method
+- **Examples** — Real-world usage
+
+## OpenAPI Best Practices
+
+- Use `$ref` for reusable schemas and responses
+- Provide `example` values for all properties
+- Document enums with descriptions
+- Include multiple request/response examples for complex endpoints
+- Specify `required` fields explicitly
+
+## GraphQL Documentation
+
+- Add descriptions to all types, fields, queries, and mutations
+- Document nullable vs non-nullable fields
+- Specify pagination limits and cursor behavior
+- Document required permissions/scopes per operation
+
+## Library/SDK Documentation
+
+```typescript
+/**
+ * Creates a new payment.
+ *
+ * @param params - Payment parameters
+ * @returns The created payment object
+ * @throws {CardDeclinedError} Card declined by issuer
+ * @throws {RateLimitError} Rate limit exceeded
+ */
+async createPayment(params: CreatePaymentParams): Promise<Payment>;
+```
+
+## Keeping Docs in Sync
+
+- **Single source of truth** — Generate from code annotations or spec, never maintain parallel docs
+- **CI validation** — Lint OpenAPI spec, check for breaking changes against main branch
+- **Versioning** — Document version in API path, maintain docs for all supported versions, mark deprecated endpoints clearly
+
+## Anti-Patterns
+
+- **Only documenting success** — Always document error responses (400, 401, 403, 404, 429, 500)
+- **Vague descriptions** — "Gets the thing" doesn't help; be specific and actionable
+- **No examples** — Include realistic example values for every schema and endpoint

@@ -27,15 +27,22 @@ export function cursorAdapter(skillPack, options = {}) {
   const files = [{ path: filePath, content }];
 
   if (skillPack.mcp_server) {
-    const serverName = skillPack.mcp_server.replace(/^@[^/]+\//, '');
-    const mcpConfig = {
-      mcpServers: {
-        [serverName]: {
-          command: 'npx',
-          args: ['-y', skillPack.mcp_server],
-        },
-      },
-    };
+    let serverEntry;
+    if (skillPack.mcp_server === 'built-in') {
+      serverEntry = {
+        command: 'npx',
+        args: ['-y', '@djm204/agent-skills-serve', skillPack.name],
+      };
+    } else {
+      serverEntry = {
+        command: 'npx',
+        args: ['-y', skillPack.mcp_server],
+      };
+    }
+    const serverName = skillPack.mcp_server === 'built-in'
+      ? `agent-skills-${skillPack.name}`
+      : skillPack.mcp_server.replace(/^@[^/]+\//, '');
+    const mcpConfig = { mcpServers: { [serverName]: serverEntry } };
     files.push({ path: '.cursor/mcp.json', content: JSON.stringify(mcpConfig, null, 2) });
   }
 
