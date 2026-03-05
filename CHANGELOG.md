@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.6.0...agent-skills-v1.7.0) (2026-03-05)
+
+
+### Features
+
+* security-expert skill, architecture docs, and coding challenge tests ([#129](https://github.com/djm204/agent-skills/issues/129)) ([47b5f6b](https://github.com/djm204/agent-skills/commit/47b5f6b63de95aad701676ca4c6eff3144733c6f))
+
 ## [1.6.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.5.0...agent-skills-v1.6.0) (2026-03-04)
 
 
