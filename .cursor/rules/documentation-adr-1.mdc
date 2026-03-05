@@ -1,0 +1,65 @@
+---
+description: Architecture Decision Records (ADRs)
+alwaysApply: false
+---
+
+# Architecture Decision Records (ADRs)
+
+Guidelines for documenting architectural decisions and their rationale.
+
+## Purpose
+
+ADRs capture architecturally significant decisions — choices affecting system structure, non-functional characteristics, external dependencies, development approaches, or standards. They prevent rehashing debates, document tradeoffs, and help future developers understand *why*.
+
+## ADR Format
+
+```markdown
+# ADR-NNN: [Title]
+
+## Status
+Accepted | Proposed | Deprecated | Superseded | Rejected
+
+## Context
+What's the situation? What problem are we solving? Key requirements and constraints.
+
+## Decision
+What did we decide? Be specific.
+
+## Consequences
+Positive, negative, and neutral outcomes. Be specific and measurable.
+```
+
+### Y-Statement (Ultra-Minimal)
+
+For smaller decisions: *In the context of **X**, facing **Y**, we decided for **Z** to achieve **W**, accepting **trade-off**.*
+
+## When to Write an ADR
+
+**Write one when:** Choosing between multiple valid approaches, making long-term-consequence decisions, introducing new patterns/technologies, deviating from conventions, team disagreement exists.
+
+**Skip when:** Following established patterns, easily reversible choices, standard library usage, implementation details (not architecture).
+
+## Lifecycle
+
+- **Never delete ADRs** — they document decision history including mistakes
+- Mark superseded ADRs with a link to the replacement
+- Add a supersession note explaining why the decision changed
+
+## What to Capture
+
+1. **Requirements/Constraints** — What must the solution do?
+2. **Options Considered** — What alternatives were evaluated?
+3. **Decision Drivers** — What factors influenced the choice?
+4. **Tradeoffs** — What are we giving up?
+5. **Consequences** — What changes as a result?
+
+## File Organization
+
+- Store in `docs/adr/` with naming: `adr-NNN-short-title.md`
+- Maintain an index file listing all ADRs with status and date
+
+## Anti-Patterns
+
+- **Documenting after the fact** — Write during the decision, not 6 months later
+- **Missing alternatives** — Always show what else was considered
+- **Vague consequences** — Be specific and measurable, not "some impact on performance"

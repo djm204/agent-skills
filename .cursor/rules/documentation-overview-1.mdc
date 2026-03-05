@@ -1,0 +1,48 @@
+---
+description: Documentation Standards
+alwaysApply: false
+---
+
+# Documentation Standards
+
+Guidelines for effective technical documentation across all project types.
+
+## Core Principles
+
+- **Minimum Viable Documentation** — Small, fresh, accurate docs beat a large stale assembly
+- **Write for Humans First** — Code tells computers what to do; docs tell humans *why*
+- **Radical Simplicity** — Fewer distractions make for better writing and productive reading
+- **Better is Better Than Best** — Incremental improvement beats prolonged debate
+
+## The Documentation Spectrum
+
+1. **Meaningful names** — Self-documenting code through good naming
+2. **Inline comments** — Why the code exists, not what it does
+3. **API documentation** — Method/class contracts (JSDoc, docstrings)
+4. **README files** — Orientation for new users
+5. **Guides and tutorials** — How to accomplish specific tasks
+6. **ADRs** — Why we chose this approach
+
+## When to Document
+
+**Always:** Public APIs, non-obvious business logic, architectural decisions, setup/install, configuration, breaking changes
+
+**Skip:** What code literally does, obvious behavior types express, frequently-changing implementation details
+
+## Documentation as Code
+
+**Same-Commit Rule:** Change documentation in the same commit as the code change. This keeps docs fresh, provides reviewer context, and ensures sync.
+
+## Review Checklist
+
+- [ ] Docstrings updated for changed functions
+- [ ] README updated if behavior changes
+- [ ] API docs reflect new endpoints/parameters
+- [ ] ADR created for significant decisions
+
+## Definition of Done
+
+- New public APIs have docstrings
+- README reflects current state
+- Complex logic has explanatory comments
+- Setup instructions tested and working

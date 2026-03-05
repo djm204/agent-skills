@@ -30,4 +30,4 @@ conflicts_with: []
 
 requires_tools: true
 requires_memory: false
-mcp_server: "@djm204/mcp-web"
+mcp_server: built-in

@@ -1,0 +1,54 @@
+---
+description: Research methodologies for different contexts - academic, investigative, market, competitive, and OSINT
+alwaysApply: false
+---
+
+# Research Methodologies
+
+Systematic approaches for different types of research challenges.
+
+## Methodology Selection
+
+| Research Type | Primary Goal | Key Methods | Typical Sources |
+|---------------|--------------|-------------|-----------------|
+| Academic | Advance knowledge | Literature/systematic review | Journals, conferences, preprints |
+| Investigative | Uncover hidden info | Document analysis, FOIA, interviews | Primary documents, records |
+| Market | Inform decisions | Surveys, competitive intel | Industry reports, filings, experts |
+| Technical | Solve problems | Doc review, experimentation | Docs, code, specs, forums |
+| Due Diligence | Assess risk | Background checks, verification | Public records, references |
+
+## Academic Research
+
+**Literature review process:** Define question (PICO format) → Develop search protocol (databases, terms, criteria) → Execute (document all queries) → Screen (title/abstract, then full-text) → Extract data → Synthesize (themes, contradictions, evidence quality) → Report.
+
+**Citation analysis:** Forward (who cites this), backward (reference list), co-citation (frequently cited together), author tracking. Check preprints for paywalled papers.
+
+## Investigative Research
+
+**Document flow:** Identify what documents should exist → Determine who holds them → Acquire (FOIA, court filings, regulatory filings) → Analyze (timeline, relationships, patterns) → Fill gaps (interviews, additional requests) → Verify across sources.
+
+## OSINT Techniques
+
+| Technique | Application |
+|-----------|-------------|
+| Social media analysis | Track individuals, organizations, events |
+| Domain/IP research | Identify ownership (WHOIS, Shodan) |
+| Image analysis | Verify photos (reverse image search, ExifTool) |
+| Corporate records | Ownership, officers (OpenCorporates, state DBs) |
+| Archive research | Historical/deleted content (Wayback Machine) |
+
+## Market and Competitive Research
+
+**Competitive intelligence:** Basic profile → Financial analysis (filings, funding) → Strategic analysis (stated vs. revealed strategy, M&A) → Operational intel (tech stack from job postings, patent activity, hiring patterns) → Strengths/weaknesses (reviews, employee sentiment).
+
+**Market sizing approaches:** Top-down (total → segment → target), bottom-up (unit economics × customers), value theory (value × willingness to pay), analogous (similar market × adjustments).
+
+## Technical Research
+
+Define requirements → Landscape survey → Deep evaluation (docs, community health, security, benchmarks) → Proof of concept → Weighted scoring decision.
+
+## Matching Rigor to Stakes
+
+- **Low stakes:** Quick search, single source OK
+- **Medium stakes:** Multiple sources, basic verification
+- **High stakes:** Systematic methodology, full documentation, expert review

@@ -259,6 +259,39 @@ describe('cursorAdapter — MCP config', () => {
 });
 
 // ============================================================================
+// Built-in MCP server tests
+// ============================================================================
+
+const SKILL_PACK_BUILTIN_MCP = {
+  ...SKILL_PACK,
+  mcp_server: 'built-in',
+};
+
+describe('claudeCodeAdapter — built-in MCP server', () => {
+  it('emits agent-skills-serve command for built-in MCP', () => {
+    const result = claudeCodeAdapter(SKILL_PACK_BUILTIN_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.claude/settings.json');
+    expect(settingsFile).toBeDefined();
+    const settings = JSON.parse(settingsFile.content);
+    const serverName = `agent-skills-${SKILL_PACK.name}`;
+    expect(settings.mcpServers[serverName].command).toBe('npx');
+    expect(settings.mcpServers[serverName].args).toEqual(['-y', '@djm204/agent-skills-serve', SKILL_PACK.name]);
+  });
+});
+
+describe('cursorAdapter — built-in MCP server', () => {
+  it('emits agent-skills-serve command for built-in MCP', () => {
+    const result = cursorAdapter(SKILL_PACK_BUILTIN_MCP);
+    const mcpFile = result.files.find((f) => f.path === '.cursor/mcp.json');
+    expect(mcpFile).toBeDefined();
+    const config = JSON.parse(mcpFile.content);
+    const serverName = `agent-skills-${SKILL_PACK.name}`;
+    expect(config.mcpServers[serverName].command).toBe('npx');
+    expect(config.mcpServers[serverName].args).toEqual(['-y', '@djm204/agent-skills-serve', SKILL_PACK.name]);
+  });
+});
+
+// ============================================================================
 // Adapter registry tests
 // ============================================================================
 

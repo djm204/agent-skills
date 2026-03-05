@@ -1,0 +1,61 @@
+---
+description: Citation practices, attribution standards, and plagiarism prevention for research integrity
+alwaysApply: false
+---
+
+# Citation and Attribution
+
+Standards for crediting sources and maintaining research integrity.
+
+## When to Cite
+
+**Always cite:** Direct quotes, paraphrased ideas from specific sources, statistics/data, non-common-knowledge facts, others' images/charts/frameworks, borrowed methodologies.
+
+**No citation needed:** Common knowledge, your own original analysis, general field knowledge, your own observations.
+
+## Minimum Citation Elements
+
+Author(s) or organization, title, publication date, access date (for web), URL or DOI, page numbers (for quotes/data).
+
+## Quick Formats
+
+- **Web:** Author. "Title." Publication, Date. URL. Accessed Date.
+- **Paper:** Author. "Title." Journal Vol, no. Issue (Year): Pages. DOI.
+- **Book:** Author. Title. Publisher, Year.
+- **Report:** Organization. "Title." Report Number, Date. URL.
+
+## In-Text Attribution
+
+- Direct quote: `"the market grew by 15% in Q4" (Smith 2025, p. 12)`
+- Paraphrase: `Market growth accelerated (Smith 2025)`
+- Conflicting: `Smith (2025) argues for expansion, while Jones (2024) urges caution`
+- Confidence: `According to [Source]` (direct), `Research indicates` (multiple sources), `Unverified reports suggest` (low confidence)
+
+## Handling Secondary Sources
+
+When you can't access the original, acknowledge it: "Einstein reportedly said X, as quoted in Smith (2020, p. 45)." Best practice: find and cite the original.
+
+## Plagiarism Prevention
+
+| Type | Description |
+|------|-------------|
+| Direct | Copying text without quotes or citation |
+| Mosaic | Mixing your words with uncited borrowed phrases |
+| Paraphrase | Rewording ideas without attribution |
+| Source | Citing wrong source or fabricating citations |
+
+**Acceptable paraphrase:** Read, set aside, write in own words, compare for sufficient difference, add citation. Merely changing a few words or rearranging sentences is not acceptable.
+
+## Citation Ethics
+
+- Don't cite sources you haven't read
+- Don't misrepresent what sources say
+- Note obvious biases relevant to claims
+- Disclose relationships with authors/organizations
+- Acknowledge when sources are limited or conflicting
+
+## Anti-Patterns
+
+- **Citation padding** — Every citation must directly support the specific claim it's attached to
+- **Orphan statistics** — "Studies show 73%..." needs which studies, when, what methodology
+- **Stale citations** — Use recent sources for current facts; historical only for historical context

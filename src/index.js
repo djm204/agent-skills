@@ -1629,6 +1629,8 @@ export async function run(args) {
   let exportFormat = null;
   let autoMode = false;
   let autoPrompt = null;
+  let serveMode = false;
+  let handlerDir = null;
   let statsMode = false;
   let statsJson = false;
   let clearStats = false;
@@ -1674,6 +1676,10 @@ export async function run(args) {
       }
     } else if (arg === '--auto') {
       autoMode = true;
+    } else if (arg === 'serve') {
+      serveMode = true;
+    } else if (arg.startsWith('--handler-dir=')) {
+      handlerDir = arg.slice(14);
     } else if (arg.startsWith('--prompt=')) {
       autoPrompt = arg.slice(9);
     } else if (arg === '--stats') {
@@ -1736,6 +1742,37 @@ export async function run(args) {
 
   // Use default IDEs if none specified
   const targetIdes = ides.length > 0 ? ides : DEFAULT_IDES;
+
+  // Handle serve mode — start an MCP server for a skill
+  if (serveMode) {
+    const skillName = resolvedTemplates[0];
+    if (!skillName) {
+      throw new Error('Usage: agent-skills serve <skill-name> [--skill-dir=...] [--tier=...] [--handler-dir=...]');
+    }
+
+    const skillsDir = path.resolve(adapterSkillsDir || 'skills');
+    const skillDir = path.join(skillsDir, skillName);
+    const skill = await loadSkill(skillDir, { tier: adapterTier });
+
+    if (skill.tools.length === 0) {
+      throw new Error(`Skill "${skillName}" has no tools defined. Only skills with tools/ can be served via MCP.`);
+    }
+
+    if (dryRun) {
+      console.log(`\n${colors.cyan('MCP server would start for:')} ${skillName}`);
+      console.log(`  Tools: ${skill.tools.map((t) => t.name).join(', ')}`);
+      console.log(`  Tier: ${adapterTier}`);
+      if (handlerDir) console.log(`  Handler dir: ${handlerDir}`);
+      return { skill: skillName, tools: skill.tools.length, tier: adapterTier, handlerDir: handlerDir || null };
+    }
+
+    const { createMcpServer, startServer } = await import('./mcp/server.js');
+    const { server } = await createMcpServer(skill, { handlerDir });
+
+    process.stderr.write(`MCP server started: ${skillName} (${skill.tools.length} tools)\n`);
+    await startServer({ server });
+    return;
+  }
 
   // Handle --no-tracking (set env var for this process)
   if (noTracking) {

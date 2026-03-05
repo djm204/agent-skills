@@ -1,0 +1,70 @@
+---
+description: README Standards
+alwaysApply: false
+---
+
+# README Standards
+
+Guidelines for writing effective README files that orient users quickly.
+
+## Purpose
+
+A README is the front door to your project. It should orient new users immediately, provide essential "getting started" info, link to detailed docs, and be scannable in under 2 minutes.
+
+## Required Sections (Minimum Viable README)
+
+1. **Project name + one-line description**
+2. **Quick start** (install + basic usage, max 3-5 copy-pasteable commands)
+3. **Basic usage example**
+
+## Complete README Structure
+
+- **Project Name** — Actual name + one sentence describing what it does (no buzzwords)
+- **Quick Start** — Fastest path to "hello world", should work on first try
+- **Features** — Bullet list of key capabilities
+- **Installation** — Prerequisites, step-by-step setup
+- **Usage** — Simple case first, then progressively complex examples
+- **Configuration** — Table format: variable, type/description, default
+- **API Reference** — Link to detailed docs
+- **Contributing** — Link to CONTRIBUTING.md
+- **License**
+
+## Section Guidelines
+
+### Quick Start
+
+```markdown
+## Quick Start
+\`\`\`bash
+npx create-my-app my-project
+cd my-project
+npm start
+\`\`\`
+```
+
+### Configuration Tables
+
+```markdown
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `timeout` | `number` | `30000` | Request timeout in ms |
+| `retries` | `number` | `0` | Retry attempts |
+```
+
+## Directory READMEs
+
+For READMEs inside project directories: brief purpose, structure overview, conventions, and key files.
+
+## Anti-Patterns
+
+- **Stale info** — Link to source of truth (e.g., `package.json`) instead of hardcoding versions
+- **Wall of text** — Get to the point; no project history essays
+- **Missing examples** — Always provide copy-pasteable commands
+- **Broken links** — Link to repo files, not external wikis that rot
+
+## Maintenance
+
+- Update README when behavior changes
+- Test all code examples periodically
+- Verify links work
+- Remove outdated sections

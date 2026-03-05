@@ -1,0 +1,58 @@
+---
+description: Documentation Maintenance
+alwaysApply: false
+---
+
+# Documentation Maintenance
+
+Guidelines for keeping documentation fresh, accurate, and useful.
+
+## The Same-Commit Rule
+
+**Documentation changes belong in the same commit as code changes.** This keeps docs fresh, provides reviewer context, and prevents drift.
+
+## Delete Dead Documentation
+
+Signs of dead docs: references to removed features, non-compiling examples, broken links, outdated screenshots, non-working instructions, stale TODOs.
+
+**Default to delete** when uncertain. Archive important history in ADRs. Don't preserve for nostalgia — that's what git history is for.
+
+## Regular Maintenance
+
+### Quarterly Review Checklist
+
+- [ ] All README quick-start instructions work
+- [ ] Code examples compile and run
+- [ ] Links resolve correctly
+- [ ] API docs match implementation
+- [ ] No TODO/FIXME comments older than 90 days
+
+## Documentation Ownership
+
+- Every doc should have an owner (team or individual)
+- Review triggers: related code changes, user confusion, new team member struggles, 90 days since last review
+
+## Preventing Decay
+
+- **Link to source of truth** — Don't duplicate info that drifts (e.g., link to `package.json` for supported versions)
+- **Generate when possible** — Derive docs from code/config
+- **Use versioned references** — Pin links to specific versions
+
+## Handling Outdated Docs
+
+- **Update** when core info is correct and structure is sound
+- **Rewrite** when fundamental approach changed or >50% needs changes
+- **Delete** when no longer needed
+
+## Code Review Checklist
+
+- [ ] Docstrings added/updated for changed functions
+- [ ] README reflects new features
+- [ ] API docs updated for endpoint changes
+- [ ] Examples are tested
+
+## Anti-Patterns
+
+- **"We'll document it later"** — Later means never. Document as you code.
+- **Documentation-only PRs** — Large doc PRs signal docs weren't updated with code
+- **Separate doc repos** — Creates sync issues; keep docs with code

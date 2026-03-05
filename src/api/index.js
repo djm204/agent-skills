@@ -152,3 +152,6 @@ export { selectSkills, detectContext };
 
 // Re-export analytics utilities
 export { trackUsage, getUsageReport, clearUsageData, isTrackingEnabled };
+
+// Re-export MCP server factory
+export { createMcpServer } from '../mcp/server.js';

@@ -554,3 +554,36 @@ export function clearUsageData(
  * Returns false in CI or when AGENT_SKILLS_NO_TRACKING=1.
  */
 export function isTrackingEnabled(): boolean;
+
+// ============================================================================
+// MCP Server
+// ============================================================================
+
+/** Options for creating an MCP server. */
+export interface McpServerOptions {
+  /** Directory of custom handler .js files (each exports default async function). */
+  handlerDir?: string;
+  /** Built-in handler functions keyed by tool name. */
+  builtinHandlers?: Record<string, (params: Record<string, unknown>) => Promise<McpToolResult>>;
+}
+
+/** MCP tool response shape. */
+export interface McpToolResult {
+  content: Array<{ type: string; text: string }>;
+}
+
+/** Result of createMcpServer(). */
+export interface McpServerResult {
+  /** The McpServer instance from @modelcontextprotocol/sdk. */
+  server: unknown;
+}
+
+/**
+ * Create an MCP server for a skill pack.
+ * Registers all tools from the skill's tools/ directory and exposes
+ * skill prompts as MCP resources at `skill://<name>/prompt/<tier>`.
+ */
+export function createMcpServer(
+  skillPack: SkillPack,
+  options?: McpServerOptions
+): Promise<McpServerResult>;

@@ -21,11 +21,11 @@
 - **Tiered behavioral prompts** — each skill has 3 standalone tiers (minimal ~700 tokens, standard ~2,800, comprehensive ~7,500) encoding *how to think* about a domain, not just what to do
 - **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, and GitHub Copilot, with smart merging and conflict detection
 - **Adapter templates** — reformats prompts into framework-specific boilerplate for LangChain, CrewAI, and OpenAI Agents SDK
+- **MCP servers** — 13 skills define tool schemas that can be served over MCP, making them callable by any MCP-compatible agent
 
 ### What This Isn't (Yet)
 
 - **Not runtime agents** — skills are static prompts injected into context windows, not executable code
-- **Not MCP servers** — the `tools/*.yaml` files define interface contracts for future tool implementations, not working tools (see [Roadmap](#roadmap))
 - **Not deep framework integrations** — adapters produce formatted strings and code scaffolds, not framework plugins
 
 ## Installation
@@ -196,6 +196,62 @@ npx @djm204/agent-skills --test golang-expert
 
 ---
 
+## MCP Server Mode
+
+Skills with tool definitions can be served as MCP (Model Context Protocol) servers, making their tools callable by any MCP-compatible agent.
+
+```bash
+# Start an MCP server for a skill
+npx @djm204/agent-skills serve research-assistant
+
+# With custom tool handler implementations
+npx @djm204/agent-skills serve research-assistant --handler-dir=./my-handlers
+
+# With a specific prompt tier
+npx @djm204/agent-skills serve research-assistant --tier=comprehensive
+```
+
+### How It Works
+
+1. The server loads the skill's tool definitions from `tools/*.yaml`
+2. Each tool is registered with the MCP SDK using Zod-validated schemas
+3. Tool handlers are resolved by priority: **built-in > user-provided > stub**
+4. Skill prompts are exposed as MCP resources at `skill://<name>/prompt/<tier>`
+
+Tools without a real implementation return structured "not implemented" responses describing what the tool expects and returns — useful for development and testing.
+
+### MCP Client Configuration
+
+Adapters automatically emit the correct MCP config. For example, after `npx @djm204/agent-skills research --adapter=cursor`, the generated `.cursor/mcp.json` includes:
+
+```json
+{
+  "mcpServers": {
+    "agent-skills-research-assistant": {
+      "command": "npx",
+      "args": ["-y", "@djm204/agent-skills-serve", "research-assistant"]
+    }
+  }
+}
+```
+
+### Programmatic Usage
+
+```javascript
+import { createMcpServer, loadSkill } from '@djm204/agent-skills/api';
+
+const skill = await loadSkill('skills/research-assistant');
+const { server } = await createMcpServer(skill, {
+  builtinHandlers: {
+    web_search: async (params) => ({
+      content: [{ type: 'text', text: JSON.stringify(results) }],
+    }),
+  },
+});
+```
+
+---
+
 ## CLI Options
 
 | Option | Description |
@@ -213,6 +269,8 @@ npx @djm204/agent-skills --test golang-expert
 | `--reset` | Remove ALL installed content |
 | `--yes`, `-y` | Skip confirmation prompt (for `--remove` and `--reset`) |
 | `--version`, `-v` | Show version number |
+| `serve <skill>` | Start MCP server for a skill (requires tools) |
+| `--handler-dir=<dir>` | Directory of custom tool handler `.js` files (with `serve`) |
 | `--help`, `-h` | Show help message |
 
 ### Shorthand Aliases
@@ -567,11 +625,13 @@ npx @djm204/agent-skills qa-engineering --adapter=crewai --out=./crew
 |-------|------|--------|
 | Honest positioning | Clarify what skills are (prompts) vs. what they aren't (agents) | Done |
 | Remove off-brand skills | Cut lifestyle skills, focus on dev/business (48 → 44) | Done |
-| MCP servers | Turn tool schemas into real MCP tools that agents can call | Planned |
+| Runtime composition | Dynamic skill loading based on task detection (`--auto`) | Done |
+| JSON skill export | Export skills as JSON manifest (`--export`) | Done |
+| Usage analytics | Local usage tracking with `--stats` and privacy controls | Done |
+| MCP servers | Generic MCP server — serve any skill's tools via `serve` command | Done |
 | Effectiveness benchmarks | A/B test prompts vs. no-prompts, publish results | Planned |
 | Model-specific tuning | Test and document per-model tier recommendations | Planned |
 | Real framework integrations | LangChain Runnables, CrewAI Agent subclasses | Future |
-| Runtime composition | Dynamic skill loading based on task detection | Future |
 
 ---
 
@@ -707,7 +767,7 @@ templates/<category>/your-template/
 ### Testing
 
 ```bash
-npm test                         # Run all tests (330+)
+npm test                         # Run all tests (490+)
 npm run validate:rules           # Check template rule sizes (<100 lines)
 node bin/cli.js --list           # List all skills/templates
 node bin/cli.js golang-expert --adapter=raw   # Test adapter output
