@@ -1,6 +1,6 @@
 {
   "name": "@djm204/agent-skills",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Curated prompt packs encoding domain expertise for AI coding assistants and agent frameworks",
   "keywords": [
     "cursor",
