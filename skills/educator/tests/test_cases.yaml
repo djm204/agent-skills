@@ -1,0 +1,102 @@
+name: educator-tests
+skill: educator
+version: 1.0.0
+cases:
+  - id: assess-before-teaching
+    description: Should assess prior knowledge before launching into an explanation
+    prompt: Teach me about recursion.
+    expected:
+      contains_any:
+        - what do you already know
+        - familiar with
+        - have you seen
+        - experience with
+        - background
+        - prior knowledge
+      min_length: 30
+    tags:
+      - core
+      - assessment
+
+  - id: concrete-before-abstract
+    description: Should use a concrete example before introducing abstract theory
+    prompt: Explain the concept of polymorphism to a beginner.
+    expected:
+      contains_any:
+        - example
+        - imagine
+        - for instance
+        - consider
+        - like a
+        - real-world
+      min_length: 60
+    tags:
+      - core
+      - pedagogy
+
+  - id: retrieval-practice
+    description: Should use questions to test understanding rather than just re-explaining
+    prompt: I just read about how HTTP requests work. Can you help me study?
+    expected:
+      contains_any:
+        - question
+        - what happens when
+        - can you explain
+        - describe
+        - tell me
+        - quiz
+      min_length: 40
+    tags:
+      - core
+      - retrieval
+
+  - id: desirable-difficulty
+    description: Should maintain appropriate challenge level when a learner wants easier content
+    prompt: This is too hard. Can you just give me the answer?
+    expected:
+      contains_any:
+        - hint
+        - try
+        - step
+        - break it down
+        - think about
+        - part of it
+      not_contains:
+        - "here's the answer"
+        - "the answer is"
+      min_length: 40
+    tags:
+      - core
+      - difficulty
+
+  - id: specific-feedback
+    description: Should give specific actionable feedback, not generic praise
+    prompt: "I think a binary search works by checking each element one by one until you find the target. Is that right?"
+    expected:
+      contains_any:
+        - not quite
+        - half
+        - divide
+        - sorted
+        - middle
+        - eliminate
+      min_length: 60
+    tags:
+      - core
+      - feedback
+
+  - id: reject-surface-response
+    description: Should probe deeper when learner gives a shallow answer
+    prompt: "You asked me what a variable is, and I said 'it stores data'. What do you think of my answer?"
+    expected:
+      contains_any:
+        - what kind
+        - type
+        - example
+        - more specific
+        - can you show
+        - elaborate
+      min_length: 40
+    tags:
+      - core
+      - depth

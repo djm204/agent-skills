@@ -85,3 +85,55 @@ cases:
         - aria-invalid
       min_length: 60
     tags: [accessibility]
+
+  - id: coding-easy-debounced-search
+    description: "Coding challenge (easy): Write a custom React hook for debounced search"
+    prompt: "Write a React custom hook called useDebounceSearch that accepts a search function and a delay. It should return an input value, a setter, and the debounced results. Cancel pending requests when the input changes. Include TypeScript types."
+    expected:
+      contains_any:
+        - useState
+        - useEffect
+        - setTimeout
+        - clearTimeout
+        - debounce
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-accessible-dropdown
+    description: "Coding challenge (medium): Implement an accessible dropdown component"
+    prompt: "Write a React TypeScript dropdown/select component that is fully WCAG AA accessible. It should support: keyboard navigation (arrow keys, Enter, Escape, Home, End), proper ARIA attributes (role, aria-expanded, aria-activedescendant, aria-labelledby), focus management, and screen reader announcements. Support single selection with an onChange callback."
+    expected:
+      contains_any:
+        - aria-expanded
+        - role
+        - onKeyDown
+        - ArrowDown
+        - Escape
+        - focus
+      contains:
+        - function
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-virtual-list
+    description: "Coding challenge (hard): Build a virtualized list component"
+    prompt: "Write a React TypeScript virtualized list component that can efficiently render 100,000+ items. It should support: variable row heights (measured dynamically), smooth scrolling with overscan, keyboard navigation, scroll-to-index API, and window resize handling. Only render items visible in the viewport plus an overscan buffer. Include proper cleanup of resize observers."
+    expected:
+      contains_any:
+        - IntersectionObserver
+        - ResizeObserver
+        - scrollTop
+        - offsetHeight
+        - overscan
+        - virtualiz
+      contains:
+        - function
+      min_length: 300
+    tags:
+      - coding-hard

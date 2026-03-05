@@ -69,3 +69,56 @@ cases:
         - user journey
       min_length: 60
     tags: [core, testing]
+
+  - id: coding-easy-shared-schema
+    description: "Coding challenge (easy): Write a shared Zod validation schema used by both client and server"
+    prompt: "Write a Zod schema for a CreatePost form that validates title (1-200 chars), body (1-10000 chars), tags (array of 1-5 strings), and publishAt (optional future ISO date). Export both the schema and the inferred TypeScript type. Show how the same schema is used in a Next.js API route handler and a React form component."
+    expected:
+      contains_any:
+        - z.object
+        - z.string
+        - z.array
+        - z.infer
+        - safeParse
+      contains:
+        - export
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-optimistic-update
+    description: "Coding challenge (medium): Implement an optimistic update pattern"
+    prompt: "Write a React custom hook called useOptimisticMutation that performs an optimistic update when mutating data. It should: immediately update the local UI state, send the request to the server, roll back to the previous state if the server returns an error, support a retry mechanism, and prevent race conditions when multiple mutations are in flight. Use TypeScript."
+    expected:
+      contains_any:
+        - rollback
+        - previous
+        - optimistic
+        - error
+        - state
+        - Promise
+      contains:
+        - function
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-realtime-sync
+    description: "Coding challenge (hard): Build a real-time data synchronization system"
+    prompt: "Write a full-stack real-time sync system using WebSocket and a Next.js API route. The server should broadcast changes to all connected clients. The client hook should: maintain a local cache of items, apply optimistic updates, reconcile with server state on reconnection, handle conflict resolution (last-write-wins with vector clocks), and queue offline mutations for replay when connection is restored."
+    expected:
+      contains_any:
+        - WebSocket
+        - broadcast
+        - reconnect
+        - conflict
+        - queue
+        - offline
+        - sync
+      contains:
+        - function
+      min_length: 300
+    tags:
+      - coding-hard

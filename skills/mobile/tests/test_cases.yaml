@@ -87,3 +87,58 @@ cases:
         - performance
       min_length: 60
     tags: [testing, devices]
+
+  - id: coding-easy-offline-cache
+    description: "Coding challenge (easy): Write a React Native hook for offline-first data caching"
+    prompt: "Write a React Native custom hook called useOfflineData that fetches data from an API and caches it in AsyncStorage. It should: return cached data immediately while fetching fresh data, update the cache when fresh data arrives, show stale data with an indicator when offline, and handle cache invalidation with a configurable TTL."
+    expected:
+      contains_any:
+        - AsyncStorage
+        - cache
+        - fetch
+        - offline
+        - stale
+        - TTL
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-permission-flow
+    description: "Coding challenge (medium): Implement a permission request flow with rationale"
+    prompt: "Write a React Native hook called usePermission that handles the full permission lifecycle. It should: check current permission status, show a custom rationale dialog before the system prompt (explaining why the permission is needed), request the permission, handle all states (granted/denied/blocked/unavailable), deep-link to app settings when permanently denied, and track permission state changes across app foreground/background transitions."
+    expected:
+      contains_any:
+        - permission
+        - request
+        - rationale
+        - settings
+        - Linking
+        - AppState
+        - denied
+      contains:
+        - function
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-sync-engine
+    description: "Coding challenge (hard): Build an offline-first sync engine for mobile"
+    prompt: "Write a React Native sync engine class that handles offline-first data synchronization. It should: queue mutations in a local SQLite database when offline, replay queued mutations when connectivity is restored (in order), handle conflict resolution (server wins by default, with custom resolver option), support partial sync (only changed records since last sync timestamp), retry failed syncs with exponential backoff, and emit events for sync status changes."
+    expected:
+      contains_any:
+        - queue
+        - SQLite
+        - sync
+        - conflict
+        - offline
+        - retry
+        - timestamp
+      contains:
+        - class
+      min_length: 300
+    tags:
+      - coding-hard

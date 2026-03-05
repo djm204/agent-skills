@@ -92,3 +92,59 @@ cases:
         - permits
       min_length: 80
     tags: [core, modern-java]
+
+  - id: coding-easy-result-type
+    description: "Coding challenge (easy): Implement a Result type using sealed classes"
+    prompt: "Write a Java sealed interface Result<T> with Success and Failure record implementations. Include map, flatMap, and orElse methods. Use pattern matching with switch expressions where appropriate. Target Java 21+."
+    expected:
+      contains_any:
+        - sealed
+        - interface Result
+        - record Success
+        - record Failure
+        - map
+        - switch
+      contains:
+        - class
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-circuit-breaker
+    description: "Coding challenge (medium): Implement a circuit breaker pattern"
+    prompt: "Write a Java circuit breaker class with three states: CLOSED (normal), OPEN (failing fast), and HALF_OPEN (testing recovery). It should track failure count, trip to OPEN after a configurable threshold, automatically transition to HALF_OPEN after a timeout, and reset to CLOSED on success in HALF_OPEN. Make it thread-safe and generic over the operation type."
+    expected:
+      contains_any:
+        - CLOSED
+        - OPEN
+        - HALF_OPEN
+        - threshold
+        - AtomicInteger
+        - synchronized
+        - volatile
+      contains:
+        - class
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-scheduler
+    description: "Coding challenge (hard): Implement a priority task scheduler with virtual threads"
+    prompt: "Write a Java task scheduler that uses virtual threads (Java 21+). It should support: submitting tasks with priority levels, a configurable max concurrency limit, task dependencies (task B waits for task A to complete), cancellation with proper cleanup, and returning a CompletableFuture per task. Handle circular dependency detection."
+    expected:
+      contains_any:
+        - virtual
+        - Thread.ofVirtual
+        - CompletableFuture
+        - priority
+        - PriorityQueue
+        - Semaphore
+        - dependency
+        - circular
+      contains:
+        - class
+      min_length: 300
+    tags:
+      - coding-hard

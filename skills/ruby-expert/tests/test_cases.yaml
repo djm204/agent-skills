@@ -88,3 +88,60 @@ cases:
         - refactor
       min_length: 80
     tags: [core, design]
+
+  - id: coding-easy-service-object
+    description: "Coding challenge (easy): Write a service object with validation"
+    prompt: "Write a Ruby service object class called CreateUser that takes name, email, and role parameters. It should validate that email is present and contains @, that role is one of admin/editor/viewer, and return a Result object with either the created user hash or error messages. Use plain Ruby, no Rails."
+    expected:
+      contains_any:
+        - class CreateUser
+        - validate
+        - result
+        - error
+        - email
+        - call
+      contains:
+        - def
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-dsl-builder
+    description: "Coding challenge (medium): Implement a DSL for defining state machines"
+    prompt: "Write a Ruby DSL for defining state machines. Users should be able to define states, events, and transitions using a block syntax like: StateMachine.define { state :idle; state :running; event :start, from: :idle, to: :running }. Include guard conditions, before/after transition callbacks, and a fire method that validates and executes transitions."
+    expected:
+      contains_any:
+        - define
+        - state
+        - event
+        - transition
+        - block
+        - callback
+        - instance_eval
+      contains:
+        - class
+        - def
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-concurrent-worker
+    description: "Coding challenge (hard): Implement a concurrent job processor with retry and dead letter queue"
+    prompt: "Write a Ruby concurrent job processor using Ractor or Thread. It should support: configurable worker count, job priority queues, retry with exponential backoff (max 3 retries), a dead letter queue for permanently failed jobs, graceful shutdown on SIGTERM, and job status tracking (pending/running/completed/failed). Include proper mutex synchronization."
+    expected:
+      contains_any:
+        - Thread
+        - Mutex
+        - Queue
+        - retry
+        - dead letter
+        - shutdown
+        - signal
+      contains:
+        - class
+        - def
+      min_length: 300
+    tags:
+      - coding-hard

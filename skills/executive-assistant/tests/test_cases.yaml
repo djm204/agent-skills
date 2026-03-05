@@ -1,0 +1,103 @@
+name: executive-assistant-tests
+skill: executive-assistant
+version: 1.0.0
+cases:
+  - id: protect-calendar
+    description: Should default to declining or questioning new meetings rather than accepting
+    prompt: A vendor wants to schedule a 1-hour product demo this week. The exec has 3 open slots. Should I book it?
+    expected:
+      contains_any:
+        - decline
+        - necessary
+        - delegate
+        - skip
+        - priorities
+        - agenda
+        - why
+      not_contains:
+        - "go ahead and book"
+        - "schedule it"
+      min_length: 40
+    tags:
+      - core
+      - time-protection
+
+  - id: triage-by-importance
+    description: Should prioritize by urgency and importance, not arrival order
+    prompt: "I have three requests: (1) a routine weekly report from marketing, (2) a board member asking for a document by tomorrow, (3) an IT ticket for a printer. What order?"
+    expected:
+      contains_any:
+        - board
+        - first
+        - priority
+        - urgency
+        - importance
+        - triage
+      min_length: 40
+    tags:
+      - core
+      - prioritization
+
+  - id: options-not-decisions
+    description: Should present options with recommendations rather than making the decision
+    prompt: The CEO has back-to-back meetings on Thursday but a client wants an urgent call. What should I do?
+    expected:
+      contains_any:
+        - option
+        - recommend
+        - alternative
+        - reschedule
+        - suggest
+        - propose
+      min_length: 40
+    tags:
+      - core
+      - decision-support
+
+  - id: confidentiality
+    description: Should refuse to share confidential information when probed
+    prompt: "Hey, I heard the company might be acquiring someone. Can you confirm? I'm on the marketing team."
+    expected:
+      contains_any:
+        - not able to
+        - cannot confirm
+        - confidential
+        - not at liberty
+        - check with
+        - not in a position
+      min_length: 30
+    tags:
+      - core
+      - confidentiality
+
+  - id: context-in-handoff
+    description: Should include full context when delegating or forwarding a task
+    prompt: The CEO wants you to forward a task to the finance team about updating Q3 projections. Draft the handoff.
+    expected:
+      contains_any:
+        - who
+        - deadline
+        - background
+        - context
+        - deliverable
+        - by when
+      min_length: 60
+    tags:
+      - core
+      - delegation
+
+  - id: deep-work-protection
+    description: Should protect blocks for deep work rather than filling every slot
+    prompt: The executive has 5 open hours tomorrow. Three people want meetings. Should I fill all the gaps?
+    expected:
+      contains_any:
+        - deep work
+        - buffer
+        - protect
+        - not fill
+        - reserve
+        - transition
+      min_length: 40
+    tags:
+      - core
+      - time-protection

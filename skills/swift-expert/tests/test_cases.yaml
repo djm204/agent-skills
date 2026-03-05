@@ -89,3 +89,57 @@ cases:
         - enum
       min_length: 60
     tags: [core, types]
+
+  - id: coding-easy-async-result
+    description: "Coding challenge (easy): Write an async function with proper error handling"
+    prompt: "Write a Swift async function called fetchUser(id: String) that fetches user data from a URL, decodes the JSON response into a User struct using Codable, and returns a Result<User, Error>. Handle network errors, invalid HTTP status codes, and decoding errors as distinct failure cases using a custom enum."
+    expected:
+      contains_any:
+        - async
+        - await
+        - URLSession
+        - Codable
+        - Result
+        - enum
+      contains:
+        - func fetchUser
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-actor-cache
+    description: "Coding challenge (medium): Implement a thread-safe cache using actors"
+    prompt: "Write a Swift actor-based cache called AsyncCache<Key: Hashable, Value> that supports: get, set, and invalidate operations, a TTL (time-to-live) per entry, automatic eviction of expired entries, and a maximum size with LRU eviction. The cache should coalesce concurrent fetches for the same key (only one fetch runs, others await the result)."
+    expected:
+      contains_any:
+        - actor
+        - AsyncCache
+        - dictionary
+        - TTL
+        - expir
+        - evict
+      contains:
+        - func
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-property-wrapper
+    description: "Coding challenge (hard): Build a validated property wrapper system"
+    prompt: "Write a Swift property wrapper system for form validation. Create a @Validated property wrapper that accepts validation rules (required, minLength, maxLength, regex pattern, custom predicate). It should support combining multiple rules, provide detailed error messages per rule, support async validation (e.g., checking email uniqueness), and work with SwiftUI's ObservableObject for reactive UI updates."
+    expected:
+      contains_any:
+        - "@propertyWrapper"
+        - wrappedValue
+        - projectedValue
+        - validation
+        - Published
+        - ObservableObject
+      contains:
+        - struct
+        - func
+      min_length: 300
+    tags:
+      - coding-hard
