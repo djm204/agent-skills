@@ -95,3 +95,56 @@ cases:
         - profile
       min_length: 80
     tags: [core, performance]
+
+  - id: coding-easy-raii-file
+    description: "Coding challenge (easy): Write a RAII file handle wrapper"
+    prompt: "Write a C++ RAII class called FileHandle that wraps a FILE* pointer. It should open the file in the constructor, close it in the destructor, be non-copyable but movable, and provide read/write methods. Use modern C++ idioms."
+    expected:
+      contains_any:
+        - RAII
+        - destructor
+        - fclose
+        - delete
+        - move
+        - noexcept
+      contains:
+        - class
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-thread-safe-queue
+    description: "Coding challenge (medium): Implement a thread-safe bounded queue"
+    prompt: "Write a C++ thread-safe bounded queue using std::mutex and std::condition_variable. It should support push (blocks when full), pop (blocks when empty), try_push and try_pop (non-blocking), and a close method that wakes all waiters and prevents further operations. Make it a template class."
+    expected:
+      contains_any:
+        - mutex
+        - condition_variable
+        - unique_lock
+        - notify
+        - wait
+        - template
+      contains:
+        - class
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-compile-time-fsm
+    description: "Coding challenge (hard): Implement a compile-time validated state machine"
+    prompt: "Write a C++ state machine framework using templates and constexpr that validates transitions at compile time. Define states and events as types. Invalid transitions should produce a compile error, not a runtime error. Support entry/exit actions per state and guard conditions on transitions. Use C++20 concepts where appropriate."
+    expected:
+      contains_any:
+        - template
+        - constexpr
+        - concept
+        - static_assert
+        - transition
+        - state
+      contains:
+        - struct
+      min_length: 300
+    tags:
+      - coding-hard

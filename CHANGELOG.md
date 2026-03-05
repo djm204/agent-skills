@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.7.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.6.0...agent-skills-v1.7.0) (2026-03-05)
+
+
+### Features
+
+* security-expert skill, architecture docs, and coding challenge tests ([#129](https://github.com/djm204/agent-skills/issues/129)) ([47b5f6b](https://github.com/djm204/agent-skills/commit/47b5f6b63de95aad701676ca4c6eff3144733c6f))
+
+## [1.6.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.5.0...agent-skills-v1.6.0) (2026-03-04)
+
+
+### Features
+
+* feedback loops — usage tracking, --stats, privacy controls (Plan 07) ([#127](https://github.com/djm204/agent-skills/issues/127)) ([4d0a1a3](https://github.com/djm204/agent-skills/commit/4d0a1a3cb8d5ae5a78b8e5b2ef40a4569851c23b))
+* JSON skill export — exportSkills() + --export CLI flag (Plan 05) ([#125](https://github.com/djm204/agent-skills/issues/125)) ([fb6d2a2](https://github.com/djm204/agent-skills/commit/fb6d2a25003e0cb9d852f315a86461a6ea759e20))
+* runtime skill composition — context-detector, skill-selector, --auto (Plan 06) ([#126](https://github.com/djm204/agent-skills/issues/126)) ([211bad0](https://github.com/djm204/agent-skills/commit/211bad033f0baadbde5832098794a5b11009e188))
+
 ## [1.5.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.4.0...agent-skills-v1.5.0) (2026-03-02)
 
 

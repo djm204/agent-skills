@@ -75,3 +75,53 @@ cases:
     tags:
       - core
       - error-handling
+
+  - id: coding-easy-debounce
+    description: "Coding challenge (easy): Implement a debounce utility function"
+    prompt: "Write a TypeScript debounce function that delays invoking a callback until after a specified wait time has elapsed since the last call. It should be generic, preserve the argument types, and return a cancel method."
+    expected:
+      contains_any:
+        - setTimeout
+        - clearTimeout
+        - cancel
+        - delay
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-event-emitter
+    description: "Coding challenge (medium): Implement a type-safe event emitter"
+    prompt: "Write a TypeScript EventEmitter class that is generic over an event map type. It should support on, off, once, and emit methods. The event map should enforce that listeners receive the correct payload type for each event name. Include proper cleanup to prevent memory leaks."
+    expected:
+      contains_any:
+        - Map
+        - Set
+        - listener
+        - emit
+        - delete
+      contains:
+        - class
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-task-queue
+    description: "Coding challenge (hard): Implement a concurrent async task queue with retry and backoff"
+    prompt: "Write a TypeScript TaskQueue class that processes async tasks with configurable max concurrency. It should support: priority ordering (higher priority tasks run first), retry with exponential backoff on failure, a per-task timeout, and an abort method that cancels all pending tasks. Return results via a promise per task."
+    expected:
+      contains_any:
+        - async
+        - await
+        - Promise
+        - queue
+        - retry
+        - concurrency
+      contains:
+        - class
+      min_length: 300
+    tags:
+      - coding-hard

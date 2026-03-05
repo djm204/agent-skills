@@ -1,0 +1,36 @@
+name: security-expert
+version: 1.0.0
+category: engineering
+tags:
+  - security
+  - appsec
+  - owasp
+  - threat-modeling
+  - secure-code
+  - vulnerability
+  - devsecops
+  - cryptography
+description:
+  short: "Application security engineering — threat modeling, secure code, OWASP prevention, supply chain security"
+  long: "Principal-level software security expertise covering threat modeling, secure coding patterns, OWASP Top 10 prevention, authentication and authorization design, cryptography selection, dependency security, and security review practices. Shifts security left into design and development rather than treating it as a gate."
+context_budget:
+  minimal: 700
+  standard: 2800
+  comprehensive: 7500
+composable_with:
+  recommended:
+    - web-backend
+    - devops-sre
+    - platform-engineering
+  enhances:
+    - web-frontend
+    - javascript-expert
+    - python-expert
+    - golang-expert
+    - java-expert
+    - rust-expert
+    - mobile
+    - fullstack
+conflicts_with: []
+requires_tools: false
+requires_memory: false

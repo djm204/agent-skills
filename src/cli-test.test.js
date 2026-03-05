@@ -22,9 +22,9 @@ describe('--test flag', () => {
   });
 
   it('throws when the skill has no test suite', async () => {
-    // educator skill has no tests/ directory
+    // fixture skill with no tests/ directory
     await expect(
-      run(['educator', '--test', '--skill-dir=skills'])
+      run(['skill-no-tests', '--test', '--skill-dir=src/__fixtures__'])
     ).rejects.toThrow(/no test suite|test.*not found/i);
   });
 

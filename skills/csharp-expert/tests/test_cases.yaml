@@ -88,3 +88,57 @@ cases:
         - event handler
       min_length: 80
     tags: [core, async]
+
+  - id: coding-easy-retry-policy
+    description: "Coding challenge (easy): Write a generic retry method with exponential backoff"
+    prompt: "Write a C# static method RetryAsync<T> that takes a Func<Task<T>>, max retry count, and initial delay. It should retry the operation on exception with exponential backoff, accept a CancellationToken, and log each retry attempt. Use modern C# patterns."
+    expected:
+      contains_any:
+        - async
+        - await
+        - Task
+        - retry
+        - delay
+        - CancellationToken
+      contains:
+        - static
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-channel-pipeline
+    description: "Coding challenge (medium): Implement an async pipeline using System.Threading.Channels"
+    prompt: "Write a C# pipeline framework using System.Threading.Channels where you chain processing stages. Each stage reads from an input Channel<T>, transforms items, and writes to an output Channel<T>. Support configurable bounded capacity per stage (backpressure), cancellation via CancellationToken, and error propagation that completes downstream channels."
+    expected:
+      contains_any:
+        - Channel
+        - BoundedChannelOptions
+        - ReadAsync
+        - WriteAsync
+        - CancellationToken
+        - Complete
+      contains:
+        - class
+        - async
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-middleware-chain
+    description: "Coding challenge (hard): Implement a composable middleware pipeline like ASP.NET Core"
+    prompt: "Write a C# middleware pipeline system similar to ASP.NET Core's. Define a Context class, a middleware delegate type, and a PipelineBuilder that lets you Use() middleware functions and Build() the pipeline. Middleware should be able to short-circuit (stop the chain), modify the context, and run logic both before and after the next middleware. Support dependency injection for middleware classes."
+    expected:
+      contains_any:
+        - delegate
+        - Func
+        - next
+        - middleware
+        - Build
+        - IServiceProvider
+      contains:
+        - class
+      min_length: 300
+    tags:
+      - coding-hard

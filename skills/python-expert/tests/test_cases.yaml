@@ -69,3 +69,55 @@ cases:
         - "Mock(spec="
       min_length: 80
     tags: [core, testing]
+
+  - id: coding-easy-retry-decorator
+    description: "Coding challenge (easy): Write a retry decorator with configurable attempts"
+    prompt: "Write a Python decorator called retry that takes max_attempts and delay_seconds parameters. It should retry the decorated function on any exception up to max_attempts times, waiting delay_seconds between attempts. Include proper type hints."
+    expected:
+      contains_any:
+        - def retry
+        - wrapper
+        - attempts
+        - except
+        - sleep
+      contains:
+        - def
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-lru-cache
+    description: "Coding challenge (medium): Implement an LRU cache from scratch"
+    prompt: "Write a Python LRU cache class with a configurable max size. It should support get and put operations in O(1) time using a combination of a dictionary and doubly-linked list. Include type hints and handle edge cases like updating existing keys."
+    expected:
+      contains_any:
+        - class
+        - dict
+        - node
+        - capacity
+        - evict
+      contains:
+        - def get
+        - def put
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-async-pipeline
+    description: "Coding challenge (hard): Build an async data processing pipeline with backpressure"
+    prompt: "Write a Python async pipeline framework where you chain processing stages. Each stage is an async callable that transforms items. The pipeline should support: configurable buffer size between stages (backpressure), error handling per-item without stopping the pipeline, graceful shutdown via cancellation, and collecting results or streaming them via an async iterator."
+    expected:
+      contains_any:
+        - async def
+        - asyncio
+        - Queue
+        - await
+        - yield
+        - buffer
+      contains:
+        - class
+      min_length: 300
+    tags:
+      - coding-hard

@@ -64,3 +64,57 @@ cases:
         - ServeMux
       min_length: 60
     tags: [core, stdlib]
+
+  - id: coding-easy-worker-pool
+    description: "Coding challenge (easy): Implement a bounded worker pool"
+    prompt: "Write a Go function that processes a slice of URLs concurrently using a worker pool pattern. It should accept a max concurrency parameter, use a WaitGroup for synchronization, and return a slice of results. Use channels to distribute work."
+    expected:
+      contains_any:
+        - chan
+        - WaitGroup
+        - goroutine
+        - go func
+        - range
+      contains:
+        - func
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-rate-limiter
+    description: "Coding challenge (medium): Implement a token bucket rate limiter"
+    prompt: "Write a Go rate limiter using the token bucket algorithm. It should be safe for concurrent use, support configurable rate (tokens per second) and burst size, and provide a Wait method that blocks until a token is available and an Allow method that returns immediately. Use context for cancellation."
+    expected:
+      contains_any:
+        - Mutex
+        - token
+        - bucket
+        - time
+        - context
+        - Allow
+      contains:
+        - func
+        - struct
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-concurrent-cache
+    description: "Coding challenge (hard): Implement a concurrent cache with TTL, eviction, and singleflight"
+    prompt: "Write a Go generic cache (Cache[K, V]) that is safe for concurrent access. It should support: per-key TTL expiration, LRU eviction when max size is reached, singleflight deduplication (concurrent gets for the same missing key only trigger one loader call), and a background goroutine for expired entry cleanup. Accept a loader function for cache misses."
+    expected:
+      contains_any:
+        - sync.Mutex
+        - sync.RWMutex
+        - singleflight
+        - TTL
+        - expir
+        - evict
+      contains:
+        - func
+        - struct
+      min_length: 300
+    tags:
+      - coding-hard

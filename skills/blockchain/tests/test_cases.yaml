@@ -1,0 +1,133 @@
+name: blockchain-tests
+skill: blockchain
+version: 1.0.0
+cases:
+  - id: reentrancy-guard
+    description: Should insist on Checks-Effects-Interactions and ReentrancyGuard for state-changing functions
+    prompt: I'm writing a withdraw function in Solidity. I update the user balance after sending ETH. Is that fine?
+    expected:
+      contains_any:
+        - reentrancy
+        - checks-effects-interactions
+        - update before
+        - state before
+        - CEI
+      not_contains:
+        - "looks fine"
+        - "that's correct"
+      min_length: 60
+    tags:
+      - core
+      - security
+
+  - id: reject-spot-price
+    description: Should reject spot prices and recommend TWAP oracles
+    prompt: My DeFi protocol reads the current pool price to calculate how many tokens to give the user. Is there a problem?
+    expected:
+      contains_any:
+        - TWAP
+        - flash loan
+        - oracle
+        - manipulation
+        - spot price
+      min_length: 60
+    tags:
+      - core
+      - defi
+
+  - id: slippage-deadline
+    description: Should require slippage and deadline parameters on swap functions
+    prompt: My swap function takes tokenIn, tokenOut, and amountIn. What am I missing?
+    expected:
+      contains_any:
+        - slippage
+        - minAmountOut
+        - deadline
+        - front-run
+        - sandwich
+      min_length: 60
+    tags:
+      - core
+      - defi
+
+  - id: pin-pragma
+    description: Should reject floating pragma and require pinned version
+    prompt: I'm using pragma solidity ^0.8.20 in my contracts. Any issues?
+    expected:
+      contains_any:
+        - pin
+        - exact version
+        - floating
+        - deterministic
+        - lock
+      min_length: 40
+    tags:
+      - core
+      - best-practices
+
+  - id: reject-tx-origin
+    description: Should reject tx.origin for authentication
+    prompt: I'm checking tx.origin == owner in my access control. Is that secure?
+    expected:
+      contains_any:
+        - msg.sender
+        - phishing
+        - tx.origin
+        - intermediate contract
+        - never use
+      not_contains:
+        - "that's secure"
+        - "looks good"
+      min_length: 40
+    tags:
+      - core
+      - security
+
+  - id: coding-easy-erc20-approve
+    description: "Coding challenge (easy): Write a safe approval pattern for ERC-20 tokens"
+    prompt: "Write a Solidity function that safely approves an ERC-20 token spend, avoiding the approve front-running vulnerability. Include the reset-to-zero pattern."
+    expected:
+      contains_any:
+        - approve
+        - "0"
+        - allowance
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-staking
+    description: "Coding challenge (medium): Implement a basic staking contract with reward calculation"
+    prompt: "Write a Solidity staking contract where users deposit an ERC-20 token and earn rewards proportional to their stake and time staked. Include stake, unstake, and claimRewards functions. Use Checks-Effects-Interactions."
+    expected:
+      contains_any:
+        - mapping
+        - stake
+        - reward
+        - block.timestamp
+        - balanceOf
+      contains:
+        - function
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-flash-loan-resistant
+    description: "Coding challenge (hard): Implement a price oracle resistant to flash loan manipulation"
+    prompt: "Write a Solidity contract that implements a TWAP (Time-Weighted Average Price) oracle. It should accumulate price observations over time and compute a time-weighted average over a configurable window. The design must resist flash loan manipulation."
+    expected:
+      contains_any:
+        - observation
+        - cumulative
+        - timestamp
+        - window
+        - TWAP
+        - average
+      contains:
+        - function
+      min_length: 250
+    tags:
+      - coding-hard

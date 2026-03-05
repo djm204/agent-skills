@@ -1,0 +1,149 @@
+name: security-expert-tests
+skill: security-expert
+version: 1.0.0
+cases:
+  - id: threat-modeling-approach
+    description: Should recommend structured threat modeling for new features
+    prompt: We're building a new payment API. How should we think about security?
+    expected:
+      contains_any:
+        - threat model
+        - STRIDE
+        - attack surface
+        - trust boundary
+        - asset
+        - data flow
+      not_contains:
+        - "don't worry"
+        - "should be fine"
+      min_length: 80
+    tags:
+      - core
+      - threat-modeling
+
+  - id: input-validation-boundary
+    description: Should insist on validating all external input at system boundaries
+    prompt: Our API receives JSON from the client. Do we really need to validate every field?
+    expected:
+      contains_any:
+        - validate
+        - boundary
+        - untrusted
+        - sanitize
+        - schema
+        - reject
+      not_contains:
+        - "trust the client"
+        - "not necessary"
+        - "skip validation"
+      min_length: 60
+    tags:
+      - core
+      - input-validation
+
+  - id: reject-plaintext-secrets
+    description: Should reject storing secrets in plaintext and recommend proper secrets management
+    prompt: I'm storing our database password in a config.js file that's committed to git. Is that OK?
+    expected:
+      contains_any:
+        - environment variable
+        - secrets manager
+        - vault
+        - gitignore
+        - never commit
+        - rotate
+      not_contains:
+        - "that's fine"
+        - "acceptable"
+        - "OK to"
+      min_length: 60
+    tags:
+      - core
+      - secrets
+
+  - id: defense-in-depth
+    description: Should recommend multiple security layers not a single control
+    prompt: We added input validation on the frontend. Is that enough to prevent injection attacks?
+    expected:
+      contains_any:
+        - server-side
+        - backend
+        - parameterized
+        - defense in depth
+        - multiple layers
+        - never trust
+      min_length: 60
+    tags:
+      - core
+      - defense-in-depth
+
+  - id: auth-token-storage
+    description: Should recommend secure token storage patterns
+    prompt: Where should I store the JWT token in my web app? LocalStorage seems easy.
+    expected:
+      contains_any:
+        - httpOnly
+        - cookie
+        - XSS
+        - localStorage is
+        - stolen
+        - secure
+      min_length: 60
+    tags:
+      - core
+      - authentication
+
+  - id: coding-easy-input-sanitizer
+    description: "Coding challenge (easy): Write an input sanitization middleware"
+    prompt: "Write an Express.js middleware that sanitizes incoming request bodies. It should: trim all string values, remove any HTML tags from strings, enforce maximum string length (default 10000 chars), reject requests with nested objects deeper than 5 levels, and return 422 with details on which fields were rejected. Use no external sanitization libraries."
+    expected:
+      contains_any:
+        - middleware
+        - req.body
+        - trim
+        - replace
+        - depth
+        - 422
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-csrf-protection
+    description: "Coding challenge (medium): Implement CSRF protection with double-submit cookie pattern"
+    prompt: "Write Express middleware that implements CSRF protection using the double-submit cookie pattern. It should: generate a cryptographically random token, set it as an HTTP-only cookie and also provide it via a response header, validate that the token in the request header matches the cookie on state-changing methods (POST/PUT/DELETE), reject mismatches with 403, and support token rotation."
+    expected:
+      contains_any:
+        - crypto
+        - cookie
+        - token
+        - header
+        - 403
+        - POST
+      contains:
+        - function
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-rbac-system
+    description: "Coding challenge (hard): Implement a role-based access control system with resource ownership"
+    prompt: "Write a TypeScript RBAC authorization system. It should support: roles with hierarchical permissions (admin inherits editor, editor inherits viewer), resource-level ownership checks (users can only modify their own resources), permission wildcards (posts:* grants all post permissions), a middleware factory that takes required permissions and returns Express middleware, an audit log of all authorization decisions, and deny-by-default with explicit grants only."
+    expected:
+      contains_any:
+        - role
+        - permission
+        - resource
+        - owner
+        - deny
+        - audit
+        - middleware
+      contains:
+        - class
+        - function
+      min_length: 300
+    tags:
+      - coding-hard

@@ -1,0 +1,16 @@
+name: skill-no-tests
+version: 1.0.0
+category: testing
+tags:
+  - fixture
+description:
+  short: "Test fixture skill with no test suite"
+context_budget:
+  minimal: 100
+  standard: 200
+  comprehensive: 300
+composable_with:
+  recommended: []
+conflicts_with: []
+requires_tools: false
+requires_memory: false

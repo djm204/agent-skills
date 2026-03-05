@@ -67,3 +67,56 @@ cases:
         - that's fine
       min_length: 80
     tags: [core, networking]
+
+  - id: coding-easy-object-pool
+    description: "Coding challenge (easy): Write a generic object pool for Unity"
+    prompt: "Write a C# generic ObjectPool<T> class for Unity where T is a Component. It should: pre-instantiate a configurable number of objects, provide Get() and Return() methods, disable returned objects and enable gotten ones, auto-expand when the pool is empty, and parent pooled objects under a container GameObject for scene hierarchy cleanliness."
+    expected:
+      contains_any:
+        - Queue
+        - Stack
+        - SetActive
+        - Instantiate
+        - GetComponent
+        - pool
+      contains:
+        - class
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-state-machine
+    description: "Coding challenge (medium): Implement a ScriptableObject-based state machine for AI"
+    prompt: "Write a Unity AI state machine using ScriptableObject-based states. Each state should be a ScriptableObject with Enter, Execute, and Exit methods. The StateMachine MonoBehaviour should support: state transitions with conditions, a global state that runs alongside the current state, a history stack for returning to previous states, and transition cooldowns to prevent rapid state flickering."
+    expected:
+      contains_any:
+        - ScriptableObject
+        - MonoBehaviour
+        - Enter
+        - Exit
+        - transition
+        - state
+      contains:
+        - class
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-ecs-damage
+    description: "Coding challenge (hard): Implement a DOTS/ECS damage system for thousands of entities"
+    prompt: "Write a Unity DOTS/ECS system that processes damage for thousands of entities per frame. It should: use IComponentData for Health and DamageEvent components, process damage in a Burst-compiled IJobEntity, support damage types (physical, fire, poison) with resistance calculations, emit death events when health reaches zero, and use an EntityCommandBuffer for structural changes. Target zero GC allocations."
+    expected:
+      contains_any:
+        - IComponentData
+        - IJobEntity
+        - Burst
+        - EntityCommandBuffer
+        - SystemBase
+        - partial struct
+      contains:
+        - struct
+      min_length: 300
+    tags:
+      - coding-hard

@@ -92,3 +92,57 @@ cases:
         - idiomatic
       min_length: 60
     tags: [core, idioms]
+
+  - id: coding-easy-sealed-result
+    description: "Coding challenge (easy): Write a sealed Result class with map and fold"
+    prompt: "Write a Kotlin sealed class Result<out T> with Success and Failure subclasses. Include map, flatMap, fold, and getOrElse methods. The Failure class should hold a Throwable. Make it work naturally with when expressions."
+    expected:
+      contains_any:
+        - sealed
+        - Success
+        - Failure
+        - map
+        - when
+        - Throwable
+      contains:
+        - class
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-coroutine-retry
+    description: "Coding challenge (medium): Implement a coroutine-based retry with backoff and circuit breaking"
+    prompt: "Write a Kotlin suspend function retryWithBackoff that retries a suspend lambda on failure. It should support: configurable max retries, exponential backoff with jitter, a predicate to decide which exceptions are retryable, and circuit breaker behavior (stop retrying if failures exceed a threshold within a time window). Use structured concurrency."
+    expected:
+      contains_any:
+        - suspend
+        - delay
+        - retry
+        - backoff
+        - exception
+        - coroutine
+      contains:
+        - fun
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-flow-pipeline
+    description: "Coding challenge (hard): Build a reactive data pipeline with Kotlin Flow"
+    prompt: "Write a Kotlin Flow-based reactive pipeline framework. Create a PipelineBuilder DSL that lets you chain stages using transform, filter, batch (group N items), rateLimit (max items per second), and merge (combine multiple flows). Each stage should propagate backpressure. Include error handling per-stage with retry and fallback strategies. Support graceful cancellation."
+    expected:
+      contains_any:
+        - Flow
+        - flow
+        - collect
+        - emit
+        - transform
+        - channelFlow
+      contains:
+        - fun
+        - class
+      min_length: 300
+    tags:
+      - coding-hard
