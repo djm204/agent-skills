@@ -1,0 +1,141 @@
+name: web-backend-tests
+skill: web-backend
+version: 1.0.0
+cases:
+  - id: validate-at-boundary
+    description: Should insist on schema validation at the API boundary
+    prompt: Our API controller passes req.body directly to the service layer. Is that OK?
+    expected:
+      contains_any:
+        - validate
+        - schema
+        - Zod
+        - Joi
+        - boundary
+        - reject
+      not_contains:
+        - "that's fine"
+        - "acceptable"
+      min_length: 60
+    tags:
+      - core
+      - validation
+
+  - id: parameterized-queries
+    description: Should reject string-concatenated SQL and require parameterized queries
+    prompt: "I'm building a search: `db.query('SELECT * FROM users WHERE name = ' + req.query.name)`. Works great locally."
+    expected:
+      contains_any:
+        - injection
+        - parameterized
+        - prepared statement
+        - placeholder
+        - never concatenate
+      not_contains:
+        - "looks good"
+        - "that works"
+      min_length: 60
+    tags:
+      - core
+      - security
+
+  - id: error-handling-hierarchy
+    description: Should recommend custom error classes over generic throws
+    prompt: We throw new Error('not found') everywhere. Then our error handler checks the message string to decide the HTTP status. Any better approach?
+    expected:
+      contains_any:
+        - custom error
+        - error class
+        - NotFoundError
+        - status code
+        - error hierarchy
+        - error handler
+      min_length: 60
+    tags:
+      - core
+      - error-handling
+
+  - id: structured-logging
+    description: Should recommend structured logging with correlation IDs
+    prompt: We use console.log throughout our Express app. What should we do instead?
+    expected:
+      contains_any:
+        - structured
+        - correlation
+        - requestId
+        - pino
+        - winston
+        - log level
+      min_length: 60
+    tags:
+      - core
+      - observability
+
+  - id: repository-pattern
+    description: Should advocate for repository pattern separating data access from business logic
+    prompt: My service functions contain raw SQL queries mixed with business logic. Is that a problem?
+    expected:
+      contains_any:
+        - repository
+        - separate
+        - data access
+        - testable
+        - abstraction
+        - single responsibility
+      min_length: 60
+    tags:
+      - core
+      - architecture
+
+  - id: coding-easy-middleware
+    description: "Coding challenge (easy): Write an Express error-handling middleware"
+    prompt: "Write an Express.js global error-handling middleware that catches all errors, logs them with a correlation ID, and returns a consistent JSON error response without leaking stack traces."
+    expected:
+      contains_any:
+        - err
+        - req
+        - res
+        - next
+        - status
+        - json
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-auth-middleware
+    description: "Coding challenge (medium): Implement JWT authentication middleware with refresh token rotation"
+    prompt: "Write Express middleware that verifies a JWT access token from the Authorization header, and a separate endpoint that accepts a refresh token (from an HTTP-only cookie), validates it, rotates it (issues a new refresh token and invalidates the old one), and returns a new access token."
+    expected:
+      contains_any:
+        - jwt
+        - verify
+        - token
+        - refresh
+        - cookie
+        - httpOnly
+      contains:
+        - function
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-rate-limiter
+    description: "Coding challenge (hard): Implement a distributed sliding window rate limiter"
+    prompt: "Write a rate limiting middleware for Express that implements a sliding window algorithm using Redis. It should support per-route configuration (different limits for auth vs read vs write endpoints), return proper 429 responses with Retry-After headers, and handle Redis failures gracefully by falling back to permissive behavior."
+    expected:
+      contains_any:
+        - redis
+        - window
+        - limit
+        - 429
+        - Retry-After
+        - fallback
+      contains:
+        - function
+      min_length: 250
+    tags:
+      - coding-hard

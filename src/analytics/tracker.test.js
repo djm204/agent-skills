@@ -17,6 +17,10 @@ describe('tracker', () => {
   beforeEach(() => {
     tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tracker-test-'));
     originalEnv = { ...process.env };
+    // Clear CI env vars so trackUsage is enabled by default in tests
+    delete process.env.CI;
+    delete process.env.GITHUB_ACTIONS;
+    delete process.env.AGENT_SKILLS_NO_TRACKING;
   });
 
   afterEach(() => {

@@ -89,3 +89,57 @@ cases:
         - concurrent
       min_length: 100
     tags: [core, concurrency]
+
+  - id: coding-easy-result-chain
+    description: "Coding challenge (easy): Write a function that chains fallible operations with the ? operator"
+    prompt: "Write a Rust function called load_config that reads a file path from an environment variable, reads the file contents, and parses it as JSON into a Config struct. Use the ? operator for error propagation with a custom error enum that wraps std::env::VarError, std::io::Error, and serde_json::Error."
+    expected:
+      contains_any:
+        - enum
+        - "?"
+        - impl From
+        - std::env
+        - serde_json
+        - Result
+      contains:
+        - fn load_config
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-state-machine
+    description: "Coding challenge (medium): Implement a type-state pattern for a connection"
+    prompt: "Write a Rust TCP connection using the typestate pattern with zero-cost abstractions. Model three states: Disconnected, Connected, and Authenticated. The connect method should only be available on Disconnected, authenticate only on Connected, and send/receive only on Authenticated. Use generic type parameters so invalid state transitions are compile-time errors."
+    expected:
+      contains_any:
+        - PhantomData
+        - struct
+        - impl
+        - Disconnected
+        - Connected
+        - Authenticated
+      contains:
+        - fn
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-mpmc-channel
+    description: "Coding challenge (hard): Implement a bounded async multi-producer multi-consumer channel"
+    prompt: "Write a Rust bounded MPMC (multi-producer, multi-consumer) channel with async support. It should support send and recv operations that return Results, block when the buffer is full (send) or empty (recv), support async versions using tokio, and implement Drop to wake all waiting tasks on close. Use Arc and proper synchronization primitives."
+    expected:
+      contains_any:
+        - Arc
+        - Mutex
+        - Condvar
+        - async
+        - tokio
+        - Waker
+      contains:
+        - struct
+        - fn
+      min_length: 300
+    tags:
+      - coding-hard

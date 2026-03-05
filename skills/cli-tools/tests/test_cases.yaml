@@ -88,3 +88,57 @@ cases:
         - remedy
       min_length: 60
     tags: [ux, errors]
+
+  - id: coding-easy-arg-parser
+    description: "Coding challenge (easy): Write a minimal CLI argument parser"
+    prompt: "Write a Node.js function called parseArgs that takes process.argv and parses it into an object. It should support: positional arguments, --flag (boolean), --key=value and --key value syntax, -f short flags, and -- to stop flag parsing. Return { positionals: string[], flags: Record<string, string | boolean> }. No external dependencies."
+    expected:
+      contains_any:
+        - process.argv
+        - "--"
+        - startsWith
+        - positional
+        - flag
+      contains:
+        - function
+      not_contains:
+        - "I can't write"
+      min_length: 100
+    tags:
+      - coding-easy
+
+  - id: coding-medium-progress-indicator
+    description: "Coding challenge (medium): Implement a terminal progress bar with ETA"
+    prompt: "Write a Node.js ProgressBar class that renders a terminal progress bar. It should support: configurable width, percentage and ETA display, a tick() method to advance, a log() method that prints above the bar without disrupting it, multi-bar support (track multiple concurrent operations), and graceful handling of non-TTY environments (fall back to simple percentage logging)."
+    expected:
+      contains_any:
+        - stdout
+        - write
+        - "\r"
+        - isTTY
+        - clearLine
+        - ETA
+        - elapsed
+      contains:
+        - class
+      min_length: 200
+    tags:
+      - coding-medium
+
+  - id: coding-hard-plugin-loader
+    description: "Coding challenge (hard): Build a plugin system for a CLI tool"
+    prompt: "Write a Node.js plugin system for a CLI tool. It should: discover plugins from node_modules (matching a naming convention like cli-plugin-*), load them dynamically with import(), allow plugins to register subcommands with their own flags and handlers, provide a plugin API context (config, logger, registerCommand, registerHook), support lifecycle hooks (beforeRun, afterRun, onError), and handle plugin load failures gracefully without crashing the host CLI."
+    expected:
+      contains_any:
+        - import
+        - register
+        - hook
+        - plugin
+        - command
+        - node_modules
+      contains:
+        - class
+        - async
+      min_length: 300
+    tags:
+      - coding-hard

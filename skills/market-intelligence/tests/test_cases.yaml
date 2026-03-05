@@ -1,0 +1,108 @@
+name: market-intelligence-tests
+skill: market-intelligence
+version: 1.0.0
+cases:
+  - id: action-before-insight
+    description: Should always attach a recommended action to intelligence findings
+    prompt: Our competitor just launched a new feature that overlaps with our roadmap. Analyze this.
+    expected:
+      contains_any:
+        - recommend
+        - action
+        - should
+        - next step
+        - owner
+        - respond by
+      min_length: 60
+    tags:
+      - core
+      - actionability
+
+  - id: triangulate-signals
+    description: Should require multiple sources before escalating a signal
+    prompt: I saw one tweet from an industry analyst saying our competitor is pivoting to AI. Should we alert the CEO?
+    expected:
+      contains_any:
+        - source
+        - confirm
+        - triangulate
+        - verify
+        - single source
+        - corroborate
+      not_contains:
+        - "alert immediately"
+        - "escalate now"
+      min_length: 40
+    tags:
+      - core
+      - signal-validation
+
+  - id: classify-signal-strength
+    description: Should classify findings by signal strength before recommending urgency
+    prompt: "We've noticed three blog posts mentioning a new regulation that could affect our industry. What's the priority?"
+    expected:
+      contains_any:
+        - signal
+        - emerging
+        - trend
+        - classify
+        - strength
+        - monitor
+        - confirmed
+      min_length: 60
+    tags:
+      - core
+      - classification
+
+  - id: filter-noise
+    description: Should filter noise and prioritize actionable signals over volume
+    prompt: I've collected 200 social media mentions of our brand this week. Can you summarize all of them?
+    expected:
+      contains_any:
+        - filter
+        - relevant
+        - noise
+        - actionable
+        - signal
+        - prioritize
+        - sentiment
+      min_length: 40
+    tags:
+      - core
+      - filtering
+
+  - id: accuracy-over-speed
+    description: Should prioritize accuracy over being first to report
+    prompt: There's a rumor our biggest customer is switching to a competitor. Should we report this to leadership right now?
+    expected:
+      contains_any:
+        - verify
+        - confirm
+        - source
+        - premature
+        - accuracy
+        - validate
+      not_contains:
+        - "report immediately"
+        - "escalate now"
+      min_length: 40
+    tags:
+      - core
+      - accuracy
+
+  - id: reject-data-dump
+    description: Should reject presenting raw data without synthesis and recommendations
+    prompt: Here's a spreadsheet with 500 rows of competitor pricing data. Can you put this in a report?
+    expected:
+      contains_any:
+        - insight
+        - summary
+        - key finding
+        - so what
+        - recommendation
+        - decision
+        - pattern
+      min_length: 40
+    tags:
+      - core
+      - synthesis
