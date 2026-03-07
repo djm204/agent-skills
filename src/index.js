@@ -183,6 +183,10 @@ const TEMPLATE_ALIASES = {
   'harmonizer': 'supply-chain-harmonizer',
   'negotiator': 'strategic-negotiator',
   'predictive': 'predictive-maintenance',
+  // Security
+  'security': 'security-expert',
+  'sec': 'security-expert',
+  'appsec': 'security-expert',
   // Creative
   'brand': 'brand-guardian',
   // Agents
