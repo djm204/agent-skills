@@ -1,0 +1,12 @@
+name: security-expert
+category: engineering
+description: "Application security engineering — threat modeling, secure code, OWASP prevention, supply chain security"
+rules:
+  - overview.mdc
+  - threat-modeling.mdc
+  - input-validation.mdc
+  - auth.mdc
+  - cryptography.mdc
+  - dependencies.mdc
+  - error-handling-logging.mdc
+  - headers-api.mdc

@@ -307,6 +307,7 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 | `chain`, `web3` | `blockchain` |
 | `platform`, `platform-eng` | `platform-engineering` |
 | `unity` | `unity-dev-expert` |
+| `security`, `sec`, `appsec` | `security-expert` |
 
 **Professional**
 
@@ -351,9 +352,9 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 
 ---
 
-## Available Skills (44)
+## Available Skills (45)
 
-### Engineering (13)
+### Engineering (14)
 
 | Skill | Description |
 |-------|-------------|
@@ -366,6 +367,7 @@ Use short names instead of full skill names. Run `--list` to see all aliases.
 | `mobile` | Mobile applications (React Native, Flutter, native iOS/Android) |
 | `platform-engineering` | Internal developer platforms, infrastructure automation, reliability engineering |
 | `qa-engineering` | Quality assurance programs for confident, rapid software delivery |
+| `security-expert` | Application security engineering — threat modeling, secure code, OWASP prevention, supply chain security |
 | `testing` | Comprehensive testing practices (TDD, test design, CI/CD integration, performance testing) |
 | `unity-dev-expert` | Unity game development (C#, ECS/DOTS, physics, UI systems, multiplayer, performance) |
 | `web-backend` | Backend APIs and services (REST, GraphQL, microservices) |
