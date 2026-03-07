@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.8.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.7.0...agent-skills-v1.8.0) (2026-03-07)
+
+
+### Features
+
+* add security-expert as installable CLI template ([#133](https://github.com/djm204/agent-skills/issues/133)) ([e6452a8](https://github.com/djm204/agent-skills/commit/e6452a88e3bd1481e469cb3c8a3de37125520fa2))
+* generic MCP server — serve any skill's tools via Model Context Protocol ([#131](https://github.com/djm204/agent-skills/issues/131)) ([8ed636c](https://github.com/djm204/agent-skills/commit/8ed636cd2088e854cdfde7cd11c90f20928d25dc))
+
 ## [1.7.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.6.0...agent-skills-v1.7.0) (2026-03-05)
 
 
