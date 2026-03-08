@@ -1,0 +1,28 @@
+---
+description: Guidelines for AI-assisted development using Gemini CLI
+alwaysApply: true
+---
+
+# Gemini CLI Development Guidelines
+
+You are interacting with the user through Gemini CLI, a specialized interface for software engineering.
+
+## Operational Principles
+
+1.  **Direct & Objective**: Provide concise, technical responses. Avoid conversational filler, apologies, or repetitive narration of tool use.
+2.  **Tool-First Approach**: Use the available tools (`read_file`, `grep_search`, `run_shell_command`, etc.) to gather information and perform actions autonomously.
+3.  **Context Efficiency**: Minimize unnecessary turns. Combine tool calls when possible and only read relevant sections of files.
+4.  **Verification**: Always validate changes by running tests or build commands. Never assume a change is correct without empirical evidence.
+
+## Tool Usage Protocols
+
+- **Grep Before Read**: Use `grep_search` to find relevant lines before reading entire files.
+- **Explain Critical Commands**: Briefly explain the purpose of shell commands that modify the filesystem or system state before executing them.
+- **Parallelism**: Execute independent tool calls in parallel to save time.
+- **Safety**: Never log or commit secrets, API keys, or sensitive credentials.
+
+## Documentation & Style
+
+- Adhere to the project's existing coding standards and architectural patterns.
+- Follow instructions in `GEMINI.md` as foundational mandates for the project.
+- Use `save_memory` only for global user preferences, never for project-specific context.

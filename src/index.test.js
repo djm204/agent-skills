@@ -23,9 +23,15 @@ const {
   generateSectionSignature,
   findMissingSections,
   mergeClaudeContent,
+  mergeGeminiContent,
   getAlternateFilename,
   copyFile,
   generateClaudeMdContent,
+  generateGeminiMdContent,
+  generateClaudeMd,
+  generateGeminiMd,
+  generateClaudeMdToPath,
+  generateGeminiMdToPath,
   generateCopilotInstructionsContent,
   isOurFile,
   install,
@@ -178,16 +184,17 @@ describe('Constants', () => {
   });
 
   describe('SUPPORTED_IDES', () => {
-    it('should contain cursor, claude, and codex', () => {
+    it('should contain cursor, claude, gemini, and codex', () => {
       expect(SUPPORTED_IDES).toContain('cursor');
       expect(SUPPORTED_IDES).toContain('claude');
+      expect(SUPPORTED_IDES).toContain('gemini');
       expect(SUPPORTED_IDES).toContain('codex');
     });
   });
 
   describe('DEFAULT_IDES', () => {
     it('should default to all supported IDEs', () => {
-      expect(DEFAULT_IDES).toEqual(SUPPORTED_IDES);
+      expect(DEFAULT_IDES).toEqual(['cursor', 'claude', 'codex', 'gemini']);
     });
   });
 
@@ -611,10 +618,32 @@ describe('Content Generation', () => {
 
     it('should include shared rules table', () => {
       const content = generateClaudeMdContent(['web-frontend']);
-      
+
       expect(content).toContain('core-principles.mdc');
       expect(content).toContain('code-quality.mdc');
       expect(content).toContain('security-fundamentals.mdc');
+    });
+
+    describe('generateGeminiMdContent', () => {
+      it('should generate valid markdown', () => {
+        const content = generateGeminiMdContent(['web-frontend']);
+
+        expect(content).toContain('# GEMINI.md - Development Guide');
+        expect(content).toContain('web-frontend');
+      });
+
+      it('should include gemini-cli.mdc in shared rules', () => {
+        const content = generateGeminiMdContent(['web-frontend']);
+
+        expect(content).toContain('gemini-cli.mdc');
+        expect(content).toContain('Guidelines for Gemini CLI');
+      });
+
+      it('should include template description', () => {
+        const content = generateGeminiMdContent(['web-frontend']);
+
+        expect(content).toContain(TEMPLATES['web-frontend'].description);
+      });
     });
 
     it('should include customization section', () => {
@@ -986,6 +1015,12 @@ describe('Install/Remove/Reset Operations', () => {
       await reset(tempDir, false, false, true, ['claude']);
 
       expect(fs.existsSync(path.join(tempDir, 'CLAUDE.md'))).toBe(false);
+    });
+
+    it('should remove GEMINI.md', async () => {
+      await reset(tempDir, false, false, true, ['gemini']);
+
+      expect(fs.existsSync(path.join(tempDir, 'GEMINI.md'))).toBe(false);
     });
 
     it('should remove copilot-instructions.md', async () => {
