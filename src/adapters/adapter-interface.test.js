@@ -15,6 +15,7 @@ import { rawAdapter } from './raw.js';
 import { cursorAdapter } from './cursor.js';
 import { claudeCodeAdapter } from './claude-code.js';
 import { copilotAdapter } from './copilot.js';
+import { geminiAdapter } from './gemini.js';
 import { codexAdapter } from './codex.js';
 import { ADAPTERS, getAdapter } from './index.js';
 
@@ -91,6 +92,7 @@ assertAdapterContract(rawAdapter, 'rawAdapter');
 assertAdapterContract(cursorAdapter, 'cursorAdapter');
 assertAdapterContract(claudeCodeAdapter, 'claudeCodeAdapter');
 assertAdapterContract(copilotAdapter, 'copilotAdapter');
+assertAdapterContract(geminiAdapter, 'geminiAdapter');
 assertAdapterContract(codexAdapter, 'codexAdapter');
 
 // ============================================================================
@@ -172,6 +174,30 @@ describe('claudeCodeAdapter', () => {
 });
 
 // ============================================================================
+// gemini adapter specific tests
+// ============================================================================
+
+describe('geminiAdapter', () => {
+  it('outputs a GEMINI.md file', () => {
+    const result = geminiAdapter(SKILL_PACK);
+    const paths = result.files.map((f) => f.path);
+    expect(paths).toContain('GEMINI.md');
+  });
+
+  it('GEMINI.md content contains the system prompt', () => {
+    const result = geminiAdapter(SKILL_PACK);
+    const geminiMd = result.files.find((f) => f.path === 'GEMINI.md');
+    expect(geminiMd.content).toContain('Test Skill');
+  });
+
+  it('includes a skill metadata section', () => {
+    const result = geminiAdapter(SKILL_PACK);
+    const geminiMd = result.files.find((f) => f.path === 'GEMINI.md');
+    expect(geminiMd.content).toContain('test-skill');
+  });
+});
+
+// ============================================================================
 // copilot adapter specific tests
 // ============================================================================
 
@@ -235,6 +261,31 @@ describe('claudeCodeAdapter — MCP config', () => {
   });
 });
 
+describe('geminiAdapter — MCP config', () => {
+  it('emits .gemini/settings.json with mcpServers when mcp_server is set', () => {
+    const result = geminiAdapter(SKILL_PACK_WITH_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.gemini/settings.json');
+    expect(settingsFile).toBeDefined();
+    const settings = JSON.parse(settingsFile.content);
+    expect(settings.mcpServers).toBeDefined();
+    expect(settings.mcpServers['mcp-web']).toBeDefined();
+  });
+
+  it('uses npx -y <package> pattern for MCP server command', () => {
+    const result = geminiAdapter(SKILL_PACK_WITH_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.gemini/settings.json');
+    const settings = JSON.parse(settingsFile.content);
+    expect(settings.mcpServers['mcp-web'].command).toBe('npx');
+    expect(settings.mcpServers['mcp-web'].args).toEqual(['-y', '@djm204/mcp-web']);
+  });
+
+  it('skips MCP config when mcp_server is null', () => {
+    const result = geminiAdapter(SKILL_PACK_NO_MCP);
+    const settingsFile = result.files.find((f) => f.path === '.gemini/settings.json');
+    expect(settingsFile).toBeUndefined();
+  });
+});
+
 describe('cursorAdapter — MCP config', () => {
   it('emits .cursor/mcp.json with mcpServers when mcp_server is set', () => {
     const result = cursorAdapter(SKILL_PACK_WITH_MCP);
@@ -259,6 +310,7 @@ describe('cursorAdapter — MCP config', () => {
     expect(mcpFile).toBeUndefined();
   });
 });
+
 
 // ============================================================================
 // Built-in MCP server tests

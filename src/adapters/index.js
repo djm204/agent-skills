@@ -10,6 +10,7 @@ import { rawAdapter } from './raw.js';
 import { cursorAdapter } from './cursor.js';
 import { claudeCodeAdapter } from './claude-code.js';
 import { copilotAdapter } from './copilot.js';
+import { geminiAdapter } from './gemini.js';
 import { openaiAgentsAdapter } from './openai-agents.js';
 import { langchainAdapter } from './langchain.js';
 import { crewaiAdapter } from './crewai.js';
@@ -20,6 +21,7 @@ const ADAPTER_MAP = {
   cursor: cursorAdapter,
   'claude-code': claudeCodeAdapter,
   copilot: copilotAdapter,
+  gemini: geminiAdapter,
   'openai-agents': openaiAgentsAdapter,
   langchain: langchainAdapter,
   crewai: crewaiAdapter,
@@ -50,6 +52,7 @@ export {
   cursorAdapter,
   claudeCodeAdapter,
   copilotAdapter,
+  geminiAdapter,
   openaiAgentsAdapter,
   langchainAdapter,
   crewaiAdapter,
