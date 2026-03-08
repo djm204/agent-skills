@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.8.0...agent-skills-v1.9.0) (2026-03-08)
+
+
+### Features
+
+* add codex adapter for OpenAI Codex skills format ([#135](https://github.com/djm204/agent-skills/issues/135)) ([eab1ec1](https://github.com/djm204/agent-skills/commit/eab1ec1bcbc64f4af8eaf8abfa8025f9c8782b67))
+
 ## [1.8.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.7.0...agent-skills-v1.8.0) (2026-03-07)
 
 
