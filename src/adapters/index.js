@@ -13,6 +13,7 @@ import { copilotAdapter } from './copilot.js';
 import { openaiAgentsAdapter } from './openai-agents.js';
 import { langchainAdapter } from './langchain.js';
 import { crewaiAdapter } from './crewai.js';
+import { codexAdapter } from './codex.js';
 
 const ADAPTER_MAP = {
   raw: rawAdapter,
@@ -22,6 +23,7 @@ const ADAPTER_MAP = {
   'openai-agents': openaiAgentsAdapter,
   langchain: langchainAdapter,
   crewai: crewaiAdapter,
+  codex: codexAdapter,
 };
 
 /** List of all registered adapter names */
@@ -51,4 +53,5 @@ export {
   openaiAgentsAdapter,
   langchainAdapter,
   crewaiAdapter,
+  codexAdapter,
 };

@@ -11,6 +11,7 @@
 ![Windsurf](https://img.shields.io/badge/Windsurf-0B6FBF?style=flat)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat)
 ![OpenAI Agents](https://img.shields.io/badge/OpenAI_Agents-412991?style=flat)
+![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-412991?style=flat)
 
 **44 curated prompt packs** that encode principal-level domain expertise for AI coding assistants. Install into Cursor, Claude Code, or GitHub Copilot — or compose into LangChain, CrewAI, and OpenAI Agents SDK pipelines via adapter templates.
 
@@ -153,6 +154,7 @@ npx @djm204/agent-skills <skill-name> --adapter=<adapter> [--tier=<tier>] [--out
 | `openai-agents` | Python `Agent(instructions=...)` snippet | OpenAI Agents SDK |
 | `langchain` | Python `SystemMessagePromptTemplate` | LangChain |
 | `crewai` | Python `Agent(backstory=..., goal=...)` | CrewAI |
+| `codex` | `.agents/skills/<name>/SKILL.md` + `agents/openai.yaml` | OpenAI Codex |
 
 > **Note:** Adapters produce formatted prompt strings and code scaffolds — not runtime framework plugins. Tool definitions in skill packs (`tools/*.yaml`) are interface contracts that describe what a tool would accept and return. Your application provides the implementation.
 
@@ -257,7 +259,7 @@ const { server } = await createMcpServer(skill, {
 | Option | Description |
 |--------|-------------|
 | `--ide=[name]` | Target IDE: `cursor`, `claude`, or `codex` (can be used multiple times) |
-| `--adapter=[name]` | Adapter for skill pack mode: `raw`, `cursor`, `claude-code`, `copilot`, `openai-agents`, `langchain`, `crewai` |
+| `--adapter=[name]` | Adapter for skill pack mode: `raw`, `cursor`, `claude-code`, `copilot`, `openai-agents`, `langchain`, `crewai`, `codex` |
 | `--tier=[tier]` | Prompt tier: `minimal`, `standard`, `comprehensive` (default: `standard`) |
 | `--test` | Preview test cases for a skill without calling an LLM |
 | `--skill-dir=[dir]` | Path to a custom skills directory (default: built-in `skills/`) |
@@ -476,6 +478,7 @@ When using `--adapter`, no IDE files are installed. Instead, a single prompt fil
 | `openai-agents` | Python snippet: `Agent(name=..., instructions=...)` |
 | `langchain` | Python snippet: `SystemMessagePromptTemplate.from_template(...)` |
 | `crewai` | Python snippet: `Agent(role=..., goal=..., backstory=...)` |
+| `codex` | `.agents/skills/<name>/SKILL.md` + optional `agents/openai.yaml` |
 
 ---
 
@@ -609,6 +612,16 @@ npx @djm204/agent-skills golang-expert --adapter=langchain --out=./agents
 
 # Compose a fullstack + testing specialist (minimal tokens)
 npx @djm204/agent-skills fullstack,testing --adapter=langchain --tier=minimal --out=./agents
+```
+
+### OpenAI Codex Skill
+
+```bash
+# Install a skill as a Codex-compatible skill directory
+npx @djm204/agent-skills security-expert --adapter=codex
+
+# With minimal tier for smaller context
+npx @djm204/agent-skills golang-expert --adapter=codex --tier=minimal
 ```
 
 ### CrewAI Multi-Agent Team

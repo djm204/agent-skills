@@ -15,6 +15,7 @@ import { rawAdapter } from './raw.js';
 import { cursorAdapter } from './cursor.js';
 import { claudeCodeAdapter } from './claude-code.js';
 import { copilotAdapter } from './copilot.js';
+import { codexAdapter } from './codex.js';
 import { ADAPTERS, getAdapter } from './index.js';
 
 // ============================================================================
@@ -90,6 +91,7 @@ assertAdapterContract(rawAdapter, 'rawAdapter');
 assertAdapterContract(cursorAdapter, 'cursorAdapter');
 assertAdapterContract(claudeCodeAdapter, 'claudeCodeAdapter');
 assertAdapterContract(copilotAdapter, 'copilotAdapter');
+assertAdapterContract(codexAdapter, 'codexAdapter');
 
 // ============================================================================
 // raw adapter specific tests
@@ -301,6 +303,7 @@ describe('ADAPTERS registry', () => {
     expect(ADAPTERS).toContain('cursor');
     expect(ADAPTERS).toContain('claude-code');
     expect(ADAPTERS).toContain('copilot');
+    expect(ADAPTERS).toContain('codex');
   });
 
   it('getAdapter returns the adapter function for known names', () => {
