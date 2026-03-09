@@ -218,6 +218,7 @@ const SHARED_RULES = [
   'code-quality.mdc',
   'communication.mdc',
   'core-principles.mdc',
+  'gemini-cli.mdc',
   'git-workflow.mdc',
   'review-protocol.mdc',
   'security-fundamentals.mdc'
@@ -341,6 +342,7 @@ ${colors.yellow('IDE Targets:')}
   claude         CLAUDE.md file (Claude Code, Cursor with Claude)
   copilot        .github/copilot-instructions.md (GitHub Copilot)
   codex          AGENTS.md file (OpenAI Codex)
+  gemini         GEMINI.md file (Gemini CLI)
 
 ${colors.yellow('Shorthand Aliases:')}
   Languages:  js, ts, go, py, rs, ruby, rb, swift, kotlin, kt, java, cpp, csharp, cs
@@ -376,7 +378,7 @@ ${colors.yellow('Removal Examples:')}
 
 ${colors.dim('Shared rules (code-quality, security, git-workflow, etc.) are always included.')}
 ${colors.dim('Identical files are skipped. Modified files are preserved; ours saved as *-1.mdc.')}
-${colors.dim('CLAUDE.md/AGENTS.md: missing sections are intelligently merged (not overwritten).')}
+${colors.dim('CLAUDE.md/GEMINI.md/AGENTS.md: missing sections are intelligently merged (not overwritten).')}
 `);
 }
 
@@ -764,16 +766,6 @@ ${templateRuleTables}
 `;
 }
 
-function generateClaudeMd(targetDir, installedTemplates) {
-  const content = generateClaudeMdContent(installedTemplates);
-  fs.writeFileSync(path.join(targetDir, 'CLAUDE.md'), content);
-}
-
-function generateCodexMd(targetDir, installedTemplates) {
-  const content = generateCodexMdContent(installedTemplates);
-  fs.writeFileSync(path.join(targetDir, 'AGENTS.md'), content);
-}
-
 function generateGeminiMdContent(installedTemplates) {
   const templateList = installedTemplates
     .map(t => `- **${t}**: ${TEMPLATES[t].description}`)
@@ -823,6 +815,16 @@ ${templateRuleTables}
 - Edit existing files directly; changes take effect immediately
 - Re-run to update: \`npx @djm204/agent-skills ${installedTemplates.join(' ')}\`
 `;
+}
+
+function generateClaudeMd(targetDir, installedTemplates) {
+  const content = generateClaudeMdContent(installedTemplates);
+  fs.writeFileSync(path.join(targetDir, 'CLAUDE.md'), content);
+}
+
+function generateCodexMd(targetDir, installedTemplates) {
+  const content = generateCodexMdContent(installedTemplates);
+  fs.writeFileSync(path.join(targetDir, 'AGENTS.md'), content);
 }
 
 function generateGeminiMd(targetDir, installedTemplates) {
@@ -1286,7 +1288,8 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
       cursor: '.cursor/rules/ (Cursor IDE)',
       claude: 'CLAUDE.md (Claude Code)',
       copilot: '.github/copilot-instructions.md (GitHub Copilot)',
-      codex: 'AGENTS.md (OpenAI Codex)'
+      codex: 'AGENTS.md (OpenAI Codex)',
+      gemini: 'GEMINI.md (Gemini CLI)'
     };
     console.log(`  - ${ideInfo[ide]}`);
   }
@@ -1313,13 +1316,16 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
   if (installedFor.includes('claude')) {
     console.log('  1. Review CLAUDE.md for any customization');
   }
+  if (installedFor.includes('gemini')) {
+    console.log('  2. Review GEMINI.md for any customization');
+  }
   if (installedFor.includes('copilot')) {
-    console.log('  2. Review .github/copilot-instructions.md');
+    console.log('  3. Review .github/copilot-instructions.md');
   }
   if (installedFor.includes('codex')) {
-    console.log('  3. Review AGENTS.md for any customization');
+    console.log('  4. Review AGENTS.md for any customization');
   }
-  console.log('  4. Commit the new files to your repository');
+  console.log('  5. Commit the new files to your repository');
   console.log();
 }
 
@@ -1674,12 +1680,11 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
     }
   }
 
-  // 4. Remove .github/copilot-instructions.md for GitHub Copilot
-      if (ides.includes('copilot')) {
-      const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
+// 4. Remove .github/copilot-instructions.md for GitHub Copilot
+if (ides.includes('copilot')) {
+  const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
 
-      if (fs.existsSync(copilotPath)) {
-      console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
+  if (fs.existsSync(copilotPath)) {      console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
 
       // Check if it contains our signature content
       const content = fs.readFileSync(copilotPath, 'utf8');

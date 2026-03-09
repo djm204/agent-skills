@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.9.0...agent-skills-v1.10.0) (2026-03-08)
+
+
+### Features
+
+* add Gemini CLI as a first-class IDE target and adapter ([#137](https://github.com/djm204/agent-skills/issues/137)) ([a75acf4](https://github.com/djm204/agent-skills/commit/a75acf49391d50bd3a6b20e798bdb122d831fed1))
+
 ## [1.9.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.8.0...agent-skills-v1.9.0) (2026-03-08)
 
 

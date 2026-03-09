@@ -21,7 +21,7 @@
 ## What This Is
 
 - **Tiered behavioral prompts** — each skill has 3 standalone tiers (minimal ~700 tokens, standard ~2,800, comprehensive ~7,500) encoding *how to think* about a domain, not just what to do
-- **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, GitHub Copilot, and OpenAI Codex, with smart merging and conflict detection
+- **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, Gemini CLI, GitHub Copilot, and OpenAI Codex, with smart merging and conflict detection
 - **Adapter templates** — reformats prompts into framework-specific boilerplate for LangChain, CrewAI, and OpenAI Agents SDK
 - **MCP servers** — 13 skills define tool schemas that can be served over MCP, making them callable by any MCP-compatible agent
 
