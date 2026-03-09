@@ -245,8 +245,8 @@ function extractDescription(filePath) {
 }
 
 // Supported IDEs/tools
-const SUPPORTED_IDES = ['cursor', 'claude', 'codex'];
-const DEFAULT_IDES = ['cursor', 'claude', 'codex']; // Default: install for all IDEs
+const SUPPORTED_IDES = ['cursor', 'claude', 'copilot', 'codex', 'gemini'];
+const DEFAULT_IDES = ['cursor', 'claude', 'copilot', 'codex', 'gemini']; // Default: install for all IDEs
 
 // Colors
 const colors = {
@@ -339,7 +339,8 @@ ${colors.yellow('Removal Options:')}
 ${colors.yellow('IDE Targets:')}
   cursor         .cursor/rules/ directory (Cursor IDE)
   claude         CLAUDE.md file (Claude Code, Cursor with Claude)
-  codex          .github/copilot-instructions.md (GitHub Copilot)
+  copilot        .github/copilot-instructions.md (GitHub Copilot)
+  codex          AGENTS.md file (OpenAI Codex)
 
 ${colors.yellow('Shorthand Aliases:')}
   Languages:  js, ts, go, py, rs, ruby, rb, swift, kotlin, kt, java, cpp, csharp, cs
@@ -375,7 +376,7 @@ ${colors.yellow('Removal Examples:')}
 
 ${colors.dim('Shared rules (code-quality, security, git-workflow, etc.) are always included.')}
 ${colors.dim('Identical files are skipped. Modified files are preserved; ours saved as *-1.mdc.')}
-${colors.dim('CLAUDE.md: missing sections are intelligently merged (not overwritten).')}
+${colors.dim('CLAUDE.md/AGENTS.md: missing sections are intelligently merged (not overwritten).')}
 `);
 }
 
@@ -605,6 +606,16 @@ function mergeClaudeContent(existingContent, templateContent) {
   return { merged: merged.trimEnd() + '\n', addedSections };
 }
 
+function mergeCodexContent(existingContent, templateContent) {
+  // Uses the same logic as Claude for now
+  return mergeClaudeContent(existingContent, templateContent);
+}
+
+function mergeGeminiContent(existingContent, templateContent) {
+  // Uses the same logic as Claude for now
+  return mergeClaudeContent(existingContent, templateContent);
+}
+
 /**
  * Get alternate filename with -1 suffix (e.g., code-quality.mdc -> code-quality-1.mdc)
  */
@@ -703,13 +714,134 @@ ${templateRuleTables}
 `;
 }
 
+function generateCodexMdContent(installedTemplates) {
+  const templateList = installedTemplates
+    .map(t => `- **${t}**: ${TEMPLATES[t].description}`)
+    .join('\n');
+
+  const templateRuleTables = installedTemplates.map(template => {
+    const rules = TEMPLATES[template].rules
+      .map(rule => `| \`${template}-${rule}\` | ${rule.replace('.mdc', '').replace(/-/g, ' ')} guidelines |`)
+      .join('\n');
+    
+    return `
+#### ${template.charAt(0).toUpperCase() + template.slice(1)} Rules
+
+| Rule | Purpose |
+|------|---------|
+${rules}`;
+  }).join('\n');
+
+  return `# AGENTS.md - Development Guide
+
+This project uses AI-assisted development with OpenAI Codex. Rules in \`.cursor/rules/\` provide guidance.
+
+## Installed Templates
+
+- **Shared** (always included): Core principles, code quality, security, git workflow, communication
+${templateList}
+
+## Rule Files
+
+All rules are in \`.cursor/rules/\`. The AI assistant reads these automatically.
+
+#### Shared Rules
+
+| Rule | Purpose |
+|------|---------|
+| \`core-principles.mdc\` | Honesty, simplicity, testing requirements |
+| \`code-quality.mdc\` | SOLID, DRY, clean code patterns |
+| \`security-fundamentals.mdc\` | Zero trust, input validation, secrets |
+| \`git-workflow.mdc\` | Commits, branches, PRs, safety |
+| \`communication.mdc\` | Direct, objective, professional |
+${templateRuleTables}
+
+## Customization
+
+- Create new \`.mdc\` files in \`.cursor/rules/\` for project-specific rules
+- Edit existing files directly; changes take effect immediately
+- Re-run to update: \`npx @djm204/agent-skills ${installedTemplates.join(' ')}\`
+`;
+}
+
 function generateClaudeMd(targetDir, installedTemplates) {
   const content = generateClaudeMdContent(installedTemplates);
   fs.writeFileSync(path.join(targetDir, 'CLAUDE.md'), content);
 }
 
+function generateCodexMd(targetDir, installedTemplates) {
+  const content = generateCodexMdContent(installedTemplates);
+  fs.writeFileSync(path.join(targetDir, 'AGENTS.md'), content);
+}
+
+function generateGeminiMdContent(installedTemplates) {
+  const templateList = installedTemplates
+    .map(t => `- **${t}**: ${TEMPLATES[t].description}`)
+    .join('\n');
+
+  const templateRuleTables = installedTemplates.map(template => {
+    const rules = TEMPLATES[template].rules
+      .map(rule => `| \`${template}-${rule}\` | ${rule.replace('.mdc', '').replace(/-/g, ' ')} guidelines |`)
+      .join('\n');
+    
+    return `
+#### ${template.charAt(0).toUpperCase() + template.slice(1)} Rules
+
+| Rule | Purpose |
+|------|---------|
+${rules}`;
+  }).join('\n');
+
+  return `# GEMINI.md - Development Guide
+
+This project uses AI-assisted development with Gemini CLI. Rules in \`.cursor/rules/\` provide guidance.
+
+## Installed Templates
+
+- **Shared** (always included): Core principles, code quality, security, git workflow, communication, gemini cli
+${templateList}
+
+## Rule Files
+
+All rules are in \`.cursor/rules/\`. The AI assistant reads these automatically.
+
+#### Shared Rules
+
+| Rule | Purpose |
+|------|---------|
+| \`core-principles.mdc\` | Honesty, simplicity, testing requirements |
+| \`code-quality.mdc\` | SOLID, DRY, clean code patterns |
+| \`security-fundamentals.mdc\` | Zero trust, input validation, secrets |
+| \`git-workflow.mdc\` | Commits, branches, PRs, safety |
+| \`communication.mdc\` | Direct, objective, professional |
+| \`gemini-cli.mdc\` | Guidelines for Gemini CLI |
+${templateRuleTables}
+
+## Customization
+
+- Create new \`.mdc\` files in \`.cursor/rules/\` for project-specific rules
+- Edit existing files directly; changes take effect immediately
+- Re-run to update: \`npx @djm204/agent-skills ${installedTemplates.join(' ')}\`
+`;
+}
+
+function generateGeminiMd(targetDir, installedTemplates) {
+  const content = generateGeminiMdContent(installedTemplates);
+  fs.writeFileSync(path.join(targetDir, 'GEMINI.md'), content);
+}
+
 function generateClaudeMdToPath(targetDir, installedTemplates, destPath) {
   const content = generateClaudeMdContent(installedTemplates);
+  fs.writeFileSync(destPath, content);
+}
+
+function generateCodexMdToPath(targetDir, installedTemplates, destPath) {
+  const content = generateCodexMdContent(installedTemplates);
+  fs.writeFileSync(destPath, content);
+}
+
+function generateGeminiMdToPath(targetDir, installedTemplates, destPath) {
+  const content = generateGeminiMdContent(installedTemplates);
   fs.writeFileSync(destPath, content);
 }
 
@@ -974,9 +1106,62 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
     console.log();
   }
 
-  // 3. Generate .github/copilot-instructions.md for GitHub Copilot (Codex)
-  if (ides.includes('codex')) {
-    installedFor.push('codex');
+  // 3. Generate GEMINI.md for Gemini CLI
+  if (ides.includes('gemini')) {
+    installedFor.push('gemini');
+    const geminiPath = path.join(targetDir, 'GEMINI.md');
+    const geminiExists = fs.existsSync(geminiPath);
+    const templateContent = generateGeminiMdContent(templates);
+
+    console.log(colors.green('► Generating GEMINI.md (Gemini CLI)...'));
+    if (dryRun) {
+      if (!geminiExists) {
+        console.log(`  ${colors.dim('[copy]')} GEMINI.md`);
+      } else if (force) {
+        console.log(`  ${colors.dim('[update]')} GEMINI.md`);
+      } else {
+        const existingContent = fs.readFileSync(geminiPath, 'utf8');
+        const { missing } = findMissingSections(existingContent, templateContent);
+        if (missing.length === 0) {
+          console.log(`  ${colors.yellow('[skip]')} GEMINI.md (all sections present)`);
+        } else {
+          console.log(`  ${colors.blue('[merge]')} GEMINI.md (would add ${missing.length} section(s))`);
+          for (const section of missing) {
+            console.log(`    ${colors.dim('+')} ${section.heading}`);
+          }
+        }
+      }
+    } else if (!geminiExists) {
+      fs.writeFileSync(geminiPath, templateContent);
+      console.log(`  ${colors.dim('[copied]')} GEMINI.md`);
+      stats.copied++;
+    } else if (force) {
+      fs.writeFileSync(geminiPath, templateContent);
+      console.log(`  ${colors.dim('[updated]')} GEMINI.md`);
+      stats.updated++;
+    } else {
+      const existingContent = fs.readFileSync(geminiPath, 'utf8');
+      const { merged, addedSections } = mergeGeminiContent(existingContent, templateContent);
+
+      if (addedSections.length === 0) {
+        console.log(`  ${colors.yellow('[skip]')} GEMINI.md (all sections present)`);
+        stats.skipped++;
+      } else {
+        fs.writeFileSync(geminiPath, merged);
+        console.log(`  ${colors.blue('[merged]')} GEMINI.md`);
+        console.log(`    ${colors.green('Added sections:')}`);
+        for (const heading of addedSections) {
+          console.log(`      ${colors.dim('+')} ${heading}`);
+        }
+        stats.updated++;
+      }
+    }
+    console.log();
+  }
+
+  // 4. Generate .github/copilot-instructions.md for GitHub Copilot
+  if (ides.includes('copilot')) {
+    installedFor.push('copilot');
     const githubDir = path.join(targetDir, '.github');
     const copilotPath = path.join(githubDir, 'copilot-instructions.md');
     const copilotExists = fs.existsSync(copilotPath);
@@ -1025,6 +1210,59 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
     console.log();
   }
 
+  // 4. Generate AGENTS.md for OpenAI Codex
+  if (ides.includes('codex')) {
+    installedFor.push('codex');
+    const codexPath = path.join(targetDir, 'AGENTS.md');
+    const codexExists = fs.existsSync(codexPath);
+    const templateContent = generateCodexMdContent(templates);
+
+    console.log(colors.green('► Generating AGENTS.md (OpenAI Codex)...'));
+    if (dryRun) {
+      if (!codexExists) {
+        console.log(`  ${colors.dim('[copy]')} AGENTS.md`);
+      } else if (force) {
+        console.log(`  ${colors.dim('[update]')} AGENTS.md`);
+      } else {
+        const existingContent = fs.readFileSync(codexPath, 'utf8');
+        const { missing } = findMissingSections(existingContent, templateContent);
+        if (missing.length === 0) {
+          console.log(`  ${colors.yellow('[skip]')} AGENTS.md (all sections present)`);
+        } else {
+          console.log(`  ${colors.blue('[merge]')} AGENTS.md (would add ${missing.length} section(s))`);
+          for (const section of missing) {
+            console.log(`    ${colors.dim('+')} ${section.heading}`);
+          }
+        }
+      }
+    } else if (!codexExists) {
+      fs.writeFileSync(codexPath, templateContent);
+      console.log(`  ${colors.dim('[copied]')} AGENTS.md`);
+      stats.copied++;
+    } else if (force) {
+      fs.writeFileSync(codexPath, templateContent);
+      console.log(`  ${colors.dim('[updated]')} AGENTS.md`);
+      stats.updated++;
+    } else {
+      const existingContent = fs.readFileSync(codexPath, 'utf8');
+      const { merged, addedSections } = mergeCodexContent(existingContent, templateContent);
+
+      if (addedSections.length === 0) {
+        console.log(`  ${colors.yellow('[skip]')} AGENTS.md (all sections present)`);
+        stats.skipped++;
+      } else {
+        fs.writeFileSync(codexPath, merged);
+        console.log(`  ${colors.blue('[merged]')} AGENTS.md`);
+        console.log(`    ${colors.green('Added sections:')}`);
+        for (const heading of addedSections) {
+          console.log(`      ${colors.dim('+')} ${heading}`);
+        }
+        stats.updated++;
+      }
+    }
+    console.log();
+  }
+
   // Summary
   console.log(colors.green('════════════════════════════════════════════════════════════'));
   console.log(colors.green('✓ Installation complete!\n'));
@@ -1047,7 +1285,8 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
     const ideInfo = {
       cursor: '.cursor/rules/ (Cursor IDE)',
       claude: 'CLAUDE.md (Claude Code)',
-      codex: '.github/copilot-instructions.md (GitHub Copilot)'
+      copilot: '.github/copilot-instructions.md (GitHub Copilot)',
+      codex: 'AGENTS.md (OpenAI Codex)'
     };
     console.log(`  - ${ideInfo[ide]}`);
   }
@@ -1074,10 +1313,13 @@ To clean up manually, move any custom rules to \`.cursor/rules/\` and delete \`.
   if (installedFor.includes('claude')) {
     console.log('  1. Review CLAUDE.md for any customization');
   }
-  if (installedFor.includes('codex')) {
+  if (installedFor.includes('copilot')) {
     console.log('  2. Review .github/copilot-instructions.md');
   }
-  console.log('  3. Commit the new files to your repository');
+  if (installedFor.includes('codex')) {
+    console.log('  3. Review AGENTS.md for any customization');
+  }
+  console.log('  4. Commit the new files to your repository');
   console.log();
 }
 
@@ -1199,11 +1441,20 @@ async function remove(targetDir, templates, dryRun = false, force = false, skipC
     }
   }
 
-  // 2. Note about CLAUDE.md and copilot-instructions.md
+  // 2. Note about aggregated files (CLAUDE.md, GEMINI.md, AGENTS.md, etc.)
   // These are regenerated, not patched, so we can't easily remove just one template's content
   // We'll warn the user about this
-  if (ides.includes('claude') || ides.includes('codex')) {
-    console.log(colors.yellow('Note: CLAUDE.md and copilot-instructions.md contain merged content.'));
+  const aggregatedIdes = ides.filter(ide => ['claude', 'copilot', 'codex', 'gemini'].includes(ide));
+  if (aggregatedIdes.length > 0) {
+    const fileNames = aggregatedIdes.map(ide => {
+      if (ide === 'claude') return 'CLAUDE.md';
+      if (ide === 'gemini') return 'GEMINI.md';
+      if (ide === 'codex') return 'AGENTS.md';
+      if (ide === 'copilot') return '.github/copilot-instructions.md';
+      return null;
+    }).filter(Boolean);
+
+    console.log(colors.yellow(`Note: ${fileNames.join(', ')} contain merged content.`));
     console.log(colors.dim('To update these files, re-run the installer with the remaining templates.\n'));
   }
 
@@ -1399,18 +1650,42 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
     }
   }
 
-  // 3. Remove .github/copilot-instructions.md for Codex
-  if (ides.includes('codex')) {
-    const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
-    
-    if (fs.existsSync(copilotPath)) {
+  // 3. Remove GEMINI.md for Gemini CLI
+  if (ides.includes('gemini')) {
+    const geminiPath = path.join(targetDir, 'GEMINI.md');
+
+    if (fs.existsSync(geminiPath)) {
+      console.log(colors.yellow('► Checking GEMINI.md...'));
+
+      // Check if it contains our signature content
+      const content = fs.readFileSync(geminiPath, 'utf8');
+      const isOurs = content.includes('# GEMINI.md - Development Guide') &&
+                     (content.includes('.cursor/rules/') || content.includes('.cursorrules/'));
+
+      if (!isOurs && !force) {
+        console.log(`  ${colors.yellow('[modified]')} GEMINI.md (doesn't match template, use --force)`);
+        modifiedFiles.push('GEMINI.md');
+        stats.skipped++;
+      } else {
+        console.log(`  ${colors.red('[remove]')} GEMINI.md${!isOurs ? ' (modified, --force)' : ''}`);
+        filesToRemove.push({ path: geminiPath, name: 'GEMINI.md' });
+      }
+      console.log();
+    }
+  }
+
+  // 4. Remove .github/copilot-instructions.md for GitHub Copilot
+      if (ides.includes('copilot')) {
+      const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
+
+      if (fs.existsSync(copilotPath)) {
       console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
-      
+
       // Check if it contains our signature content
       const content = fs.readFileSync(copilotPath, 'utf8');
-      const isOurs = content.includes('# Copilot Instructions') && 
+      const isOurs = content.includes('# Copilot Instructions') &&
                      content.includes('Installed Templates:');
-      
+
       if (!isOurs && !force) {
         console.log(`  ${colors.yellow('[modified]')} .github/copilot-instructions.md (doesn't match template, use --force)`);
         modifiedFiles.push('.github/copilot-instructions.md');
@@ -1420,11 +1695,34 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
         filesToRemove.push({ path: copilotPath, name: '.github/copilot-instructions.md' });
       }
       console.log();
-    }
-  }
+      }
+      }
 
-  if (filesToRemove.length === 0 && dirsToRemove.length === 0) {
-    console.log(colors.yellow('Nothing to remove.\n'));
+      // 4. Remove AGENTS.md for OpenAI Codex
+      if (ides.includes('codex')) {
+      const codexPath = path.join(targetDir, 'AGENTS.md');
+
+      if (fs.existsSync(codexPath)) {
+      console.log(colors.yellow('► Checking AGENTS.md...'));
+
+      // Check if it contains our signature content
+      const content = fs.readFileSync(codexPath, 'utf8');
+      const isOurs = content.includes('# AGENTS.md - Development Guide') &&
+                     (content.includes('.cursor/rules/') || content.includes('.cursorrules/'));
+
+      if (!isOurs && !force) {
+        console.log(`  ${colors.yellow('[modified]')} AGENTS.md (doesn't match template, use --force)`);
+        modifiedFiles.push('AGENTS.md');
+        stats.skipped++;
+      } else {
+        console.log(`  ${colors.red('[remove]')} AGENTS.md${!isOurs ? ' (modified, --force)' : ''}`);
+        filesToRemove.push({ path: codexPath, name: 'AGENTS.md' });
+      }
+      console.log();
+      }
+      }
+
+      if (filesToRemove.length === 0 && dirsToRemove.length === 0) {    console.log(colors.yellow('Nothing to remove.\n'));
     return;
   }
 
@@ -2102,9 +2400,19 @@ export const _internals = {
   generateSectionSignature,
   findMissingSections,
   mergeClaudeContent,
+  mergeCodexContent,
+  mergeGeminiContent,
   getAlternateFilename,
   copyFile,
   generateClaudeMdContent,
+  generateCodexMdContent,
+  generateGeminiMdContent,
+  generateClaudeMd,
+  generateCodexMd,
+  generateGeminiMd,
+  generateClaudeMdToPath,
+  generateCodexMdToPath,
+  generateGeminiMdToPath,
   generateCopilotInstructionsContent,
   isOurFile,
   install,

@@ -46,7 +46,7 @@ describe('--adapter flag parsing', () => {
   });
 
   it('accepts all registered adapters without throwing a parse error', async () => {
-    const adapters = ['raw', 'cursor', 'claude-code', 'copilot', 'openai-agents', 'langchain', 'crewai'];
+    const adapters = ['raw', 'cursor', 'claude-code', 'copilot', 'openai-agents', 'langchain', 'crewai', 'gemini', 'codex'];
     const tmpDir = makeTmpDir();
     try {
       for (const adapter of adapters) {
@@ -58,7 +58,7 @@ describe('--adapter flag parsing', () => {
     } finally {
       fs.rmSync(tmpDir, { recursive: true });
     }
-  });
+  }, 10000);
 });
 
 // ============================================================================

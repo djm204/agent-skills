@@ -23,9 +23,13 @@ const {
   generateSectionSignature,
   findMissingSections,
   mergeClaudeContent,
+  mergeCodexContent,
+  mergeGeminiContent,
   getAlternateFilename,
   copyFile,
   generateClaudeMdContent,
+  generateCodexMdContent,
+  generateGeminiMdContent,
   generateCopilotInstructionsContent,
   isOurFile,
   install,
@@ -178,16 +182,18 @@ describe('Constants', () => {
   });
 
   describe('SUPPORTED_IDES', () => {
-    it('should contain cursor, claude, and codex', () => {
+    it('should contain cursor, claude, copilot, codex, and gemini', () => {
       expect(SUPPORTED_IDES).toContain('cursor');
       expect(SUPPORTED_IDES).toContain('claude');
+      expect(SUPPORTED_IDES).toContain('copilot');
       expect(SUPPORTED_IDES).toContain('codex');
+      expect(SUPPORTED_IDES).toContain('gemini');
     });
   });
 
   describe('DEFAULT_IDES', () => {
     it('should default to all supported IDEs', () => {
-      expect(DEFAULT_IDES).toEqual(SUPPORTED_IDES);
+      expect(DEFAULT_IDES).toEqual(['cursor', 'claude', 'copilot', 'codex', 'gemini']);
     });
   });
 
@@ -811,10 +817,26 @@ describe('Install/Remove/Reset Operations', () => {
       expect(content).toContain('# CLAUDE.md - Development Guide');
     });
 
-    it('should create copilot-instructions.md for codex IDE', async () => {
-      await install(tempDir, ['web-frontend'], false, false, ['codex']);
+    it('should create copilot-instructions.md for copilot IDE', async () => {
+      await install(tempDir, ['web-frontend'], false, false, ['copilot']);
 
       expect(fs.existsSync(path.join(tempDir, '.github', 'copilot-instructions.md'))).toBe(true);
+    });
+
+    it('should create AGENTS.md for codex IDE', async () => {
+      await install(tempDir, ['web-frontend'], false, false, ['codex']);
+
+      expect(fs.existsSync(path.join(tempDir, 'AGENTS.md'))).toBe(true);
+      const content = fs.readFileSync(path.join(tempDir, 'AGENTS.md'), 'utf8');
+      expect(content).toContain('# AGENTS.md - Development Guide');
+    });
+
+    it('should create GEMINI.md for gemini IDE', async () => {
+      await install(tempDir, ['web-frontend'], false, false, ['gemini']);
+
+      expect(fs.existsSync(path.join(tempDir, 'GEMINI.md'))).toBe(true);
+      const content = fs.readFileSync(path.join(tempDir, 'GEMINI.md'), 'utf8');
+      expect(content).toContain('# GEMINI.md - Development Guide');
     });
 
     it('should install for all IDEs by default', async () => {
@@ -822,6 +844,8 @@ describe('Install/Remove/Reset Operations', () => {
 
       expect(fs.existsSync(path.join(tempDir, '.cursor', 'rules'))).toBe(true);
       expect(fs.existsSync(path.join(tempDir, 'CLAUDE.md'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, 'AGENTS.md'))).toBe(true);
+      expect(fs.existsSync(path.join(tempDir, 'GEMINI.md'))).toBe(true);
       expect(fs.existsSync(path.join(tempDir, '.github', 'copilot-instructions.md'))).toBe(true);
     });
 
@@ -982,14 +1006,20 @@ describe('Install/Remove/Reset Operations', () => {
       }
     });
 
-    it('should remove CLAUDE.md', async () => {
-      await reset(tempDir, false, false, true, ['claude']);
+    it('should remove GEMINI.md', async () => {
+      await reset(tempDir, false, false, true, ['gemini']);
 
-      expect(fs.existsSync(path.join(tempDir, 'CLAUDE.md'))).toBe(false);
+      expect(fs.existsSync(path.join(tempDir, 'GEMINI.md'))).toBe(false);
+    });
+
+    it('should remove AGENTS.md', async () => {
+      await reset(tempDir, false, false, true, ['codex']);
+
+      expect(fs.existsSync(path.join(tempDir, 'AGENTS.md'))).toBe(false);
     });
 
     it('should remove copilot-instructions.md', async () => {
-      await reset(tempDir, false, false, true, ['codex']);
+      await reset(tempDir, false, false, true, ['copilot']);
 
       expect(fs.existsSync(path.join(tempDir, '.github', 'copilot-instructions.md'))).toBe(false);
     });

@@ -1,8 +1,9 @@
 /**
- * Codex adapter — outputs OpenAI Codex skills format.
+ * Codex adapter — outputs OpenAI Codex / Agents format.
  *
  * Output:
- * - .agents/skills/<name>/SKILL.md               — always
+ * - AGENTS.md                                   — standard rule file
+ * - .agents/skills/<name>/SKILL.md               — OpenAI Agents skill
  * - .agents/skills/<name>/agents/openai.yaml      — when MCP or tools present
  *
  * Format: https://developers.openai.com/codex/skills/
@@ -41,7 +42,20 @@ export function codexAdapter(skillPack, options = {}) {
 
   const files = [];
 
-  // --- SKILL.md ---
+  // --- AGENTS.md (Standard for Codex rules) ---
+  const agentsMd = [
+    `# AGENTS.md - ${humanize(skillPack.name)}`,
+    '',
+    `> ${skillPack.description.short}`,
+    '',
+    '---',
+    '',
+    prompt,
+  ].join('\n');
+
+  files.push({ path: 'AGENTS.md', content: agentsMd });
+
+  // --- .agents/skills/<name>/SKILL.md ---
   const description = skillPack.description.long || skillPack.description.short;
   const skillMd = [
     '---',
@@ -101,6 +115,7 @@ export function codexAdapter(skillPack, options = {}) {
 
   return {
     files,
-    summary: `Codex: .agents/skills/${skillPack.name}/ (tier: ${tier})`,
+    summary: `Codex: AGENTS.md + .agents/skills/${skillPack.name}/ (tier: ${tier})`,
   };
 }
+

@@ -7,20 +7,21 @@
 
 ![Cursor](https://img.shields.io/badge/Cursor_IDE-black?style=flat&logo=cursor)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-cc785c?style=flat&logo=anthropic)
+![Gemini CLI](https://img.shields.io/badge/Gemini_CLI-4285F4?style=flat&logo=google)
 ![GitHub Copilot](https://img.shields.io/badge/GitHub_Copilot-000?style=flat&logo=githubcopilot)
+![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-412991?style=flat&logo=openai)
 ![Windsurf](https://img.shields.io/badge/Windsurf-0B6FBF?style=flat)
 ![LangChain](https://img.shields.io/badge/LangChain-1C3C3C?style=flat)
 ![OpenAI Agents](https://img.shields.io/badge/OpenAI_Agents-412991?style=flat)
-![OpenAI Codex](https://img.shields.io/badge/OpenAI_Codex-412991?style=flat)
 
-**44 curated prompt packs** that encode principal-level domain expertise for AI coding assistants. Install into Cursor, Claude Code, or GitHub Copilot — or compose into LangChain, CrewAI, and OpenAI Agents SDK pipelines via adapter templates.
+**44 curated prompt packs** that encode principal-level domain expertise for AI coding assistants. Install into Cursor, Claude Code, Gemini CLI, GitHub Copilot, or OpenAI Codex — or compose into LangChain, CrewAI, and OpenAI Agents SDK pipelines via adapter templates.
 
 > **Disclaimer:** This project is provided for **educational and experimental purposes only**. The author takes no responsibility for any actions, outputs, or consequences resulting from an LLM or AI assistant following these rules. Use at your own risk. Always review AI-generated code before deploying to production.
 
 ## What This Is
 
 - **Tiered behavioral prompts** — each skill has 3 standalone tiers (minimal ~700 tokens, standard ~2,800, comprehensive ~7,500) encoding *how to think* about a domain, not just what to do
-- **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, and GitHub Copilot, with smart merging and conflict detection
+- **A CLI installer** — copies rule files to the right locations for Cursor, Claude Code, GitHub Copilot, and OpenAI Codex, with smart merging and conflict detection
 - **Adapter templates** — reformats prompts into framework-specific boilerplate for LangChain, CrewAI, and OpenAI Agents SDK
 - **MCP servers** — 13 skills define tool schemas that can be served over MCP, making them callable by any MCP-compatible agent
 
@@ -54,9 +55,11 @@ Navigate to your project directory and run:
 npx @djm204/agent-skills web-frontend
 ```
 
-This installs rule files for all supported IDEs (Cursor, Claude Code, GitHub Copilot):
+This installs rule files for all supported IDEs (Cursor, Claude Code, Gemini CLI, GitHub Copilot, OpenAI Codex):
 
 - **`CLAUDE.md`** — Development guide for Claude Code and Cursor with Claude
+- **`GEMINI.md`** — Development guide for Gemini CLI
+- **`AGENTS.md`** — Development guide for OpenAI Codex
 - **`.cursor/rules/`** — Rule files for Cursor IDE (`.mdc` format)
 - **`.github/copilot-instructions.md`** — Instructions for GitHub Copilot
 
@@ -150,11 +153,12 @@ npx @djm204/agent-skills <skill-name> --adapter=<adapter> [--tier=<tier>] [--out
 | `raw` | Plain markdown prompt | Any LLM, testing |
 | `cursor` | `.cursor/rules/` MDC files | Cursor IDE |
 | `claude-code` | `CLAUDE.md` section | Claude Code |
+| `gemini` | `GEMINI.md` section | Gemini CLI |
 | `copilot` | `.github/copilot-instructions.md` section | GitHub Copilot |
+| `codex` | `AGENTS.md` + `.agents/skills/<name>/SKILL.md` | OpenAI Codex |
 | `openai-agents` | Python `Agent(instructions=...)` snippet | OpenAI Agents SDK |
 | `langchain` | Python `SystemMessagePromptTemplate` | LangChain |
 | `crewai` | Python `Agent(backstory=..., goal=...)` | CrewAI |
-| `codex` | `.agents/skills/<name>/SKILL.md` + `agents/openai.yaml` | OpenAI Codex |
 
 > **Note:** Adapters produce formatted prompt strings and code scaffolds — not runtime framework plugins. Tool definitions in skill packs (`tools/*.yaml`) are interface contracts that describe what a tool would accept and return. Your application provides the implementation.
 
@@ -473,12 +477,13 @@ When using `--adapter`, no IDE files are installed. Instead, a single prompt fil
 |---------|--------|
 | `raw` | `<skill-name>.md` — plain markdown prompt |
 | `claude-code` | Prompt formatted as a `CLAUDE.md` section |
+| `gemini` | Prompt formatted as a `GEMINI.md` section |
 | `cursor` | `.cursor/rules/<skill-name>.mdc` |
 | `copilot` | Prompt formatted for `.github/copilot-instructions.md` |
+| `codex` | `AGENTS.md` + `.agents/skills/<name>/SKILL.md` |
 | `openai-agents` | Python snippet: `Agent(name=..., instructions=...)` |
 | `langchain` | Python snippet: `SystemMessagePromptTemplate.from_template(...)` |
 | `crewai` | Python snippet: `Agent(role=..., goal=..., backstory=...)` |
-| `codex` | `.agents/skills/<name>/SKILL.md` + optional `agents/openai.yaml` |
 
 ---
 
@@ -489,6 +494,8 @@ When using `--adapter`, no IDE files are installed. Instead, a single prompt fil
 ```text
 your-project/
 ├── CLAUDE.md                              # Development guide (Claude Code, Cursor)
+├── GEMINI.md                              # Development guide (Gemini CLI)
+├── AGENTS.md                              # Development guide (OpenAI Codex)
 ├── .cursor/
 │   └── rules/                             # Rule files (Cursor IDE)
 │       ├── core-principles.mdc                 # Shared
