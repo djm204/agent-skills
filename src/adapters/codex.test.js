@@ -82,6 +82,30 @@ const SKILL_PACK_QUOTES_IN_DESC = {
 };
 
 // ============================================================================
+// AGENTS.md output
+// ============================================================================
+
+describe('codexAdapter — AGENTS.md', () => {
+  it('outputs AGENTS.md at root', () => {
+    const result = codexAdapter(SKILL_PACK);
+    const agentsMd = result.files.find((f) => f.path === 'AGENTS.md');
+    expect(agentsMd).toBeDefined();
+  });
+
+  it('AGENTS.md content contains the system prompt', () => {
+    const result = codexAdapter(SKILL_PACK);
+    const agentsMd = result.files.find((f) => f.path === 'AGENTS.md');
+    expect(agentsMd.content).toContain('Full behavioral prompt.');
+  });
+
+  it('AGENTS.md includes a title with humanized skill name', () => {
+    const result = codexAdapter(SKILL_PACK);
+    const agentsMd = result.files.find((f) => f.path === 'AGENTS.md');
+    expect(agentsMd.content).toContain('# AGENTS.md - Test Skill');
+  });
+});
+
+// ============================================================================
 // SKILL.md output
 // ============================================================================
 
@@ -142,9 +166,9 @@ describe('codexAdapter — no tools or MCP', () => {
     expect(yaml).toBeUndefined();
   });
 
-  it('outputs only one file (SKILL.md)', () => {
+  it('outputs basic files (AGENTS.md + SKILL.md)', () => {
     const result = codexAdapter(SKILL_PACK);
-    expect(result.files).toHaveLength(1);
+    expect(result.files).toHaveLength(2);
   });
 });
 
