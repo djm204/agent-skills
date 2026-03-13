@@ -322,6 +322,7 @@ ${colors.yellow('Options:')}
   --list, -l        List available templates
   --help, -h        Show this help message
   --version, -v     Show version number
+  --json            Output as JSON (with --list, --version, --stats, --auto)
   --dry-run         Show what would be changed
   --force, -f       Overwrite/remove even if files were modified
   --yes, -y         Skip confirmation prompt (for --remove and --reset)
@@ -1680,11 +1681,12 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
     }
   }
 
-// 4. Remove .github/copilot-instructions.md for GitHub Copilot
-if (ides.includes('copilot')) {
-  const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
+  // 4. Remove .github/copilot-instructions.md for GitHub Copilot
+  if (ides.includes('copilot')) {
+    const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
 
-  if (fs.existsSync(copilotPath)) {      console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
+    if (fs.existsSync(copilotPath)) {
+      console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
 
       // Check if it contains our signature content
       const content = fs.readFileSync(copilotPath, 'utf8');
@@ -1700,14 +1702,14 @@ if (ides.includes('copilot')) {
         filesToRemove.push({ path: copilotPath, name: '.github/copilot-instructions.md' });
       }
       console.log();
-      }
-      }
+    }
+  }
 
-      // 4. Remove AGENTS.md for OpenAI Codex
-      if (ides.includes('codex')) {
-      const codexPath = path.join(targetDir, 'AGENTS.md');
+  // 5. Remove AGENTS.md for OpenAI Codex
+  if (ides.includes('codex')) {
+    const codexPath = path.join(targetDir, 'AGENTS.md');
 
-      if (fs.existsSync(codexPath)) {
+    if (fs.existsSync(codexPath)) {
       console.log(colors.yellow('► Checking AGENTS.md...'));
 
       // Check if it contains our signature content
@@ -1724,10 +1726,11 @@ if (ides.includes('copilot')) {
         filesToRemove.push({ path: codexPath, name: 'AGENTS.md' });
       }
       console.log();
-      }
-      }
+    }
+  }
 
-      if (filesToRemove.length === 0 && dirsToRemove.length === 0) {    console.log(colors.yellow('Nothing to remove.\n'));
+  if (filesToRemove.length === 0 && dirsToRemove.length === 0) {
+    console.log(colors.yellow('Nothing to remove.\n'));
     return;
   }
 
@@ -1939,9 +1942,11 @@ export async function run(args) {
   let serveMode = false;
   let handlerDir = null;
   let statsMode = false;
-  let statsJson = false;
+  let jsonOutput = false;
   let clearStats = false;
   let noTracking = false;
+  let listMode = false;
+  let versionMode = false;
   let testSkillsDir = null;
   let adapterName = null;
   let adapterTier = 'standard';
@@ -1953,17 +1958,13 @@ export async function run(args) {
   // Parse arguments
   for (const arg of args) {
     if (arg === '--list' || arg === '-l') {
-      printBanner();
-      printTemplates();
-      process.exit(0);
+      listMode = true;
     } else if (arg === '--help' || arg === '-h') {
       printBanner();
       printHelp();
       process.exit(0);
     } else if (arg === '--version' || arg === '-v') {
-      console.log(`${PACKAGE_NAME} v${CURRENT_VERSION}`);
-      console.log(`${colors.dim('Changelog:')} ${CHANGELOG_URL}`);
-      process.exit(0);
+      versionMode = true;
     } else if (arg === '--dry-run') {
       dryRun = true;
     } else if (arg === '--force' || arg === '-f') {
@@ -1992,7 +1993,7 @@ export async function run(args) {
     } else if (arg === '--stats') {
       statsMode = true;
     } else if (arg === '--json') {
-      statsJson = true;
+      jsonOutput = true;
     } else if (arg === '--clear-stats') {
       clearStats = true;
     } else if (arg === '--no-tracking') {
@@ -2039,10 +2040,54 @@ export async function run(args) {
     }
   }
 
-  printBanner();
+  // Handle --version (deferred from arg loop)
+  if (versionMode) {
+    if (jsonOutput) {
+      console.log(JSON.stringify({ name: PACKAGE_NAME, version: CURRENT_VERSION }, null, 2));
+    } else {
+      printBanner();
+      console.log(`${PACKAGE_NAME} v${CURRENT_VERSION}`);
+      console.log(`${colors.dim('Changelog:')} ${CHANGELOG_URL}`);
+    }
+    process.exit(0);
+  }
 
-  // Check for updates (non-blocking, fails silently)
-  await checkForUpdates();
+  // Handle --list (deferred from arg loop)
+  if (listMode) {
+    if (jsonOutput) {
+      // Build reverse alias map
+      const aliasesByTemplate = {};
+      for (const [alias, canonical] of Object.entries(TEMPLATE_ALIASES)) {
+        if (!aliasesByTemplate[canonical]) aliasesByTemplate[canonical] = [];
+        aliasesByTemplate[canonical].push(alias);
+      }
+
+      // Group by category
+      const skills = {};
+      for (const [name, info] of Object.entries(TEMPLATES)) {
+        if (!skills[info.category]) skills[info.category] = [];
+        skills[info.category].push({
+          name,
+          description: info.description,
+          aliases: aliasesByTemplate[name] || [],
+        });
+      }
+
+      const sharedRules = SHARED_RULES.map(r => r.replace('.mdc', ''));
+      console.log(JSON.stringify({ skills, shared_rules: sharedRules }, null, 2));
+    } else {
+      printBanner();
+      printTemplates();
+    }
+    process.exit(0);
+  }
+
+  if (!jsonOutput) {
+    printBanner();
+
+    // Check for updates (non-blocking, fails silently)
+    await checkForUpdates();
+  }
 
   // Resolve template aliases to canonical names
   const resolvedTemplates = templates.map(resolveTemplateAlias);
@@ -2097,7 +2142,7 @@ export async function run(args) {
   if (statsMode) {
     const report = getUsageReport();
 
-    if (statsJson) {
+    if (jsonOutput) {
       console.log(JSON.stringify(report, null, 2));
       return report;
     }
@@ -2155,13 +2200,15 @@ export async function run(args) {
 
     // Detect context from cwd
     const context = detectContext(process.cwd());
-    console.log(`\n${colors.cyan('Auto-detecting skills for this project...')}`);
+    if (!jsonOutput) {
+      console.log(`\n${colors.cyan('Auto-detecting skills for this project...')}`);
 
-    if (context.language) {
-      console.log(`  Language: ${colors.yellow(context.language)}`);
-    }
-    if (context.frameworks.length > 0) {
-      console.log(`  Frameworks: ${colors.yellow(context.frameworks.join(', '))}`);
+      if (context.language) {
+        console.log(`  Language: ${colors.yellow(context.language)}`);
+      }
+      if (context.frameworks.length > 0) {
+        console.log(`  Frameworks: ${colors.yellow(context.frameworks.join(', '))}`);
+      }
     }
 
     // Build skill catalog from available skills
@@ -2196,6 +2243,24 @@ export async function run(args) {
       maxSkills: 5,
       budget: adapterBudget || undefined,
     });
+
+    // JSON output — handles empty results too
+    if (jsonOutput) {
+      const output = {
+        detected: {
+          language: context.language || null,
+          frameworks: context.frameworks || [],
+        },
+        recommended_skills: selected.map(s => ({
+          name: s.name,
+          score: s.score,
+          category: s.meta?.category || null,
+          description: s.meta?.description?.short || s.meta?.description || null,
+        })),
+      };
+      console.log(JSON.stringify(output, null, 2));
+      return output;
+    }
 
     if (selected.length === 0) {
       console.log(`\n${colors.yellow('No matching skills found for this project.')}`);

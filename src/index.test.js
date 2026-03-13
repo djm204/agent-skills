@@ -1178,6 +1178,116 @@ describe('CLI Argument Parsing', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('releases/tag'));
   });
 
+  it('should output version as JSON with --version --json', async () => {
+    await expect(run(['--version', '--json'])).rejects.toThrow('process.exit');
+
+    expect(exitSpy).toHaveBeenCalledWith(0);
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+    expect(json).toHaveProperty('name', '@djm204/agent-skills');
+    expect(json).toHaveProperty('version');
+    expect(json.version).toMatch(/^\d+\.\d+\.\d+/);
+  });
+
+  it('should output version as JSON with --json --version (flag order)', async () => {
+    await expect(run(['--json', '--version'])).rejects.toThrow('process.exit');
+
+    expect(exitSpy).toHaveBeenCalledWith(0);
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+    expect(json).toHaveProperty('name');
+    expect(json).toHaveProperty('version');
+  });
+
+  it('should output skills as JSON with --list --json', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    expect(exitSpy).toHaveBeenCalledWith(0);
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // Must have skills grouped by category
+    expect(json).toHaveProperty('skills');
+    expect(typeof json.skills).toBe('object');
+
+    // Must have shared_rules array
+    expect(json).toHaveProperty('shared_rules');
+    expect(Array.isArray(json.shared_rules)).toBe(true);
+    expect(json.shared_rules.length).toBeGreaterThan(0);
+    // No .mdc extensions
+    expect(json.shared_rules.every(r => !r.endsWith('.mdc'))).toBe(true);
+  });
+
+  it('should include aliases in --list --json output', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // Find javascript-expert — it has aliases (js, ts)
+    const allSkills = Object.values(json.skills).flat();
+    const jsExpert = allSkills.find(s => s.name === 'javascript-expert');
+    expect(jsExpert).toBeDefined();
+    expect(jsExpert.aliases).toContain('js');
+    expect(jsExpert).toHaveProperty('description');
+  });
+
+  it('should group skills by category in --list --json', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // At least engineering category should exist
+    expect(json.skills).toHaveProperty('engineering');
+    expect(Array.isArray(json.skills.engineering)).toBe(true);
+    expect(json.skills.engineering.length).toBeGreaterThan(0);
+  });
+
+  it('should suppress banner with --list --json', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    const allOutput = consoleLogSpy.mock.calls.flat().join('');
+    expect(allOutput).not.toContain('Agent Skills Installer');
+    expect(allOutput).not.toContain('Available Templates');
+  });
+
+  it('should output auto-detect results as JSON with --auto --json', async () => {
+    const result = await run(['--auto', '--json', '--dry-run']);
+
+    expect(exitSpy).not.toHaveBeenCalled();
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    expect(json).toHaveProperty('detected');
+    expect(json.detected).toHaveProperty('language');
+    expect(json.detected).toHaveProperty('frameworks');
+    expect(json).toHaveProperty('recommended_skills');
+    expect(Array.isArray(json.recommended_skills)).toBe(true);
+  });
+
+  it('should flatten skill metadata in --auto --json output', async () => {
+    const result = await run(['--auto', '--json', '--dry-run']);
+
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // Each recommended skill should have flattened fields, not nested meta
+    for (const skill of json.recommended_skills) {
+      expect(skill).toHaveProperty('name');
+      expect(skill).toHaveProperty('score');
+      expect(skill).not.toHaveProperty('meta');
+    }
+  });
+
+  it('should suppress banner with --auto --json', async () => {
+    await run(['--auto', '--json', '--dry-run']);
+
+    const allOutput = consoleLogSpy.mock.calls.flat().join('');
+    expect(allOutput).not.toContain('Agent Skills Installer');
+    expect(allOutput).not.toContain('Auto-detecting');
+  });
+
   it('should error on unknown option', async () => {
     await expect(run(['--unknown-option'])).rejects.toThrow('process.exit');
     
@@ -1322,5 +1432,20 @@ describe('CLI Argument Parsing', () => {
     await run(['javascript-expert', '--dry-run']);
 
     expect(exitSpy).not.toHaveBeenCalled();
+  });
+
+  it('should ignore --json without informational command', async () => {
+    // --json alone with no templates should behave normally (error: no templates)
+    await expect(run(['--json'])).rejects.toThrow('process.exit');
+    expect(exitSpy).toHaveBeenCalledWith(1);
+  });
+
+  it('should still support --stats --json (regression)', async () => {
+    const result = await run(['--stats', '--json']);
+
+    expect(exitSpy).not.toHaveBeenCalled();
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+    expect(json).toHaveProperty('totalEvents');
   });
 });
