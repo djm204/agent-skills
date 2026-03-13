@@ -1681,11 +1681,12 @@ async function reset(targetDir, dryRun = false, force = false, skipConfirm = fal
     }
   }
 
-// 4. Remove .github/copilot-instructions.md for GitHub Copilot
-if (ides.includes('copilot')) {
-  const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
+  // 4. Remove .github/copilot-instructions.md for GitHub Copilot
+  if (ides.includes('copilot')) {
+    const copilotPath = path.join(targetDir, '.github', 'copilot-instructions.md');
 
-  if (fs.existsSync(copilotPath)) {      console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
+    if (fs.existsSync(copilotPath)) {
+      console.log(colors.yellow('► Checking .github/copilot-instructions.md...'));
 
       // Check if it contains our signature content
       const content = fs.readFileSync(copilotPath, 'utf8');
@@ -1701,14 +1702,14 @@ if (ides.includes('copilot')) {
         filesToRemove.push({ path: copilotPath, name: '.github/copilot-instructions.md' });
       }
       console.log();
-      }
-      }
+    }
+  }
 
-      // 4. Remove AGENTS.md for OpenAI Codex
-      if (ides.includes('codex')) {
-      const codexPath = path.join(targetDir, 'AGENTS.md');
+  // 5. Remove AGENTS.md for OpenAI Codex
+  if (ides.includes('codex')) {
+    const codexPath = path.join(targetDir, 'AGENTS.md');
 
-      if (fs.existsSync(codexPath)) {
+    if (fs.existsSync(codexPath)) {
       console.log(colors.yellow('► Checking AGENTS.md...'));
 
       // Check if it contains our signature content
@@ -1725,10 +1726,11 @@ if (ides.includes('copilot')) {
         filesToRemove.push({ path: codexPath, name: 'AGENTS.md' });
       }
       console.log();
-      }
-      }
+    }
+  }
 
-      if (filesToRemove.length === 0 && dirsToRemove.length === 0) {    console.log(colors.yellow('Nothing to remove.\n'));
+  if (filesToRemove.length === 0 && dirsToRemove.length === 0) {
+    console.log(colors.yellow('Nothing to remove.\n'));
     return;
   }
 
@@ -2041,7 +2043,7 @@ export async function run(args) {
   // Handle --version (deferred from arg loop)
   if (versionMode) {
     if (jsonOutput) {
-      console.log(JSON.stringify({ name: PACKAGE_NAME, version: CURRENT_VERSION }));
+      console.log(JSON.stringify({ name: PACKAGE_NAME, version: CURRENT_VERSION }, null, 2));
     } else {
       printBanner();
       console.log(`${PACKAGE_NAME} v${CURRENT_VERSION}`);
