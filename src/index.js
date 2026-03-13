@@ -1939,9 +1939,11 @@ export async function run(args) {
   let serveMode = false;
   let handlerDir = null;
   let statsMode = false;
-  let statsJson = false;
+  let jsonOutput = false;
   let clearStats = false;
   let noTracking = false;
+  let listMode = false;
+  let versionMode = false;
   let testSkillsDir = null;
   let adapterName = null;
   let adapterTier = 'standard';
@@ -1953,17 +1955,13 @@ export async function run(args) {
   // Parse arguments
   for (const arg of args) {
     if (arg === '--list' || arg === '-l') {
-      printBanner();
-      printTemplates();
-      process.exit(0);
+      listMode = true;
     } else if (arg === '--help' || arg === '-h') {
       printBanner();
       printHelp();
       process.exit(0);
     } else if (arg === '--version' || arg === '-v') {
-      console.log(`${PACKAGE_NAME} v${CURRENT_VERSION}`);
-      console.log(`${colors.dim('Changelog:')} ${CHANGELOG_URL}`);
-      process.exit(0);
+      versionMode = true;
     } else if (arg === '--dry-run') {
       dryRun = true;
     } else if (arg === '--force' || arg === '-f') {
@@ -1992,7 +1990,7 @@ export async function run(args) {
     } else if (arg === '--stats') {
       statsMode = true;
     } else if (arg === '--json') {
-      statsJson = true;
+      jsonOutput = true;
     } else if (arg === '--clear-stats') {
       clearStats = true;
     } else if (arg === '--no-tracking') {
@@ -2037,6 +2035,28 @@ export async function run(args) {
     } else {
       templates.push(arg);
     }
+  }
+
+  // Handle --version (deferred from arg loop)
+  if (versionMode) {
+    if (jsonOutput) {
+      console.log(JSON.stringify({ name: PACKAGE_NAME, version: CURRENT_VERSION }));
+    } else {
+      printBanner();
+      console.log(`${PACKAGE_NAME} v${CURRENT_VERSION}`);
+      console.log(`${colors.dim('Changelog:')} ${CHANGELOG_URL}`);
+    }
+    process.exit(0);
+  }
+
+  // Handle --list (deferred from arg loop)
+  if (listMode) {
+    if (!jsonOutput) {
+      printBanner();
+      printTemplates();
+    }
+    // JSON path added in Task 2
+    process.exit(0);
   }
 
   printBanner();
@@ -2097,7 +2117,7 @@ export async function run(args) {
   if (statsMode) {
     const report = getUsageReport();
 
-    if (statsJson) {
+    if (jsonOutput) {
       console.log(JSON.stringify(report, null, 2));
       return report;
     }

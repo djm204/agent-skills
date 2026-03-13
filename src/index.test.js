@@ -1178,6 +1178,27 @@ describe('CLI Argument Parsing', () => {
     expect(consoleLogSpy).toHaveBeenCalledWith(expect.stringContaining('releases/tag'));
   });
 
+  it('should output version as JSON with --version --json', async () => {
+    await expect(run(['--version', '--json'])).rejects.toThrow('process.exit');
+
+    expect(exitSpy).toHaveBeenCalledWith(0);
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+    expect(json).toHaveProperty('name', '@djm204/agent-skills');
+    expect(json).toHaveProperty('version');
+    expect(json.version).toMatch(/^\d+\.\d+\.\d+/);
+  });
+
+  it('should output version as JSON with --json --version (flag order)', async () => {
+    await expect(run(['--json', '--version'])).rejects.toThrow('process.exit');
+
+    expect(exitSpy).toHaveBeenCalledWith(0);
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+    expect(json).toHaveProperty('name');
+    expect(json).toHaveProperty('version');
+  });
+
   it('should error on unknown option', async () => {
     await expect(run(['--unknown-option'])).rejects.toThrow('process.exit');
     
