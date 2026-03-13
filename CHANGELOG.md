@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.11.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.10.0...agent-skills-v1.11.0) (2026-03-13)
+
+
+### Features
+
+* add --json output for informational CLI commands ([#141](https://github.com/djm204/agent-skills/issues/141)) ([0f70a05](https://github.com/djm204/agent-skills/commit/0f70a05f55dcf9a75559d3211bf59101940b4f44))
+* distinguish OpenAI Codex from GitHub Copilot and add AGENTS.md support ([#139](https://github.com/djm204/agent-skills/issues/139)) ([a7e70f4](https://github.com/djm204/agent-skills/commit/a7e70f489e18457160c024d7b38952c9981c07c7))
+
 ## [1.10.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.9.0...agent-skills-v1.10.0) (2026-03-08)
 
 
