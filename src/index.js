@@ -2051,11 +2051,31 @@ export async function run(args) {
 
   // Handle --list (deferred from arg loop)
   if (listMode) {
-    if (!jsonOutput) {
+    if (jsonOutput) {
+      // Build reverse alias map
+      const aliasesByTemplate = {};
+      for (const [alias, canonical] of Object.entries(TEMPLATE_ALIASES)) {
+        if (!aliasesByTemplate[canonical]) aliasesByTemplate[canonical] = [];
+        aliasesByTemplate[canonical].push(alias);
+      }
+
+      // Group by category
+      const skills = {};
+      for (const [name, info] of Object.entries(TEMPLATES)) {
+        if (!skills[info.category]) skills[info.category] = [];
+        skills[info.category].push({
+          name,
+          description: info.description,
+          aliases: aliasesByTemplate[name] || [],
+        });
+      }
+
+      const sharedRules = SHARED_RULES.map(r => r.replace('.mdc', ''));
+      console.log(JSON.stringify({ skills, shared_rules: sharedRules }, null, 2));
+    } else {
       printBanner();
       printTemplates();
     }
-    // JSON path added in Task 2
     process.exit(0);
   }
 

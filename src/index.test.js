@@ -1199,6 +1199,59 @@ describe('CLI Argument Parsing', () => {
     expect(json).toHaveProperty('version');
   });
 
+  it('should output skills as JSON with --list --json', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    expect(exitSpy).toHaveBeenCalledWith(0);
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // Must have skills grouped by category
+    expect(json).toHaveProperty('skills');
+    expect(typeof json.skills).toBe('object');
+
+    // Must have shared_rules array
+    expect(json).toHaveProperty('shared_rules');
+    expect(Array.isArray(json.shared_rules)).toBe(true);
+    expect(json.shared_rules.length).toBeGreaterThan(0);
+    // No .mdc extensions
+    expect(json.shared_rules.every(r => !r.endsWith('.mdc'))).toBe(true);
+  });
+
+  it('should include aliases in --list --json output', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // Find javascript-expert — it has aliases (js, ts)
+    const allSkills = Object.values(json.skills).flat();
+    const jsExpert = allSkills.find(s => s.name === 'javascript-expert');
+    expect(jsExpert).toBeDefined();
+    expect(jsExpert.aliases).toContain('js');
+    expect(jsExpert).toHaveProperty('description');
+  });
+
+  it('should group skills by category in --list --json', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // At least engineering category should exist
+    expect(json.skills).toHaveProperty('engineering');
+    expect(Array.isArray(json.skills.engineering)).toBe(true);
+    expect(json.skills.engineering.length).toBeGreaterThan(0);
+  });
+
+  it('should suppress banner with --list --json', async () => {
+    await expect(run(['--list', '--json'])).rejects.toThrow('process.exit');
+
+    const allOutput = consoleLogSpy.mock.calls.flat().join('');
+    expect(allOutput).not.toContain('Agent Skills Installer');
+    expect(allOutput).not.toContain('Available Templates');
+  });
+
   it('should error on unknown option', async () => {
     await expect(run(['--unknown-option'])).rejects.toThrow('process.exit');
     
