@@ -2079,10 +2079,12 @@ export async function run(args) {
     process.exit(0);
   }
 
-  printBanner();
+  if (!jsonOutput) {
+    printBanner();
 
-  // Check for updates (non-blocking, fails silently)
-  await checkForUpdates();
+    // Check for updates (non-blocking, fails silently)
+    await checkForUpdates();
+  }
 
   // Resolve template aliases to canonical names
   const resolvedTemplates = templates.map(resolveTemplateAlias);
@@ -2195,13 +2197,15 @@ export async function run(args) {
 
     // Detect context from cwd
     const context = detectContext(process.cwd());
-    console.log(`\n${colors.cyan('Auto-detecting skills for this project...')}`);
+    if (!jsonOutput) {
+      console.log(`\n${colors.cyan('Auto-detecting skills for this project...')}`);
 
-    if (context.language) {
-      console.log(`  Language: ${colors.yellow(context.language)}`);
-    }
-    if (context.frameworks.length > 0) {
-      console.log(`  Frameworks: ${colors.yellow(context.frameworks.join(', '))}`);
+      if (context.language) {
+        console.log(`  Language: ${colors.yellow(context.language)}`);
+      }
+      if (context.frameworks.length > 0) {
+        console.log(`  Frameworks: ${colors.yellow(context.frameworks.join(', '))}`);
+      }
     }
 
     // Build skill catalog from available skills
@@ -2236,6 +2240,24 @@ export async function run(args) {
       maxSkills: 5,
       budget: adapterBudget || undefined,
     });
+
+    // JSON output — handles empty results too
+    if (jsonOutput) {
+      const output = {
+        detected: {
+          language: context.language || null,
+          frameworks: context.frameworks || [],
+        },
+        recommended_skills: selected.map(s => ({
+          name: s.name,
+          score: s.score,
+          category: s.meta?.category || null,
+          description: s.meta?.description?.short || s.meta?.description || null,
+        })),
+      };
+      console.log(JSON.stringify(output, null, 2));
+      return output;
+    }
 
     if (selected.length === 0) {
       console.log(`\n${colors.yellow('No matching skills found for this project.')}`);

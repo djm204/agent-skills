@@ -1252,6 +1252,42 @@ describe('CLI Argument Parsing', () => {
     expect(allOutput).not.toContain('Available Templates');
   });
 
+  it('should output auto-detect results as JSON with --auto --json', async () => {
+    const result = await run(['--auto', '--json', '--dry-run']);
+
+    expect(exitSpy).not.toHaveBeenCalled();
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    expect(json).toHaveProperty('detected');
+    expect(json.detected).toHaveProperty('language');
+    expect(json.detected).toHaveProperty('frameworks');
+    expect(json).toHaveProperty('recommended_skills');
+    expect(Array.isArray(json.recommended_skills)).toBe(true);
+  });
+
+  it('should flatten skill metadata in --auto --json output', async () => {
+    const result = await run(['--auto', '--json', '--dry-run']);
+
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+
+    // Each recommended skill should have flattened fields, not nested meta
+    for (const skill of json.recommended_skills) {
+      expect(skill).toHaveProperty('name');
+      expect(skill).toHaveProperty('score');
+      expect(skill).not.toHaveProperty('meta');
+    }
+  });
+
+  it('should suppress banner with --auto --json', async () => {
+    await run(['--auto', '--json', '--dry-run']);
+
+    const allOutput = consoleLogSpy.mock.calls.flat().join('');
+    expect(allOutput).not.toContain('Agent Skills Installer');
+    expect(allOutput).not.toContain('Auto-detecting');
+  });
+
   it('should error on unknown option', async () => {
     await expect(run(['--unknown-option'])).rejects.toThrow('process.exit');
     
