@@ -1433,4 +1433,19 @@ describe('CLI Argument Parsing', () => {
 
     expect(exitSpy).not.toHaveBeenCalled();
   });
+
+  it('should ignore --json without informational command', async () => {
+    // --json alone with no templates should behave normally (error: no templates)
+    await expect(run(['--json'])).rejects.toThrow('process.exit');
+    expect(exitSpy).toHaveBeenCalledWith(1);
+  });
+
+  it('should still support --stats --json (regression)', async () => {
+    const result = await run(['--stats', '--json']);
+
+    expect(exitSpy).not.toHaveBeenCalled();
+    const calls = consoleLogSpy.mock.calls.flat().join('');
+    const json = JSON.parse(calls);
+    expect(json).toHaveProperty('totalEvents');
+  });
 });

@@ -322,6 +322,7 @@ ${colors.yellow('Options:')}
   --list, -l        List available templates
   --help, -h        Show this help message
   --version, -v     Show version number
+  --json            Output as JSON (with --list, --version, --stats, --auto)
   --dry-run         Show what would be changed
   --force, -f       Overwrite/remove even if files were modified
   --yes, -y         Skip confirmation prompt (for --remove and --reset)
