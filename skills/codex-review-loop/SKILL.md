@@ -40,7 +40,7 @@ SCRIPT="/absolute/path/to/this/skill/scripts/codex-review-loop.sh"
 If installed in the default profile, the path is usually:
 
 ```bash
-SCRIPT="$HOME/.hermes/skills/github/codex-review-loop/scripts/codex-review-loop.sh"
+SCRIPT="$HOME/.hermes/skills/codex-review-loop/scripts/codex-review-loop.sh"
 ```
 
 Prerequisites:
@@ -52,11 +52,11 @@ Prerequisites:
 
 | Step | Command |
 |------|---------|
-| Detect | `"$SCRIPT" detect --repo OWNER/NAME` |
-| Trigger | `TS=$("$SCRIPT" trigger --repo OWNER/NAME --pr N)` |
-| Poll | `"$SCRIPT" poll --repo OWNER/NAME --pr N --since "$TS"` |
-| Classify fixture | `"$SCRIPT" classify --input fixture.json` |
-| Detect fixture | `"$SCRIPT" detect-classify --input fixture.json` |
+| Detect | `bash "$SCRIPT" detect --repo OWNER/NAME` |
+| Trigger | `TS=$(bash "$SCRIPT" trigger --repo OWNER/NAME --pr N)` |
+| Poll | `bash "$SCRIPT" poll --repo OWNER/NAME --pr N --since "$TS"` |
+| Classify fixture | `bash "$SCRIPT" classify --input fixture.json` |
+| Detect fixture | `bash "$SCRIPT" detect-classify --input fixture.json` |
 
 `detect` returns `available: true | false | "unknown"`. Treat `"unknown"` as trigger-and-observe, not unavailable. Only declare unavailable if normal review polling times out with no Codex response.
 

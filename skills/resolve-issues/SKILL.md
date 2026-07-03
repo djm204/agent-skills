@@ -45,7 +45,7 @@ SCRIPT="/absolute/path/to/this/skill/scripts/select-issues.sh"
 Default install path:
 
 ```bash
-SCRIPT="$HOME/.hermes/skills/github/resolve-issues/scripts/select-issues.sh"
+SCRIPT="$HOME/.hermes/skills/resolve-issues/scripts/select-issues.sh"
 ```
 
 ## Argument Shape
@@ -64,7 +64,7 @@ Defaults:
 Forward selection flags to `select-issues.sh`:
 
 ```bash
-"$SCRIPT" [--issue N] [--label L] [--max N] [--repo OWNER/NAME]
+bash "$SCRIPT" [--issue N] [--label L] [--max N] [--repo OWNER/NAME]
 ```
 
 The script returns a JSON array ordered by priority (`priorityRank`: 0 critical, 1 high, 2 medium, 3 low, 99 unprioritized), then newest issue number.
