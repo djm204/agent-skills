@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.12.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.11.0...agent-skills-v1.12.0) (2026-07-03)
+
+
+### Features
+
+* add Hermes skill from Claude workflows ([#142](https://github.com/djm204/agent-skills/issues/142)) ([1e17523](https://github.com/djm204/agent-skills/commit/1e175233af66410bf8ec5a29b164059cbed287c3))
+* add Hermes skill from Claude workflows ([#143](https://github.com/djm204/agent-skills/issues/143)) ([7538a04](https://github.com/djm204/agent-skills/commit/7538a04b8b5ef6b2313bd2b288f026f075807609))
+* add Hermes skill from Claude workflows ([#144](https://github.com/djm204/agent-skills/issues/144)) ([aaefc42](https://github.com/djm204/agent-skills/commit/aaefc42de0c9d8bedcd1641247953856b41a513a))
+* add Hermes skill from Claude workflows ([#145](https://github.com/djm204/agent-skills/issues/145)) ([14fb8d9](https://github.com/djm204/agent-skills/commit/14fb8d9fa63f1726b7382ab7b11e42fd49596cd6))
+* add Hermes skill from Claude workflows ([#146](https://github.com/djm204/agent-skills/issues/146)) ([488d930](https://github.com/djm204/agent-skills/commit/488d930d0f742810bd3f8c5f226f9b9e4b693e62))
+
+
+### Bug Fixes
+
+* invoke Hermes skill scripts with bash ([#148](https://github.com/djm204/agent-skills/issues/148)) ([e668759](https://github.com/djm204/agent-skills/commit/e66875925c4f90deb863d5e708458abd3fc48a5b))
+
 ## [1.11.0](https://github.com/djm204/agent-skills/compare/agent-skills-v1.10.0...agent-skills-v1.11.0) (2026-03-13)
 
 
